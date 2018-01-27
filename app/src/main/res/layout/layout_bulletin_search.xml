@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:background="@color/theme"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TableLayout
+        android:gravity="center"
+        android:layout_marginLeft="15dp"
+        android:id="@+id/tl_search_edit"
+        android:layout_height="50dp"
+        android:layout_width="220dp"
+        android:orientation="vertical">
+
+        <TableRow>
+                <EditText
+                    android:background="@drawable/editext_shape"
+                    android:id="@+id/edit"
+                    android:gravity="center"
+                    android:layout_height="30dp"
+                    android:textSize="15dp"
+                    android:hint="请输入要搜索的文字"
+                    android:layout_width="220dp">
+                </EditText>
+        </TableRow>
+    </TableLayout>
+    <TextView
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/tl_search_edit"
+        android:id="@+id/btn_bulletin_search"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:textSize="17dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="60dp"
+        android:textColor="@color/white"
+        android:text="搜索">
+</TextView>
+    <TextView
+        android:layout_below="@+id/tl_search_edit"
+        android:id="@+id/result"
+        android:layout_height="5dp"
+        android:layout_width="fill_parent">
+    </TextView>
+</RelativeLayout>

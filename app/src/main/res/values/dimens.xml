@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--all linearlayout-->
+    <dimen name="linearlayout_height">43dp</dimen>
+    <dimen name="linearlayout_tv_textsize">16dp</dimen>
+    <dimen name="all_icon_height_width">22dp</dimen>
+
+    <!--activity_bind_phonenumber-->
+    <dimen name="activity_bind_phonenumber_tv_wanning_textSize">13dp</dimen>
+    <dimen name="all_smalltextsize">14dp</dimen>
+    <dimen name="activity_bind_phonenumber_et_input_code_textSize">15dp</dimen>
+    <dimen name="activity_bind_phonenumber_btn_request_code_textSize">13dp</dimen>
+    <dimen name="activity_bind_phonenumber_bt_submit_id_textSize">16dp</dimen>
+    <dimen name="activity_bind_phonenumber_rlayout_worning_layout_height">56dp</dimen>
+    <dimen name="activity_bind_phonenumber_rlayout_input_phone_layout_height">55dp</dimen>
+    <dimen name="activity_bind_phonenumber_img_phone_layout_width">25dp</dimen>
+    <dimen name="activity_bind_phonenumber_img_phone_layout_height">25dp</dimen>
+    <dimen name="activity_bind_phonenumber_rlayout_input_code_layout_height">55dp</dimen>
+    <dimen name="activity_bind_phonenumber_img_clock_layout_width">25dp</dimen>
+    <dimen name="activity_bind_phonenumber_img_clock_layout_height">25dp</dimen>
+    <dimen name="activity_bind_phonenumber_bt_submit_id_layout_height">45dp</dimen>
+
+
+    <!--activity_maincamera-->
+    <dimen name="activity_maincamera_tv_title_textSize">17sp</dimen>
+    <dimen name="activity_maincamera_tv_warning_textSize">13dp</dimen>
+    <dimen name="activity_maincamera_tv_warning_layout_marginTop">17dp</dimen>
+    <dimen name="activity_maincamera_btn_positivePhoto_layout_width">200dp</dimen>
+    <dimen name="activity_maincamera_btn_positivePhoto_layout_height">110dp</dimen>
+    <dimen name="activity_maincamera_btn_positivePhoto_layout_marginTop">67dp</dimen>
+    <dimen name="activity_maincamera_imv_shadow_layout_width">200dp</dimen>
+    <dimen name="activity_maincamera_imv_shadow_layout_height">110dp</dimen>
+    <dimen name="activity_maincamera_imv_shadow_layout_marginTop">67dp</dimen>
+    <dimen name="activity_maincamera_tv_positive_textSize">16dp</dimen>
+    <dimen name="activity_maincamera_tv_positive_layout_marginTop">7dp</dimen>
+    <dimen name="activity_maincamera_imv_repickPositive_layout_width">40dp</dimen>
+    <dimen name="activity_maincamera_imv_repickPositive_layout_height">40dp</dimen>
+    <dimen name="activity_maincamera_imv_repickPositive_layout_marginTop">44dp</dimen>
+    <dimen name="activity_maincamera_btn_appendixPhoto_layout_width">200dp</dimen>
+    <dimen name="activity_maincamera_btn_appendixPhoto_layout_height">110dp</dimen>
+    <dimen name="activity_maincamera_btn_appendixPhoto_layout_marginTop">200dp</dimen>
+    <dimen name="activity_maincamera_tv_appendix_textSize">16dp</dimen>
+    <dimen name="activity_maincamera_tv_appendix_layout_marginTop">77dp</dimen>
+    <dimen name="activity_maincamera_imv_repickAppendix_layout_width">40dp</dimen>
+    <dimen name="activity_maincamera_imv_repickAppendix_layout_height">40dp</dimen>
+    <dimen name="activity_maincamera_imv_repickAppendix_layout_marginTop">114dp</dimen>
+    <dimen name="activity_maincamera_btn_next_textSize">14dp</dimen>
+
+    <!--activity_appealstatus-->
+    <dimen name="activity_appealstatus_tv_title_textSize">17sp</dimen>
+    <dimen name="activity_appealstatus_tv_close_textSize">13dp</dimen>
+    <dimen name="activity_appealstatus_imv_tips_layout_width">17dp</dimen>
+    <dimen name="activity_appealstatus_imv_tips_layout_height">17dp</dimen>
+    <dimen name="activity_appealstatus_imv_tips_layout_marginLeft">20dp</dimen>
+    <dimen name="activity_appealstatus_imv_tips_layout_marginTop">26dp</dimen>
+    <dimen name="activity_appealstatus_tv_status_textSize">13dp</dimen>
+    <dimen name="activity_appealstatus_tv_status_layout_marginTop">25dp</dimen>
+    <dimen name="activity_appealstatus_tv_currentAppeal_textSize">17dp</dimen>
+    <dimen name="activity_appealstatus_tv_currentAppeal_layout_marginLeft">5dp</dimen>
+    <dimen name="activity_appealstatus_tv_currentAppeal_layout_marginTop">10dp</dimen>
+    <dimen name="activity_appealstatus_ll_info_layout_marginTop">5dp</dimen>
+    <dimen name="activity_appealstatus_ll_info_layout_width">290dp</dimen>
+    <dimen name="activity_appealstatus_ll_info_padding">10dp</dimen>
+    <dimen name="activity_appealstatus_ll_info_layout_height">145dp</dimen>
+    <dimen name="activity_appealstatus_tv_phone_textSize">15dp</dimen>
+    <dimen name="activity_appealstatus_tv_phone_layout_width">85dp</dimen>
+    <dimen name="activity_appealstatus_tv_phone_layout_height">25dp</dimen>
+    <dimen name="activity_appealstatus_tv_vehicle_textSize">15dp</dimen>
+    <dimen name="activity_appealstatus_tv_vehicle_layout_width">85dp</dimen>
+    <dimen name="activity_appealstatus_tv_vehicle_layout_height">25dp</dimen>
+    <dimen name="activity_appealstatus_tv_date_textSize">15dp</dimen>
+    <dimen name="activity_appealstatus_tv_date_layout_width">80dp</dimen>
+    <dimen name="activity_appealstatus_tv_date_layout_height">25dp</dimen>
+    <dimen name="activity_appealstatus_tv_overview_textSize">15dp</dimen>
+    <dimen name="activity_appealstatus_tv_overview_layout_width">80dp</dimen>
+    <dimen name="activity_appealstatus_tv_overview_layout_height">25dp</dimen>
+    <dimen name="activity_appealstatus_tv_inputPhone_textSize">15dp</dimen>
+    <dimen name="activity_appealstatus_tv_inputVehicle_textSize">15dp</dimen>
+    <dimen name="activity_appealstatus_tv_inputDate_textSize">15dp</dimen>
+    <dimen name="activity_appealstatus_tv_inputDate_layout_marginLeft">5dp</dimen>
+    <dimen name="activity_appealstatus_tv_inputOverview_textSize">15dp</dimen>
+    <dimen name="activity_appealstatus_tv_inputOverview_layout_marginLeft">5dp</dimen>
+    <dimen name="activity_appealstatus_btn_cancel_layout_width">75dp</dimen>
+    <dimen name="activity_appealstatus_btn_cancel_layout_height">28dp</dimen>
+    <dimen name="activity_appealstatus_btn_cancel_textSize">14dp</dimen>
+    <dimen name="activity_appealstatus_tv_inputPhone_layout_marginTop">5dp</dimen>
+    <dimen name="activity_appealstatus_tv_inputVehicle_layout_marginTop">4dp</dimen>
+    <dimen name="activity_appealstatus_tv_inputDate_layout_marginTop">4dp</dimen>
+    <dimen name="activity_appealstatus_tv_inputOverview_layout_marginTop">3dp</dimen>
+    <dimen name="activity_appealstatus_ll_marginTop">15dp</dimen>
+    <dimen name="activity_appealstatus_ll_marginleft">16dp</dimen>
+    <dimen name="activity_appealstatus_bottombtn_margintop">45dp</dimen>
+
+
+    <!--activity_carinfo-->
+    <dimen name="activity_carinfo_btn_goback_layout_marginLeft">5dp</dimen>
+    <dimen name="activity_carinfo_btn_goback_layout_width">28dp</dimen>
+    <dimen name="activity_carinfo_btn_goback_layout_height">28dp</dimen>
+    <dimen name="activity_carinfo_tv_title_textSize">17dp</dimen>
+    <dimen name="activity_carinfo_tv_message_textSize">12dp</dimen>
+    <dimen name="activity_carinfo_tv_message_padding">11dp</dimen>
+    <dimen name="activity_carinfo_ll_carNumber_layout_marginLeft">15dp</dimen>
+    <dimen name="activity_carinfo_tv_number_textSize">15dp</dimen>
+    <dimen name="activity_carinfo_frame_padding">5dp</dimen>
+    <dimen name="activity_carinfo_frame_paddingRight">15dp</dimen>
+    <dimen name="activity_carinfo_frame_layout_width">50dp</dimen>
+    <dimen name="activity_carinfo_frame_layout_height">30dp</dimen>
+    <dimen name="activity_carinfo_frame_layout_marginLeft">28dp</dimen>
+    <dimen name="activity_carinfo_tv_region_textSize">12dp</dimen>
+    <dimen name="activity_carinfo_img_arrow_layout_width">11dp</dimen>
+    <dimen name="activity_carinfo_img_arrow_layout_height">11dp</dimen>
+    <dimen name="activity_carinfo_ll_opblongspace_layout_height">38dp</dimen>
+    <dimen name="activity_carinfo_edt_inputNumber_textSize">15dp</dimen>
+    <dimen name="all_tv_textSize">15dp</dimen>
+    <dimen name="activity_carinfo_edt_inputFrameNumber_textSize">15dp</dimen>
+    <dimen name="activity_carinfo_tv_vehicle_textSize">15dp</dimen>
+    <dimen name="activity_carinfo_edt_vehicle_textSize">15dp</dimen>
+    <dimen name="activity_carinfo_btn_vehicle_layout_width">10dp</dimen>
+    <dimen name="activity_carinfo_btn_vehicle_layout_height">20dp</dimen>
+    <dimen name="activity_carinfo_btn_vehicle_layout_marginRight">15dp</dimen>
+    <dimen name="activity_carinfo_btn_vehicle_padding">8dp</dimen>
+    <dimen name="activity_carinfo_tv_exhaus_textSize">15dp</dimen>
+    <dimen name="activity_carinfo_edt_exhaus_textSize">15dp</dimen>
+    <dimen name="activity_carinfo_tv_registerTime_textSize">15dp</dimen>
+    <dimen name="activity_carinfo_tv_registerTimer_textSize">15dp</dimen>
+    <dimen name="activity_carinfo_btn_register_layout_width">10dp</dimen>
+    <dimen name="activity_carinfo_btn_register_layout_height">20dp</dimen>
+    <dimen name="activity_carinfo_btn_register_layout_marginRight">15dp</dimen>
+    <dimen name="activity_carinfo_btn_register_padding">8dp</dimen>
+    <dimen name="activity_carinfo_btn_next_layout_height">38dp</dimen>
+    <dimen name="activity_carinfo_btn_next_textSize">14dp</dimen>
+    <dimen name="activity_carinfo_imvarrow_marginleft">28dp</dimen>
+
+
+    <dimen name="activity_maincamera_btn_next_layout_height">38dp</dimen>
+
+    <!--layout_melist_divider_20-->
+    <dimen name="layout_melist_divider_20_view_layout_height">17dp</dimen>
+
+
+    <!--activity_frontcamera-->
+    <dimen name="activity_frontcamera_imvsufv_width">264dp</dimen>
+    <dimen name="activity_frontcamera_imvsufv_height">402dp</dimen>
+    <dimen name="activity_frontcamera_btn_others">36dp</dimen>
+    <dimen name="activity_frontcamera_btn_shutter">48dp</dimen>
+    <dimen name="activity_frontcamera_rll_marb">20dp</dimen>
+    <dimen name="activity_frontcamera_rll_take_photo_pd">20dp</dimen>
+
+
+
+    <!--activity_register_time-->
+    <dimen name="activity_register_time_tv_cancel_padding">10dp</dimen>
+    <dimen name="activity_register_time_tv_cancel_textSize">16dp</dimen>
+    <dimen name="activity_register_time_tv_title_paddingTop">10dp</dimen>
+    <dimen name="activity_register_time_tv_title_paddingBottom">10dp</dimen>
+    <dimen name="activity_register_time_tv_title_textSize">17dp</dimen>
+    <dimen name="activity_register_time_tv_finish_padding">10dp</dimen>
+    <dimen name="activity_register_time_tv_finish_textSize">16dp</dimen>
+    <dimen name="activity_register_time_ll_registertime_layout_marginTop">45dp</dimen>
+    <dimen name="activity_register_time_image_registertime_layout_height">200dp</dimen>
+    <dimen name="activity_register_time_image_registertime_layout_marginTopAndBottom">15dp</dimen>
+    <dimen name="activity_register_time_addCarInfoCarRegister_layout_height">50dp</dimen>
+    <dimen name="activity_register_time_ll_timelist_layout_marginLeft">15dp</dimen>
+    <dimen name="activity_register_time_tv_worningtime_textSize">16dp</dimen>
+    <dimen name="activity_register_time_tv_registertime_layout_marginLeft">20dp</dimen>
+    <dimen name="activity_register_time_tv_registertime_paddingRight">20dp</dimen>
+    <dimen name="activity_register_time_tv_registertime_textSize">16dp</dimen>
+
+    <!--activity_main-->
+    <dimen name="com_tab_height">45dp</dimen> <!--控制栏高度-->
+    <dimen name="buttonRecorder_width_height">47dp</dimen><!--录音btn宽高-->
+    <dimen name="buttonRecorder_marginbottom">9dp</dimen><!--录音btn-->
+    <dimen name="com_tap_button_img_padding">4dp</dimen><!--底部标签imv大小-->
+    <dimen name="com_tap_button_textsize">9dp</dimen><!--底部标签文字大小-->
+
+    <!--chat-->
+    <dimen name="layout_search_searchButton_height">25dp</dimen><!--搜索高-->
+    <dimen name="layout_search_tv_textsize">14dp</dimen><!--搜索文字大小-->
+    <dimen name="layout_search_searchIcon_wh">13dp</dimen><!--搜索icon大小-->
+    <dimen name="layout_content_find_paddinglr">14dp</dimen><!--搜索padding左右-->
+    <dimen name="layout_content_lv_paddinglr">0dp</dimen><!--listview padding左右-->
+    <dimen name="layout_content_lv_marginTop">110dp</dimen>
+    <dimen name="layout_content_dialoglv_marginTop">3dp</dimen>
+
+
+    <!--activity_im_contact_detail-->
+    <dimen name="activity_im_contact_detail_downimg_height_width">50dp</dimen><!--底部图片高度和宽度-->
+    <dimen name="detail_title_margin_top">23dp</dimen>
+
+    <!--map-->
+    <dimen name="main_map_btn_wh">35dp</dimen>
+    <dimen name="com_item_margin_big">15dp</dimen>
+    <dimen name="lauout_scaleLayout_marginright">15dp</dimen>
+    <dimen name="lauout_scaleLayout_marginmarginBottom">20dp</dimen>
+    <dimen name="toggleImageButton_mapLocal_marginleft">15dp</dimen>
+    <dimen name="checkbox_mapCheckBoxTraffic_marginleft">15dp</dimen>
+    <dimen name="checkbox_mapCheckBoxTraffic_marginTop">30dp</dimen>
+    <dimen name="imagebutton_mapZoomMax_marginBottom">15dp</dimen>
+    <dimen name="imagebutton_mapCompass_marginTop">10dp</dimen>
+
+    <!--menu_message-->
+    <dimen name="layout_menu_layout_height">65dp</dimen>
+    <dimen name="layout_menu_img_size">28dp</dimen>
+    <dimen name="layout_menu_text_size">12dp</dimen>
+
+    <!--layout_item_contact-->
+
+    <!--activity_car_infot-->
+    <dimen name="carInfoHeaderImage_wh">65dp</dimen>
+
+    <!--layout_content_me-->
+    <dimen name="com_views_ImageViewExtend">35dp</dimen>
+    <dimen name="relativelayout_height">180dp</dimen>
+    <dimen name="com_me_editbutton_w">48dp</dimen>
+    <dimen name="com_me_editbutton_h">22dp</dimen>
+    <dimen name="me_editbutton_size">15dp</dimen>
+
+    <!--layout_title-->
+    <dimen name="com_title_height">42dp</dimen>
+    <dimen name="com_title_size">16dp</dimen>
+    <dimen name="com_title_lateral_size">14dp</dimen>
+    <dimen name="com_title_icon_size">18dp</dimen>
+
+    <!--activity_persional_info-->
+    <dimen name="com_me_head_height">70dp</dimen>
+    <dimen name="com_me_textsize">15dp</dimen>
+    <dimen name="com_me_textsize_hint">12dp</dimen>
+    <dimen name="com_me_img_arrow_height_width">32dp</dimen>
+    <dimen name="com_me_img_head_height_width">53dp</dimen>
+
+    <!--activity_register-->
+    <dimen name="com_margin_to_title">40dp</dimen>
+    <dimen name="com_item_height_width">45dp</dimen>
+    <dimen name="com_icon_label_padding">9dp</dimen>
+    <dimen name="get_check_number">14dp</dimen>
+    <dimen name="font_size_normal">15dp</dimen>
+    <dimen name="next_size_button">20dp</dimen>
+    <dimen name="com_check_margin_right">0dp</dimen>
+    <dimen name="com_item_height">45dp</dimen>
+    <dimen name="com_button_height">43dp</dimen>
+    <dimen name="com_button_margin">20dp</dimen>
+    <dimen name="com_item_margin_big1">20dp</dimen>
+    <dimen name="check_button_width">90dp</dimen>
+    <dimen name="check_button_height">40dp</dimen>
+    <dimen name="com_item_margin_mid2">6dp</dimen>
+
+    <!--activity_login-->
+    <dimen name="login_button_textsize">16dp</dimen>
+    <dimen name="register_forget_textsize">13dp</dimen>
+    <dimen name="bottom_img_height_width">20dp</dimen>
+    <dimen name="edt_input_textsize">16dp</dimen>
+
+    <!--layout_mydialog-->
+    <dimen name="dialog_layout_height">135dp</dimen>
+    <dimen name="dialog_layout_width">250dp</dimen>
+    <dimen name="dialog_title_textsize">15dp</dimen>
+    <dimen name="dialog_message_textsize">14dp</dimen>
+    <dimen name="dialog_message_padding">5dp</dimen>
+    <dimen name="dialog_bottom_btn_width">75dp</dimen>
+    <dimen name="dialog_bottom_btn_height">25dp</dimen>
+    <dimen name="dialog_bottom_btn_textsize">12dp</dimen>
+    <dimen name="dialog_editext_text_marginbottom">0dp</dimen>
+    <dimen name="dialog_editext_height">31dp</dimen>
+    <dimen name="dialog_editext_text_margintop">5dp</dimen>
+    <dimen name="dialog_chancle_btn_size">17dp</dimen>
+    <dimen name="dialog_chancle_btn_marginright">5dp</dimen>
+    <dimen name="dialog_select_category_first_margintop">12dp</dimen>
+    <dimen name="dialog_select_category_second_margintop">6dp</dimen>
+    <dimen name="dialog_choose_items_margintop">4dp</dimen>
+
+    layout_mydialog_addveiwical-->
+    <dimen name="dialog_vertical_layout_height">165dp</dimen>
+
+    <!--activity_guide-->
+    <dimen name="view_triangle_width">100dp</dimen>
+    <dimen name="view_triangle_height">50dp</dimen>
+    <dimen name="view_triangle_marginBottom">80dp</dimen>
+    <dimen name="btn_experience_width">110dp</dimen>
+    <dimen name="btn_experience_height">35dp</dimen>
+    <dimen name="btn_experience_marginBottom">30dp</dimen>
+    <dimen name="btn_experience_textsize">16dp</dimen>
+
+    <!--layout_item_carehaus-->
+    <dimen name="layout_item_carehaus_w">53dp</dimen>
+    <dimen name="layout_item_carehaus_h">27dp</dimen>
+
+    <!--photowall-->
+    <dimen name="img_photo_width">245dp</dimen>   <!--cardview_image-->
+    <dimen name="img_photo_height">320dp</dimen>
+    <dimen name="ll_info_height">47dp</dimen>
+    <dimen name="ll_info_marginTop">10dp</dimen>
+    <dimen name="cardview_cardelevation">40dp</dimen>
+    <dimen name="ll_praise_margin_right">20dp</dimen>
+    <dimen name="btn_photowall_close_margin">35dp</dimen>
+    <dimen name="tv_date_marginTop">3dp</dimen>
+    <dimen name="tv_date_textsize">10dp</dimen>
+    <dimen name="tv_photo_date_margin">1dp</dimen>
+    <dimen name="ll_appreciate_marginTop">2dp</dimen>
+    <dimen name="ll_lower_right_corner_image_margin">5dp</dimen>
+    <dimen name="tv_tv_photo_view_margin">3dp</dimen>
+    <dimen name="ll_ll_userinfo_margin">5dp</dimen>
+    <dimen name="civ_photo_useravatar_margin">6dp</dimen>
+    <dimen name="rlayout_photo_num_marginTop">285dp</dimen>
+    <dimen name="rlayout_photo_num_marginLeft">208dp</dimen>
+    <dimen name="img_photo_num_width_height">30dp</dimen>
+    <dimen name="tv_photo_num_paddingbottom">5dp</dimen>
+    <dimen name="img_browse_photo_paddingbottom">5dp</dimen>
+    <dimen name="tv_photo_num_textsize">15dp</dimen>
+
+    <!--item_chat_dialog_list-->
+    <dimen name="dialog_avatar_width_height">49dp</dimen>
+    <dimen name="dialog_avatar_ll_width_height">49dp</dimen>
+    <dimen name="dialog_avatar_margin">7dp</dimen>
+    <dimen name="tv_dialogname_margin_right">14dp</dimen>
+    <dimen name="tv_dialogdevider_margin_left">26dp</dimen>
+    <dimen name="tv_dialogname_margin_top">5dp</dimen>
+    <dimen name="tv_dialogdate_margin_right">3dp</dimen>
+    <dimen name="rl_dialogname_margin_right">16dp</dimen>
+    <dimen name="rl_dialogname_margin_top">3dp</dimen>
+    <dimen name="dialog_message_avatar_width_height">22dp</dimen>
+    <dimen name="dialog_message_avatar_margin">6dp</dimen>
+    <dimen name="tv_unreadbubble_margin">-5dp</dimen>
+    <dimen name="fl_dividercontainer_margin">16dp</dimen>
+    <dimen name="dialog_title_text_size">16dp</dimen>
+    <dimen name="dialog_message_text_size">13dp</dimen>
+    <dimen name="dialog_date_text_size">12dp</dimen>
+    <dimen name="dialog_unreadbubble_width_height">22dp</dimen>
+
+    <!--layout_item_group-->
+    <dimen name="groupheadview_ghv_group_avatar_width_height">42dp</dimen>
+    <dimen name="groupheadview_ghv_group_avatar_margin">4dp</dimen>
+    <dimen name="tv_group_name_margin_textsize">15dp</dimen>
+    <dimen name="tv_group_name_margin_marginleft">10dp</dimen>
+
+    <!--layout_item_contact-->
+    <dimen name="circleimageview_contactItemHeader_width_height">36dp</dimen>
+
+    <!--layout_qrcodesacn-->
+    <dimen name="tv_mo_scanner_light_magin">360dp</dimen>
+
+    <!--layout_tab_button-->
+    <dimen name="com_note_num_wh">14dp</dimen>
+    <dimen name="com_tab_note_num_marginleft">-16dip</dimen>
+    <dimen name="com_tab_cell_margin">3dp</dimen>
+    <dimen name="com_tab_cell_padding">0dp</dimen>
+    <dimen name="com_tab_cell_textsize">9dp</dimen>
+
+    <!--layout_photo_marker-->
+    <dimen name="roundimageview_photo_marker_width_height">52dp</dimen>
+    <dimen name="roundimageview_photo_marker_marginBottom">7.5dp</dimen>
+    <dimen name="roundimageview_img_photo_frame_width">57dp</dimen>
+    <dimen name="roundimageview_img_photo_frame_layout_height">75dp</dimen>
+
+</resources>

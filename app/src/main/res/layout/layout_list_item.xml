@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:descendantFocusability="blocksDescendants"
+    >
+    <RelativeLayout
+        android:id="@+id/rl_sub_info"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/tv_sub_name"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="name"
+            android:textSize="20dp"
+            android:visibility="visible" />
+    <TextView
+        android:visibility="visible"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/tv_sub_phone"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:layout_toRightOf="@+id/tv_sub_name"
+        android:text="id"/>
+        <Button
+            android:id="@+id/btn_call_phone"
+            android:layout_width="22dp"
+            android:layout_toRightOf="@+id/tv_sub_phone"
+            android:layout_centerVertical="true"
+            android:layout_height="22dp"
+            android:background="@drawable/call"/>
+        <ImageView
+           android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/img_next_arrow"/>
+    </RelativeLayout>
+
+<View
+    android:layout_alignParentBottom="true"
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:background="@color/theme"
+    android:layout_marginLeft="8dp"></View>
+</RelativeLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/ll_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <include
+        layout="@layout/layout_title"></include>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_below="@+id/ll_title"
+        android:id="@+id/ll_bulletin_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+<include
+    layout="@layout/layout_bulletin_search"></include>
+    </LinearLayout>
+        <LinearLayout
+            android:layout_below="@+id/ll_bulletin_search"
+            android:id="@+id/button_view_include"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <include layout="@layout/activity_bottom_btns" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/fragment_content"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/button_view_include"
+            >
+        </FrameLayout>
+
+
+
+</RelativeLayout>

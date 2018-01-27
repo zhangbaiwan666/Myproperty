@@ -1,0 +1,320 @@
+package cottee.myproperty.handler;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Message;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import cottee.myproperty.activity.ControlSubActivity;
+import cottee.myproperty.activity.ResetPassWordActivity;
+import cottee.myproperty.constant.Properties;
+import cottee.myproperty.activity.MainActivity;
+import cottee.myproperty.activity.SetPasswordActivity;
+import cottee.myproperty.constant.SubListBean;
+import cottee.myproperty.manager.LoginRegisterManager;
+
+
+public class LoginRegisterHandler extends Handler {
+    private String email;
+    private String password;
+    private Context context;
+    /*
+ * 发送成功返回   0 （要给用户提示注意查看邮件之类的提示）
+ * 发送失败返回   1
+ * 验证码发送频率过快返回 2  （测试时间100秒）
+ * 邮箱已存在返回 3
+ * 提交字段有误返回 4
+   */
+    private static final int SUBMITSUCCESSFUL = 26;
+    private static final int SUBMITFAILED = 1;
+    private static final int SUBMITFAST = 2;
+    private static final int EMAILEXIST = 3;
+    private static final int EMAILWRONG = 4;
+    /*
+     * 执行成功返回 0
+ * 验证码正确但写入失败 1
+ * 验证码过期并重新发送成功返回 2
+ * 验证码过期并重新发送失败返回 3
+ * 无该用户记录返回 5*
+ * 提交字段有误 返回 4
+      */
+    private static final int VERSSUCCEED = 0;
+    private static final int VERSFAILD = 1;
+    private static final int VERTIMOUTPASS = 2;
+    private static final int VERTIMOUTFAILED = 3;
+    private static final int SUBMITDNULL = 4;
+    private static final int VERSWRONG = 5;
+
+    
+    /* * 登陆成功时候返回 0
+       * 用户不存在或密码错误返回 1
+       * 提交字段有误返回 4*/
+
+    private static final int LOGINSSUCCEED = 32;
+    private static final int PSWFAILD = 1;
+    private static final int USERUNEXIST = 4;
+
+    /*     * 成功返回 0
+ * 验证码未通过匹配 1*/
+
+    private static final int READINSSUCCEED = 26;
+    private static final int READINFAILD = 1;
+
+    /*  * 发送成功返回   0 （要给用户提示注意查看邮件之类的提示）
+             * 发送失败返回   1
+             * 验证码发送频率过快返回 2  （测试时间100秒）
+             * 邮箱不存在返回 3
+             * 提交字段有误返回 4*/
+    private static final int SUBMITSUCCEE = 0;
+    private static final int SUBMITFAIL = 1;
+    private static final int SUBMITSUCCESFAST = 2;
+    private static final int EMAILNULL = 3;
+    private static final int PUTEMAILWRONG = 4;
+
+    /* * 执行成功返回 0
+                * 验证码错误 1
+                * 验证码过期并重新发送失败返回 3
+                * 无该用户记录返回 5
+                * 提交字段有误 返回 4*/
+    private static final int VERSTURE = 0;
+    private static final int VERMISTAKE = 1;
+    private static final int VEROUT = 3;
+    private static final int VERNULL = 5;
+    private static final int VERNWORDWRONG = 4;
+    /*##提交邮件和密码
+    ##提交字段：mail_address（邮件地址）   password（密码）
+                * 成功返回 0
+                * 失败返回 1*/
+    private static final int RESETSUCCEE = 26;
+    private static final int RESETFAILED = 1;
+    /* #添加子账户
+             ##提交字段：father_id（查询拥有房屋返还的id）$user_id（子账户id） power_service（报修权限）
+              power_payment（缴费权限） power_affiche（公告权限）
+             * 字段提交有误返回1
+             * 其他错误暂未发现
+             成功返回0*/
+    private static final int ADDSUCCESS = 1;
+    private static final int ADDFAILED = 0;
+    private String property;
+    private static int property_home_id;
+    private static int property_pro_id;
+
+
+    public LoginRegisterHandler(Context context, String email, String password) {
+        this.context = context;
+        this.email = email;
+        this.password = password;
+    }
+
+    @Override
+    public void handleMessage(Message msg) {
+        switch (msg.what) {
+            case Properties.CHECKOUT_EMAIL:
+                switch (msg.arg1) {
+                    case SUBMITSUCCESSFUL:
+                        Toast.makeText(context, "请等待邮件", Toast.LENGTH_SHORT).show();
+                        break;
+                    case EMAILEXIST:
+                        Toast.makeText(context, "当前邮箱已注册", Toast.LENGTH_SHORT)
+                                .show();
+                        break;
+                    case SUBMITFAILED: {
+                    }
+                    break;
+                    case SUBMITFAST: {
+                    }
+                    break;
+                    case EMAILWRONG: {
+                    }
+                    break;
+                }
+                break;
+            case Properties.USER_LOGIN:
+                switch (msg.arg1) {
+                    case LOGINSSUCCEED:
+                        SharedPreferences preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("name", email);
+                        editor.putString("psword", password);
+                        editor.commit();
+                        Toast.makeText(context, "登陆成功", Toast.LENGTH_SHORT)
+                                .show();
+                        Intent intent1 = new Intent(context, MainActivity.class);
+                        ((Activity) context).startActivity(intent1);
+                        break;
+                    case PSWFAILD:
+                        Toast.makeText(context, "密码错误", Toast.LENGTH_SHORT)
+                                .show();
+                        break;
+                    case USERUNEXIST:
+                        Toast.makeText(context, "当前账号不存在", Toast.LENGTH_SHORT)
+                                .show();
+                        break;
+                }
+
+                break;
+            case Properties.CHECKOUT_EMAIL_VER:
+                switch (msg.arg1) {
+                    case READINSSUCCEED:
+                        Toast.makeText(context, "注册成功", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(context, MainActivity.class);
+                        context.startActivity(intent);
+                        break;
+                    case READINFAILD:
+                        Toast.makeText(context, "注册失败", Toast.LENGTH_SHORT).show();
+                        break;
+
+                    default:
+                        break;
+                }
+
+                break;
+            case Properties.FINISH_USER_REGISTER:
+                switch (msg.arg1) {
+                    case VERSSUCCEED:
+                        Intent intent = new Intent(context, SetPasswordActivity.class);
+                        intent.putExtra("email", email);
+                        context.startActivity(intent);
+                        break;
+                    case VERSFAILD:
+                        Toast.makeText(context, "验证码不匹配", Toast.LENGTH_SHORT).show();
+                        break;
+                    case VERTIMOUTPASS:
+                        Toast.makeText(context, "验证码过期或邮箱不存在返回", Toast.LENGTH_SHORT).show();
+                        break;
+                    case VERTIMOUTFAILED:
+                        break;
+                    case SUBMITDNULL:
+                        break;
+                    case VERSWRONG:
+                        break;
+
+                }
+                break;
+            case Properties.FORGET_PASS_WORD:
+                switch (msg.arg1) {
+                    case SUBMITSUCCEE:
+                        Toast.makeText(context, "请等待邮件", Toast.LENGTH_SHORT).show();
+                        break;
+                    case SUBMITFAIL:
+                        break;
+                    case SUBMITSUCCESFAST:
+                        break;
+                    case EMAILNULL:
+                        break;
+                    case PUTEMAILWRONG:
+                        break;
+                }
+                break;
+            case Properties.CHECKOUT_FORGET_EMAIL:
+                switch (msg.arg1) {
+                    case VERSTURE:
+                        Intent intent = new Intent(context, ResetPassWordActivity.class);
+                        intent.putExtra("forgetmail", email);
+                        context.startActivity(intent);
+                        Toast.makeText(context, "身份验证成功", Toast.LENGTH_SHORT).show();
+                        break;
+                    case VERMISTAKE:
+                        break;
+                    case VEROUT:
+                        break;
+                    case VERNULL:
+                        break;
+                    case VERNWORDWRONG:
+                        break;
+                }
+                break;
+            case Properties.RESET_USER:
+                switch (msg.arg1) {
+                    case RESETSUCCEE:
+                        Intent intent = new Intent(context, MainActivity.class);
+                        context.startActivity(intent);
+                        Toast.makeText(context, "修改成功", Toast.LENGTH_SHORT).show();
+                        break;
+                    case RESETFAILED:
+                        break;
+                }
+                break;
+            case Properties.JSON_PROPERTY:
+//                Intent intent = new Intent(context, ControlSubActivity.class);
+//                intent.putExtra("property_name", msg.obj.toString());
+                property = msg.obj.toString();
+                property_home_id = msg.arg1;
+                property_pro_id = msg.arg2;
+//                intent.putExtra("property_home_id", msg.arg1);
+//                intent.putExtra("property_pro_id", msg.arg2);
+//                context.startActivity(intent);
+                break;
+
+            case Properties.ADD_SUB_ACCOUNT_:
+                switch (msg.arg1) {
+                    case ADDSUCCESS:
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setTitle("是否添加此账户");
+                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "","");
+                                LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
+                                loginRegisterManager.GsonProperyt();
+                                loginRegisterManager.GsonSubList();
+                                dialog.dismiss();
+                                Toast.makeText(context, "添加子账户成功", Toast.LENGTH_SHORT).show();
+
+                            }
+                        })
+                                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .create()
+                                .show();
+                        break;
+                    case ADDFAILED:
+                        break;
+
+                    default:
+                        break;
+                }
+                break;
+            case Properties.SHOW_SUB_INFO:
+                ArrayList<String> sub_remark_list = new ArrayList<String>();
+                ArrayList<String> sub_id_list = new ArrayList<>();
+                ArrayList<String> sub_phone_list = new ArrayList<>();
+                Object obj = msg.obj;
+//                Serializable userBeanList = msg.getData().getSerializable("userBeanList");
+//                int test = msg.getData().getInt("test");
+//                System.out.println("userBeanList的强转字符串"+userBeanList);
+                System.out.println("userBeanList的强转字符串的test" + obj);
+                List<SubListBean> subListBeanslist = (List<SubListBean>) obj;
+
+                for (int i = 0; i < subListBeanslist.size(); i++) {
+                    sub_id_list.add(subListBeanslist.get(i).getUser_id());
+                    sub_phone_list.add(subListBeanslist.get(i).getPhone_num());
+                    sub_remark_list.add(subListBeanslist.get(i).getRemark());
+                }
+                Intent intent1 = new Intent(context, ControlSubActivity.class);
+                intent1.putStringArrayListExtra("sub_remark_list", sub_remark_list);
+                intent1.putStringArrayListExtra("sub_phone_list", sub_phone_list);
+                intent1.putStringArrayListExtra("sub_id_list", sub_id_list);
+
+                intent1.putExtra("property_name", property);
+                intent1.putExtra("property_pro_id", property_pro_id);
+                intent1.putExtra("property_home_id", property_home_id);
+                context.startActivity(intent1);
+                System.out.println("传递前得sub_remark_list为"+sub_remark_list);
+                break;
+        }
+    }
+}
+

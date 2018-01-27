@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<cottee.myproperty.widgets.Title xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/title"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:background="@color/titleBg">
+
+    <TextView
+        android:id="@+id/titleName"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="设置"
+        android:textColor="@color/titleTextColor"
+        android:textSize="16dp"
+        android:maxLines="1"
+        android:maxEms="10"
+        android:ellipsize="end"/>
+
+    <LinearLayout
+        android:id="@+id/titleBackLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:minWidth="45dp"
+        android:orientation="horizontal">
+
+        <!--android:background="@drawable/selector_title_click"-->
+
+        <ImageView
+            android:id="@+id/titleBackImg"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/selector_btn_titleback" />
+
+        <TextView
+            android:id="@+id/titleBackName"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="退出"
+            android:textColor="@color/titleTextColor"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/titleRightLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:minWidth="45dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <!--android:background="@drawable/selector_title_click"-->
+            <ImageView
+                android:id="@+id/titleRightImg2"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/selector_btn_titleback" />
+
+            <TextView
+                android:id="@+id/titleRight2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:color="@color/gray3"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="完成"
+                android:textSize="14dp"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/titleRightLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:minWidth="45dp"
+            android:orientation="horizontal">
+
+            <!--android:background="@drawable/selector_title_click"-->
+            <ImageView
+                android:id="@+id/titleRightImg"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/selector_btn_titleback"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/titleRight"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:color="@color/gray3"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="完成"
+                android:textSize="14dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/titleCustomLayoutAear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/titleBackLayout"
+        android:visibility="gone">
+
+    </RelativeLayout>
+
+
+    <View
+        android:id="@+id/titleDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white" />
+
+</cottee.myproperty.widgets.Title>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical">
+
+        <ImageView
+            android:layout_marginTop="70dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:src="@drawable/img_logo"
+            android:layout_gravity="center_horizontal"
+            />
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="爱尚家"
+            android:textSize="18dp"
+            android:textColor="@color/theme"
+            />
+
+
+        <EditText
+            android:layout_marginTop="20dp"
+            android:id="@+id/et_user_email"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/rect"
+            android:hint="请输入您的邮箱账号"
+            android:paddingLeft="10dp"
+            android:paddingTop="8dp"
+            android:textColorHint="#BEBEBE"
+            android:textSize="16sp"
+            />
+
+        <EditText
+            android:id="@+id/et_user_password"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/rect"
+            android:hint="请输入您的密码"
+            android:paddingLeft="10dp"
+            android:paddingTop="8dp"
+            android:textColorHint="#BEBEBE"
+            android:textSize="16sp"
+            />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:minHeight="50dp"
+        android:paddingTop="15dp">
+        <TextView
+            android:id="@+id/tv_emailRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="账号注册"
+            android:paddingLeft="43dp"
+           android:autoLink="all"
+            android:onClick="emailRegister"
+            android:textSize="15sp"/>
+        <TextView
+            android:id="@+id/tv_passwordForget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_emailRegister"
+            android:layout_marginLeft="110dp"
+            android:text="忘记密码"
+            android:textSize="15sp"
+
+            android:onClick="forgetPassword"/>
+    </LinearLayout>
+       <Button
+           android:id="@+id/bt_login"
+           android:layout_width="160dp"
+           android:layout_height="30dp"
+           android:layout_margin="20dp"
+           android:layout_gravity="center_horizontal"
+           android:layout_marginBottom="14dp"
+           android:layout_marginLeft="20dp"
+           android:layout_marginRight="15dp"
+           android:layout_marginTop="5dp"
+           android:gravity="center"
+           android:text="登录"
+           android:textColor="#FFFFFF"
+           android:textSize="15sp"
+           style="@style/buttonLogin"
+           android:background="@drawable/selector_button_login"/>
+
+
+
+   </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/img_bottom_view" />
+</RelativeLayout>

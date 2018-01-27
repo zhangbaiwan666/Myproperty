@@ -1,0 +1,32 @@
+package cottee.myproperty.constant;
+
+/**
+ * Created by Administrator on 2017/11/20.
+ */
+
+public class Properties {
+    public static final String EMAIL_SUBMIT_PATH = "https://thethreestooges.cn/property/bean/login/mail_submit.php";
+    public static final String MAIL_VERIFICATION_PATH= "https://thethreestooges.cn/property/bean/login/mail_validate.php";
+    public static final String USER_BUILD_PATH = "https://thethreestooges.cn/property/bean/login/user_write.php";
+    public static final String LOGIN_PATH = "https://thethreestooges.cn:5210/identity/login/login.php";
+    public static final String FORGET_SUBMIT_PATH ="https://thethreestooges.cn/property/bean/login/forget_submit.php";
+    public static final String FORGET_VALIDATE_PATH ="https://thethreestooges.cn/property/bean/login/forget_validate.php";
+    public static final String RESET_USER_PATH ="https://thethreestooges.cn/property/bean/login/user_forget.php";
+    public static final String PROPERTY_PATH ="https://thethreestooges.cn/property/bean/housemanage/myhouse.php";
+    public static final String ADD_SUB_ACCOUNT="https://thethreestooges.cn:5210/housemanage/son/add";
+    public static final String FIX_HOUSE="https://thethreestooges.cn/property/static/file/project_static.json";
+    public static final String SUB_LIST_PATH="https://thethreestooges.cn:5210/housemanage/son/show";
+    public final static int USER_LOGIN = 1;
+    public final static int CHECKOUT_EMAIL = 2;
+    public final static int CHECKOUT_EMAIL_VER = 3;
+    public final static int FINISH_USER_REGISTER = 4;
+    public final static int FORGET_PASS_WORD = 5;
+    public final static int CHECKOUT_FORGET_EMAIL = 6;
+    public final static int RESET_USER = 7;
+    public final static int JSON_PROPERTY = 8;
+    public final static int ADD_SUB_ACCOUNT_ = 9;
+    public final static int SHOW_SUB_INFO = 10;
+    public final static String SUCCESS = "0";
+
+
+}

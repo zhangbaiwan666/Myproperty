@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <!-- 填充颜色为亮灰色 -->
+    <solid android:color="#c0c0c0"/>
+    
+    <!-- 描边颜色为银色 -->
+    <stroke android:width="2dp"
+        android:color="#a9a9a9"/>
+    
+    <!-- 边角为45度 -->
+    <corners android:radius="45dp"/>
+
+</shape>

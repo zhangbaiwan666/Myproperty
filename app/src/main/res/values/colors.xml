@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="White">#fdfdfd</color>
+    <color name="red2">#FF0000</color>
+    <color name="blue_gray">#464954</color>
+    <color name="gray3">#FF969696</color>
+    <color name="theme">#effc8744</color>
+    <color name="titleTextColor">@color/White</color>
+    <color name="titleBg">@color/transparent</color>
+    <color name="transparent">#00000000</color>
+    <color name="transparentAA">#AA000000</color>
+    <color name="Black">#000000</color>
+    <color name="gray5">#FF646464</color>
+    <color name="itemTextColorSecon">@color/gray5</color>
+    <color name="ind_red">#B30E17</color>
+    <color name="blue_light">#00C0E4</color>
+    <color name="material_orange">#ffEF6C00</color>
+    <color name="white">#ffffffff</color>
+    <color name="selected_fg_color">#7DD3EC</color>
+    <color name="green">#5ae66a</color>
+</resources>

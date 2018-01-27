@@ -1,0 +1,29 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="buttonLogin">
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textSize">19dp</item>
+        <item name="android:background">@color/theme</item>
+        <item name="android:onClick">onButtonClick</item>
+    </style>
+    <style name="Dialog" parent="android:style/Theme.Dialog">
+        <item name="android:background">#00000000</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+    <style name="setItemTextSeconLeft">
+        <item name="android:textSize">@dimen/all_smalltextsize</item>
+        <item name="android:textColor">@color/itemTextColorSecon</item>
+        <item name="android:gravity">left|center_vertical</item>
+    </style>
+    <style name="TabStyle" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+</resources>

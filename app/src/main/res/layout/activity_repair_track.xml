@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/track_background"
+    >
+    <RelativeLayout
+
+        android:id="@+id/rel_genzongchuli"
+        android:layout_width="match_parent"
+        android:layout_height="45sp"
+        android:minHeight="50dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="12dp"
+        >
+        <Button
+
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="7dp"
+            android:layout_marginStart="7dp"
+            android:background="@drawable/back"
+            android:onClick="back"
+            android:paddingBottom="10dp"
+            android:paddingTop="40dp"/>
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="跟踪处理"
+            android:textSize="20dp"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:id="@+id/rel_jigong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_genzongchuli"
+        android:paddingTop="25dp">
+
+        <ImageView
+            android:id="@+id/imv_photo"
+            android:layout_width="70dp"
+            android:layout_height="80dp"
+            android:paddingLeft="10dp"
+            android:src="@drawable/ff"/>
+        <TextView
+            android:id="@+id/tv_trackOfworker"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@id/imv_photo"
+            android:textSize="15dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:text="李师傅"/>
+        <TextView
+            android:id="@+id/tv_serProject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_trackOfworker"
+            android:paddingLeft="10dp"
+            android:text="服务项目:"
+            android:textSize="15dp"
+            android:paddingTop="5dp"
+            android:layout_toRightOf="@id/imv_photo"/>
+        <TextView
+            android:id="@+id/tv_serProjectOftrack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:text="aaaaaaaaaaa"
+            android:textSize="15dp"
+            android:layout_toRightOf="@id/tv_serProject"
+            android:layout_below="@id/tv_trackOfworker"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel1"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_below="@id/rel_jigong"
+        android:paddingTop="25dp">
+
+        <ImageView
+            android:id="@+id/imv_zhengzaichuli"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:paddingTop="17dp"
+            android:src="@drawable/genzong"/>
+        <TextView
+            android:id="@+id/tv_baoxiuxinxi"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@id/imv_zhengzaichuli"
+            android:textSize="20dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:text="报修信息已发送"/>
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_baoxiuxinxi"
+            android:paddingLeft="10dp"
+            android:text="2017-12-13 13:12"
+            android:textSize="15dp"
+            android:layout_toRightOf="@id/imv_zhengzaichuli"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rel2"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:paddingTop="20dp"
+        android:layout_below="@id/rel1">
+
+        <ImageView
+            android:id="@+id/imv_zhengzaichuli1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:paddingTop="17dp"
+            android:src="@drawable/genzong"/>
+        <TextView
+            android:id="@+id/tv_baoxiuxinxi1"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@id/imv_zhengzaichuli1"
+            android:textSize="20dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:text="李师傅已接收"/>
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_baoxiuxinxi1"
+            android:paddingLeft="10dp"
+            android:text="2017-12-13 13:20"
+            android:textSize="15dp"
+            android:layout_toRightOf="@id/imv_zhengzaichuli1"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@id/rel2"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:paddingTop="20dp">
+
+        <ImageView
+            android:id="@+id/imv_zhengzaichuli2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:paddingTop="17dp"
+            android:src="@drawable/zhengzaichuli"/>
+
+        <TextView
+            android:id="@+id/tv_baoxiuxinxi2"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@id/imv_zhengzaichuli2"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:text="正在处理"
+            android:textSize="20dp"/>
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_baoxiuxinxi2"
+            android:layout_toRightOf="@id/imv_zhengzaichuli2"
+            android:paddingLeft="10dp"
+            android:text="2017-12-13 13:12"
+            android:textSize="15dp"/>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="申请取消"
+            android:textSize="15sp"
+            android:background="@drawable/shenqing_quxiao"
+
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="联系工人"
+            android:textSize="15sp"
+            android:background="@drawable/shenqing_quxiao"
+            android:layout_weight="1"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1"
+            android:text="修理完成"
+            android:textSize="15sp"
+            android:onClick="repairFinish"
+            android:background="@drawable/xiuli_wancheng"
+            />
+    </LinearLayout>
+
+</RelativeLayout>
