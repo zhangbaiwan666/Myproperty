@@ -28,7 +28,7 @@ public class SettingFragment extends Fragment {
 			public void onNoDoubleClick(View view) {
 				LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getActivity(), "","");
 				LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getActivity(), loginRegisterHandler);
-				loginRegisterManager.GsonProperyt();
+//				loginRegisterManager.GsonProperyt();
 				loginRegisterManager.GsonSubList();
 			}
 		});

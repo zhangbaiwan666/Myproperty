@@ -100,12 +100,21 @@ public class LoginRegisterHandler extends Handler {
               power_payment（缴费权限） power_affiche（公告权限）
              * 字段提交有误返回1
              * 其他错误暂未发现
+             * 显示子账户增加返回值  3
+               作用  当前房屋未选定
              成功返回0*/
     private static final int ADDSUCCESS = 1;
     private static final int ADDFAILED = 0;
+    private static final int ADDFAILED_NOT_CHOOSE_HOUSE = 3;
     private String property;
     private static int property_home_id;
     private static int property_pro_id;
+    /* #显示所有物业
+    *  #提交字段*/
+    private static final int SHOWPROPERTY = 1;
+    private static final int FAILEDPROPERTY =0;
+
+
 
 
     public LoginRegisterHandler(Context context, String email, String password) {
@@ -264,7 +273,7 @@ public class LoginRegisterHandler extends Handler {
                             public void onClick(DialogInterface dialog, int which) {
                                 LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "","");
                                 LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
-                                loginRegisterManager.GsonProperyt();
+//                                loginRegisterManager.GsonProperyt();
                                 loginRegisterManager.GsonSubList();
                                 dialog.dismiss();
                                 Toast.makeText(context, "添加子账户成功", Toast.LENGTH_SHORT).show();
@@ -281,6 +290,9 @@ public class LoginRegisterHandler extends Handler {
                                 .show();
                         break;
                     case ADDFAILED:
+                        break;
+                    case ADDFAILED_NOT_CHOOSE_HOUSE:
+                        Toast.makeText(context, "尚未选择房屋", Toast.LENGTH_SHORT).show();
                         break;
 
                     default:

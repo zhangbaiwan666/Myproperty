@@ -17,7 +17,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import cottee.myproperty.constant.Properties;
-import cottee.myproperty.constant.PropertyBean;
 import cottee.myproperty.constant.Repair;
 import cottee.myproperty.constant.SubListBean;
 import cottee.myproperty.handler.LoginRegisterHandler;
@@ -287,7 +286,6 @@ public class LoginRegisterManager implements Serializable {
                         msg.what = Properties.RESET_USER;
                         msg.arg1 = str.length();
                         loginRegisterHandler.sendMessage(msg);
-
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -299,69 +297,69 @@ public class LoginRegisterManager implements Serializable {
     /**
      ##请求物业json
      */
-    public void GsonProperyt(){
-        new Thread(){
-        public void run() {
-            try {
-                SharedPreferences preferences=context.getSharedPreferences("user", Context.MODE_PRIVATE);
-//                String session=preferences.getString("session", "");
-                String session = Session.getSession();
-                OkHttpClient client = new OkHttpClient();
-                RequestBody requestBody = new FormBody.Builder().add("session",session).build();
-                Request request = new Request.Builder().url(Properties.PROPERTY_PATH).post(requestBody).build();
-                Response response = client.newCall(request).execute();
-                String json = response.body().string();
-                if (json.trim().equals("250")){
-                    String email=preferences.getString("name", "");
-                    String password=preferences.getString("psword", "");
-                    final String id = email;
-                    final String psw = password;
-                    OkHttpClient client1 = new OkHttpClient();
-                    RequestBody requestBody1 = new FormBody.Builder().add("username", id).add("password", psw).build();
-                    Request request1 = new Request.Builder().url(Properties.LOGIN_PATH).post(requestBody1).build();
-                    Response response1 = client1.newCall(request1).execute();
-                    if (response1.isSuccessful()) {
-                        //获得新的session
-                        String str = response1.body().string();
-                        Session.setSession(str);
-//                                    SharedPreferences preferences=context.getSharedPreferences("user",Context.MODE_PRIVATE);
-                        //新session存到本地
-//                        SharedPreferences.Editor editor=preferences.edit();
-//                        editor.putString("session", str);
-//                        editor.commit();
-                        GsonProperyt();
-                    }
-
-                }
-                else {
-                    Log.d("Property","Json" + json);
-                    parseJSONWithpropertyGSON(json);
-                }
-                //Json的解析类对象
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        private void parseJSONWithpropertyGSON(String jsonData) {
-            //使用轻量级的Gson解析得到的json
-            Gson gson = new Gson();
-            List<PropertyBean> appList = gson.fromJson(jsonData, new TypeToken<List<PropertyBean>>() {}.getType());
-            for (PropertyBean app : appList) {
-                Log.d("Property","appList" + appList);
-                //控制台输出结果，便于查看
-                Log.d("MainActivity", "name" + app.getName());
-                Log.d("MainActivity", "home_id" + app.getHomeid());
-                Log.d("MainActivity", "pro_id" + app.getProid());
-                Message msg = new Message();
-                msg.what=Properties.JSON_PROPERTY;
-                msg.obj=app.getName();
-                msg.arg1=Integer.parseInt(app.getProid());
-                msg.arg2=Integer.parseInt(app.getHomeid());
-                loginRegisterHandler.sendMessage(msg);
-            }
-        }
-    }.start();
-    }
+//    public void GsonProperyt(){
+//        new Thread(){
+//        public void run() {
+//            try {
+//                SharedPreferences preferences=context.getSharedPreferences("user", Context.MODE_PRIVATE);
+////                String session=preferences.getString("session", "");
+//                String session = Session.getSession();
+//                OkHttpClient client = new OkHttpClient();
+//                RequestBody requestBody = new FormBody.Builder().add("session",session).build();
+//                Request request = new Request.Builder().url(Properties.PROPERTY_PATH).post(requestBody).build();
+//                Response response = client.newCall(request).execute();
+//                String json = response.body().string();
+//                if (json.trim().equals("250")){
+//                    String email=preferences.getString("name", "");
+//                    String password=preferences.getString("psword", "");
+//                    final String id = email;
+//                    final String psw = password;
+//                    OkHttpClient client1 = new OkHttpClient();
+//                    RequestBody requestBody1 = new FormBody.Builder().add("username", id).add("password", psw).build();
+//                    Request request1 = new Request.Builder().url(Properties.LOGIN_PATH).post(requestBody1).build();
+//                    Response response1 = client1.newCall(request1).execute();
+//                    if (response1.isSuccessful()) {
+//                        //获得新的session
+//                        String str = response1.body().string();
+//                        Session.setSession(str);
+////                                    SharedPreferences preferences=context.getSharedPreferences("user",Context.MODE_PRIVATE);
+//                        //新session存到本地
+////                        SharedPreferences.Editor editor=preferences.edit();
+////                        editor.putString("session", str);
+////                        editor.commit();
+//                        GsonProperyt();
+//                    }
+//
+//                }
+//                else {
+//                    Log.d("Property","Json" + json);
+//                    parseJSONWithpropertyGSON(json);
+//                }
+//                //Json的解析类对象
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        private void parseJSONWithpropertyGSON(String jsonData) {
+//            //使用轻量级的Gson解析得到的json
+//            Gson gson = new Gson();
+//            List<PropertyBean> appList = gson.fromJson(jsonData, new TypeToken<List<PropertyBean>>() {}.getType());
+//            for (PropertyBean app : appList) {
+//                Log.d("Property","appList" + appList);
+//                //控制台输出结果，便于查看
+//                Log.d("MainActivity", "name" + app.getName());
+//                Log.d("MainActivity", "home_id" + app.getHomeid());
+//                Log.d("MainActivity", "pro_id" + app.getProid());
+//                Message msg = new Message();
+//                msg.what=Properties.JSON_PROPERTY;
+//                msg.obj=app.getName();
+//                msg.arg1=Integer.parseInt(app.getProid());
+//                msg.arg2=Integer.parseInt(app.getHomeid());
+//                loginRegisterHandler.sendMessage(msg);
+//            }
+//        }
+//    }.start();
+//    }
     /**
      ##添加子账户
      */
@@ -571,7 +569,7 @@ public class LoginRegisterManager implements Serializable {
                     Response response = client.newCall(request).execute();
                     String responseData = response.body().string();
                     System.out.println(response);
-                    parseJSONObject(responseData);
+                    ParseJSONObject(responseData);
                 } catch (Exception e) {
                     e.printStackTrace();
 
@@ -580,7 +578,7 @@ public class LoginRegisterManager implements Serializable {
         }).start();
     }
 
-    public void parseJSONObject(String responseData) {
+    public void ParseJSONObject(String responseData) {
         Gson gson = new Gson();
         proinfo = gson.fromJson(responseData, Repair
                 .class).getProinfo();
@@ -593,6 +591,61 @@ public class LoginRegisterManager implements Serializable {
         }
 
 
+    }
+    /**
+     ##切换物业
+     */
+    public void ShowAllProperty(String session){
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    SharedPreferences preferences=context.getSharedPreferences("user", Context.MODE_PRIVATE);
+                    String session = Session.getSession();
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("session",session).build();
+                    //把session add到requestbody中
+                    Request request = new Request.Builder().url(Properties.SHOW_ALL_PROPERTY).post(requestBody).build();
+                    Response response = client.newCall(request).execute();
+                    String recode = response.body().string();
+                    String recode_trim = recode.trim();
+                    //如果返回250，表示session过期，如果session通过返回之前正常的0,1逻辑
+                    if (recode_trim.equals("250")){
+                        //本地做重新登录得动作
+                        String email=preferences.getString("name", "");
+                        String password=preferences.getString("psword", "");
+                        final String id = email;
+                        final String psw = password;
+                        OkHttpClient client1 = new OkHttpClient();
+                        RequestBody requestBody1 = new FormBody.Builder().add("username", id).add("password", psw).build();
+                        Request request1 = new Request.Builder().url(Properties.LOGIN_PATH).post(requestBody1).build();
+                        Response response1 = client1.newCall(request1).execute();
+                        if (response1.isSuccessful()) {
+                            //获得新的session
+                            String str = response1.body().string();
+//                                    SharedPreferences preferences=context.getSharedPreferences("user",Context.MODE_PRIVATE);
+                            //新session存到本地
+//                                SharedPreferences.Editor editor=preferences.edit();
+//                                editor.putString("session", str);
+//                                editor.commit();
+                            Session.setSession(str);
+                            ShowAllProperty(session);
+                        }
+
+                    }else {
+                        //sesssion没过期执行的正常逻辑
+                        Message msg = new Message();
+                        msg.what = Properties.ADD_SUB_ACCOUNT_;
+                        msg.arg1 = Integer.parseInt(recode_trim);
+                        loginRegisterHandler.sendMessage(msg);
+                        Log.d("MainActivity", "返回值" + recode);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 }
 

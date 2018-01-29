@@ -14,8 +14,10 @@ public class Properties {
     public static final String RESET_USER_PATH ="https://thethreestooges.cn/property/bean/login/user_forget.php";
     public static final String PROPERTY_PATH ="https://thethreestooges.cn/property/bean/housemanage/myhouse.php";
     public static final String ADD_SUB_ACCOUNT="https://thethreestooges.cn:5210/housemanage/son/add";
-    public static final String FIX_HOUSE="https://thethreestooges.cn/property/static/file/project_static.json";
     public static final String SUB_LIST_PATH="https://thethreestooges.cn:5210/housemanage/son/show";
+    public static final String SHOW_ALL_PROPERTY="https://thethreestooges.cn:5210/housemanage/find/property";
+    public static final String CHOOSE_PROPERTY="https://thethreestooges.cn:5210/housemanage/set/property";
+    public static final String SHOW_ALL_HOUSE="https://thethreestooges.cn:5210/housemanage/user/house";
     public final static int USER_LOGIN = 1;
     public final static int CHECKOUT_EMAIL = 2;
     public final static int CHECKOUT_EMAIL_VER = 3;
