@@ -17,6 +17,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import cottee.myproperty.constant.Properties;
+import cottee.myproperty.constant.PropertyListBean;
 import cottee.myproperty.constant.Repair;
 import cottee.myproperty.constant.SubListBean;
 import cottee.myproperty.handler.LoginRegisterHandler;
@@ -610,6 +611,15 @@ public class LoginRegisterManager implements Serializable {
                     Response response = client.newCall(request).execute();
                     String recode = response.body().string();
                     String recode_trim = recode.trim();
+                    System.out.println("获得的物业表是"+recode_trim);
+                    System.out.println("获得的物业表是"+recode_trim);
+                    System.out.println("获得的物业表是"+recode_trim);
+                    System.out.println("获得的物业表是"+recode_trim);
+                    System.out.println("获得的物业表是"+recode_trim);
+                    System.out.println("获得的物业表是"+recode_trim);
+                    System.out.println("获得的物业表是"+recode_trim);
+                    System.out.println("获得的物业表是"+recode_trim);
+                    System.out.println("获得的物业表是"+recode_trim);
                     //如果返回250，表示session过期，如果session通过返回之前正常的0,1逻辑
                     if (recode_trim.equals("250")){
                         //本地做重新登录得动作
@@ -634,18 +644,31 @@ public class LoginRegisterManager implements Serializable {
                         }
 
                     }else {
-                        //sesssion没过期执行的正常逻辑
-                        Message msg = new Message();
-                        msg.what = Properties.ADD_SUB_ACCOUNT_;
-                        msg.arg1 = Integer.parseInt(recode_trim);
-                        loginRegisterHandler.sendMessage(msg);
-                        Log.d("MainActivity", "返回值" + recode);
+                      parseJSONWithGSON(recode_trim);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
+            private void parseJSONWithGSON(String recode_trim) {
+                //使用轻量级的Gson解析得到的json
+                JsonObject jsonObject = new JsonParser().parse(recode_trim).getAsJsonObject();
+                JsonArray son_show = jsonObject.getAsJsonArray("pro_list");
+                System.out.println(son_show);
+                Gson gson = new Gson();
+                List<PropertyListBean> propertyListBeans = gson.fromJson(son_show, new TypeToken<List<PropertyListBean>>() {
+                }.getType());
+
+                System.out.println("propertyListBeans"+propertyListBeans);
+                Message msg = new Message();
+                msg.what=Properties.ALL_PROPERTY_LIST;
+                msg.obj=propertyListBeans;
+                System.out.println("propertyListBeans的传出字符串"+propertyListBeans);
+                loginRegisterHandler.sendMessage(msg);
+            }
         }.start();
+
     }
+
 }
 

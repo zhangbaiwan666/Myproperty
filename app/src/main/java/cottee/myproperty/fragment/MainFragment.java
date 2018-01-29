@@ -40,10 +40,15 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import cottee.myproperty.R;
+import cottee.myproperty.activity.AddSubActivity;
 import cottee.myproperty.activity.LoginActivity;
 import cottee.myproperty.activity.RepairProjectActivity;
 import cottee.myproperty.activity.TabLessActivity;
+import cottee.myproperty.handler.LoginRegisterHandler;
 import cottee.myproperty.listener.NoDoubleClickListener;
+import cottee.myproperty.manager.LoginRegisterManager;
+import cottee.myproperty.uitils.HealthMap;
+import cottee.myproperty.uitils.Session;
 
 public class MainFragment extends Fragment {
 	private Button bt_checkout;
@@ -296,6 +301,23 @@ public class MainFragment extends Fragment {
 
 		@Override
 		public void onClick(View v) {
+			LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getContext(), "", "");
+			LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getContext(), loginRegisterHandler);
+			String session = Session.getSession();
+			Object property_list = HealthMap.get("property_list");
+			System.out.println("输出东西就睡觉"+property_list);
+			System.out.println("输出东西就睡觉"+property_list);
+			System.out.println("输出东西就睡觉"+property_list);
+			System.out.println("输出东西就睡觉"+property_list);
+			System.out.println("输出东西就睡觉"+property_list);
+			System.out.println("输出东西就睡觉"+property_list);
+			System.out.println("输出东西就睡觉"+property_list);
+			System.out.println("输出东西就睡觉"+property_list);
+			System.out.println("输出东西就睡觉"+property_list);
+
+
+
+			loginRegisterManager.ShowAllProperty(session);
 			switch (v.getId()) {
 
 				case R.id.tv_right:

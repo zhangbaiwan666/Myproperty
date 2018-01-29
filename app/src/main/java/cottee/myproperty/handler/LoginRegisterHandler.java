@@ -6,8 +6,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.widget.Adapter;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -15,11 +17,14 @@ import java.util.List;
 
 import cottee.myproperty.activity.ControlSubActivity;
 import cottee.myproperty.activity.ResetPassWordActivity;
+import cottee.myproperty.adapter.SubinfoAdapter;
 import cottee.myproperty.constant.Properties;
 import cottee.myproperty.activity.MainActivity;
 import cottee.myproperty.activity.SetPasswordActivity;
+import cottee.myproperty.constant.PropertyListBean;
 import cottee.myproperty.constant.SubListBean;
 import cottee.myproperty.manager.LoginRegisterManager;
+import cottee.myproperty.uitils.HealthMap;
 
 
 public class LoginRegisterHandler extends Handler {
@@ -113,8 +118,6 @@ public class LoginRegisterHandler extends Handler {
     *  #提交字段*/
     private static final int SHOWPROPERTY = 1;
     private static final int FAILEDPROPERTY =0;
-
-
 
 
     public LoginRegisterHandler(Context context, String email, String password) {
@@ -326,7 +329,20 @@ public class LoginRegisterHandler extends Handler {
                 context.startActivity(intent1);
                 System.out.println("传递前得sub_remark_list为"+sub_remark_list);
                 break;
+            case Properties.ALL_PROPERTY_LIST:
+                ArrayList<String> property_list = new ArrayList<String>();
+                ArrayList<String> pro_id_list = new ArrayList<>();
+                Object obj_property = msg.obj;
+                System.out.println("userBeanList的强转字符串的test" + obj_property);
+                List<PropertyListBean> propertyListBean = (List<PropertyListBean>) obj_property;
+                for (int i = 0; i < propertyListBean.size(); i++) {
+                    property_list.add(propertyListBean.get(i).getName());
+                    pro_id_list.add(propertyListBean.get(i).getPro_id());
+                }
+                HealthMap.put("property_list",property_list);
+                break;
         }
+
     }
 }
 

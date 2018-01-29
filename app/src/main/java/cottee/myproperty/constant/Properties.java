@@ -28,6 +28,7 @@ public class Properties {
     public final static int JSON_PROPERTY = 8;
     public final static int ADD_SUB_ACCOUNT_ = 9;
     public final static int SHOW_SUB_INFO = 10;
+    public final static int ALL_PROPERTY_LIST = 11;
     public final static String SUCCESS = "0";
 
 
