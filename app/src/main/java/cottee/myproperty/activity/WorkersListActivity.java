@@ -23,7 +23,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class WorkersListActivity extends Activity {
-    //
+
     private ListView listView;
     String project_id;
     Handler handler;
