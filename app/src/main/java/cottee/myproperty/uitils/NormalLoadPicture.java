@@ -14,7 +14,7 @@ import java.net.URL;
 
 
 public class NormalLoadPicture {
-    //hao
+    //h
     private String uri;
     private ImageView imageView;
     private  byte[] picByte;
