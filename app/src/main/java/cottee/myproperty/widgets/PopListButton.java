@@ -20,7 +20,6 @@ import java.util.List;
 
 import cottee.myproperty.R;
 
-@SuppressLint("AppCompatCustomView")
 public class PopListButton extends Button implements View.OnClickListener {
 
 	// 声明上下文对象

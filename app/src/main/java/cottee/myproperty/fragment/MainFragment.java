@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,17 +16,24 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -38,18 +46,22 @@ import cottee.myproperty.activity.TabLessActivity;
 import cottee.myproperty.listener.NoDoubleClickListener;
 
 public class MainFragment extends Fragment {
-	private Button bt_property;
 	private Button bt_checkout;
 	private Button bt_placard;
+	private TextView tvRight;
 	private static Map<String,Activity> destoryMap = new HashMap<>();
 	private boolean click=true;
-	private Button btn_change_pro; private int imageIds[];
+	private int imageIds[];
 	private String[] titles;
 	private ArrayList<ImageView> images;
 	private ArrayList<View> dots;
 	private TextView title;
 	private ViewPager mViewPager;
 	private ViewPagerAdapter adapter;
+	private PopupWindow popRight;
+	private View layoutRight;
+	private ListView menulistRight;
+	private List<Map<String, String>> listRight;
 
 	private int oldPosition = 0;//记录上一次点的位置
 	private int currentItem; //当前页面
@@ -66,7 +78,6 @@ public class MainFragment extends Fragment {
 							 Bundle savedInstanceState) {
 		inflate = inflater.inflate(R.layout.fragment_main, null);
 		bt_checkout = (Button) inflate.findViewById(R.id.bt_checkout);
-		btn_change_pro = (Button) inflate.findViewById(R.id.btn_change_pro);
 		bt_property_server = (Button) inflate.findViewById(R.id.bt_property_server);
 		bt_placard = (Button) inflate.findViewById(R.id.bt_placard);
 		bt_payFee = (Button)inflate.findViewById(R.id.bt_payFee);
@@ -74,7 +85,19 @@ public class MainFragment extends Fragment {
 		ll_placard = (LinearLayout) inflate.findViewById(R.id.ll_placard);
 		pop();
 		initEven();
+		initParam();
 		return inflate;
+	}
+	private void initParam() {
+		tvRight = (TextView) inflate.findViewById(R.id.tv_right);
+		tvRight.setOnClickListener(myListener);
+		// 初始化数据项
+		listRight = new ArrayList<Map<String, String>>();
+		for (int i = 1; i < 10; i++) {
+			HashMap<String, String> mapTemp = new HashMap<String, String>();
+			mapTemp.put("item", "right " + i);
+			listRight.add(mapTemp);
+		}
 	}
 
 	private void initEven() {
@@ -90,12 +113,6 @@ public class MainFragment extends Fragment {
 			@Override
 			public void onNoDoubleClick(View view) {
 
-			}
-		});
-		btn_change_pro.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				showPopupMenu(btn_change_pro);
 			}
 		});
 		bt_repair.setOnClickListener(new View.OnClickListener() {
@@ -275,6 +292,81 @@ public class MainFragment extends Fragment {
 				}
 
 			};
+	private View.OnClickListener myListener = new View.OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			switch (v.getId()) {
+
+				case R.id.tv_right:
+					if (popRight != null && popRight.isShowing()) {
+						popRight.dismiss();
+					} else {
+						layoutRight = getLayoutInflater().inflate(
+								R.layout.pop_menulist, null);
+						menulistRight = (ListView) layoutRight
+								.findViewById(R.id.menulist);
+						SimpleAdapter listAdapter = new SimpleAdapter(
+								getContext(), listRight, R.layout.pop_menuitem,
+								new String[] { "item" },
+								new int[] { R.id.menuitem });
+						menulistRight.setAdapter(listAdapter);
+
+						// 点击listview中item的处理
+						menulistRight
+								.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+									@Override
+									public void onItemClick(AdapterView<?> arg0,
+															View arg1, int arg2, long arg3) {
+										String strItem = listRight.get(arg2).get(
+												"item");
+										tvRight.setText(strItem);
+
+										if (popRight != null && popRight.isShowing()) {
+											popRight.dismiss();
+										}
+									}
+								});
+
+						popRight = new PopupWindow(layoutRight, tvRight.getWidth(),
+								ViewGroup.LayoutParams.WRAP_CONTENT);
+
+						ColorDrawable cd = new ColorDrawable(-0000);
+						popRight.setBackgroundDrawable(cd);
+						popRight.setAnimationStyle(R.style.PopupAnimation);
+						popRight.update();
+						popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+						popRight.setTouchable(true); // 设置popupwindow可点击
+						popRight.setOutsideTouchable(true); // 设置popupwindow外部可点击
+						popRight.setFocusable(true); // 获取焦点
+
+						// 设置popupwindow的位置
+						int topBarHeight = 30;
+						popRight.showAsDropDown(tvRight, 0,
+								(topBarHeight - tvRight.getHeight()) / 2);
+
+						popRight.setTouchInterceptor(new View.OnTouchListener() {
+
+							@Override
+							public boolean onTouch(View v, MotionEvent event) {
+								// 如果点击了popupwindow的外部，popupwindow也会消失
+								if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+									popRight.dismiss();
+									return true;
+								}
+								return false;
+							}
+						});
+					}
+					break;
+
+				default:
+					break;
+			}
+		}
+
+	};
 
 			@Override
 			public void onStop() {
