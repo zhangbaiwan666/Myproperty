@@ -334,9 +334,9 @@ public class LoginRegisterHandler extends Handler {
                 ArrayList<String> pro_id_list = new ArrayList<>();
                 Object obj_property = msg.obj;
                 System.out.println("userBeanList的强转字符串的test" + obj_property);
-                List<PropertyListBean> propertyListBean = (List<PropertyListBean>) obj_property;
-                for (int i = 0; i < propertyListBean.size(); i++) {
-                    property_list.add(propertyListBean.get(i).getName());
+                    List<PropertyListBean> propertyListBean = (List<PropertyListBean>) obj_property;
+                    for (int i = 0; i < propertyListBean.size(); i++) {
+                        property_list.add(propertyListBean.get(i).getName());
                     pro_id_list.add(propertyListBean.get(i).getPro_id());
                 }
                 HealthMap.put("property_list",property_list);

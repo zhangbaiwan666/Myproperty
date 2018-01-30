@@ -101,7 +101,6 @@ public class ControlSubActivity extends Activity {
             sub_id = sub_remark_list.get(i);
             SubInfo subInfo = new SubInfo(sub_remark, sub_id,sub_phone);
             subList.add(subInfo);
-
         }
         return subList;
     }
@@ -132,8 +131,6 @@ public class ControlSubActivity extends Activity {
                     ControlSubActivity.this, R.layout.layout_list_item,subList);
 
             //把R.layout.fruit_item和初始化完毕的ArrayList<Fruit>给FruitAdapter
-
-
 
             final ListView listView=(ListView)findViewById(R.id.sub_list);
             listView.setAdapter(adapter);//把Subinfo给ListView

@@ -614,12 +614,6 @@ public class LoginRegisterManager implements Serializable {
                     System.out.println("获得的物业表是"+recode_trim);
                     System.out.println("获得的物业表是"+recode_trim);
                     System.out.println("获得的物业表是"+recode_trim);
-                    System.out.println("获得的物业表是"+recode_trim);
-                    System.out.println("获得的物业表是"+recode_trim);
-                    System.out.println("获得的物业表是"+recode_trim);
-                    System.out.println("获得的物业表是"+recode_trim);
-                    System.out.println("获得的物业表是"+recode_trim);
-                    System.out.println("获得的物业表是"+recode_trim);
                     //如果返回250，表示session过期，如果session通过返回之前正常的0,1逻辑
                     if (recode_trim.equals("250")){
                         //本地做重新登录得动作

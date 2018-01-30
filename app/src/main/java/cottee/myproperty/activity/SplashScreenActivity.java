@@ -13,10 +13,19 @@ import cottee.myproperty.manager.LoginRegisterManager;
 
 public class SplashScreenActivity extends Activity {
     private static int SPLASH_TIME_OUT = 3000;
+    private String email;
+    private String password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        SharedPreferences preferences=getSharedPreferences("user", Context.MODE_PRIVATE);
+        email = preferences.getString("name", "");
+        password = preferences.getString("psword", "");
+        LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(SplashScreenActivity.this, "", "");
+        LoginRegisterManager loginRegisterManager = new LoginRegisterManager(SplashScreenActivity.this, loginRegisterHandler);
+        loginRegisterManager.UserLogin(email.toString().trim(),password.toString().trim());
         new Handler().postDelayed(new Runnable() {
 
                 /*
@@ -28,10 +37,7 @@ public class SplashScreenActivity extends Activity {
             public void run() {
                 // This method will be executed once the timer is over
                 // Start your app main activity
-                SharedPreferences preferences=getSharedPreferences("user", Context.MODE_PRIVATE);
-                String email=preferences.getString("name", "");
-                String password=preferences.getString("psword", "");
-                if (email==""||password==""){
+                if (email ==""|| password ==""){
                     Intent i = new Intent(SplashScreenActivity.this, LoginActivity.class);
                     startActivity(i);
                 }else {

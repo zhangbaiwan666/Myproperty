@@ -10,6 +10,11 @@ public class PropertyListBean implements Serializable {
     private String name;
     private String pro_id;
 
+    public PropertyListBean(String name)
+    {
+        this.name=name;
+    }
+
     public String getName() {
         return name;
     }

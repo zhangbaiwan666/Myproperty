@@ -6,12 +6,9 @@ package cottee.myproperty.constant;
 
 public class SubInfo {
 
-
         private String sub_remark;
         private String sub_Id;
         private String sub_phone;
-
-
 
     public SubInfo(String sub_remark, String sub_Id, String sub_phone)
         {

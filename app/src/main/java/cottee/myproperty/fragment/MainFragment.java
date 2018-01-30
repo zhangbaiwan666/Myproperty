@@ -44,6 +44,9 @@ import cottee.myproperty.activity.AddSubActivity;
 import cottee.myproperty.activity.LoginActivity;
 import cottee.myproperty.activity.RepairProjectActivity;
 import cottee.myproperty.activity.TabLessActivity;
+import cottee.myproperty.adapter.ChoosePropertyAdapter;
+import cottee.myproperty.constant.PropertyListBean;
+import cottee.myproperty.constant.SubInfo;
 import cottee.myproperty.handler.LoginRegisterHandler;
 import cottee.myproperty.listener.NoDoubleClickListener;
 import cottee.myproperty.manager.LoginRegisterManager;
@@ -76,6 +79,7 @@ public class MainFragment extends Fragment {
 	private LinearLayout ll_placard;
 	private Button bt_repair;
 	private Button bt_payFee;
+	private ArrayList<String> property_list;
 
 
 	@Override
@@ -91,6 +95,10 @@ public class MainFragment extends Fragment {
 		pop();
 		initEven();
 		initParam();
+		LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getContext(), "", "");
+		LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getContext(), loginRegisterHandler);
+		String session = Session.getSession();
+		loginRegisterManager.ShowAllProperty(session);
 		return inflate;
 	}
 	private void initParam() {
@@ -297,91 +305,90 @@ public class MainFragment extends Fragment {
 				}
 
 			};
+	private List<PropertyListBean> init() {
+		List<PropertyListBean> proList=new ArrayList<PropertyListBean>();
+		for(int i=0;i<property_list.size();i++){
+			String s = property_list.get(i);
+			PropertyListBean pro_Info = new PropertyListBean(s);
+			proList.add(pro_Info);
+		}
+		return proList;
+	}
 	private View.OnClickListener myListener = new View.OnClickListener() {
 
 		@Override
 		public void onClick(View v) {
-			LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getContext(), "", "");
-			LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getContext(), loginRegisterHandler);
-			String session = Session.getSession();
-			Object property_list = HealthMap.get("property_list");
-			System.out.println("输出东西就睡觉"+property_list);
-			System.out.println("输出东西就睡觉"+property_list);
-			System.out.println("输出东西就睡觉"+property_list);
-			System.out.println("输出东西就睡觉"+property_list);
-			System.out.println("输出东西就睡觉"+property_list);
-			System.out.println("输出东西就睡觉"+property_list);
-			System.out.println("输出东西就睡觉"+property_list);
-			System.out.println("输出东西就睡觉"+property_list);
-			System.out.println("输出东西就睡觉"+property_list);
 
+			property_list = (ArrayList<String>) HealthMap.get("property_list");
 
-
-			loginRegisterManager.ShowAllProperty(session);
 			switch (v.getId()) {
 
 				case R.id.tv_right:
 					if (popRight != null && popRight.isShowing()) {
 						popRight.dismiss();
 					} else {
-						layoutRight = getLayoutInflater().inflate(
-								R.layout.pop_menulist, null);
-						menulistRight = (ListView) layoutRight
-								.findViewById(R.id.menulist);
-						SimpleAdapter listAdapter = new SimpleAdapter(
-								getContext(), listRight, R.layout.pop_menuitem,
-								new String[] { "item" },
-								new int[] { R.id.menuitem });
-						menulistRight.setAdapter(listAdapter);
+						if (property_list.size() > 0) {
+							List<PropertyListBean> subList = init();
+							layoutRight = getLayoutInflater().inflate(
+									R.layout.pop_menulist, null);
+							menulistRight = (ListView) layoutRight
+									.findViewById(R.id.menulist);
+							ChoosePropertyAdapter listAdapter = new ChoosePropertyAdapter(
+//								getContext(), listRight, R.layout.pop_menuitem,
+//								new String[] { "item" },
+//								new int[] { R.id.menuitem }
+									getContext(), R.layout.pop_menuitem, subList);
+							menulistRight.setAdapter(listAdapter);
 
-						// 点击listview中item的处理
-						menulistRight
-								.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+							// 点击listview中item的处理
+							menulistRight
+									.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-									@Override
-									public void onItemClick(AdapterView<?> arg0,
-															View arg1, int arg2, long arg3) {
-										String strItem = listRight.get(arg2).get(
-												"item");
-										tvRight.setText(strItem);
+										@Override
+										public void onItemClick(AdapterView<?> arg0,
+																View arg1, int arg2, long arg3) {
+											String strItem = listRight.get(arg2).get(
+													"item");
+											tvRight.setText(strItem);
 
-										if (popRight != null && popRight.isShowing()) {
-											popRight.dismiss();
+											if (popRight != null && popRight.isShowing()) {
+												popRight.dismiss();
+											}
 										}
+									});
+
+							popRight = new PopupWindow(layoutRight, tvRight.getWidth(),
+									ViewGroup.LayoutParams.WRAP_CONTENT);
+
+							ColorDrawable cd = new ColorDrawable(-0000);
+							popRight.setBackgroundDrawable(cd);
+							popRight.setAnimationStyle(R.style.PopupAnimation);
+							popRight.update();
+							popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+							popRight.setTouchable(true); // 设置popupwindow可点击
+							popRight.setOutsideTouchable(true); // 设置popupwindow外部可点击
+							popRight.setFocusable(true); // 获取焦点
+
+							// 设置popupwindow的位置
+							int topBarHeight = 30;
+							popRight.showAsDropDown(tvRight, 0,
+									(topBarHeight - tvRight.getHeight()) / 2);
+
+							popRight.setTouchInterceptor(new View.OnTouchListener() {
+
+								@Override
+								public boolean onTouch(View v, MotionEvent event) {
+									// 如果点击了popupwindow的外部，popupwindow也会消失
+									if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+										popRight.dismiss();
+										return true;
 									}
-								});
-
-						popRight = new PopupWindow(layoutRight, tvRight.getWidth(),
-								ViewGroup.LayoutParams.WRAP_CONTENT);
-
-						ColorDrawable cd = new ColorDrawable(-0000);
-						popRight.setBackgroundDrawable(cd);
-						popRight.setAnimationStyle(R.style.PopupAnimation);
-						popRight.update();
-						popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-						popRight.setTouchable(true); // 设置popupwindow可点击
-						popRight.setOutsideTouchable(true); // 设置popupwindow外部可点击
-						popRight.setFocusable(true); // 获取焦点
-
-						// 设置popupwindow的位置
-						int topBarHeight = 30;
-						popRight.showAsDropDown(tvRight, 0,
-								(topBarHeight - tvRight.getHeight()) / 2);
-
-						popRight.setTouchInterceptor(new View.OnTouchListener() {
-
-							@Override
-							public boolean onTouch(View v, MotionEvent event) {
-								// 如果点击了popupwindow的外部，popupwindow也会消失
-								if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-									popRight.dismiss();
-									return true;
+									return false;
 								}
-								return false;
-							}
-						});
+							});
+						}
+						break;
 					}
-					break;
 
 				default:
 					break;
