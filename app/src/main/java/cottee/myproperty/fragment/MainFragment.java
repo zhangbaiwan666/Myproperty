@@ -26,8 +26,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,13 +38,11 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import cottee.myproperty.R;
-import cottee.myproperty.activity.AddSubActivity;
 import cottee.myproperty.activity.LoginActivity;
 import cottee.myproperty.activity.RepairProjectActivity;
 import cottee.myproperty.activity.TabLessActivity;
 import cottee.myproperty.adapter.ChoosePropertyAdapter;
 import cottee.myproperty.constant.PropertyListBean;
-import cottee.myproperty.constant.SubInfo;
 import cottee.myproperty.handler.LoginRegisterHandler;
 import cottee.myproperty.listener.NoDoubleClickListener;
 import cottee.myproperty.manager.LoginRegisterManager;
@@ -57,7 +53,6 @@ public class MainFragment extends Fragment {
 	private Button bt_checkout;
 	private Button bt_placard;
 	private TextView tvRight;
-	private static Map<String,Activity> destoryMap = new HashMap<>();
 	private boolean click=true;
 	private int imageIds[];
 	private String[] titles;
@@ -79,30 +74,40 @@ public class MainFragment extends Fragment {
 	private LinearLayout ll_placard;
 	private Button bt_repair;
 	private Button bt_payFee;
-	private ArrayList<String> property_list;
+	private static ArrayList<String> property_list;
+	private static ArrayList<String> pro_id_list;
+	private TextView positon_pro_name;
+	private View rootView;
 
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		inflate = inflater.inflate(R.layout.fragment_main, null);
-		bt_checkout = (Button) inflate.findViewById(R.id.bt_checkout);
-		bt_property_server = (Button) inflate.findViewById(R.id.bt_property_server);
-		bt_placard = (Button) inflate.findViewById(R.id.bt_placard);
-		bt_payFee = (Button)inflate.findViewById(R.id.bt_payFee);
-		bt_repair = (Button)inflate.findViewById(R.id.bt_repair);
-		ll_placard = (LinearLayout) inflate.findViewById(R.id.ll_placard);
-		pop();
-		initEven();
-		initParam();
-		LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getContext(), "", "");
-		LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getContext(), loginRegisterHandler);
-		String session = Session.getSession();
-		loginRegisterManager.ShowAllProperty(session);
-		return inflate;
+		if (rootView == null) {
+			rootView = inflater.inflate(R.layout.fragment_main, null);
+			bt_checkout = (Button) rootView.findViewById(R.id.bt_checkout);
+			bt_property_server = (Button) rootView.findViewById(R.id.bt_property_server);
+			positon_pro_name = rootView.findViewById(R.id.positon_pro_name);
+			bt_placard = (Button) rootView.findViewById(R.id.bt_placard);
+			bt_payFee = (Button) rootView.findViewById(R.id.bt_payFee);
+			bt_repair = (Button) rootView.findViewById(R.id.bt_repair);
+			ll_placard = (LinearLayout) rootView.findViewById(R.id.ll_placard);
+			pop();
+			initEven();
+			initParam();
+			LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getContext(), "", "");
+			LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getContext(), loginRegisterHandler);
+			String session = Session.getSession();
+			loginRegisterManager.ShowAllProperty(session);
+		}ViewGroup parent = (ViewGroup) rootView.getParent();
+		if (parent != null)
+		{
+			parent.removeView(rootView);
+		}
+		return rootView;
 	}
 	private void initParam() {
-		tvRight = (TextView) inflate.findViewById(R.id.tv_right);
+		tvRight = (TextView) rootView.findViewById(R.id.tv_right);
 		tvRight.setOnClickListener(myListener);
 		// 初始化数据项
 		listRight = new ArrayList<Map<String, String>>();
@@ -204,16 +209,16 @@ public class MainFragment extends Fragment {
 
 				//显示的点
 				dots = new ArrayList<View>();
-				dots.add(inflate.findViewById(R.id.dot_0));
-				dots.add(inflate.findViewById(R.id.dot_1));
-				dots.add(inflate.findViewById(R.id.dot_2));
-				dots.add(inflate.findViewById(R.id.dot_3));
-				dots.add(inflate.findViewById(R.id.dot_4));
+				dots.add(rootView.findViewById(R.id.dot_0));
+				dots.add(rootView.findViewById(R.id.dot_1));
+				dots.add(rootView.findViewById(R.id.dot_2));
+				dots.add(rootView.findViewById(R.id.dot_3));
+				dots.add(rootView.findViewById(R.id.dot_4));
 
-				title = (TextView) inflate.findViewById(R.id.title);
+				title = (TextView) rootView.findViewById(R.id.title);
 				title.setText(titles[0]);
 
-				mViewPager = (ViewPager)inflate.findViewById(R.id.vp);
+				mViewPager = (ViewPager)rootView.findViewById(R.id.vp);
 
 				adapter = new ViewPagerAdapter();
 				mViewPager.setAdapter(adapter);
@@ -318,83 +323,88 @@ public class MainFragment extends Fragment {
 
 		@Override
 		public void onClick(View v) {
+				pro_id_list = (ArrayList<String>) HealthMap.get("pro_id_list");
+				property_list = (ArrayList<String>) HealthMap.get("property_list");
+			if (property_list == null) {
+				Toast.makeText(getContext(), "当前无物业", Toast.LENGTH_SHORT).show();
+			} else {
+				switch (v.getId()) {
 
-			property_list = (ArrayList<String>) HealthMap.get("property_list");
-
-			switch (v.getId()) {
-
-				case R.id.tv_right:
-					if (popRight != null && popRight.isShowing()) {
-						popRight.dismiss();
-					} else {
-						if (property_list.size() > 0) {
-							List<PropertyListBean> subList = init();
-							layoutRight = getLayoutInflater().inflate(
-									R.layout.pop_menulist, null);
-							menulistRight = (ListView) layoutRight
-									.findViewById(R.id.menulist);
-							ChoosePropertyAdapter listAdapter = new ChoosePropertyAdapter(
+					case R.id.tv_right:
+						if (popRight != null && popRight.isShowing()) {
+							popRight.dismiss();
+						} else {
+							if (property_list.size() > 0) {
+								List<PropertyListBean> subList = init();
+								layoutRight = getLayoutInflater().inflate(
+										R.layout.pop_menulist, null);
+								menulistRight = (ListView) layoutRight
+										.findViewById(R.id.menulist);
+								ChoosePropertyAdapter listAdapter = new ChoosePropertyAdapter(
 //								getContext(), listRight, R.layout.pop_menuitem,
 //								new String[] { "item" },
 //								new int[] { R.id.menuitem }
-									getContext(), R.layout.pop_menuitem, subList);
-							menulistRight.setAdapter(listAdapter);
+										getContext(), R.layout.pop_menuitem, subList);
+								menulistRight.setAdapter(listAdapter);
 
-							// 点击listview中item的处理
-							menulistRight
-									.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+								// 点击listview中item的处理
+								menulistRight
+										.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+											@Override
+											public void onItemClick(AdapterView<?> parent,
+																	View view, int position, long id) {
+												String strItem = property_list.get(position);
+//												tvRight.setText(strItem);
+												positon_pro_name.setText(strItem);
+												String session = Session.getSession();
+												LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getContext(), "", "");
+												LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getContext(), loginRegisterHandler);
+												loginRegisterManager.ChooseProperty(session, pro_id_list.get(position));
 
-										@Override
-										public void onItemClick(AdapterView<?> arg0,
-																View arg1, int arg2, long arg3) {
-											String strItem = listRight.get(arg2).get(
-													"item");
-											tvRight.setText(strItem);
-
-											if (popRight != null && popRight.isShowing()) {
-												popRight.dismiss();
+												if (popRight != null && popRight.isShowing()) {
+													popRight.dismiss();
+												}
 											}
+										});
+
+								popRight = new PopupWindow(layoutRight, tvRight.getWidth(),
+										ViewGroup.LayoutParams.WRAP_CONTENT);
+
+								ColorDrawable cd = new ColorDrawable(-0000);
+								popRight.setBackgroundDrawable(cd);
+								popRight.setAnimationStyle(R.style.PopupAnimation);
+								popRight.update();
+								popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+								popRight.setTouchable(true); // 设置popupwindow可点击
+								popRight.setOutsideTouchable(true); // 设置popupwindow外部可点击
+								popRight.setFocusable(true); // 获取焦点
+
+								// 设置popupwindow的位置
+								int topBarHeight = 30;
+								popRight.showAsDropDown(tvRight, 0,
+										(topBarHeight - tvRight.getHeight()) / 2);
+
+								popRight.setTouchInterceptor(new View.OnTouchListener() {
+
+									@Override
+									public boolean onTouch(View v, MotionEvent event) {
+										// 如果点击了popupwindow的外部，popupwindow也会消失
+										if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+											popRight.dismiss();
+											return true;
 										}
-									});
-
-							popRight = new PopupWindow(layoutRight, tvRight.getWidth(),
-									ViewGroup.LayoutParams.WRAP_CONTENT);
-
-							ColorDrawable cd = new ColorDrawable(-0000);
-							popRight.setBackgroundDrawable(cd);
-							popRight.setAnimationStyle(R.style.PopupAnimation);
-							popRight.update();
-							popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-							popRight.setTouchable(true); // 设置popupwindow可点击
-							popRight.setOutsideTouchable(true); // 设置popupwindow外部可点击
-							popRight.setFocusable(true); // 获取焦点
-
-							// 设置popupwindow的位置
-							int topBarHeight = 30;
-							popRight.showAsDropDown(tvRight, 0,
-									(topBarHeight - tvRight.getHeight()) / 2);
-
-							popRight.setTouchInterceptor(new View.OnTouchListener() {
-
-								@Override
-								public boolean onTouch(View v, MotionEvent event) {
-									// 如果点击了popupwindow的外部，popupwindow也会消失
-									if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-										popRight.dismiss();
-										return true;
+										return false;
 									}
-									return false;
-								}
-							});
+								});
+							}
+							break;
 						}
-						break;
-					}
 
-				default:
-					break;
+					default:
+						break;
+				}
 			}
 		}
-
 	};
 
 			@Override

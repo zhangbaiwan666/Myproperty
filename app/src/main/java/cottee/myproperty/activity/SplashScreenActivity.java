@@ -26,8 +26,8 @@ public class SplashScreenActivity extends Activity {
         LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(SplashScreenActivity.this, "", "");
         LoginRegisterManager loginRegisterManager = new LoginRegisterManager(SplashScreenActivity.this, loginRegisterHandler);
         loginRegisterManager.UserLogin(email.toString().trim(),password.toString().trim());
+        //登录容易跳两遍，写存session方法就好
         new Handler().postDelayed(new Runnable() {
-
                 /*
                  * Showing splash screen with a timer. This will be useful when you
                  * want to show case your app logo / company

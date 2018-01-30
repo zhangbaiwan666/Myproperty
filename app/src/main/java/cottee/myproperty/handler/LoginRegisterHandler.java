@@ -18,6 +18,7 @@ import java.util.List;
 import cottee.myproperty.activity.ControlSubActivity;
 import cottee.myproperty.activity.ResetPassWordActivity;
 import cottee.myproperty.adapter.SubinfoAdapter;
+import cottee.myproperty.constant.HouseListBean;
 import cottee.myproperty.constant.Properties;
 import cottee.myproperty.activity.MainActivity;
 import cottee.myproperty.activity.SetPasswordActivity;
@@ -25,6 +26,7 @@ import cottee.myproperty.constant.PropertyListBean;
 import cottee.myproperty.constant.SubListBean;
 import cottee.myproperty.manager.LoginRegisterManager;
 import cottee.myproperty.uitils.HealthMap;
+import cottee.myproperty.uitils.Session;
 
 
 public class LoginRegisterHandler extends Handler {
@@ -114,10 +116,18 @@ public class LoginRegisterHandler extends Handler {
     private String property;
     private static int property_home_id;
     private static int property_pro_id;
-    /* #显示所有物业
-    *  #提交字段*/
-    private static final int SHOWPROPERTY = 1;
-    private static final int FAILEDPROPERTY =0;
+    /* #更换物业
+    *  #提交字段
+    *  session
+    *  pro_id*/
+    private static final int CHANGEPROSUCCESS = 1;
+    private static final int CHANGEPROFAILED =0;
+     /* #更换房屋
+    *  #提交字段
+    *   session
+    *  home_id*/
+     private static final int CHANGEHOUSESUCCESS = 1;
+    private static final int CHANGEHOUSEFAILED =0;
 
 
     public LoginRegisterHandler(Context context, String email, String password) {
@@ -329,6 +339,10 @@ public class LoginRegisterHandler extends Handler {
                 context.startActivity(intent1);
                 System.out.println("传递前得sub_remark_list为"+sub_remark_list);
                 break;
+                case Properties.SHOW_SUB_INFO_NULL:
+                    Intent intent = new Intent(context, ControlSubActivity.class);
+                    context.startActivity(intent);
+                    break;
             case Properties.ALL_PROPERTY_LIST:
                 ArrayList<String> property_list = new ArrayList<String>();
                 ArrayList<String> pro_id_list = new ArrayList<>();
@@ -337,10 +351,42 @@ public class LoginRegisterHandler extends Handler {
                     List<PropertyListBean> propertyListBean = (List<PropertyListBean>) obj_property;
                     for (int i = 0; i < propertyListBean.size(); i++) {
                         property_list.add(propertyListBean.get(i).getName());
-                    pro_id_list.add(propertyListBean.get(i).getPro_id());
+                        pro_id_list.add(propertyListBean.get(i).getPro_id());
                 }
                 HealthMap.put("property_list",property_list);
+                HealthMap.put("pro_id_list",pro_id_list);
                 break;
+            case Properties.ALL_HOUSE_LIST:
+                    ArrayList<String> address_list = new ArrayList<String>();
+                    ArrayList<String> home_id_list = new ArrayList<>();
+                    Object obj_house = msg.obj;
+                    List<HouseListBean> houseListBean = (List<HouseListBean>) obj_house;
+                    for (int i = 0; i < houseListBean.size(); i++) {
+                        address_list.add(houseListBean.get(i).getAddress());
+                        home_id_list.add(houseListBean.get(i).getHome_id());
+                    }
+                    HealthMap.put("address_list",address_list);
+                    HealthMap.put("home_id_list",home_id_list);
+                    break;
+            case Properties.CHANGE_UESR_PROPERTY:
+                        switch (msg.arg1){
+                            case CHANGEPROSUCCESS:
+                                break;
+                            case  CHANGEPROFAILED:
+                                break;
+                        }
+                        break;
+            case Properties.CHANGE_UESR_HOUSE:
+                        switch (msg.arg1){
+                            case CHANGEHOUSESUCCESS:
+                                System.out.println("恭喜。更换房屋成功");
+                                System.out.println("更换房屋成功");
+                                System.out.println("更换房屋成功");
+                                break;
+                            case CHANGEHOUSEFAILED:
+                                break;
+                        }
+                        break;
         }
 
     }

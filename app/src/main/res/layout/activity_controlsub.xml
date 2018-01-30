@@ -15,16 +15,29 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content">
     <include layout="@layout/layout_title"/>
-            <Button
-                android:id="@+id/btn_change_house"
-                android:layout_marginLeft="5dp"
+            <TextView
+                android:id="@+id/tv_right"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="15dp"
                 android:layout_alignParentRight="true"
+                android:layout_marginRight="10dip"
+                android:clickable="true"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:text="right"
+                android:textColor="@android:color/white"
                 android:background="@drawable/switch_house"
-                />
+                android:textSize="16sp" />
+            <!--<Button-->
+            <!--android:id="@+id/btn_change_house"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:layout_width="20dp"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:layout_alignParentRight="true"-->
+         <!---->
+            <!--/>-->
         </RelativeLayout>
 
     <LinearLayout
