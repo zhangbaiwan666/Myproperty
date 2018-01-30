@@ -24,7 +24,7 @@ import cottee.myproperty.R;
 import cottee.myproperty.uitils.Properties;
 
 public class CameraActivity extends Activity implements SurfaceHolder.Callback, Camera.AutoFocusCallback{
-    //a
+
     SurfaceHolder holder;
     Camera myCamera;
     SurfaceView mySurfaceView;

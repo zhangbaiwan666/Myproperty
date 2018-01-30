@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="290dp"
+             android:layout_height="350dp"
+             android:clickable="true"
+             android:orientation="vertical"
+             
+             android:padding="10dp" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/dialogbackground"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/text_18_ffffff"
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:text="title_alert"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" >
+
+
+            <TextView
+                android:id="@+id/message"
+                style="@style/text_16_666666"
+                android:layout_width="fill_parent"
+                android:layout_height="150dp"
+                android:gravity="left|center"
+                android:lineSpacingMultiplier="1.5"
+                android:minHeight="120dp"
+                android:maxLength="100"
+                android:paddingBottom="15dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="15dp" />
+        </LinearLayout>
+
+        <!--<View-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="1.0px"-->
+            <!--android:background="#ffd0d0d0" />-->
+
+        <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60dip"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/positiveButton"
+            style="@style/text_15_ffffff_sdw"
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:gravity="center|bottom"
+            android:background="@drawable/buttoncancel"
+
+            android:textColor="#ff9800"
+
+            android:text="Cancel" />
+
+        <Button
+            android:id="@+id/negativeButton"
+            style="@style/text_15_666666_sdw"
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="15dp"
+            android:gravity="center|bottom"
+            android:background="@drawable/buttonok"
+            android:textColor="#FFFFFF"
+            android:text="OK" />
+    </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

@@ -40,23 +40,31 @@ public class RepairHandler extends Handler {
     private ArrayList<String> showTitle;
     private int lastPosition;
     private List<Repair.ProinfoBean> proinfo;
-
+    private TextView tv_address;
+    private String address;
     public  RepairHandler(Context context,ListView lv_left,ListView lv_Right,TextView tv_title){
         this.context=context;
         this.lv_left=lv_left;
         this.lv_Right=lv_Right;
         this.tv_title=tv_title;
     }
-
+    public RepairHandler(Context context,TextView tv_address){
+        this.tv_address=tv_address;
+    }
     @Override
     public void handleMessage(Message msg) {
         switch (msg.what){
-            case Properties.RepairProject:
-                proinfo= (List<Repair.ProinfoBean>) msg.obj;
+            case Properties.RepairProject: {
+                proinfo = (List<Repair.ProinfoBean>) msg.obj;
                 initRepairProjectData();
                 initRepairProjectView();
-
+            }
+//            case 1:
+//                address= (String) msg.obj;
+//                tv_address.setText(address);
         }
+
+
     }
     public void initRepairProjectData() {
         lists = new ArrayList<BaseData>();

@@ -2,6 +2,7 @@ package cottee.myproperty.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,5 +25,9 @@ public class RepairProjectActivity extends Activity {
         RepairManager repairManager=new RepairManager(repairHandler);
         repairManager.sendRequestRepairProject();
     }
+  public void back(View view){
+        finish();
+}
+
 
 }
