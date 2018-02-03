@@ -34,6 +34,7 @@
             android:paddingLeft="93dp"
             android:textColor="#ff9800"
             android:textSize="17dp"
+            android:onClick="sure"
             android:text="确定"/>
     </RelativeLayout>
     <RelativeLayout
@@ -269,7 +270,9 @@
             android:layout_marginEnd="22dp"
             android:layout_marginRight="22dp"
             android:paddingLeft="10dp"
-            android:src="@drawable/phone"/>
+            android:src="@drawable/phone"
+            android:onClick="mobilePhone"
+            />
     </RelativeLayout>
     <View
         android:layout_width="wrap_content"
@@ -294,7 +297,7 @@
             />
 
         <TextView
-            android:id="@+id/tv_phone"
+            android:id="@+id/tv_kefuphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -313,11 +316,12 @@
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/tv_phone"
+            android:layout_alignTop="@+id/tv_kefuphone"
             android:layout_marginEnd="22dp"
             android:layout_marginRight="22dp"
             android:paddingLeft="10dp"
-            android:src="@drawable/phone"/>
+            android:src="@drawable/phone"
+            android:onClick="telePhone"/>
     </RelativeLayout>
     <View
         android:layout_width="wrap_content"

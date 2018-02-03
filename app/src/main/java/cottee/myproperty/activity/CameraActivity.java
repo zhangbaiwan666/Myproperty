@@ -1,5 +1,6 @@
 package cottee.myproperty.activity;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -8,10 +9,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import java.io.File;
@@ -38,7 +41,11 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback, 
     private float ratio;
     private Camera.Size mBestPictureSizes;
     private Camera.Size mBestPreviewSize;
+    private LinearLayout ll_takePhoto;
+    private LinearLayout ll_retakePhoto;
+    private Bitmap bmp;
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +56,15 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback, 
         holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
         rel_shutter = (RelativeLayout)findViewById(R.id.rel_shutter);
         rel_photoOk = (RelativeLayout)findViewById(R.id.rel_photook);
+//        ll_takePhoto = (LinearLayout)findViewById(R.id.ll_takePhoto);
+//        ll_retakePhoto = (LinearLayout)findViewById(R.id.ll_retakePhoto);
+//        Resources res = getResources();
+//        bmp = BitmapFactory.decodeResource(res, R.drawable.camerabackground);
+//       Bitmap bitmap= BlurBitmapUtil.blurBitmap( this, bmp, 5 );
+//
+//       ll_takePhoto.setBackground(new BitmapDrawable( bitmap ) );
+//       ll_retakePhoto.setBackground(new BitmapDrawable( bitmap ));
+
     }
     @Override
     public void surfaceCreated(SurfaceHolder holder) {

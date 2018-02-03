@@ -180,7 +180,7 @@ public class RepairConfirmActivity extends Activity {
                 new android.content.DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        Intent intent=new Intent(RepairConfirmActivity.this,RepairDetailInfo.class);
+                        Intent intent=new Intent(RepairConfirmActivity.this,RepairDetailInfoActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);
                     }

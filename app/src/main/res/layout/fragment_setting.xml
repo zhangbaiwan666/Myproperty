@@ -143,6 +143,7 @@
             android:layout_height="match_parent"
             android:src="@drawable/img_notes_repaire"/>
         <TextView
+            android:id="@+id/repair_record"
             android:gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

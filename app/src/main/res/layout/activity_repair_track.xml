@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_main"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/track_background"
+    android:background="#fff"
+
     >
     <RelativeLayout
 
@@ -42,12 +43,34 @@
             />
     </RelativeLayout>
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingLeft="20dp">
+        <ImageView
+            android:id="@+id/repair_person"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/repair_person"
+            />
+        <TextView
+            android:layout_toRightOf="@id/repair_person"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:textSize="15dp"
+            android:text="维修员工信息"/>
+
+    </RelativeLayout>
+    <RelativeLayout
 
         android:id="@+id/rel_jigong"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rel_genzongchuli"
-        android:paddingTop="25dp">
+        android:background="#F5F5F5"
+        android:paddingTop="10dp"
+
+       >
 
         <ImageView
             android:id="@+id/imv_photo"
@@ -85,6 +108,27 @@
             android:layout_below="@id/tv_trackOfworker"/>
 
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       android:paddingTop="10dp"
+        android:paddingLeft="20dp"
+        android:background="#F5F5F5">
+        <ImageView
+            android:id="@+id/repair_track"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/repair_track"
+            />
+        <TextView
+            android:layout_toRightOf="@id/repair_track"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:textSize="15dp"
+            android:text="报修跟踪"/>
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/rel1"
@@ -104,9 +148,10 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_toRightOf="@id/imv_zhengzaichuli"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
+            android:textColor="#808a87"
             android:text="报修信息已发送"/>
         <TextView
 
@@ -116,15 +161,19 @@
             android:paddingLeft="10dp"
             android:text="2017-12-13 13:12"
             android:textSize="15dp"
+            android:textColor="#808a87"
             android:layout_toRightOf="@id/imv_zhengzaichuli"/>
 
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/rel2"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
-        android:paddingTop="20dp"
-        android:layout_below="@id/rel1">
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:paddingTop="10dp">
 
         <ImageView
             android:id="@+id/imv_zhengzaichuli1"
@@ -132,24 +181,28 @@
             android:layout_height="30dp"
             android:paddingTop="17dp"
             android:src="@drawable/genzong"/>
+
         <TextView
             android:id="@+id/tv_baoxiuxinxi1"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_toRightOf="@id/imv_zhengzaichuli1"
-            android:textSize="20dp"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
-            android:text="李师傅已接收"/>
+            android:text="李师傅已接收"
+            android:textColor="#808a87"
+            android:textSize="15dp"/>
+
         <TextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_baoxiuxinxi1"
+            android:layout_toRightOf="@id/imv_zhengzaichuli1"
             android:paddingLeft="10dp"
             android:text="2017-12-13 13:20"
-            android:textSize="15dp"
-            android:layout_toRightOf="@id/imv_zhengzaichuli1"/>
+            android:textColor="#808a87"
+            android:textSize="15dp"/>
 
     </RelativeLayout>
 
@@ -157,7 +210,7 @@
         android:layout_below="@id/rel2"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
-        android:paddingTop="20dp">
+        android:paddingTop="10dp">
 
         <ImageView
             android:id="@+id/imv_zhengzaichuli2"
@@ -174,7 +227,8 @@
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:text="正在处理"
-            android:textSize="20dp"/>
+        android:textColor="#ff9800"
+            android:textSize="15dp"/>
 
         <TextView
 
@@ -184,49 +238,74 @@
             android:layout_toRightOf="@id/imv_zhengzaichuli2"
             android:paddingLeft="10dp"
             android:text="2017-12-13 13:12"
+            android:textColor="#808a87"
             android:textSize="15dp"/>
 
     </RelativeLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_gravity="bottom"-->
+
+        <!--android:orientation="horizontal">-->
+
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="申请取消"-->
+            <!--android:textSize="15sp"-->
+            <!--android:background="@drawable/shenqing_quxiao"-->
+
+            <!--/>-->
+
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:text="联系工人"-->
+            <!--android:textSize="15sp"-->
+            <!--android:background="@drawable/shenqing_quxiao"-->
+            <!--android:layout_weight="1"-->
+            <!--/>-->
+
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="修理完成"-->
+            <!--android:textSize="15sp"-->
+            <!--android:onClick="repairFinish"-->
+            <!--android:background="@drawable/xiuli_wancheng"-->
+            <!--/>-->
+    <!--</LinearLayout>-->
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="40dp">
+    <Button
+        android:id="@+id/contact_person"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom"
+        android:background="@drawable/rect"
+        android:text="联系工人"
+        android:textColor="#fff"
 
-        android:orientation="horizontal">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="申请取消"
-            android:textSize="15sp"
-            android:background="@drawable/shenqing_quxiao"
+        />
 
-            />
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/contact_person"
+        android:background="@drawable/rect"
+        android:text="申请取消"
+        android:textColor="#fff"
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="联系工人"
-            android:textSize="15sp"
-            android:background="@drawable/shenqing_quxiao"
-            android:layout_weight="1"
-            />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_weight="1"
-            android:text="修理完成"
-            android:textSize="15sp"
-            android:onClick="repairFinish"
-            android:background="@drawable/xiuli_wancheng"
-            />
-    </LinearLayout>
-
+        />
 </RelativeLayout>
+</LinearLayout>

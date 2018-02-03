@@ -4,7 +4,7 @@
              android:layout_height="350dp"
              android:clickable="true"
              android:orientation="vertical"
-             
+
              android:padding="10dp" >
 
     <LinearLayout
@@ -42,7 +42,7 @@
                 android:minHeight="120dp"
                 android:maxLength="100"
                 android:paddingBottom="15dp"
-                android:paddingLeft="20dp"
+                android:paddingLeft="25dp"
                 android:paddingRight="20dp"
                 android:paddingTop="15dp" />
         </LinearLayout>
