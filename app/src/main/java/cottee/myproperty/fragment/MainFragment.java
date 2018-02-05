@@ -1,10 +1,6 @@
 package cottee.myproperty.fragment;
 
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
@@ -92,6 +88,8 @@ public class MainFragment extends Fragment {
 			bt_payFee = (Button) rootView.findViewById(R.id.bt_payFee);
 			bt_repair = (Button) rootView.findViewById(R.id.bt_repair);
 			ll_placard = (LinearLayout) rootView.findViewById(R.id.ll_placard);
+			pro_id_list = (ArrayList<String>) HealthMap.get("pro_id_list");
+			property_list = (ArrayList<String>) HealthMap.get("property_list");
 			pop();
 			initEven();
 			initParam();
@@ -149,35 +147,14 @@ public class MainFragment extends Fragment {
 		bt_checkout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				new AlertDialog.Builder(getActivity())
-						.setMessage("确定要退出吗")
-						.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								SharedPreferences preferences=getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
-								String email=preferences.getString("name", "");
-								String password=preferences.getString("psword", "");
-								Intent intent = new Intent(getActivity(), LoginActivity.class);
-								intent.putExtra("name",email);
-								intent.putExtra("psword",password);
-								startActivity(intent);
-								dialog.dismiss();
-//                                    ((BaseActivity)getActivity()).goNextAnim();
-							}
-						})
-						.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								dialog.dismiss();
-							}
-						})
-						.create()
-						.show();
+
 			}
 		});
 	}
 
+
 	private void pop() {
+		//TODO 增加切换图片数量，来自服务器；在小区团购中增加物业pop用于物业宣传
 		scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 
 		//每隔5秒钟切换一张图片
@@ -323,13 +300,11 @@ public class MainFragment extends Fragment {
 
 		@Override
 		public void onClick(View v) {
-				pro_id_list = (ArrayList<String>) HealthMap.get("pro_id_list");
-				property_list = (ArrayList<String>) HealthMap.get("property_list");
+
 			if (property_list == null) {
 				Toast.makeText(getContext(), "当前无物业", Toast.LENGTH_SHORT).show();
 			} else {
 				switch (v.getId()) {
-
 					case R.id.tv_right:
 						if (popRight != null && popRight.isShowing()) {
 							popRight.dismiss();

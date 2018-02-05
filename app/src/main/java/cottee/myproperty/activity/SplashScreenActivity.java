@@ -25,7 +25,7 @@ public class SplashScreenActivity extends Activity {
         password = preferences.getString("psword", "");
         LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(SplashScreenActivity.this, "", "");
         LoginRegisterManager loginRegisterManager = new LoginRegisterManager(SplashScreenActivity.this, loginRegisterHandler);
-        loginRegisterManager.UserLogin(email.toString().trim(),password.toString().trim());
+        loginRegisterManager.ReUserLogin(email.toString().trim(),password.toString().trim());
         //登录容易跳两遍，写存session方法就好
         new Handler().postDelayed(new Runnable() {
                 /*

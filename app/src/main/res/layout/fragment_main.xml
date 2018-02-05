@@ -235,7 +235,7 @@
         android:layout_height="200dp"
         android:text="2018.1.1 18：10
         来电了"
-        ></TextView>
+        />
 
     <Button
         android:visibility="gone"

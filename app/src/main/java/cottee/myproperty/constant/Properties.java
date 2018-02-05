@@ -36,6 +36,9 @@ public class Properties {
     public final static int CHANGE_UESR_PROPERTY = 13;
     public final static int CHANGE_UESR_HOUSE = 14;
     public final static int SHOW_SUB_INFO_NULL = 15;
+    public final static int DELETE_SUB_ACCOUNT_ = 16;
+    public final static int UPDATE_SUB_ACCOUNT_ = 17;
+    public final static int REUSER_LOGIN = 18;
     public final static String SUCCESS = "0";
     public  final static  int RepairProject=0;
 

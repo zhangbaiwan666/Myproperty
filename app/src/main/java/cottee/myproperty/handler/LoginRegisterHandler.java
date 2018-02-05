@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cottee.myproperty.activity.ControlSubActivity;
+import cottee.myproperty.activity.DelateSubActivity;
 import cottee.myproperty.activity.ResetPassWordActivity;
 import cottee.myproperty.adapter.SubinfoAdapter;
 import cottee.myproperty.constant.HouseListBean;
@@ -121,13 +122,27 @@ public class LoginRegisterHandler extends Handler {
     *  session
     *  pro_id*/
     private static final int CHANGEPROSUCCESS = 1;
-    private static final int CHANGEPROFAILED =0;
-     /* #更换房屋
-    *  #提交字段
-    *   session
-    *  home_id*/
-     private static final int CHANGEHOUSESUCCESS = 1;
-    private static final int CHANGEHOUSEFAILED =0;
+    private static final int CHANGEPROFAILED = 0;
+    /* #更换房屋
+   *  #提交字段
+   *   session
+   *  home_id*/
+    private static final int CHANGEHOUSESUCCESS = 1;
+    private static final int CHANGEHOUSEFAILED = 0;
+    /* #删除子账户
+   *  #提交字段
+   *   session
+   *  sub_id*/
+    private static final int DELETESUBSUCCESS = 1;
+    private static final int DELETESUBFAILED = 0;
+    /* #修改子账户
+  *  #提交字段
+  *   session
+  *   sub_remark
+  *   sub_phone
+  *  sub_id*/
+    private static final int UPDATESUBSUCCESS = 1;
+    private static final int UPDATESUBFAILED = 0;
 
 
     public LoginRegisterHandler(Context context, String email, String password) {
@@ -279,30 +294,14 @@ public class LoginRegisterHandler extends Handler {
             case Properties.ADD_SUB_ACCOUNT_:
                 switch (msg.arg1) {
                     case ADDSUCCESS:
-                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                        builder.setTitle("是否添加此账户");
-                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "","");
+                                LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "", "");
                                 LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
 //                                loginRegisterManager.GsonProperyt();
                                 loginRegisterManager.GsonSubList();
-                                dialog.dismiss();
                                 Toast.makeText(context, "添加子账户成功", Toast.LENGTH_SHORT).show();
-
-                            }
-                        })
-                                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                })
-                                .create()
-                                .show();
                         break;
                     case ADDFAILED:
+                        Toast.makeText(context, "添加失败", Toast.LENGTH_SHORT).show();
                         break;
                     case ADDFAILED_NOT_CHOOSE_HOUSE:
                         Toast.makeText(context, "尚未选择房屋", Toast.LENGTH_SHORT).show();
@@ -337,58 +336,106 @@ public class LoginRegisterHandler extends Handler {
                 intent1.putExtra("property_pro_id", property_pro_id);
                 intent1.putExtra("property_home_id", property_home_id);
                 context.startActivity(intent1);
-                System.out.println("传递前得sub_remark_list为"+sub_remark_list);
+                System.out.println("传递前得sub_remark_list为" + sub_remark_list);
                 break;
-                case Properties.SHOW_SUB_INFO_NULL:
-                    Intent intent = new Intent(context, ControlSubActivity.class);
-                    context.startActivity(intent);
-                    break;
+            case Properties.SHOW_SUB_INFO_NULL:
+                Intent intent = new Intent(context, ControlSubActivity.class);
+                context.startActivity(intent);
+                break;
             case Properties.ALL_PROPERTY_LIST:
                 ArrayList<String> property_list = new ArrayList<String>();
                 ArrayList<String> pro_id_list = new ArrayList<>();
                 Object obj_property = msg.obj;
                 System.out.println("userBeanList的强转字符串的test" + obj_property);
-                    List<PropertyListBean> propertyListBean = (List<PropertyListBean>) obj_property;
-                    for (int i = 0; i < propertyListBean.size(); i++) {
-                        property_list.add(propertyListBean.get(i).getName());
-                        pro_id_list.add(propertyListBean.get(i).getPro_id());
+                List<PropertyListBean> propertyListBean = (List<PropertyListBean>) obj_property;
+                for (int i = 0; i < propertyListBean.size(); i++) {
+                    property_list.add(propertyListBean.get(i).getName());
+                    pro_id_list.add(propertyListBean.get(i).getPro_id());
                 }
-                HealthMap.put("property_list",property_list);
-                HealthMap.put("pro_id_list",pro_id_list);
+                HealthMap.put("property_list", property_list);
+                HealthMap.put("pro_id_list", pro_id_list);
                 break;
             case Properties.ALL_HOUSE_LIST:
-                    ArrayList<String> address_list = new ArrayList<String>();
-                    ArrayList<String> home_id_list = new ArrayList<>();
-                    Object obj_house = msg.obj;
-                    List<HouseListBean> houseListBean = (List<HouseListBean>) obj_house;
-                    for (int i = 0; i < houseListBean.size(); i++) {
-                        address_list.add(houseListBean.get(i).getAddress());
-                        home_id_list.add(houseListBean.get(i).getHome_id());
-                    }
-                    HealthMap.put("address_list",address_list);
-                    HealthMap.put("home_id_list",home_id_list);
-                    break;
+                ArrayList<String> address_list = new ArrayList<String>();
+                ArrayList<String> home_id_list = new ArrayList<>();
+                Object obj_house = msg.obj;
+                List<HouseListBean> houseListBean = (List<HouseListBean>) obj_house;
+                for (int i = 0; i < houseListBean.size(); i++) {
+                    address_list.add(houseListBean.get(i).getAddress());
+                    home_id_list.add(houseListBean.get(i).getHome_id());
+                }
+                HealthMap.put("address_list", address_list);
+                HealthMap.put("home_id_list", home_id_list);
+                break;
             case Properties.CHANGE_UESR_PROPERTY:
-                        switch (msg.arg1){
-                            case CHANGEPROSUCCESS:
-                                break;
-                            case  CHANGEPROFAILED:
-                                break;
-                        }
+                switch (msg.arg1) {
+                    case CHANGEPROSUCCESS:
                         break;
+                    case CHANGEPROFAILED:
+                        break;
+                }
+                break;
             case Properties.CHANGE_UESR_HOUSE:
-                        switch (msg.arg1){
-                            case CHANGEHOUSESUCCESS:
-                                System.out.println("恭喜。更换房屋成功");
-                                System.out.println("更换房屋成功");
-                                System.out.println("更换房屋成功");
-                                break;
-                            case CHANGEHOUSEFAILED:
-                                break;
-                        }
+                switch (msg.arg1) {
+                    case CHANGEHOUSESUCCESS:
+                        System.out.println("恭喜。更换房屋成功");
+                        System.out.println("更换房屋成功");
+                        System.out.println("更换房屋成功");
+                        LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "", "");
+                        LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
+//                                loginRegisterManager.GsonProperyt();
+                        loginRegisterManager.GsonSubList();
                         break;
-        }
+                    case CHANGEHOUSEFAILED:
+                        break;
+                }
+                break;
+            case Properties.DELETE_SUB_ACCOUNT_:
+                switch (msg.arg1) {
+                    case DELETESUBSUCCESS:
+                        LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "", "");
+                        LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
+//                                loginRegisterManager.GsonProperyt();
+                        loginRegisterManager.GsonSubList();
+                        Toast.makeText(context, "删除成功", Toast.LENGTH_SHORT).show();
 
+                        break;
+                    case DELETESUBFAILED:
+                        Toast.makeText(context, "删除失败", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            case Properties.UPDATE_SUB_ACCOUNT_:
+                switch (msg.arg1) {
+                    case UPDATESUBSUCCESS:
+                        Toast.makeText(context, "修改成功", Toast.LENGTH_SHORT).show();
+                        break;
+                    case UPDATESUBFAILED:
+                        Toast.makeText(context, "修改失败", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                break;
+            case Properties.REUSER_LOGIN:
+                switch (msg.arg1) {
+                    case LOGINSSUCCEED:
+                        SharedPreferences preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("name", email);
+                        editor.putString("psword", password);
+                        editor.commit();
+                        Toast.makeText(context, "登陆成功", Toast.LENGTH_SHORT)
+                                .show();
+                        break;
+                    case PSWFAILD:
+                        Toast.makeText(context, "密码错误", Toast.LENGTH_SHORT)
+                                .show();
+                        break;
+                    case USERUNEXIST:
+                        Toast.makeText(context, "当前账号不存在", Toast.LENGTH_SHORT)
+                                .show();
+                        break;
+                }
+
+        }
     }
 }
 

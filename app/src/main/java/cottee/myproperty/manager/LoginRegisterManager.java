@@ -382,8 +382,8 @@ public class LoginRegisterManager implements Serializable {
                             .add("phone",sub_phone)
                             .add("session",session).build();
                     //把session add到requestbody中
-                    Log.d("添加子账户的remark", "pro_id" +sub_remark);
-                    Log.d("添加子账户phone", "home_id" +sub_phone);
+                    Log.d("添加子账户的remark", "sub_remark" +sub_remark);
+                    Log.d("添加子账户phone", "sub_phone" +sub_phone);
                     Request request = new Request.Builder().url(Properties.ADD_SUB_ACCOUNT).post(requestBody).build();
                     Response response = client.newCall(request).execute();
                         String recode = response.body().string();
@@ -851,6 +851,150 @@ public class LoginRegisterManager implements Serializable {
                             loginRegisterHandler.sendMessage(msg);
                             Log.d("MainActivity", "返回值" + recode);
                         }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+    public void DeleteSubAccount(final String sub_id,final String session) {
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    //从SharedPreferences中获得登陆时存的session
+                    SharedPreferences preferences=context.getSharedPreferences("user", Context.MODE_PRIVATE);
+//                    String session=preferences.getString("session", "");
+                    String session = Session.getSession();
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("son_id",sub_id)
+                            .add("session",session).build();
+                    //把session add到requestbody中
+                    Request request = new Request.Builder().url(Properties.DELETE_SUB_ACCOUNT).post(requestBody).build();
+                    Response response = client.newCall(request).execute();
+                    String recode = response.body().string();
+                    String recode_trim = recode.trim();
+                    //如果返回250，表示session过期，如果session通过返回之前正常的0,1逻辑
+                    if (recode_trim.equals("250")){
+                        //本地做重新登录得动作
+                        String email=preferences.getString("name", "");
+                        String password=preferences.getString("psword", "");
+                        final String id = email;
+                        final String psw = password;
+                        OkHttpClient client1 = new OkHttpClient();
+                        RequestBody requestBody1 = new FormBody.Builder().add("username", id).add("password", psw).build();
+                        Request request1 = new Request.Builder().url(Properties.LOGIN_PATH).post(requestBody1).build();
+                        Response response1 = client1.newCall(request1).execute();
+                        if (response1.isSuccessful()) {
+                            //获得新的session
+                            String str = response1.body().string();
+//                                    SharedPreferences preferences=context.getSharedPreferences("user",Context.MODE_PRIVATE);
+                            //新session存到本地
+//                                SharedPreferences.Editor editor=preferences.edit();
+//                                editor.putString("session", str);
+//                                editor.commit();
+                            Session.setSession(str);
+                            DeleteSubAccount(sub_id,session);
+                        }
+
+                    }else {
+                        //sesssion没过期执行的正常逻辑
+                        Message msg = new Message();
+                        msg.what = Properties.DELETE_SUB_ACCOUNT_;
+                        msg.arg1 = Integer.parseInt(recode_trim);
+                        loginRegisterHandler.sendMessage(msg);
+                        Log.d("MainActivity", "返回值" + recode);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+    public void UpdateSubAccount(final String sub_id,final String session,final String sub_remark,final String sub_phone) {
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    //从SharedPreferences中获得登陆时存的session
+                    SharedPreferences preferences=context.getSharedPreferences("user", Context.MODE_PRIVATE);
+//                    String session=preferences.getString("session", "");
+                    String session = Session.getSession();
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("sub_remark",sub_remark)
+                            .add("sub_phone",sub_phone)
+                            .add("son_id",sub_id)
+                            .add("session",session).build();
+                    //把session add到requestbody中
+                    Request request = new Request.Builder().url(Properties.UPDATE_SUB_ACCOUNT).post(requestBody).build();
+                    Response response = client.newCall(request).execute();
+                    String recode = response.body().string();
+                    String recode_trim = recode.trim();
+                    //如果返回250，表示session过期，如果session通过返回之前正常的0,1逻辑
+                    if (recode_trim.equals("250")){
+                        //本地做重新登录得动作
+                        String email=preferences.getString("name", "");
+                        String password=preferences.getString("psword", "");
+                        final String id = email;
+                        final String psw = password;
+                        OkHttpClient client1 = new OkHttpClient();
+                        RequestBody requestBody1 = new FormBody.Builder().add("username", id).add("password", psw).build();
+                        Request request1 = new Request.Builder().url(Properties.LOGIN_PATH).post(requestBody1).build();
+                        Response response1 = client1.newCall(request1).execute();
+                        if (response1.isSuccessful()) {
+                            //获得新的session
+                            String str = response1.body().string();
+//                                    SharedPreferences preferences=context.getSharedPreferences("user",Context.MODE_PRIVATE);
+                            //新session存到本地
+//                                SharedPreferences.Editor editor=preferences.edit();
+//                                editor.putString("session", str);
+//                                editor.commit();
+                            Session.setSession(str);
+                            UpdateSubAccount(sub_id,session,sub_remark,sub_phone);
+                        }
+
+                    }else {
+                        //sesssion没过期执行的正常逻辑
+                        Message msg = new Message();
+                        msg.what = Properties.UPDATE_SUB_ACCOUNT_;
+                        msg.arg1 = Integer.parseInt(recode_trim);
+                        loginRegisterHandler.sendMessage(msg);
+                        Log.d("MainActivity", "返回值" + recode);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+    public void ReUserLogin(final String mailAddress, final String password) {
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder().add("username", mailAddress).add("password", password).build();
+                    Request request = new Request.Builder().url(Properties.LOGIN_PATH).post(requestBody).build();
+                    Response response = client.newCall(request).execute();
+                    if (response.isSuccessful()) {
+                        String str = response.body().string();
+                        //str为session
+                        Session.setSession(str);
+                        System.out.println("服务器响应为: " + str);
+                        Message message = new Message();
+                        message.what = Properties.USER_LOGIN;
+                        message.arg1 = str.length();
+//                        SharedPreferences preferences=context.getSharedPreferences("user",Context.MODE_PRIVATE);
+//                        //session存到本地
+//                        SharedPreferences.Editor editor=preferences.edit();
+//                        editor.putString("session", str);
+//                        editor.commit();
+                        loginRegisterHandler.sendMessage(message);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

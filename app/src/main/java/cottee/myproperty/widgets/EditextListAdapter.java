@@ -16,7 +16,7 @@ import java.util.List;
 import cottee.myproperty.R;
 
 /**
- * Created by zengd on 2016/8/17 0017.
+ * Created by z on 2016/8/17 0017.
  */
 public class EditextListAdapter extends BaseAdapter {
 
@@ -55,7 +55,6 @@ public class EditextListAdapter extends BaseAdapter {
         }
 
         final ItemBean itemObj = mData.get(position);
-
         //This is important. Remove TextWatcher first.
         if (holder.editText.getTag() instanceof TextWatcher) {
             holder.editText.removeTextChangedListener((TextWatcher) holder.editText.getTag());

@@ -1,6 +1,8 @@
 package cottee.myproperty.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -52,19 +54,36 @@ public class AddSubActivity extends Activity {
         bt_add_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (isEmail(et_sub_account.getText().toString().trim())) {
                 final Intent intent = getIntent();
                 int home_id = intent.getIntExtra("home_id", 0);
                 int pro_id = intent.getIntExtra("pro_id", 0);
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddSubActivity.this);
+                builder.setTitle("是否添加此账户");
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(AddSubActivity.this, "", "");
+                        LoginRegisterManager loginRegisterManager = new LoginRegisterManager(AddSubActivity.this, loginRegisterHandler);
+                                                      loginRegisterManager.AddSubAccount(et_sub_account.getText().toString().trim(),
+                                et_sub_remark.getText().toString().trim(), et_sub_phone.getText().toString().trim());
+                        dialog.dismiss();
+                        finish();
+                    }
+                })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .create()
+                        .show();
+//                if (isEmail(et_sub_account.getText().toString().trim())) {
                     System.out.println("AddSubActivity的home_id"+home_id);
                     System.out.println("AddSubActivity的pro_id"+pro_id);
-                    LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(AddSubActivity.this, "", "");
-                    LoginRegisterManager loginRegisterManager = new LoginRegisterManager(AddSubActivity.this, loginRegisterHandler);
-                    loginRegisterManager.AddSubAccount(et_sub_account.getText().toString().trim(), et_sub_remark.getText().toString().trim(), et_sub_phone.getText().toString().trim());
-
-                    //
+                //
 // }else {
-                        Toast.makeText(AddSubActivity.this, "输入子账户信息有误", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(AddSubActivity.this, "输入子账户信息有误", Toast.LENGTH_SHORT).show();
 //                    }
                 if(click){
                     click=false;}

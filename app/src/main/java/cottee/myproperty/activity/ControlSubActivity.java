@@ -49,6 +49,7 @@ public class ControlSubActivity extends Activity {
     private Button btn_change_house,btn_host_phone;
     private boolean click=true;
     private TextView tvRight;
+    private TextView tv_show_house;
     private PopupWindow popRight;
     private View layoutRight;
     private ListView menulistRight;
@@ -62,8 +63,8 @@ public class ControlSubActivity extends Activity {
     private int property_pro_id;
     private SubinfoAdapter sub_adapter;
     private List<Map<String, String>> listRight;
-    private ArrayList<String> address_list;
-    private ArrayList<String> home_id_list;
+    private  ArrayList<String> address_list;
+    private  ArrayList<String> home_id_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,9 @@ public class ControlSubActivity extends Activity {
         setContentView(R.layout.activity_controlsub);
         initTitle();
         initParam();
+
+        address_list = (ArrayList<String>) HealthMap.get("address_list");
+        home_id_list = (ArrayList<String>) HealthMap.get("home_id_list");
         final Intent intent = getIntent();
         sub_remark_list = intent.getStringArrayListExtra("sub_remark_list");
         sub_phone_list = intent.getStringArrayListExtra("sub_phone_list");
@@ -104,10 +108,7 @@ public class ControlSubActivity extends Activity {
                     click=false;}
             }
         });
-        LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(ControlSubActivity.this, "", "");
-        LoginRegisterManager loginRegisterManager = new LoginRegisterManager(ControlSubActivity.this, loginRegisterHandler);
-        String session = Session.getSession();
-        loginRegisterManager.ShowAllHouse(session);
+
     }
 
     private List<HouseListBean> init() {
@@ -150,15 +151,10 @@ public class ControlSubActivity extends Activity {
     };
     private void initParam() {
         tvRight = (TextView)findViewById(R.id.tv_right);
+        tv_show_house = (TextView)findViewById(R.id.tv_show_house);
         tvRight.setOnClickListener(myListener);
         // 初始化数据项
-        listRight = new ArrayList<Map<String, String>>();
-        for (int i = 1; i < 10; i++) {
-            HashMap<String, String> mapTemp = new HashMap<String, String>();
-            mapTemp.put("item", "right " + i);
-            listRight.add(mapTemp);
         }
-    }
 
     @Override
     protected void onStart() {
@@ -225,8 +221,6 @@ public class ControlSubActivity extends Activity {
                 default:
                     break;
             }
-
-
 }
 
     };
@@ -234,16 +228,12 @@ public class ControlSubActivity extends Activity {
 
         @Override
         public void onClick(View v) {
-            address_list = (ArrayList<String>) HealthMap.get("address_list");
-            home_id_list = (ArrayList<String>) HealthMap.get("home_id_list");
-
             switch (v.getId()) {
-
                 case R.id.tv_right:
                     if (popRight != null && popRight.isShowing()) {
                         popRight.dismiss();
                     } else {
-                        if (address_list.size() > 0) {
+                        if (address_list!=null) {
                             List<HouseListBean> subList = init();
                             layoutRight = getLayoutInflater().inflate(
                                     R.layout.pop_menulist, null);
@@ -255,6 +245,7 @@ public class ControlSubActivity extends Activity {
 //								new int[] { R.id.menuitem }
                                     ControlSubActivity.this, R.layout.pop_menuitem, subList);
                             menulistRight.setAdapter(listAdapter);
+                            listAdapter.notifyDataSetChanged();
 
                             // 点击listview中item的处理
                             menulistRight
@@ -263,7 +254,7 @@ public class ControlSubActivity extends Activity {
                                         public void onItemClick(AdapterView<?> parent,
                                                                 View view, int position, long id) {
                                             String strItem = address_list.get(position);
-                                            tvRight.setText(strItem);
+                                            tv_show_house.setText(strItem);
                                             String session = Session.getSession();
                                             LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(ControlSubActivity.this, "", "");
                                             LoginRegisterManager loginRegisterManager = new LoginRegisterManager(ControlSubActivity.this, loginRegisterHandler);
@@ -275,7 +266,7 @@ public class ControlSubActivity extends Activity {
                                         }
                                     });
 
-                            popRight = new PopupWindow(layoutRight, 140,
+                            popRight = new PopupWindow(layoutRight, 340,
                                     ViewGroup.LayoutParams.WRAP_CONTENT);
 
                             ColorDrawable cd = new ColorDrawable(-0000);
@@ -304,6 +295,8 @@ public class ControlSubActivity extends Activity {
                                     return false;
                                 }
                             });
+                        }else {
+                            Toast.makeText(ControlSubActivity.this, "当前物业无房屋", Toast.LENGTH_SHORT).show();
                         }
                         break;
                     }

@@ -53,24 +53,14 @@
             android:layout_marginTop="5dp"
             />
         <TextView
+            android:id="@+id/tv_show_house"
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="xx号楼"
+            android:text="xx号楼xx单元xxx室"
             android:layout_marginTop="5dp"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="xx单元"
-            android:layout_marginTop="5dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="xxx室"
-            android:layout_marginTop="5dp"
-            />
+
 
     </LinearLayout>
         <RelativeLayout
