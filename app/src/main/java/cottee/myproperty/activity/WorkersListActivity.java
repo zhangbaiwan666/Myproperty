@@ -108,12 +108,7 @@ public class WorkersListActivity extends Activity {
         message.obj = projectStaffBeans;
         handler.sendMessage(message);
 
-        System.out.println(projectStaffBeans.get(1).getGrade());
-        System.out.println(projectStaffBeans.get(1).getId());
-        System.out.println(projectStaffBeans.get(1).getName());
-        System.out.println(projectStaffBeans.get(1).getPhone());
-        System.out.println(projectStaffBeans.get(1).getPhoto());
-        System.out.println(projectStaffBeans.get(1).getTime());
+
 
     }
 

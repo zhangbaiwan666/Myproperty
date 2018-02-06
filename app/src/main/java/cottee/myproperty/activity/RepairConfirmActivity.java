@@ -38,7 +38,7 @@ public class RepairConfirmActivity extends Activity {
     private ImageView imv_takePhotoOne;
     private Bitmap bitmap;
     private Bundle bundle;
-    private String session ="5eb305b40deaa3c99b19d6807ee6b332";
+
     Handler handler;
     private String address;
     private String responseData;

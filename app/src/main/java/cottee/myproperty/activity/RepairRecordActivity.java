@@ -21,7 +21,7 @@ public class RepairRecordActivity extends Activity {
         RepairRecordAdapter repairRecordAdapter=new RepairRecordAdapter(this);
         lv_repairRecord = (ListView)findViewById(R.id.lv_repairRecord);
         lv_repairRecord.setAdapter(repairRecordAdapter);
-lv_repairRecord.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lv_repairRecord.setOnItemClickListener(new AdapterView.OnItemClickListener() {
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i,
                             long l) {

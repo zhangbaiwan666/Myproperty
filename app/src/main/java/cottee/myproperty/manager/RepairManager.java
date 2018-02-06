@@ -1,11 +1,7 @@
 package cottee.myproperty.manager;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.os.Bundle;
 import android.os.Message;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -25,17 +21,7 @@ import okhttp3.Response;
 
 public class RepairManager {
     private TextView tv_address;
-    private ImageView imv_workerphoto;
-    private TextView tv_confirmOfworker;
-    private TextView tv_serverProject;
-    private EditText et_inputInfo;
-    private ImageView imv_takePhoto;
-    private Bitmap bitmap;
-    private Bundle bundle;
 
-    private String address;
-    private String responseData;
-    public String photo_url="haha";
     RepairHandler handler;
     Context context;
    public RepairManager (RepairHandler handler){

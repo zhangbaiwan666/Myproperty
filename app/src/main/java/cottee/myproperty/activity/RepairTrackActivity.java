@@ -19,7 +19,7 @@ public class RepairTrackActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repair_track);
-    //initView();
+
     }
     public  void initView(){
         imv_photo = (ImageView)findViewById(R.id.imv_photo);

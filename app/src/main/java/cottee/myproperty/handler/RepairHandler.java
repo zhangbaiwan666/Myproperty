@@ -59,9 +59,7 @@ public class RepairHandler extends Handler {
                 initRepairProjectData();
                 initRepairProjectView();
             }
-//            case 1:
-//                address= (String) msg.obj;
-//                tv_address.setText(address);
+
         }
 
 

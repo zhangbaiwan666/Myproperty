@@ -18,6 +18,7 @@ public class RepairDetailInfoActivity extends Activity {
         Intent intent=new Intent(this,MainActivity.class);
         startActivity(intent);
     }
+
     public  void telePhone(View view){
 
     }

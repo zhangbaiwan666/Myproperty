@@ -19,6 +19,7 @@ public class WorkersInfoActivity extends Activity {
     private TextView tv_phone;
     private Bundle bundle;
     private StarLinearLayout starLinearLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

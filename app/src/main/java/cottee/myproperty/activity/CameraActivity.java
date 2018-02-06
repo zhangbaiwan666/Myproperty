@@ -56,14 +56,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback, 
         holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
         rel_shutter = (RelativeLayout)findViewById(R.id.rel_shutter);
         rel_photoOk = (RelativeLayout)findViewById(R.id.rel_photook);
-//        ll_takePhoto = (LinearLayout)findViewById(R.id.ll_takePhoto);
-//        ll_retakePhoto = (LinearLayout)findViewById(R.id.ll_retakePhoto);
-//        Resources res = getResources();
-//        bmp = BitmapFactory.decodeResource(res, R.drawable.camerabackground);
-//       Bitmap bitmap= BlurBitmapUtil.blurBitmap( this, bmp, 5 );
-//
-//       ll_takePhoto.setBackground(new BitmapDrawable( bitmap ) );
-//       ll_retakePhoto.setBackground(new BitmapDrawable( bitmap ));
+
 
     }
     @Override
