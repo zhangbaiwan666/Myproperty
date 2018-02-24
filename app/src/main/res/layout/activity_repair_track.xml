@@ -299,13 +299,24 @@
         />
 
     <Button
+        android:id="@+id/request_cancel"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/contact_person"
         android:background="@drawable/rect"
         android:text="申请取消"
         android:textColor="#fff"
-
         />
+    <Button
+
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/request_cancel"
+        android:background="@drawable/rect"
+        android:text="缴纳费用"
+        android:textColor="#fff"
+        android:onClick="payFee"
+        />
+
 </RelativeLayout>
 </LinearLayout>

@@ -13,12 +13,25 @@ public class PaymentActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
+        android.app.ActionBar actionBar=getActionBar();
+        if(actionBar!=null)
+        {
+            actionBar.hide();
+        }
     }
-    public void Sure(View view){
-        Intent intent=new Intent(PaymentActivity.this,EvaluateActivity.class);
+    public void  back(View view){
+        finish();
+    }
+    public  void  propertyFee(View view){
+        Intent intent=new Intent(PaymentActivity.this,PropertyFeeActivity.class);
         startActivity(intent);
     }
-    public void back(View view){
-        finish();
+    public  void  garbageFee(View view){
+        Intent intent=new Intent(PaymentActivity.this,GarbageFeeActivity.class);
+        startActivity(intent);
+    }
+    public void parkingFee(View view){
+        Intent intent=new Intent(PaymentActivity.this,ParkingFeeActivity.class);
+        startActivity(intent);
     }
 }

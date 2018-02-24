@@ -2,7 +2,6 @@ package cottee.myproperty.manager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
@@ -16,7 +15,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
-import cottee.myproperty.adapter.ChoosePropertyAdapter;
 import cottee.myproperty.constant.HouseListBean;
 import cottee.myproperty.constant.Properties;
 import cottee.myproperty.constant.PropertyListBean;
@@ -39,11 +37,7 @@ public class LoginRegisterManager implements Serializable {
         this.context = context;
         this.loginRegisterHandler = handler;
     }
-    private Handler handler;
-   public  LoginRegisterManager(Handler handler){
-       this.handler=handler;
 
-   }
     /**
      * 用户登陆验证
      *
@@ -574,42 +568,7 @@ public class LoginRegisterManager implements Serializable {
         }.start();
     }
 
-    public void sendRequestOkHttp() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
 
-                    Request request = new Request.Builder()
-                            .url("http://120.25.96.141/temp/file/project_static.json")
-                            .build();
-                    Response response = client.newCall(request).execute();
-                    String responseData = response.body().string();
-                    System.out.println(response);
-                    ParseJSONObject(responseData);
-                } catch (Exception e) {
-                    e.printStackTrace();
-
-                }
-            }
-        }).start();
-    }
-
-    public void ParseJSONObject(final String responseData) {
-        Gson gson = new Gson();
-        proinfo = gson.fromJson(responseData, Repair
-                .class).getProinfo();
-        for (int i = 0; i < 7; i++) {
-            System.out.println(proinfo.get(i).getKind());
-            Message message = new Message();
-            message.what = 0;
-            message.obj = proinfo.get(i).getKind();
-           handler.sendMessage(message);
-        }
-
-
-    }
     /**
      ##切换物业
      */

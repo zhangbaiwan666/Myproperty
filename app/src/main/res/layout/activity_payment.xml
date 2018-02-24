@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffff">
+    android:background="#F5F5F5">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="45sp"
@@ -37,90 +37,157 @@
             android:text="缴费"
             android:textSize="20dp"
             />
-
     </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:minHeight="50dp"
-        android:paddingLeft="37dp"
-        android:paddingRight="12dp"
-        android:paddingTop="50dp"
-        >
 
-        <TextView
+    <LinearLayout
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="请付款"
-            android:paddingLeft="10dp"
-            android:textSize="20sp"
-            />
-
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:minHeight="50dp"
-        android:paddingLeft="50dp"
-        android:paddingRight="12dp"
-
-        >
-        <FrameLayout
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:background="#fff"
+        android:layout_height="290dp">
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="110dp">
-            <EditText
-                android:layout_width="280dp"
-                android:layout_height="110dp"
-                android:background="@drawable/pay_amount"
-                />
-            <TextView
+            android:layout_height="wrap_content"
+            android:paddingLeft="40dp"
+            android:paddingTop="60dp"
+            android:orientation="horizontal">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imv_wuyefee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="propertyFee"
+                    android:src="@drawable/wuye_fee"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imv_wuyefee"
+                    android:paddingLeft="3dp"
+                    android:paddingTop="10dp"
+                    android:text="物业费"/>
+            </RelativeLayout>
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="230dp"
-                android:textSize="25sp"
-                android:paddingTop="40dp"
-                android:text="元"/>
-        </FrameLayout>
+                android:paddingLeft="60dp">
+                <ImageView
+                    android:id="@+id/imv_tingchefee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginStart="17dp"
+                    android:onClick="parkingFee"
+                    android:paddingRight="4dp"
+                    android:src="@drawable/tingche_fee"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imv_tingchefee"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:text="停车费"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="60dp">
 
-    </RelativeLayout>
+                <ImageView
+                    android:id="@+id/imv_wasteFee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginStart="17dp"
+                    android:paddingRight="4dp"
+                    android:onClick="garbageFee"
+                    android:src="@drawable/waste_fee"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imv_wasteFee"
+                    android:paddingRight="25dp"
+                    android:paddingTop="10dp"
+                    android:text="垃圾处理费"
+                    android:id="@+id/textView"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="40dp"
+            android:paddingTop="30dp"
+            android:orientation="horizontal"
+            >
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imv_payRecord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/pay_record"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imv_payRecord"
+
+                    android:paddingTop="10dp"
+                    android:text="缴费记录"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="50dp">
+                <ImageView
+                    android:id="@+id/imv_yudaoquestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="17dp"
+
+                    android:src="@drawable/question"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imv_yudaoquestion"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:text="遇到问题"/>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="60dp"
         android:minHeight="50dp"
-        android:paddingLeft="25dp"
+        android:paddingLeft="40dp"
         android:paddingRight="12dp"
-        android:paddingTop="50dp"
+        android:paddingTop="30dp"
         >
 
         <TextView
-
+            android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="请在工人指导下付款"
-            android:paddingLeft="180dp"
-            android:textSize="15sp"
+            android:text="联系客服"
+            android:paddingLeft="120dp"
+            android:textSize="10sp"
+            android:textColor="#1e90ff"
             />
 
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:paddingTop="90dp"
-        android:paddingLeft="50dp">
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="14dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:text="确定"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp"
-            android:onClick="Sure"
-            android:background="@drawable/rect"/>
     </RelativeLayout>
 </LinearLayout>

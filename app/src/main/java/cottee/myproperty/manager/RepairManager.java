@@ -1,6 +1,7 @@
 package cottee.myproperty.manager;
 
 import android.content.Context;
+import android.os.Handler;
 import android.os.Message;
 import android.widget.TextView;
 
@@ -8,11 +9,14 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
+import cottee.myproperty.constant.Mechanic;
 import cottee.myproperty.constant.Properties;
 import cottee.myproperty.constant.Repair;
 import cottee.myproperty.handler.RepairHandler;
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -22,9 +26,16 @@ import okhttp3.Response;
 public class RepairManager {
     private TextView tv_address;
 
-    RepairHandler handler;
+    RepairHandler repairHandler;
     Context context;
-   public RepairManager (RepairHandler handler){
+    private List<Mechanic.ProjectStaffBean> projectStaffBeans;
+    private String project_id;
+   public RepairManager (RepairHandler repairHandler){
+       this.repairHandler=repairHandler;
+   }
+   Handler handler;
+   public RepairManager(Handler handler,String project_id){
+       this.project_id=project_id;
        this.handler=handler;
    }
     public void sendRequestRepairProject() {
@@ -39,7 +50,7 @@ public class RepairManager {
                             .build();
                     Response response = client.newCall(request).execute();
                     String responseData = response.body().string();
-                    parseJSONORepairProject(responseData);
+                    parseJSONRepairProject(responseData);
                 } catch (Exception e) {
                     e.printStackTrace();
 
@@ -48,7 +59,7 @@ public class RepairManager {
         }).start();
     }
     private List<Repair.ProinfoBean> proinfo;
-    public void parseJSONORepairProject(String responseData) {
+    public void parseJSONRepairProject(String responseData) {
         Gson gson = new Gson();
         proinfo = gson.fromJson(responseData, Repair
                 .class).getProinfo();
@@ -57,75 +68,43 @@ public class RepairManager {
             Message message = new Message();
             message.what = Properties.RepairProject;
             message.obj = proinfo;
-            handler.sendMessage(message);
+            repairHandler.sendMessage(message);
         }
 
 
     }
-//    public void SubmissionToWeb(){
-//        new Thread(new Runnable() {
-//
-//
-//
-//            @Override
-//            public void run() {
-//                try {
-//                    OkHttpClient client = new OkHttpClient();
-//                    RequestBody requestBody = new FormBody.Builder().add
-//                            ("session", Session.getSession()).add("staff_name",bundle.getString("name"))
-//                            .add("photo_url",photo_url).add("remark",et_inputInfo.getText().toString())
-//                            .add("part",bundle.getString("bigProject")+"的"+ bundle.getString("smallProject"))
-//                            .add("staff_id",bundle.getString("id")).build();
-//                    Request request = new Request.Builder()
-//                            .url("https://thethreestooges.cn:5210/maintain/indent/submit").post(requestBody)
-//                            .build();
-//                    Response response = client.newCall(request).execute();
-//                    responseData = response.body().string();
-//                    if (responseData=="1"){
-//                        Toast.makeText(context,"上传成功", LENGTH_SHORT).show();
-//                    }
-//                    System.out.println("rrrrrrrrrrrrr"+ responseData);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//
-//                }
-//            }
-//
-//
-//
-//        }).start();
-//    }
-//    public    void sendRequestAddress() {
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    OkHttpClient client = new OkHttpClient();
-//                    RequestBody requestBody = new FormBody.Builder().add
-//                            ("session", Session.getSession()).build();
-//                    Request request = new Request.Builder()
-//                            .url("https://thethreestooges.cn:5210/maintain/user/address").post(requestBody)
-//                            .build();
-//                    Response response = client.newCall(request).execute();
-//                    String responseData = response.body().string();
-//                    parseJSONOAddress(responseData);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//
-//                }
-//            }
-//
-//
-//
-//        }).start();
-//    }
-//    public void parseJSONOAddress(String responseData) throws JSONException {
-//        JSONObject jsonObject = new JSONObject(responseData);
-//        address = jsonObject.getString("address");
-//        System.out.println("-----------"+ address);
-//        Message message = new Message();
-//        message.what = 1;
-//        message.obj = address;
-//        handler.sendMessage(message);
-//    }
+    public void sendRequestWorkersList() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder().add
+                            ("project_id",project_id).build();
+                    Request request = new Request.Builder()
+                            .url("https://thethreestooges.cn:5210/application/maintain/staff_show.php").post(requestBody)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String responseData = response.body().string();
+                   parseJSONWorkersList(responseData);
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                }
+            }
+        }).start();
+    }
+
+    private void parseJSONWorkersList(String responseData) {
+        Gson gson = new Gson();
+        projectStaffBeans = gson.fromJson(responseData,Mechanic.class).getProject_staff();
+        Message message = new Message();
+        message.what = Properties.WorkersList;
+        message.obj = projectStaffBeans;
+        handler.sendMessage(message);
+
+
+
+    }
+
 }

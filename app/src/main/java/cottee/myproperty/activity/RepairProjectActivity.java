@@ -9,6 +9,7 @@ import android.widget.TextView;
 import cottee.myproperty.R;
 import cottee.myproperty.handler.RepairHandler;
 import cottee.myproperty.manager.RepairManager;
+import cottee.myproperty.uitils.Session;
 
 public class RepairProjectActivity extends Activity {
     private ListView lv_left;
@@ -24,6 +25,7 @@ public class RepairProjectActivity extends Activity {
         RepairHandler repairHandler=new RepairHandler(this,lv_left,lv_Right,tv_title);
         RepairManager repairManager=new RepairManager(repairHandler);
         repairManager.sendRequestRepairProject();
+        System.out.println("ssssssssssssssssssssss"+Session.getSession());
     }
   public void back(View view){
         finish();

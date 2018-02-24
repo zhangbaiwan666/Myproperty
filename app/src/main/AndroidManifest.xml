@@ -49,13 +49,21 @@
         </activity>
         <activity android:name=".activity.RepairTrackActivity">
         </activity>
-        <activity android:name=".activity.PaymentActivity">
+        <activity android:name=".activity.RepairPaymentActivity">
         </activity>
         <activity android:name=".activity.EvaluateActivity">
         </activity>
         <activity android:name=".activity.RepairDetailInfoActivity">
         </activity>
         <activity android:name=".activity.RepairRecordActivity">
+        </activity>
+        <activity android:name=".activity.PaymentActivity">
+        </activity>
+        <activity android:name=".activity.PropertyFeeActivity">
+        </activity>
+        <activity android:name=".activity.GarbageFeeActivity">
+        </activity>
+        <activity android:name=".activity.ParkingFeeActivity">
         </activity>
     </application>
 

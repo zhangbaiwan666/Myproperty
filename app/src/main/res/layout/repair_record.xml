@@ -67,13 +67,6 @@
     android:layout_height="wrap_content"
     >
 
-    <Button
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="220dp"
-        android:background="@drawable/rect"
-        android:text="删除记录"
-        android:textColor="#fff"
-        />
+
 </LinearLayout>
 </LinearLayout>

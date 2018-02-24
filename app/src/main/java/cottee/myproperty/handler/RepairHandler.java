@@ -18,10 +18,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import cottee.myproperty.activity.WorkersInfoActivity;
 import cottee.myproperty.activity.WorkersListActivity;
 import cottee.myproperty.adapter.LeftAdapter;
 import cottee.myproperty.adapter.RightAdapter;
 import cottee.myproperty.constant.BaseData;
+import cottee.myproperty.constant.Mechanic;
 import cottee.myproperty.constant.Properties;
 import cottee.myproperty.constant.Repair;
 
@@ -36,17 +38,28 @@ public class RepairHandler extends Handler {
     private LeftAdapter leftAdapter;
     private RightAdapter rightAdapter;
     private Context context;
+    private Context context1;
     private ArrayList<BaseData> lists;
     private ArrayList<String> showTitle;
     private int lastPosition;
     private List<Repair.ProinfoBean> proinfo;
+    private List<Mechanic.ProjectStaffBean> projectStaffBeans;
     private TextView tv_address;
     private String address;
+    String bigProject;
+    String smallProject;
+    private ListView listView;
     public  RepairHandler(Context context,ListView lv_left,ListView lv_Right,TextView tv_title){
         this.context=context;
         this.lv_left=lv_left;
         this.lv_Right=lv_Right;
         this.tv_title=tv_title;
+    }
+    public RepairHandler(Context context,ListView listView,String bigProject,String smallProject){
+        this.context1=context;
+        this.listView=listView;
+        this.bigProject=bigProject;
+        this.smallProject=smallProject;
     }
     public RepairHandler(Context context,TextView tv_address){
         this.tv_address=tv_address;
@@ -59,10 +72,19 @@ public class RepairHandler extends Handler {
                 initRepairProjectData();
                 initRepairProjectView();
             }
+            case  Properties.WorkersList:{
+                projectStaffBeans= (List<Mechanic.ProjectStaffBean>) msg.obj;
+//                WorkersAdapter workersAdapter=new WorkersAdapter(context,projectStaffBeans);
+//                listView.setAdapter(workersAdapter);
+
+            }
 
         }
 
 
+    }
+    public  List<Mechanic.ProjectStaffBean> getProjectStaffBeans(){
+        return projectStaffBeans;
     }
     public void initRepairProjectData() {
         lists = new ArrayList<BaseData>();
@@ -183,5 +205,29 @@ public class RepairHandler extends Handler {
             lastPosition = currentPosition;
 
         }
+    }
+    public  void  initDataWorkersLists(){
+
+//        WorkersAdapter workersAdapter=new WorkersAdapter(context1,projectStaffBeans);
+//        listView.setAdapter(workersAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view,
+                                    int i, long l) {
+                Intent intent=new Intent(context1,WorkersInfoActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("photo",projectStaffBeans.get(i).getPhoto());
+                bundle.putString("name",projectStaffBeans.get(i).getName());
+                bundle.putString("id",projectStaffBeans.get(i).getId());
+                bundle.putString("bigProject",bigProject);
+                bundle.putString("smallProject",smallProject);
+                bundle.putString("phone",projectStaffBeans.get(i).getPhone());
+                bundle.putString("grade",projectStaffBeans.get(i).getGrade());
+                bundle.putString("time",projectStaffBeans.get(i).getTime());
+                intent.putExtras(bundle);
+               context.startActivity(intent);
+            }
+        });
     }
 }

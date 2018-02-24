@@ -34,8 +34,12 @@ public class RepairTrackActivity extends Activity {
     public void back(View view){
         finish();
     }
+    public  void  payFee(View view){
+        Intent intent=new Intent(RepairTrackActivity.this,RepairPaymentActivity.class);
+        startActivity(intent);
+    }
     public  void repairFinish(View view){
-        Intent intent=new Intent(RepairTrackActivity.this,PaymentActivity.class);
+        Intent intent=new Intent(RepairTrackActivity.this,RepairPaymentActivity.class);
         startActivity(intent);
     }
 }

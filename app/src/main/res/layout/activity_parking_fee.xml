@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffff">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45sp"
+        android:minHeight="50dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="12dp"
+        >
+        <Button
+
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="7dp"
+            android:layout_marginStart="7dp"
+            android:background="@drawable/back"
+            android:onClick="back"
+            android:paddingBottom="10dp"
+            android:paddingTop="40dp"/>
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="停车费缴费"
+            android:textSize="20dp"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="#ff9800">
+
+        <ImageView
+            android:id="@+id/imv_dingwei"
+            android:layout_width="35dp"
+            android:layout_height="55dp"
+            android:paddingTop="17dp"
+            android:paddingLeft="25dp"
+            android:src="@drawable/payfee_dingwei"/>
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@id/imv_dingwei"
+            android:textSize="15dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="25dp"
+            android:textColor="#fff"
+            android:text="车位地址"/>
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/imv_dingwei"
+            android:layout_below="@id/tv"
+            android:textColor="#fff"
+            android:text="大连明秀山庄二期 地上停车场 25号"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:minHeight="50dp"
+        android:paddingLeft="37dp"
+        android:paddingRight="12dp"
+        android:paddingTop="25dp"
+        >
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="停车费/月:"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="92dp"
+            android:layout_marginStart="92dp"
+            android:textSize="17dp"
+            android:paddingTop="10dp"
+            android:text="xxx元"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:minHeight="50dp"
+        android:paddingLeft="37dp"
+        android:paddingRight="12dp"
+        android:paddingTop="15dp"
+        >
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="选择您要交:"
+            android:textSize="16sp"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="50dp">
+
+        <Button
+            android:id="@+id/btn_three"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="29dp"
+            android:layout_marginStart="29dp"
+            android:layout_toEndOf="@+id/btn_one"
+            android:layout_toRightOf="@+id/btn_one"
+
+            android:text="3个月"/>
+
+        <Button
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="1个月"
+            android:id="@+id/btn_one"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="50dp">
+
+        <Button
+            android:id="@+id/btn_twelve"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="29dp"
+            android:layout_marginStart="29dp"
+            android:layout_toEndOf="@+id/btn_six"
+            android:layout_toRightOf="@+id/btn_six"
+
+            android:text="12个月"/>
+
+        <Button
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="6个月"
+            android:id="@+id/btn_six"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:minHeight="50dp"
+        android:paddingLeft="37dp"
+        android:paddingRight="12dp"
+        android:paddingTop="50dp"
+        >
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="10dp"
+            android:text="您需要支付"
+            android:textSize="16sp"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:minHeight="50dp"
+        android:paddingLeft="80dp"
+        android:paddingRight="12dp"
+
+        >
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="110dp">
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:background="@drawable/pay_amount"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="70dp"
+                android:textSize="20sp"
+                android:paddingTop="20dp"
+                android:text="5000 元"/>
+        </FrameLayout>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingLeft="60dp">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:onClick="Sure"
+            android:background="@drawable/rect"/>
+    </RelativeLayout>
+</LinearLayout>

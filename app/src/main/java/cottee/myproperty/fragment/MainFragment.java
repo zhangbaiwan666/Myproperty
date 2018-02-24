@@ -2,7 +2,6 @@ package cottee.myproperty.fragment;
 
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,7 +33,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import cottee.myproperty.R;
-import cottee.myproperty.activity.LoginActivity;
+import cottee.myproperty.activity.PaymentActivity;
 import cottee.myproperty.activity.RepairProjectActivity;
 import cottee.myproperty.activity.TabLessActivity;
 import cottee.myproperty.adapter.ChoosePropertyAdapter;
@@ -141,6 +140,8 @@ public class MainFragment extends Fragment {
 		bt_payFee.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				Intent intent=new Intent(getActivity(), PaymentActivity.class);
+				startActivity(intent);
 
 			}
 		});

@@ -9,50 +9,47 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.google.gson.Gson;
-
 import java.util.List;
 
 import cottee.myproperty.R;
 import cottee.myproperty.adapter.WorkersAdapter;
 import cottee.myproperty.constant.Mechanic;
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+import cottee.myproperty.constant.Properties;
+import cottee.myproperty.manager.RepairManager;
 
 public class WorkersListActivity extends Activity {
-
-    private ListView listView;
     String project_id;
     Handler handler;
     private List<Mechanic.ProjectStaffBean> projectStaffBeans;
     String bigProject;
     String smallProject;
+    private ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workers_list);
-        sendRequestOkHttp();
         Bundle bundle=getIntent().getExtras();
         project_id=bundle.getString("id");
         bigProject=bundle.getString("title");
         smallProject=bundle.getString("name");
+        listView = (ListView)findViewById(R.id.lv_workerList);
         handler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
                 switch (msg.what){
-                    case 0:
+                    case Properties.WorkersList:
+                        projectStaffBeans= (List<Mechanic.ProjectStaffBean>) msg.obj;
                         initData();
 
                 }
             }
         };
-
+//        RepairHandler repairHandler=new RepairHandler(this,listView,bigProject,smallProject);
+        RepairManager repairManager=new RepairManager(handler,project_id);
+        repairManager.sendRequestWorkersList();
     }
     public  void  initData(){
-        listView = (ListView)findViewById(R.id.lv);
+
         WorkersAdapter workersAdapter=new WorkersAdapter(this,projectStaffBeans);
         listView.setAdapter(workersAdapter);
 
@@ -78,38 +75,6 @@ public class WorkersListActivity extends Activity {
     public  void  back(View view){
         finish();
     }
-    private void sendRequestOkHttp() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    RequestBody requestBody = new FormBody.Builder().add
-                            ("project_id",project_id).build();
-                    Request request = new Request.Builder()
-                            .url("https://thethreestooges.cn:5210/application/maintain/staff_show.php").post(requestBody)
-                            .build();
-                    Response response = client.newCall(request).execute();
-                    String responseData = response.body().string();
-                    parseJSONObject(responseData);
-                } catch (Exception e) {
-                    e.printStackTrace();
 
-                }
-            }
-        }).start();
-    }
-
-    private void parseJSONObject(String responseData) {
-        Gson gson = new Gson();
-        projectStaffBeans = gson.fromJson(responseData,Mechanic.class).getProject_staff();
-        Message message = new Message();
-        message.what = 0;
-        message.obj = projectStaffBeans;
-        handler.sendMessage(message);
-
-
-
-    }
 
 }
