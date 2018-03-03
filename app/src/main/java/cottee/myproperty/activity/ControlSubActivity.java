@@ -104,6 +104,7 @@ public class ControlSubActivity extends Activity {
                 intent.putExtra("home_id", property_home_id);
                 intent.putExtra("pro_id",property_pro_id);
                 startActivity(intent);
+                finish();
                 if(click){
                     click=false;}
             }
@@ -168,7 +169,7 @@ public class ControlSubActivity extends Activity {
 
             final ListView listView=(ListView)findViewById(R.id.sub_list);
             listView.setAdapter(sub_adapter);//把Subinfo给ListView
-
+            sub_adapter.notifyDataSetChanged();
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
