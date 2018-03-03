@@ -63,7 +63,7 @@ public class ControlSubActivity extends Activity {
     private int property_pro_id;
     private SubinfoAdapter sub_adapter;
     private List<Map<String, String>> listRight;
-    private  ArrayList<String> address_list;
+    private static ArrayList<String> address_list;
     private  ArrayList<String> home_id_list;
 
     @Override
@@ -297,6 +297,7 @@ public class ControlSubActivity extends Activity {
                             });
                         }else {
                             Toast.makeText(ControlSubActivity.this, "当前物业无房屋", Toast.LENGTH_SHORT).show();
+                            System.out.println("房屋的列表信息"+address_list);
                         }
                         break;
                     }

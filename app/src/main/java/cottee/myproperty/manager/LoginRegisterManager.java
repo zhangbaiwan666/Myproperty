@@ -493,12 +493,7 @@ public class LoginRegisterManager implements Serializable {
         private void parseJSONWithGSON(final String jsonData) {
             //使用轻量级的Gson解析得到的json
             JsonObject jsonObject = new JsonParser().parse(jsonData).getAsJsonObject();
-            System.out.println("获得服务器器器器的json数据"+jsonObject);
-            System.out.println("获得服务器器器器的json数据"+jsonObject);
-            System.out.println("获得服务器器器器的json数据"+jsonObject);
-            System.out.println("获得服务器器器器的json数据"+jsonObject);
-            System.out.println("获得服务器器器器的json数据"+jsonObject);
-            System.out.println("获得服务器器器器的json数据"+jsonObject);
+            System.out.println("获得服务器的子账户数据"+jsonObject);
             System.out.println("获得服务器器器器的json数据"+jsonObject);
             System.out.println("获得服务器器器器的json数据"+jsonObject);
 

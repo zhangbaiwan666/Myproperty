@@ -52,8 +52,7 @@ public class SettingFragment extends Fragment {
 				LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getActivity(), "","");
 				LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getActivity(), loginRegisterHandler);
 				loginRegisterManager.GsonSubList();
-				String session = Session.getSession();
-				loginRegisterManager.ShowAllHouse(session);
+
 			}
 		});
 		rl_login_out.setOnClickListener(new NoDoubleClickListener() {

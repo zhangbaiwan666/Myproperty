@@ -143,6 +143,9 @@ public class LoginRegisterHandler extends Handler {
   *  sub_id*/
     private static final int UPDATESUBSUCCESS = 1;
     private static final int UPDATESUBFAILED = 0;
+    private static ArrayList<String> sub_id_list;
+    private static ArrayList<String> sub_phone_list;
+    private static ArrayList<String> sub_remark_list;
 
 
     public LoginRegisterHandler(Context context, String email, String password) {
@@ -312,9 +315,9 @@ public class LoginRegisterHandler extends Handler {
                 }
                 break;
             case Properties.SHOW_SUB_INFO:
-                ArrayList<String> sub_remark_list = new ArrayList<String>();
-                ArrayList<String> sub_id_list = new ArrayList<>();
-                ArrayList<String> sub_phone_list = new ArrayList<>();
+                sub_remark_list = new ArrayList<String>();
+                sub_id_list = new ArrayList<>();
+                sub_phone_list = new ArrayList<>();
                 Object obj = msg.obj;
 //                Serializable userBeanList = msg.getData().getSerializable("userBeanList");
 //                int test = msg.getData().getInt("test");
@@ -327,15 +330,11 @@ public class LoginRegisterHandler extends Handler {
                     sub_phone_list.add(subListBeanslist.get(i).getPhone_num());
                     sub_remark_list.add(subListBeanslist.get(i).getRemark());
                 }
-                Intent intent1 = new Intent(context, ControlSubActivity.class);
-                intent1.putStringArrayListExtra("sub_remark_list", sub_remark_list);
-                intent1.putStringArrayListExtra("sub_phone_list", sub_phone_list);
-                intent1.putStringArrayListExtra("sub_id_list", sub_id_list);
+                LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "","");
+                LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
+                String session = Session.getSession();
+                loginRegisterManager.ShowAllHouse(session);
 
-                intent1.putExtra("property_name", property);
-                intent1.putExtra("property_pro_id", property_pro_id);
-                intent1.putExtra("property_home_id", property_home_id);
-                context.startActivity(intent1);
                 System.out.println("传递前得sub_remark_list为" + sub_remark_list);
                 break;
             case Properties.SHOW_SUB_INFO_NULL:
@@ -352,6 +351,7 @@ public class LoginRegisterHandler extends Handler {
                     property_list.add(propertyListBean.get(i).getName());
                     pro_id_list.add(propertyListBean.get(i).getPro_id());
                 }
+
                 HealthMap.put("property_list", property_list);
                 HealthMap.put("pro_id_list", pro_id_list);
                 break;
@@ -364,6 +364,15 @@ public class LoginRegisterHandler extends Handler {
                     address_list.add(houseListBean.get(i).getAddress());
                     home_id_list.add(houseListBean.get(i).getHome_id());
                 }
+                Intent intent1 = new Intent(context, ControlSubActivity.class);
+                intent1.putStringArrayListExtra("sub_remark_list", sub_remark_list);
+                intent1.putStringArrayListExtra("sub_phone_list", sub_phone_list);
+                intent1.putStringArrayListExtra("sub_id_list", sub_id_list);
+
+                intent1.putExtra("property_name", property);
+                intent1.putExtra("property_pro_id", property_pro_id);
+                intent1.putExtra("property_home_id", property_home_id);
+                context.startActivity(intent1);
                 HealthMap.put("address_list", address_list);
                 HealthMap.put("home_id_list", home_id_list);
                 break;
@@ -381,10 +390,10 @@ public class LoginRegisterHandler extends Handler {
                         System.out.println("恭喜。更换房屋成功");
                         System.out.println("更换房屋成功");
                         System.out.println("更换房屋成功");
-                        LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "", "");
-                        LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
+                        LoginRegisterHandler loginRegisterHandler1 = new LoginRegisterHandler(context, "", "");
+                        LoginRegisterManager loginRegisterManager1 = new LoginRegisterManager(context, loginRegisterHandler1);
 //                                loginRegisterManager.GsonProperyt();
-                        loginRegisterManager.GsonSubList();
+                        loginRegisterManager1.GsonSubList();
                         break;
                     case CHANGEHOUSEFAILED:
                         break;
@@ -393,10 +402,10 @@ public class LoginRegisterHandler extends Handler {
             case Properties.DELETE_SUB_ACCOUNT_:
                 switch (msg.arg1) {
                     case DELETESUBSUCCESS:
-                        LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "", "");
-                        LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
+                        LoginRegisterHandler loginRegisterHandler1 = new LoginRegisterHandler(context, "", "");
+                        LoginRegisterManager loginRegisterManager1 = new LoginRegisterManager(context, loginRegisterHandler1);
 //                                loginRegisterManager.GsonProperyt();
-                        loginRegisterManager.GsonSubList();
+                        loginRegisterManager1.GsonSubList();
                         Toast.makeText(context, "删除成功", Toast.LENGTH_SHORT).show();
 
                         break;
