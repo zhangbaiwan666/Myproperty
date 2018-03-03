@@ -417,16 +417,14 @@ public class LoginRegisterHandler extends Handler {
             case Properties.REUSER_LOGIN:
                 switch (msg.arg1) {
                     case LOGINSSUCCEED:
-                        SharedPreferences preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString("name", email);
-                        editor.putString("psword", password);
-                        editor.commit();
-                        Toast.makeText(context, "登陆成功", Toast.LENGTH_SHORT)
+
+                        Toast.makeText(context, "重新登陆成功", Toast.LENGTH_SHORT)
                                 .show();
+                        Intent intent2 = new Intent(context, MainActivity.class);
+                        ((Activity) context).startActivity(intent2);
                         break;
                     case PSWFAILD:
-                        Toast.makeText(context, "密码错误", Toast.LENGTH_SHORT)
+                        Toast.makeText(context, "本地账户为空", Toast.LENGTH_SHORT)
                                 .show();
                         break;
                     case USERUNEXIST:

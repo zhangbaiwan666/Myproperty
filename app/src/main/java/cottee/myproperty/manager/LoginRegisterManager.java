@@ -942,9 +942,9 @@ public class LoginRegisterManager implements Serializable {
                         String str = response.body().string();
                         //str为session
                         Session.setSession(str);
-                        System.out.println("服务器响应为: " + str);
+                        System.out.println("最新获得的session为: " + str);
                         Message message = new Message();
-                        message.what = Properties.USER_LOGIN;
+                        message.what = Properties.REUSER_LOGIN;
                         message.arg1 = str.length();
 //                        SharedPreferences preferences=context.getSharedPreferences("user",Context.MODE_PRIVATE);
 //                        //session存到本地

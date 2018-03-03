@@ -5,7 +5,7 @@ package cottee.myproperty.uitils;
  */
 
 public class Session {
-    private   static String session;
+    private static String session;
 
     public static String getSession() {
         return session;

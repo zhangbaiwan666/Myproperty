@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import cottee.myproperty.handler.LoginRegisterHandler;
+import cottee.myproperty.listener.NoDoubleClickListener;
 import cottee.myproperty.manager.ActivityFinishManager;
 import cottee.myproperty.manager.LoginRegisterManager;
 import cottee.myproperty.R;
@@ -56,9 +57,9 @@ public class LoginActivity extends Activity {
                     click=false;}
             }
         });
-        bt_login.setOnClickListener(new View.OnClickListener() {
+        bt_login.setOnClickListener(new NoDoubleClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onNoDoubleClick(View view) {
                 //提交
                 LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(LoginActivity.this,
                         et_user_email.getText().toString().trim(),et_user_password.getText().toString().trim());

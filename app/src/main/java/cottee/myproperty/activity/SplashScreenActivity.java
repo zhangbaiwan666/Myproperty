@@ -13,16 +13,16 @@ import cottee.myproperty.manager.LoginRegisterManager;
 
 public class SplashScreenActivity extends Activity {
     private static int SPLASH_TIME_OUT = 3000;
-    private String email;
-    private String password;
+    private static String email;
+    private static String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        SharedPreferences preferences=getSharedPreferences("user", Context.MODE_PRIVATE);
-        email = preferences.getString("name", "");
-        password = preferences.getString("psword", "");
+        SharedPreferences pref = getSharedPreferences("user", Context.MODE_PRIVATE |Context.MODE_MULTI_PROCESS);
+        email = pref.getString("name", "");
+        password = pref.getString("psword", "");
         LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(SplashScreenActivity.this, "", "");
         LoginRegisterManager loginRegisterManager = new LoginRegisterManager(SplashScreenActivity.this, loginRegisterHandler);
         loginRegisterManager.ReUserLogin(email.toString().trim(),password.toString().trim());
@@ -41,8 +41,8 @@ public class SplashScreenActivity extends Activity {
                     Intent i = new Intent(SplashScreenActivity.this, LoginActivity.class);
                     startActivity(i);
                 }else {
-                    Intent i = new Intent(SplashScreenActivity.this, MainActivity.class);
-                    startActivity(i);
+//                    Intent i = new Intent(SplashScreenActivity.this, MainActivity.class);
+//                    startActivity(i);
                 }
 
                 // close this activity
