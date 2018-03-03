@@ -88,7 +88,6 @@ public class MainFragment extends Fragment {
 			bt_repair = (Button) rootView.findViewById(R.id.bt_repair);
 			ll_placard = (LinearLayout) rootView.findViewById(R.id.ll_placard);
 			pro_id_list = (ArrayList<String>) HealthMap.get("pro_id_list");
-			property_list = (ArrayList<String>) HealthMap.get("property_list");
 			pop();
 			initEven();
 			initParam();
@@ -301,7 +300,7 @@ public class MainFragment extends Fragment {
 
 		@Override
 		public void onClick(View v) {
-
+			property_list = (ArrayList<String>) HealthMap.get("property_list");
 			if (property_list == null) {
 				Toast.makeText(getContext(), "当前无物业", Toast.LENGTH_SHORT).show();
 			} else {
@@ -322,6 +321,7 @@ public class MainFragment extends Fragment {
 //								new int[] { R.id.menuitem }
 										getContext(), R.layout.pop_menuitem, subList);
 								menulistRight.setAdapter(listAdapter);
+								listAdapter.notifyDataSetChanged();
 
 								// 点击listview中item的处理
 								menulistRight
