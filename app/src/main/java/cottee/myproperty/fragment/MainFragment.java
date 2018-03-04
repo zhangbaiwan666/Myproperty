@@ -164,15 +164,21 @@ public class MainFragment extends Fragment {
 						R.mipmap.ad2,
 						R.mipmap.ad3,
 						R.mipmap.ad4,
-						R.mipmap.splash
+						R.mipmap.splash,
+						R.mipmap.ad3,
+						R.mipmap.ad5,
+						R.mipmap.ad2
 				};
 				//图片标题
 				titles = new String[]{
-						"巩俐不低俗，我就不能低俗",
-						"扑树又回来啦！再唱经典老歌引万人大合唱",
-						"揭秘北京电影如何升级",
-						"乐视网TV版大派送",
-						"热血屌丝的反杀"
+						"全新版本爱尚家上线啦",
+						"app广告位1",
+						"app广告位2",
+						"app广告位3",
+						"app广告位4",
+						"app广告位5",
+						"app广告位6",
+						"app广告位7"
 				};
 
 				//显示的图片
@@ -191,6 +197,9 @@ public class MainFragment extends Fragment {
 				dots.add(rootView.findViewById(R.id.dot_2));
 				dots.add(rootView.findViewById(R.id.dot_3));
 				dots.add(rootView.findViewById(R.id.dot_4));
+				dots.add(rootView.findViewById(R.id.dot_5));
+				dots.add(rootView.findViewById(R.id.dot_6));
+				dots.add(rootView.findViewById(R.id.dot_7));
 
 				title = (TextView) rootView.findViewById(R.id.title);
 				title.setText(titles[0]);
@@ -262,7 +271,6 @@ public class MainFragment extends Fragment {
 				}
 			}
 
-
 			//切换图片
 			private class ViewPagerTask implements Runnable {
 
@@ -296,6 +304,7 @@ public class MainFragment extends Fragment {
 		}
 		return proList;
 	}
+
 	private View.OnClickListener myListener = new View.OnClickListener() {
 
 		@Override
