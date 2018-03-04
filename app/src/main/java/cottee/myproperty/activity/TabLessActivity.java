@@ -12,7 +12,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,7 @@ public class TabLessActivity extends Activity implements View.OnClickListener {
     private android.app.FragmentManager fm;
     private FragmentTransaction ft;
     private Title title;
+    private EditText edit_search;
 
 
     @Override
@@ -71,6 +74,7 @@ public class TabLessActivity extends Activity implements View.OnClickListener {
         tvBtn = (Button) this.findViewById(R.id.tv_btn);
         varietyBtn = (Button) this.findViewById(R.id.variety_btn);
         btn_bulletin_search = (TextView) this.findViewById(R.id.btn_bulletin_search);
+        edit_search = this.findViewById(R.id.edit_search);
 
         tvBtn.setOnClickListener(this);
         varietyBtn.setOnClickListener(this);
@@ -122,9 +126,14 @@ public class TabLessActivity extends Activity implements View.OnClickListener {
                 break;
 
             case R.id.btn_bulletin_search:
-                InputMethodManager imm2 = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm2.hideSoftInputFromWindow(btn_bulletin_search.getWindowToken(), 0);
+                if (edit_search.getText()==null){
+                    Toast.makeText(this, "输入的信息为空", Toast.LENGTH_SHORT).show();
+                }else{
+                    String user_search = edit_search.getText().toString().trim();
+                    InputMethodManager imm2 = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm2.hideSoftInputFromWindow(btn_bulletin_search.getWindowToken(), 0);
                 ft.replace(R.id.fragment_content,new SearchBulletionFragment());
+                }
                 break;
             default:
                 break;

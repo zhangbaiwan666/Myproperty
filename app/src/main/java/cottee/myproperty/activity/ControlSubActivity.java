@@ -187,6 +187,7 @@ public class ControlSubActivity extends Activity {
 //                for (int i=0;i<adpter.getCount();i++) {
 //                    SubInfo item = adpter.getItem(i);//拿到当前数据值并强转   adpter.getItem(i)即为当前数据对象
                     startActivity(intent1);
+                    finish();
                 }
 
 

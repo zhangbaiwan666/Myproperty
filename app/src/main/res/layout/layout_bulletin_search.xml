@@ -19,11 +19,10 @@
         <TableRow>
                 <EditText
                     android:background="@drawable/editext_shape"
-                    android:id="@+id/edit"
+                    android:id="@+id/edit_search"
                     android:gravity="center"
                     android:layout_height="30dp"
                     android:textSize="15dp"
-                    android:hint="请输入要搜索的文字"
                     android:layout_width="220dp">
                 </EditText>
         </TableRow>
