@@ -3,11 +3,14 @@ package cottee.myproperty.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -105,20 +108,22 @@ public class TabLessActivity extends Activity implements View.OnClickListener {
 
             case R.id.tv_btn:
                 setBackgroundColorById(R.id.tv_btn);
-
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(btn_bulletin_search.getWindowToken(), 0);
                 ft.replace(R.id.fragment_content, new RecentBulletinFragment());
                 break;
 
 
             case R.id.variety_btn:
                 setBackgroundColorById(R.id.variety_btn);
-
-
+                InputMethodManager imm1 = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm1.hideSoftInputFromWindow(btn_bulletin_search.getWindowToken(), 0);
                 ft.replace(R.id.fragment_content, new PastBulletinFragment());
                 break;
+
             case R.id.btn_bulletin_search:
-
-
+                InputMethodManager imm2 = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm2.hideSoftInputFromWindow(btn_bulletin_search.getWindowToken(), 0);
                 ft.replace(R.id.fragment_content,new SearchBulletionFragment());
                 break;
             default:

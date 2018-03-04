@@ -41,7 +41,7 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
         //假数据
         textList = new ArrayList<String>();
         for (int i = 0; i < 25; i++) {
-            textList.add("Listview" + i);
+            textList.add("最新公告" + i);
         }
         adapter = new RecentBulletinFragment.TabFragmentAdapter();
         rListView.setAdapter(adapter);
