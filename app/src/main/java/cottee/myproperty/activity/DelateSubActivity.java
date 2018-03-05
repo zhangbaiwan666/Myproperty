@@ -172,10 +172,7 @@ public class DelateSubActivity extends Activity {
 
             }
         });
-
-
     }
-
 
     private void init() {
 

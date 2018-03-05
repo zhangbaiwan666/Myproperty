@@ -79,6 +79,7 @@ public class MainFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		if (rootView == null) {
+			property_list = (ArrayList<String>) HealthMap.get("property_list");
 			rootView = inflater.inflate(R.layout.fragment_main, null);
 			bt_checkout = (Button) rootView.findViewById(R.id.bt_checkout);
 			bt_property_server = (Button) rootView.findViewById(R.id.bt_property_server);
@@ -152,7 +153,7 @@ public class MainFragment extends Fragment {
 		});
 	}
 
-
+	//切换滚轮图片
 	private void pop() {
 		//TODO 增加切换图片数量，来自服务器；在小区团购中增加物业pop用于物业宣传
 		scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
@@ -295,6 +296,7 @@ public class MainFragment extends Fragment {
 				}
 
 			};
+
 	private List<PropertyListBean> init() {
 		List<PropertyListBean> proList=new ArrayList<PropertyListBean>();
 		for(int i=0;i<property_list.size();i++){
@@ -309,7 +311,6 @@ public class MainFragment extends Fragment {
 
 		@Override
 		public void onClick(View v) {
-			property_list = (ArrayList<String>) HealthMap.get("property_list");
 			if (property_list == null) {
 				Toast.makeText(getContext(), "当前无物业", Toast.LENGTH_SHORT).show();
 			} else {
