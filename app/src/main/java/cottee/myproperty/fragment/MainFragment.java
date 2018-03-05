@@ -353,7 +353,7 @@ public class MainFragment extends Fragment {
 											}
 										});
 
-								popRight = new PopupWindow(layoutRight, tvRight.getWidth(),
+								popRight = new PopupWindow(layoutRight, 200,
 										ViewGroup.LayoutParams.WRAP_CONTENT);
 
 								ColorDrawable cd = new ColorDrawable(-0000);

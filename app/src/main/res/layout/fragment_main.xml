@@ -19,14 +19,14 @@
             android:textSize="20dp" />
         <TextView
         android:id="@+id/tv_right"
-        android:layout_width="70dip"
+        android:layout_width="30dip"
         android:layout_height="30dip"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dip"
-        android:background="@drawable/btn_selector_pop"
         android:clickable="true"
+            android:background="@drawable/chuliliucheng"
         android:gravity="center"
-        android:text="right"
+
         android:textColor="@android:color/white"
         android:textSize="16sp" />
     </LinearLayout>
