@@ -341,8 +341,10 @@ public class LoginRegisterHandler extends Handler {
                 System.out.println("传递前得sub_remark_list为" + sub_remark_list);
                 break;
             case Properties.SHOW_SUB_INFO_NULL:
-                Intent intent = new Intent(context, ControlSubActivity.class);
-                context.startActivity(intent);
+                LoginRegisterHandler loginRegisterHandler3 = new LoginRegisterHandler(context, "","");
+                LoginRegisterManager loginRegisterManager3 = new LoginRegisterManager(context, loginRegisterHandler3);
+                String session3 = Session.getSession();
+                loginRegisterManager3.ShowAllHouse(session3);
                 break;
             case Properties.ALL_PROPERTY_LIST:
                 ArrayList<String> property_list = new ArrayList<String>();
@@ -392,7 +394,7 @@ public class LoginRegisterHandler extends Handler {
             case Properties.CHANGE_UESR_HOUSE:
                 switch (msg.arg1) {
                     case CHANGEHOUSESUCCESS:
-                        System.out.println("恭喜。更换房屋成功");
+                        System.out.println("恭喜！更换房屋成功");
                         System.out.println("更换房屋成功");
                         System.out.println("更换房屋成功");
                         LoginRegisterHandler loginRegisterHandler1 = new LoginRegisterHandler(context, "", "");

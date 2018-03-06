@@ -57,7 +57,7 @@
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="xx号楼xx单元xxx室"
+            android:text="@string/not_choose_house"
             android:layout_marginTop="5dp"
             />
 

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">爱尚家</string>
     <string name="search_hint">请输入想要查找的内容</string>
+    <string name="not_choose_house">未选择房屋</string>
 </resources>

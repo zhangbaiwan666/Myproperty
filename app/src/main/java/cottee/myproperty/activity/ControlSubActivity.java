@@ -99,14 +99,19 @@ public class ControlSubActivity extends Activity {
         bt_add_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ControlSubActivity.this, AddSubActivity.class);
-               
-                intent.putExtra("home_id", property_home_id);
-                intent.putExtra("pro_id",property_pro_id);
-                startActivity(intent);
-                finish();
-                if(click){
-                    click=false;}
+                if (tv_show_house.getText().toString().trim()==String.valueOf(R.string.not_choose_house)) {
+                    Toast.makeText(ControlSubActivity.this, "您尚未选择添加子账户的房屋", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(ControlSubActivity.this, AddSubActivity.class);
+
+                    intent.putExtra("home_id", property_home_id);
+                    intent.putExtra("pro_id", property_pro_id);
+                    startActivity(intent);
+                    finish();
+                    if (click) {
+                        click = false;
+                    }
+                }
             }
         });
 
@@ -193,7 +198,7 @@ public class ControlSubActivity extends Activity {
 
             });
         }else{
-            Toast.makeText(ControlSubActivity.this, "申请子账户列表失败，请检查您的网络连接", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ControlSubActivity.this, "您尚未添加任何子账户，请点击添加", Toast.LENGTH_SHORT).show();
         }
         System.out.println("ControlSubActivity执行了onStart操作");
     }
@@ -236,6 +241,9 @@ public class ControlSubActivity extends Activity {
                         popRight.dismiss();
                     } else {
                         if (address_list!=null) {
+                            Toast.makeText(ControlSubActivity.this, "当前物业无房屋", Toast.LENGTH_SHORT).show();
+                            System.out.println("房屋的列表信息"+address_list);
+                        } else {
                             List<HouseListBean> subList = init();
                             layoutRight = getLayoutInflater().inflate(
                                     R.layout.pop_menulist, null);
@@ -297,9 +305,6 @@ public class ControlSubActivity extends Activity {
                                     return false;
                                 }
                             });
-                        }else {
-                            Toast.makeText(ControlSubActivity.this, "当前物业无房屋", Toast.LENGTH_SHORT).show();
-                            System.out.println("房屋的列表信息"+address_list);
                         }
                         break;
                     }
