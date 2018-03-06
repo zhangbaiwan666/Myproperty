@@ -187,8 +187,11 @@ public class LoginRegisterHandler extends Handler {
                         editor.commit();
                         Toast.makeText(context, "登陆成功", Toast.LENGTH_SHORT)
                                 .show();
-                        Intent intent1 = new Intent(context, MainActivity.class);
-                        ((Activity) context).startActivity(intent1);
+                        LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "","");
+                        LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
+                        String session = Session.getSession();
+                        loginRegisterManager.ShowAllProperty(session);
+
                         break;
                     case PSWFAILD:
                         Toast.makeText(context, "密码错误", Toast.LENGTH_SHORT)
@@ -354,6 +357,8 @@ public class LoginRegisterHandler extends Handler {
 
                 HealthMap.put("property_list", property_list);
                 HealthMap.put("pro_id_list", pro_id_list);
+                Intent intent2 = new Intent(context, MainActivity.class);
+                ((Activity) context).startActivity(intent2);
                 break;
             case Properties.ALL_HOUSE_LIST:
                 ArrayList<String> address_list = new ArrayList<String>();
@@ -427,10 +432,13 @@ public class LoginRegisterHandler extends Handler {
                 switch (msg.arg1) {
                     case LOGINSSUCCEED:
 
-                        Toast.makeText(context, "重新登陆成功", Toast.LENGTH_SHORT)
+                        Toast.makeText(context, "欢迎回来", Toast.LENGTH_SHORT)
                                 .show();
-                        Intent intent2 = new Intent(context, MainActivity.class);
-                        ((Activity) context).startActivity(intent2);
+                        LoginRegisterHandler loginRegisterHandler1 = new LoginRegisterHandler(context, "", "");
+                        LoginRegisterManager loginRegisterManager1 = new LoginRegisterManager(context, loginRegisterHandler1);
+                        String session1 = Session.getSession();
+                        loginRegisterManager1.ShowAllProperty(session1);
+
                         break;
                     case PSWFAILD:
                         Toast.makeText(context, "本地账户为空", Toast.LENGTH_SHORT)

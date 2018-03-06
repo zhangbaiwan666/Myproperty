@@ -10,6 +10,7 @@ import android.os.Handler;
 import cottee.myproperty.R;
 import cottee.myproperty.handler.LoginRegisterHandler;
 import cottee.myproperty.manager.LoginRegisterManager;
+import cottee.myproperty.uitils.Session;
 
 public class SplashScreenActivity extends Activity {
     private static int SPLASH_TIME_OUT = 3000;
@@ -26,6 +27,7 @@ public class SplashScreenActivity extends Activity {
         LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(SplashScreenActivity.this, "", "");
         LoginRegisterManager loginRegisterManager = new LoginRegisterManager(SplashScreenActivity.this, loginRegisterHandler);
         loginRegisterManager.ReUserLogin(email.toString().trim(),password.toString().trim());
+
         //登录容易跳两遍，写存session方法就好
         new Handler().postDelayed(new Runnable() {
                 /*

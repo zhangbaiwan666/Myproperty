@@ -92,10 +92,7 @@ public class MainFragment extends Fragment {
 			pop();
 			initEven();
 			initParam();
-			LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getContext(), "", "");
-			LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getContext(), loginRegisterHandler);
-			String session = Session.getSession();
-			loginRegisterManager.ShowAllProperty(session);
+
 		}ViewGroup parent = (ViewGroup) rootView.getParent();
 		if (parent != null)
 		{
@@ -356,7 +353,7 @@ public class MainFragment extends Fragment {
 								popRight = new PopupWindow(layoutRight, 200,
 										ViewGroup.LayoutParams.WRAP_CONTENT);
 
-								ColorDrawable cd = new ColorDrawable(-0000);
+								ColorDrawable cd = new ColorDrawable(-1000);
 								popRight.setBackgroundDrawable(cd);
 								popRight.setAnimationStyle(R.style.PopupAnimation);
 								popRight.update();
