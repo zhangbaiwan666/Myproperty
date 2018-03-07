@@ -128,7 +128,17 @@ public class MainFragment extends Fragment {
 		bullentinBean1.setMessage("明天后两天小区停水，望周知");
 		bullentinlist.add(1,bullentinBean1);
 
+		BullentinBean bullentinBean2 = new BullentinBean();
+		bullentinBean2.setTime("8:30");
+		bullentinBean2.setTitle("停电通知");
+		bullentinBean2.setMessage("明天后两天小区停电，望周知");
+		bullentinlist.add(2,bullentinBean2);
 
+		BullentinBean bullentinBean3 = new BullentinBean();
+		bullentinBean3.setTime("2:30");
+		bullentinBean3.setTitle("停水通知");
+		bullentinBean3.setMessage("明天后两天小区停水，望周知");
+		bullentinlist.add(3,bullentinBean3);
 		PreviewBulletinAdapter previewBulletinAdapter = new PreviewBulletinAdapter(getContext(), R.layout.layout_bulletin_list, bullentinlist);
 		list_preview_bulletin.setAdapter(previewBulletinAdapter);
 		previewBulletinAdapter.notifyDataSetChanged();
@@ -376,6 +386,7 @@ public class MainFragment extends Fragment {
 												String strItem = property_list.get(position);
 //												tvRight.setText(strItem);
 												positon_pro_name.setText(strItem);
+												HealthMap.put("choosed_property_name", strItem);
 												String session = Session.getSession();
 												LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getContext(), "", "");
 												LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getContext(), loginRegisterHandler);

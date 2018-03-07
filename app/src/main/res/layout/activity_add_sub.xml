@@ -48,12 +48,8 @@
         android:textSize="16sp"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
-        android:hint="请输入需要添加子账户的邮箱"/>
-    <EditText
-        android:textSize="16sp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:hint="请输入需要子账户的昵称"/>
+        android:hint="请输入需要添加子账户的备注"/>
+
     <EditText
         android:layout_marginTop="10dp"
         android:background="@drawable/rect"
@@ -66,12 +62,8 @@
         android:textSize="16sp"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
-        android:hint="请输入需要添加子账户的邮箱"/>
-    <EditText
-        android:textSize="16sp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
         android:hint="请输入需要添加子账户的电话"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

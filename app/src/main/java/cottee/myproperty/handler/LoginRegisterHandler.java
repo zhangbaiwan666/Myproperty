@@ -146,6 +146,7 @@ public class LoginRegisterHandler extends Handler {
     private static ArrayList<String> sub_id_list;
     private static ArrayList<String> sub_phone_list;
     private static ArrayList<String> sub_remark_list;
+    private String choosed_property_s;
 
 
     public LoginRegisterHandler(Context context, String email, String password) {
@@ -366,6 +367,11 @@ public class LoginRegisterHandler extends Handler {
                 ArrayList<String> address_list = new ArrayList<String>();
                 ArrayList<String> home_id_list = new ArrayList<>();
                 Object obj_house = msg.obj;
+                Object choosed_property_name = HealthMap.get("choosed_property_name");
+                if (choosed_property_name==null){
+                    choosed_property_s = "尚未选择物业";
+                }else {
+                    choosed_property_s = choosed_property_name.toString();}
                 List<HouseListBean> houseListBean = (List<HouseListBean>) obj_house;
                 for (int i = 0; i < houseListBean.size(); i++) {
                     address_list.add(houseListBean.get(i).getAddress());
@@ -375,6 +381,7 @@ public class LoginRegisterHandler extends Handler {
                 intent1.putStringArrayListExtra("sub_remark_list", sub_remark_list);
                 intent1.putStringArrayListExtra("sub_phone_list", sub_phone_list);
                 intent1.putStringArrayListExtra("sub_id_list", sub_id_list);
+                intent1.putExtra("choosed_property_name",choosed_property_s);
 
                 intent1.putExtra("property_name", property);
                 intent1.putExtra("property_pro_id", property_pro_id);

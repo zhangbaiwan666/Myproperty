@@ -50,6 +50,7 @@ public class ControlSubActivity extends Activity {
     private boolean click=true;
     private TextView tvRight;
     private TextView tv_show_house;
+    private TextView tv_show_property;
     private PopupWindow popRight;
     private View layoutRight;
     private ListView menulistRight;
@@ -76,6 +77,7 @@ public class ControlSubActivity extends Activity {
         address_list = (ArrayList<String>) HealthMap.get("address_list");
         home_id_list = (ArrayList<String>) HealthMap.get("home_id_list");
         final Intent intent = getIntent();
+        String choosed_property_name = intent.getStringExtra("choosed_property_name");
         sub_remark_list = intent.getStringArrayListExtra("sub_remark_list");
         sub_phone_list = intent.getStringArrayListExtra("sub_phone_list");
         sub_id_list = intent.getStringArrayListExtra("sub_id_list");
@@ -88,6 +90,8 @@ public class ControlSubActivity extends Activity {
         bt_add_sub = (Button) findViewById(R.id.btn_delete_sub);
         btn_host_phone = (Button)findViewById(R.id.btn_host_phone);
 
+        tv_show_property.setText(choosed_property_name);
+
         btn_host_phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,11 +103,11 @@ public class ControlSubActivity extends Activity {
         bt_add_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (tv_show_house.getText().toString().trim()==String.valueOf(R.string.not_choose_house)) {
-                    Toast.makeText(ControlSubActivity.this, "您尚未选择添加子账户的房屋", Toast.LENGTH_SHORT).show();
+                if (tv_show_house.getText().toString().trim().equals("未选择房屋")||tv_show_property.getText().toString().trim().equals("尚未选择物业")) {
+
+                    Toast.makeText(ControlSubActivity.this, "您尚未选择添加子账户的物业或房屋", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(ControlSubActivity.this, AddSubActivity.class);
-
                     intent.putExtra("home_id", property_home_id);
                     intent.putExtra("pro_id", property_pro_id);
                     startActivity(intent);
@@ -158,6 +162,7 @@ public class ControlSubActivity extends Activity {
     private void initParam() {
         tvRight = (TextView)findViewById(R.id.tv_right);
         tv_show_house = (TextView)findViewById(R.id.tv_show_house);
+        tv_show_property = (TextView)findViewById(R.id.tv_show_property);
         tvRight.setOnClickListener(myListener);
         // 初始化数据项
         }
