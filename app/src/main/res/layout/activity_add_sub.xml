@@ -31,7 +31,7 @@
         android:layout_height="40dp"
         android:paddingTop="8dp"
         android:paddingBottom="10dp"
-        android:textColorHint="#BEBEBE"
+        android:textColorHint="@color/White"
         android:textSize="16sp"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
@@ -44,7 +44,12 @@
         android:layout_height="40dp"
         android:paddingTop="8dp"
         android:paddingBottom="10dp"
-        android:textColorHint="#BEBEBE"
+        android:textColorHint="@color/White"
+        android:textSize="16sp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:hint="请输入需要添加子账户的邮箱"/>
+    <EditText
         android:textSize="16sp"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
@@ -57,7 +62,12 @@
         android:layout_height="40dp"
         android:paddingTop="8dp"
         android:paddingBottom="10dp"
-        android:textColorHint="#BEBEBE"
+        android:textColorHint="@color/White"
+        android:textSize="16sp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:hint="请输入需要添加子账户的邮箱"/>
+    <EditText
         android:textSize="16sp"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"

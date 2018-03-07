@@ -34,6 +34,7 @@ import java.util.concurrent.TimeUnit;
 
 import cottee.myproperty.R;
 import cottee.myproperty.activity.PaymentActivity;
+import cottee.myproperty.activity.PropertyAdActivity;
 import cottee.myproperty.activity.RepairProjectActivity;
 import cottee.myproperty.activity.TabLessActivity;
 import cottee.myproperty.adapter.ChoosePropertyAdapter;
@@ -210,6 +211,16 @@ public class MainFragment extends Fragment {
 				for(int i =0; i < imageIds.length; i++){
 					ImageView imageView = new ImageView(getContext());
 					imageView.setBackgroundResource(imageIds[i]);
+					final int finalI = i;
+					imageView.setOnClickListener(new NoDoubleClickListener() {
+						@Override
+						protected void onNoDoubleClick(View v) {
+							Intent intent = new Intent(getContext(), PropertyAdActivity.class);
+							intent.putExtra("Ad_numb",finalI);
+							intent.putExtra("Ad_name",titles[finalI]);
+							startActivity(intent);
+						}
+					});
 
 					images.add(imageView);
 				}
