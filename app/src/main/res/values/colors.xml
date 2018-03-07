@@ -8,7 +8,7 @@
     <color name="blue_gray">#464954</color>
     <color name="gray3">#FF969696</color>
     <color name="gray1">#cfcfcf</color>
-    <color name="theme">#effc8744</color>
+    <color name="theme">#effc8700</color>
     <color name="titleTextColor">@color/White</color>
     <color name="titleBg">@color/transparent</color>
     <color name="transparent">#00000000</color>

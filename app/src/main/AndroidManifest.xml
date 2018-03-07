@@ -67,6 +67,8 @@
         </activity>
         <activity android:name=".activity.PropertyAdActivity">
         </activity>
+        <activity android:name=".activity.BullDetailsActivity">
+        </activity>
     </application>
 
 </manifest>

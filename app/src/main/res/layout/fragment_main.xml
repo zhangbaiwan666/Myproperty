@@ -173,10 +173,11 @@
           android:layout_height="wrap_content"
           android:text="公告"/>
   </LinearLayout>
-        <View
-            android:layout_width="1px"
-            android:layout_height="50dp"
-            android:layout_gravity="center_vertical"></View>
+        <!--<View-->
+            <!--android:layout_width="1px"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:background="@color/gray3"-->
+            <!--android:layout_gravity="center_vertical"></View>-->
         <LinearLayout
             android:background="@color/White"
             android:orientation="vertical"
@@ -196,10 +197,11 @@
                 android:layout_height="wrap_content"
                 android:text="支付"/>
         </LinearLayout>
-        <View
-            android:layout_width="1px"
-            android:layout_height="50dp"
-            android:layout_gravity="center_vertical"></View>
+        <!--<View-->
+            <!--android:layout_width="1px"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:background="@color/gray3"-->
+            <!--android:layout_gravity="center_vertical"></View>-->
         <LinearLayout
             android:background="@color/White"
             android:layout_width="0dp"
@@ -219,10 +221,11 @@
                 android:layout_height="wrap_content"
                 android:text="报修"/>
         </LinearLayout>
-        <View
-            android:layout_width="1px"
-            android:layout_height="50dp"
-            android:layout_gravity="center_vertical"></View>
+        <!--<View-->
+            <!--android:background="@color/gray3"-->
+            <!--android:layout_width="1px"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_gravity="center_vertical"></View>-->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -256,7 +259,7 @@
         android:background="@color/White"
         android:padding="10dp"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         />
 
     <Button

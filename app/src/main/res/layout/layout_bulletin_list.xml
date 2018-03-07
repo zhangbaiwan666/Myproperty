@@ -13,16 +13,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_bulletin_title"
-                android:textSize="20dp"/>
+                android:textSize="15dp"/>
             <TextView
                 android:layout_marginRight="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
+                android:textSize="10dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_bulletin_time"
                 />
     </RelativeLayout>
     <TextView
+        android:textSize="10dp"
         android:id="@+id/tv_bulletin_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -139,8 +139,11 @@ public class MainFragment extends Fragment {
 		bullentinBean3.setTitle("停水通知");
 		bullentinBean3.setMessage("明天后两天小区停水，望周知");
 		bullentinlist.add(3,bullentinBean3);
+
 		PreviewBulletinAdapter previewBulletinAdapter = new PreviewBulletinAdapter(getContext(), R.layout.layout_bulletin_list, bullentinlist);
 		list_preview_bulletin.setAdapter(previewBulletinAdapter);
+		list_preview_bulletin.setDivider(getContext().getResources().getDrawable(R.drawable.list_divider));
+		list_preview_bulletin.setDividerHeight(1);
 		previewBulletinAdapter.notifyDataSetChanged();
 	}
 

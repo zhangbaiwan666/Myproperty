@@ -1,6 +1,7 @@
 package cottee.myproperty.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,10 @@ import android.widget.TextView;
 import java.util.List;
 
 import cottee.myproperty.R;
+import cottee.myproperty.activity.BullDetailsActivity;
 import cottee.myproperty.constant.BullentinBean;
 import cottee.myproperty.constant.SubInfo;
+import cottee.myproperty.listener.NoDoubleClickListener;
 
 /**
  * Created by Administrator on 2018/3/7.
@@ -57,6 +60,13 @@ public class PreviewBulletinAdapter extends ArrayAdapter<BullentinBean> {
         viewHolder.bulletin_title.setText(bullentinBean.getTitle());
         viewHolder.bulletin_time.setText(bullentinBean.getTime());
         viewHolder.bulletin_message.setText(bullentinBean.getMessage());
+        view.setOnClickListener(new NoDoubleClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                Intent intent = new Intent(getContext(), BullDetailsActivity.class);
+                getContext().startActivity(intent);
+            }
+        });
         return view;
     }
 

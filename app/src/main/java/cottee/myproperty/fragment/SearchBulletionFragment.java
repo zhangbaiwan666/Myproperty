@@ -33,7 +33,7 @@ public class SearchBulletionFragment extends Fragment implements OnRefreshListen
         rListView = (RefreshListView) rootView.findViewById(R.id.search_refreshlv);
         //假数据
         textList = new ArrayList<String>();
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < 5; i++) {
             textList.add("查询结果公告" + i);
         }
         adapter = new TabFragmentAdapter();
@@ -49,6 +49,13 @@ public class SearchBulletionFragment extends Fragment implements OnRefreshListen
     }
     private class TabFragmentAdapter extends BaseAdapter {
 
+        class ViewHolder//用来暂存，避免每次都重新加载布局，优化程序的流畅度
+        {
+            TextView search_bulletion_name;
+            TextView search_bulletion_time;
+            TextView search_bulletion_message;
+
+        }
         @Override
         public int getCount() {
             // TODO Auto-generated method stub
@@ -70,6 +77,12 @@ public class SearchBulletionFragment extends Fragment implements OnRefreshListen
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             // TODO Auto-generated method stub
+//            final ViewHolder viewHolder;
+//            View view;
+//            if (convertView==null){
+//                convertView
+//            }
+
             TextView textView = new TextView(getContext());
             textView.setText(textList.get(position));
             textView.setTextColor(Color.BLACK);
