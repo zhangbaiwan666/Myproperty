@@ -35,11 +35,11 @@
        <!--android:background="@drawable/activity_background"/>-->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp" >
+        android:layout_height="140dp" >
 
         <FrameLayout
             android:layout_width="fill_parent"
-            android:layout_height="200dip"
+            android:layout_height="140dp"
             >
 
             <android.support.v4.view.ViewPager
