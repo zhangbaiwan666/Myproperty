@@ -58,7 +58,7 @@ public class PastBulletinFragment extends Fragment implements OnRefreshListener 
         rListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), "你点击了Listview"+(i-1), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "你点击了Listview"+(i-1), Toast.LENGTH_SHORT).show();
             }
         });
         rListView.setOnRefreshListener(this);

@@ -13,7 +13,7 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="敬请期待"
+        android:text="我是内容"
         android:textSize="40dp"
         android:textColor="@color/gray1"/>
 </LinearLayout>

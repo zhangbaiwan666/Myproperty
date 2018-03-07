@@ -83,7 +83,7 @@ public class SearchBulletionFragment extends Fragment implements OnRefreshListen
 //                convertView
 //            }
 
-            TextView textView = new TextView(getContext());
+            TextView textView = new TextView(getActivity());
             textView.setText(textList.get(position));
             textView.setTextColor(Color.BLACK);
             textView.setTextSize(18.0f);

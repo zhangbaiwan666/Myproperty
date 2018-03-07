@@ -77,7 +77,7 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             // TODO Auto-generated method stub
-            TextView textView = new TextView(getContext());
+            TextView textView = new TextView(getActivity());
             textView.setText(textList.get(position));
             textView.setTextColor(Color.BLACK);
             textView.setTextSize(18.0f);

@@ -13,7 +13,7 @@
         android:layout_marginLeft="15dp"
         android:id="@+id/tl_search_edit"
         android:layout_height="50dp"
-        android:layout_width="220dp"
+        android:layout_width="250dp"
         android:orientation="vertical">
 
         <TableRow>
@@ -23,12 +23,12 @@
                     android:gravity="center"
                     android:layout_height="30dp"
                     android:textSize="15dp"
-                    android:layout_width="220dp">
+                    android:layout_width="250dp">
                 </EditText>
         </TableRow>
     </TableLayout>
     <TextView
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="0dp"
         android:layout_toRightOf="@+id/tl_search_edit"
         android:id="@+id/btn_bulletin_search"
         android:layout_height="30dp"

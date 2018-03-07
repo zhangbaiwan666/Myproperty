@@ -85,13 +85,13 @@ public class TabLessActivity extends Activity implements View.OnClickListener {
         btnList.add(tvBtn);
         btnList.add(varietyBtn);
     }
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("ResourceAsColor")
     private void setBackgroundColorById(int btnId) {
         for (Button btn : btnList) {
             //用background改切图
             if (btn.getId() == btnId) {
-                btn.setBackground(this.getDrawable(R.color.theme));
+                btn.setBackgroundResource(R.color.theme);
             } else {
                 btn.setBackgroundColor(Color.rgb(200, 200, 200));
             }
@@ -129,7 +129,6 @@ public class TabLessActivity extends Activity implements View.OnClickListener {
                 break;
 
             case R.id.btn_bulletin_search:
-                setBackgroundColorById(R.id.btn_bulletin_search);
                 if (edit_search.getText()==null){
                     Toast.makeText(this, "输入的信息为空", Toast.LENGTH_SHORT).show();
                 }else{
