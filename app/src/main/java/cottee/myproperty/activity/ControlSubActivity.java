@@ -240,7 +240,7 @@ public class ControlSubActivity extends Activity {
                     if (popRight != null && popRight.isShowing()) {
                         popRight.dismiss();
                     } else {
-                        if (address_list!=null) {
+                        if (address_list==null) {
                             Toast.makeText(ControlSubActivity.this, "当前物业无房屋", Toast.LENGTH_SHORT).show();
                             System.out.println("房屋的列表信息"+address_list);
                         } else {

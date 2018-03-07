@@ -1,5 +1,6 @@
 package cottee.myproperty.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,6 +19,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import cottee.myproperty.R;
+import cottee.myproperty.activity.PropertyAdActivity;
+import cottee.myproperty.listener.NoDoubleClickListener;
 
 /**
  * Created by Administrator on 2018/1/16.
@@ -85,7 +88,16 @@ public class GroupBuyFragment extends Fragment {
         for(int i =0; i < imageIds.length; i++){
             ImageView imageView = new ImageView(getContext());
             imageView.setBackgroundResource(imageIds[i]);
-
+            final int finalI = i;
+            imageView.setOnClickListener(new NoDoubleClickListener() {
+                @Override
+                protected void onNoDoubleClick(View v) {
+                    Intent intent = new Intent(getContext(), PropertyAdActivity.class);
+                    intent.putExtra("Ad_numb",finalI);
+                    intent.putExtra("Ad_name",titles[finalI]);
+                    startActivity(intent);
+                }
+            });
             images.add(imageView);
         }
 
