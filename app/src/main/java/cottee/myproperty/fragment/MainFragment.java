@@ -37,6 +37,8 @@ import cottee.myproperty.activity.PaymentActivity;
 import cottee.myproperty.activity.RepairProjectActivity;
 import cottee.myproperty.activity.TabLessActivity;
 import cottee.myproperty.adapter.ChoosePropertyAdapter;
+import cottee.myproperty.adapter.PreviewBulletinAdapter;
+import cottee.myproperty.constant.BullentinBean;
 import cottee.myproperty.constant.PropertyListBean;
 import cottee.myproperty.handler.LoginRegisterHandler;
 import cottee.myproperty.listener.NoDoubleClickListener;
@@ -73,6 +75,7 @@ public class MainFragment extends Fragment {
 	private static ArrayList<String> pro_id_list;
 	private TextView positon_pro_name;
 	private View rootView;
+	private ListView list_preview_bulletin;
 
 
 	@Override
@@ -110,6 +113,29 @@ public class MainFragment extends Fragment {
 			mapTemp.put("item", "right " + i);
 			listRight.add(mapTemp);
 		}
+		list_preview_bulletin = rootView.findViewById(R.id.list_preview_bulletin);
+		List<BullentinBean> bullentinlist = initbullentinlist();
+		BullentinBean bullentinBean = new BullentinBean();
+		bullentinBean.setTime("18:30");
+		bullentinBean.setTitle("供暖通知");
+		bullentinBean.setMessage("小区将于清明节后停止供暖");
+		bullentinlist.add(0,bullentinBean);
+
+		BullentinBean bullentinBean1 = new BullentinBean();
+		bullentinBean1.setTime("11:30");
+		bullentinBean1.setTitle("停水通知");
+		bullentinBean1.setMessage("明天后两天小区停水，望周知");
+		bullentinlist.add(1,bullentinBean1);
+
+
+		PreviewBulletinAdapter previewBulletinAdapter = new PreviewBulletinAdapter(getContext(), R.layout.layout_bulletin_list, bullentinlist);
+		list_preview_bulletin.setAdapter(previewBulletinAdapter);
+		previewBulletinAdapter.notifyDataSetChanged();
+	}
+
+	private List<BullentinBean> initbullentinlist() {
+		List<BullentinBean> bullentinlist=new ArrayList<BullentinBean>();
+		return bullentinlist;
 	}
 
 	private void initEven() {
@@ -398,30 +424,27 @@ public class MainFragment extends Fragment {
 
 
 
-
-
-
-	private void showPopupMenu(View view) {
-		// View当前PopupMenu显示的相对View的位置
-		PopupMenu popupMenu = new PopupMenu(getContext(), view);
-		// menu布局
-		popupMenu.getMenuInflater().inflate(R.menu.main, popupMenu.getMenu());
-		// menu的item点击事件
-		popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				Toast.makeText(getContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
-				return false;
-			}
-		});
-		// PopupMenu关闭事件
-		popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
-			@Override
-			public void onDismiss(PopupMenu menu) {
-				Toast.makeText(getContext(), "切换", Toast.LENGTH_SHORT).show();
-			}
-		});
-
-		popupMenu.show();
-	}
+//	private void showPopupMenu(View view) {
+//		// View当前PopupMenu显示的相对View的位置
+//		PopupMenu popupMenu = new PopupMenu(getContext(), view);
+//		// menu布局
+//		popupMenu.getMenuInflater().inflate(R.menu.main, popupMenu.getMenu());
+//		// menu的item点击事件
+//		popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//			@Override
+//			public boolean onMenuItemClick(MenuItem item) {
+//				Toast.makeText(getContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+//				return false;
+//			}
+//		});
+//		// PopupMenu关闭事件
+//		popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
+//			@Override
+//			public void onDismiss(PopupMenu menu) {
+//				Toast.makeText(getContext(), "切换", Toast.LENGTH_SHORT).show();
+//			}
+//		});
+//
+//		popupMenu.show();
+//	}
 }

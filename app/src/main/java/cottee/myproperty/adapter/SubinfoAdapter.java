@@ -45,7 +45,6 @@ public class SubinfoAdapter extends ArrayAdapter<SubInfo> {
 
     public View getView(final int position, View convertView, ViewGroup parent) {
         final SubInfo subInfo = getItem(position);//实例化在ArrayList<SubListBean>中第“position”个当前Fruit对象
-
         View view;
         final ViewHolder viewHolder;
         if (convertView == null)//如果布局从来没有被加载过

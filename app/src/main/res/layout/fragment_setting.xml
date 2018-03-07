@@ -106,7 +106,8 @@
         android:id="@+id/rl_house_control"
         android:layout_marginLeft="13dp"
         android:orientation="horizontal"
-        android:background="@color/White"
+        android:clickable="true"
+        android:background="@drawable/selector_setting_choose_item"
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <ImageView

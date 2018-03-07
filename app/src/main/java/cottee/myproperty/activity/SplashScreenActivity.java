@@ -13,7 +13,7 @@ import cottee.myproperty.manager.LoginRegisterManager;
 import cottee.myproperty.uitils.Session;
 
 public class SplashScreenActivity extends Activity {
-    private static int SPLASH_TIME_OUT = 3000;
+    private static int SPLASH_TIME_OUT = 3500;
     private static String email;
     private static String password;
 

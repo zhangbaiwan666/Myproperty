@@ -173,10 +173,10 @@
           android:layout_height="wrap_content"
           android:text="公告"/>
   </LinearLayout>
-        <!--<view-->
-            <!--android:layout_width="1px"-->
-            <!--android:layout_height="60dp"-->
-            <!--android:layout_gravity="center_vertical"></view>-->
+        <View
+            android:layout_width="1px"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"></View>
         <LinearLayout
             android:background="@color/White"
             android:orientation="vertical"
@@ -196,10 +196,10 @@
                 android:layout_height="wrap_content"
                 android:text="支付"/>
         </LinearLayout>
-        <!--<view-->
-            <!--android:layout_width="1px"-->
-            <!--android:layout_height="60dp"-->
-            <!--android:layout_gravity="center_vertical"></view>-->
+        <View
+            android:layout_width="1px"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"></View>
         <LinearLayout
             android:background="@color/White"
             android:layout_width="0dp"
@@ -219,10 +219,10 @@
                 android:layout_height="wrap_content"
                 android:text="报修"/>
         </LinearLayout>
-        <!--<view-->
-            <!--android:layout_width="1px"-->
-            <!--android:layout_height="60dp"-->
-            <!--android:layout_gravity="center_vertical"></view>-->
+        <View
+            android:layout_width="1px"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"></View>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -251,13 +251,12 @@
         android:layout_marginLeft="10dp"
         android:text="小区公告："
         android:textSize="18dp"/>
-    <TextView
+    <ListView
+        android:id="@+id/list_preview_bulletin"
         android:background="@color/White"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:text="2018.1.1 18：10
-        来电了"
         />
 
     <Button

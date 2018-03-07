@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cottee.myproperty.R;
-import cottee.myproperty.constant.BulletinBean;
+import cottee.myproperty.constant.BullentinBean;
 import cottee.myproperty.listener.OnRefreshListener;
 import cottee.myproperty.widgets.RefreshListView;
 
@@ -26,7 +26,7 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
     private List<String> textList;
     private TabFragmentAdapter adapter;
     private RefreshListView rListView;
-    private BulletinBean bullentinBean;
+    private BullentinBean bullentinBean;
 
     public static RecentBulletinFragment newInstance() {
         RecentBulletinFragment fragment = new RecentBulletinFragment();
