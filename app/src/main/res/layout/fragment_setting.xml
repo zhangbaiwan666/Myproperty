@@ -35,18 +35,12 @@
             android:layout_width="wrap_content"
             android:gravity="center_vertical"
             android:layout_height="0dp"
-            android:text="用户名"/>
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:gravity="center_vertical"
-            android:layout_height="0dp"
             android:text="小宇物业"/>
     </LinearLayout>
 </RelativeLayout>
 
     <RelativeLayout
-        android:layout_marginLeft="13dp"
+
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/White"
@@ -54,6 +48,7 @@
         android:layout_marginTop="20dp">
 
         <ImageView
+            android:layout_marginLeft="13dp"
             android:id="@+id/img_change_house"
             android:layout_width="50dp"
             android:layout_height="match_parent"
@@ -76,12 +71,12 @@
             android:background="@drawable/img_next_arrow" />
     </RelativeLayout>
     <RelativeLayout
-        android:layout_marginLeft="13dp"
         android:layout_marginTop="15dp"
         android:background="@color/White"
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <ImageView
+            android:layout_marginLeft="13dp"
             android:id="@+id/img_see_myhouse"
             android:layout_width="50dp"
             android:padding="13dp"
@@ -104,13 +99,13 @@
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/rl_house_control"
-        android:layout_marginLeft="13dp"
         android:orientation="horizontal"
         android:clickable="true"
         android:background="@drawable/selector_setting_choose_item"
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <ImageView
+            android:layout_marginLeft="13dp"
             android:id="@+id/img_family_control"
             android:layout_width="50dp"
             android:padding="12dp"
@@ -132,12 +127,14 @@
 
     </RelativeLayout>
     <RelativeLayout
-        android:layout_marginLeft="13dp"
+        android:id="@+id/rl_repair_record"
         android:layout_marginTop="15dp"
-        android:background="@color/White"
+        android:clickable="true"
+        android:background="@drawable/selector_setting_choose_item"
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <ImageView
+            android:layout_marginLeft="13dp"
             android:id="@+id/img_notes_repaire"
             android:layout_width="50dp"
             android:padding="13dp"
@@ -160,11 +157,11 @@
 
     </RelativeLayout>
     <RelativeLayout
-        android:layout_marginLeft="13dp"
         android:layout_width="match_parent"
         android:background="@color/White"
         android:layout_height="50dp">
         <ImageView
+            android:layout_marginLeft="13dp"
             android:id="@+id/img_notes_pay"
             android:layout_width="50dp"
             android:padding="13dp"
@@ -187,12 +184,12 @@
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/rl_login_out"
-        android:layout_marginLeft="13dp"
         android:layout_marginTop="15dp"
         android:background="@color/White"
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <ImageView
+            android:layout_marginLeft="13dp"
             android:id="@+id/img_setting"
             android:layout_width="50dp"
             android:padding="13dp"

@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import cottee.myproperty.R;
@@ -27,6 +28,7 @@ public class SettingFragment extends Fragment {
 	private View rl_login_out;
 	private boolean click=true;
 	private TextView repair_record;
+	private RelativeLayout rl_repair_record;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,7 +37,8 @@ public class SettingFragment extends Fragment {
 		int property_name = intent.getIntExtra("property_name", 0);
 		System.out.println("传到FragmentSetting的property_name为"+property_name);
 		repair_record = (TextView)inflate.findViewById(R.id.repair_record);
-		repair_record.setOnClickListener(new View.OnClickListener() {
+		rl_repair_record = inflate.findViewById(R.id.rl_repair_record);
+		rl_repair_record.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				Intent intent=new Intent(getContext(), RepairRecordActivity.class);
