@@ -22,4 +22,5 @@
     <color name="white">#ffffffff</color>
     <color name="selected_fg_color">#7DD3EC</color>
     <color name="green">#5ae66a</color>
+    <color name="gray_search">#c8c8c8c8</color>
 </resources>

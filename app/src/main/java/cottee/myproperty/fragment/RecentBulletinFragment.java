@@ -1,14 +1,17 @@
 package cottee.myproperty.fragment;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -23,7 +26,7 @@ import cottee.myproperty.widgets.RefreshListView;
 
 public class RecentBulletinFragment extends Fragment implements OnRefreshListener {
 
-    private List<String> textList;
+    private List<BullentinBean> textList;
     private TabFragmentAdapter adapter;
     private RefreshListView rListView;
     private BullentinBean bullentinBean;
@@ -39,11 +42,15 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
         View rootView = inflater.inflate(R.layout.fragment_recentbulletin, null);
         rListView = (RefreshListView) rootView.findViewById(R.id.refreshlistview);
         //假数据
-        textList = new ArrayList<String>();
-        for (int i = 0; i < 5; i++) {
-            textList.add("最新公告" + i);
+        textList = new ArrayList<BullentinBean>();
+        for (int i = 0; i < 3; i++) {
+            BullentinBean bullentinBean1 = new BullentinBean();
+            bullentinBean1.setTitle("一周内公告");
+            bullentinBean1.setTime("12:00");
+            bullentinBean1.setMessage("库鲁猛谁，库鲁懵哈，库鲁懵谁懵谁哈啊");
+            textList.add(bullentinBean1);
         }
-        adapter = new RecentBulletinFragment.TabFragmentAdapter();
+        adapter = new RecentBulletinFragment.TabFragmentAdapter(getActivity(),R.layout.layout_bulletin_list,textList);
         rListView.setAdapter(adapter);
 //        rListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
@@ -54,37 +61,49 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
         rListView.setOnRefreshListener(this);
         return rootView;
     }
-    private class TabFragmentAdapter extends BaseAdapter {
+    private class TabFragmentAdapter extends ArrayAdapter<BullentinBean> {
 
-        @Override
-        public int getCount() {
-            // TODO Auto-generated method stub
-            return textList.size();
+        public TabFragmentAdapter(Context context, int textViewResourceId, List<BullentinBean>
+                objects) {
+            super(context, textViewResourceId, objects);
         }
+         class ViewHolder{
+             TextView title;
+             TextView time;
+             TextView message;
+         }
 
-        @Override
-        public Object getItem(int position) {
-            // TODO Auto-generated method stub
-            return textList.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            // TODO Auto-generated method stub
-            return position;
-        }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+            final BullentinBean bullentinBean = getItem(position);
+            View view;
+            final ViewHolder viewHolder;
             // TODO Auto-generated method stub
-            TextView textView = new TextView(getActivity());
-            textView.setText(textList.get(position));
-            textView.setTextColor(Color.BLACK);
-            textView.setTextSize(18.0f);
-            return textView;
+            if (convertView == null)//如果布局从来没有被加载过
+            {
+                view = LayoutInflater.from(getContext()).inflate(R.layout.layout_bulletin_list, null);//使用布局填充器来把fruit_item布局文件转为View
+                viewHolder = new ViewHolder();//新建一个ViewHolder
+                viewHolder.title = view.findViewById(R.id.tv_bulletin_title);//从View中获取ImageView，并暂存新建的ViewHolder中
+                viewHolder.time = view.findViewById(R.id.tv_bulletin_time);//从View中获取TextView，并暂存新建的ViewHolder中
+                viewHolder.message = view.findViewById(R.id.tv_bulletin_message);
+                //对于item得操作
+
+                view.setTag(viewHolder);//使用setTag把查找的view缓存起来方便多次重用
+            } else//布局被加载过
+            {
+                view = convertView;
+                viewHolder = (ViewHolder) view.getTag();//把之前暂存的ViewHolder赋给viewHolder
+            }
+            viewHolder.time.setText(bullentinBean.getTime());
+            viewHolder.message.setText(bullentinBean.getMessage());
+            viewHolder.title.setText(bullentinBean.getTitle());
+
+            return view;
         }
 
     }
+
 
     @Override
     public void onDownPullRefresh() {
@@ -94,7 +113,11 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
             protected Void doInBackground(Void... params) {
                 SystemClock.sleep(2000);
                 for (int i = 0; i < 2; i++) {
-                    textList.add(0, "ok" + i);
+                    BullentinBean bullentinBean1 = new BullentinBean();
+                    bullentinBean1.setTitle("新加载");
+                    bullentinBean1.setTime("12:00");
+                    bullentinBean1.setMessage("库鲁猛谁，库鲁懵哈，库鲁懵谁懵谁哈啊");
+                    textList.add(bullentinBean1);
                 }
                 return null;
             }
@@ -114,10 +137,11 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
             @Override
             protected Void doInBackground(Void... params) {
                 SystemClock.sleep(5000);
-
-                textList.add("11");
-                textList.add("22");
-                textList.add("33");
+                BullentinBean bullentinBean1 = new BullentinBean();
+                bullentinBean1.setTitle("更多公告");
+                bullentinBean1.setTime("12:00");
+                bullentinBean1.setMessage("库鲁猛谁，库鲁懵哈，库鲁懵谁懵谁哈啊");
+                textList.add(bullentinBean1);
                 return null;
             }
 
@@ -129,4 +153,5 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
             }
         }.execute(new Void[] {});
     }
+
 }

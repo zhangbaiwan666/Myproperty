@@ -27,9 +27,6 @@ import cottee.myproperty.fragment.PastBulletinFragment;
 import cottee.myproperty.fragment.SearchBulletionFragment;
 import cottee.myproperty.widgets.Title;
 
-/**
- * Created by zq on 2017/1/12.
- */
 
 public class TabLessActivity extends Activity implements View.OnClickListener {
     private Button  tvBtn, varietyBtn ;
@@ -39,6 +36,7 @@ public class TabLessActivity extends Activity implements View.OnClickListener {
     private FragmentTransaction ft;
     private Title title;
     private EditText edit_search;
+    private String user_search;
 
 
     @Override
@@ -48,6 +46,7 @@ public class TabLessActivity extends Activity implements View.OnClickListener {
 
         findById();
         initTitle();
+        initEven();
         // 進入系統默認為movie
         fm = getFragmentManager();
         ft = fm.beginTransaction();
@@ -55,6 +54,10 @@ public class TabLessActivity extends Activity implements View.OnClickListener {
         setBackgroundColorById(R.id.tv_btn);
         ft.replace(R.id.fragment_content, new RecentBulletinFragment());
         ft.commit();
+    }
+
+    private void initEven() {
+
     }
 
     private void initTitle() {
@@ -93,7 +96,7 @@ public class TabLessActivity extends Activity implements View.OnClickListener {
             if (btn.getId() == btnId) {
                 btn.setBackgroundResource(R.color.theme);
             } else {
-                btn.setBackgroundColor(Color.rgb(200, 200, 200));
+                btn.setBackgroundResource(R.color.gray_search);
             }
         }
     }
@@ -129,10 +132,11 @@ public class TabLessActivity extends Activity implements View.OnClickListener {
                 break;
 
             case R.id.btn_bulletin_search:
-                if (edit_search.getText()==null){
+                user_search = edit_search.getText().toString().trim();
+                setBackgroundColorById(R.id.btn_bulletin_search);
+                if (user_search.trim().isEmpty()){
                     Toast.makeText(this, "输入的信息为空", Toast.LENGTH_SHORT).show();
                 }else{
-                    String user_search = edit_search.getText().toString().trim();
                     InputMethodManager imm2 = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm2.hideSoftInputFromWindow(btn_bulletin_search.getWindowToken(), 0);
                 ft.replace(R.id.fragment_content,new SearchBulletionFragment());

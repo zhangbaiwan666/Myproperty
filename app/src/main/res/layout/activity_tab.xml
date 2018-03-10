@@ -12,12 +12,17 @@
         layout="@layout/layout_title"></include>
     </LinearLayout>
     <LinearLayout
+        android:orientation="vertical"
         android:layout_below="@+id/ll_title"
         android:id="@+id/ll_bulletin_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 <include
     layout="@layout/layout_bulletin_search"></include>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/theme"/>
     </LinearLayout>
         <LinearLayout
             android:layout_below="@+id/ll_bulletin_search"
