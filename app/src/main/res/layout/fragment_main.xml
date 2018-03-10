@@ -24,7 +24,7 @@
         android:layout_width="30dip"
         android:layout_height="30dip"
         android:clickable="true"
-            android:background="@drawable/chuliliucheng"
+        android:background="@drawable/chuliliucheng"
         android:gravity="center"
         android:textColor="@android:color/white"
         android:textSize="16sp" />
@@ -155,24 +155,24 @@
         android:orientation="horizontal">
         <LinearLayout
             android:id="@+id/ll_placard"
-      android:background="@color/White"
-      android:layout_width="0dp"
-      android:layout_weight="1"
-      android:layout_height="90dp"
-      android:orientation="vertical">
-      <Button
-          android:id="@+id/bt_placard"
-          android:layout_marginTop="10dp"
-          android:layout_gravity="center_horizontal"
-          android:background="@drawable/img_main_notice"
-          android:layout_width="50dp"
-          android:layout_height="50dp" />
-      <TextView
-          android:layout_gravity="center_horizontal"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="公告"/>
-  </LinearLayout>
+            android:background="@color/White"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="90dp"
+            android:orientation="vertical">
+          <Button
+              android:id="@+id/bt_placard"
+              android:layout_marginTop="10dp"
+              android:layout_gravity="center_horizontal"
+              android:background="@drawable/img_main_notice"
+              android:layout_width="50dp"
+              android:layout_height="50dp" />
+          <TextView
+              android:layout_gravity="center_horizontal"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="公告"/>
+      </LinearLayout>
         <!--<View-->
             <!--android:layout_width="1px"-->
             <!--android:layout_height="50dp"-->

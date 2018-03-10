@@ -48,15 +48,16 @@ public class LoginActivity extends Activity {
         preferences.edit().clear().commit();
         tv_emailRegister.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
         tv_passwordForget.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
-        tv_emailRegister.setOnClickListener(new View.OnClickListener() {
+        tv_emailRegister.setOnClickListener(new NoDoubleClickListener() {
             @Override
-            public void onClick(View view) {
+            protected void onNoDoubleClick(View v) {
                 Intent intent=new Intent(LoginActivity.this,EmailRegisterActivity.class);
                 startActivity(intent);
                 if(click){
                     click=false;}
             }
-        });
+            });
+
         bt_login.setOnClickListener(new NoDoubleClickListener() {
             @Override
             public void onNoDoubleClick(View view) {
