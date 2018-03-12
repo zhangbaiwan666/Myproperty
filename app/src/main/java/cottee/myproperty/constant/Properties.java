@@ -42,5 +42,6 @@ public class Properties {
     public final static String SUCCESS = "0";
     public  final static  int RepairProject=0;
     public  final static  int  WorkersList=1;
+    public  final static  int RepairRecord=2;
 
 }

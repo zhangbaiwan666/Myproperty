@@ -8,7 +8,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import cottee.myproperty.R;
-import cottee.myproperty.adapter.RepairRecordAdapter;
+import cottee.myproperty.handler.RepairRecordHandler;
+import cottee.myproperty.manager.RepairManager;
 
 public class RepairRecordActivity extends Activity {
 
@@ -18,9 +19,13 @@ public class RepairRecordActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repair_record);
-        RepairRecordAdapter repairRecordAdapter=new RepairRecordAdapter(this);
+
+        //RepairRecordAdapter repairRecordAdapter=new RepairRecordAdapter(this);
         lv_repairRecord = (ListView)findViewById(R.id.lv_repairRecord);
-        lv_repairRecord.setAdapter(repairRecordAdapter);
+        //lv_repairRecord.setAdapter(repairRecordAdapter);
+        RepairRecordHandler repairHandler=new RepairRecordHandler(this,lv_repairRecord);
+        RepairManager repairManager=new RepairManager(repairHandler,lv_repairRecord);
+        repairManager.sendRequestRepairRecord();
         lv_repairRecord.setOnItemClickListener(new AdapterView.OnItemClickListener() {
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i,

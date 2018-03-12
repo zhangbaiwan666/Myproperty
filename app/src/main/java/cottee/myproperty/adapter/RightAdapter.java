@@ -14,14 +14,14 @@ import java.util.List;
 
 import cottee.myproperty.R;
 import cottee.myproperty.constant.BaseData;
-import cottee.myproperty.constant.Repair;
+import cottee.myproperty.constant.RepairProject;
 import cottee.myproperty.uitils.NormalLoadPicture;
 
 
 public class RightAdapter extends BaseAdapter {
 	private Context context;
 	private ArrayList<BaseData> data = new ArrayList<BaseData>();
-	List<Repair.ProinfoBean> list;
+	List<RepairProject.ProinfoBean> list;
 	private ListView listView;
 	public RightAdapter(Context context, List list) {
 		super();

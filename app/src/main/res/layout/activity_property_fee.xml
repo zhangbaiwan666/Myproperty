@@ -86,7 +86,7 @@
             />
 
         <TextView
-            android:id="@+id/tv_area"
+            android:id="@+id/tv_areaProperty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -115,7 +115,7 @@
             />
 
         <TextView
-            android:id="@+id/tv_fee"
+            android:id="@+id/tv_feeProperty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -150,9 +150,9 @@
         android:layout_height="wrap_content"
         android:paddingLeft="50dp">
 
-        <Button
+        <RadioButton
             android:id="@+id/btn_six"
-            android:layout_width="130dp"
+            android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="29dp"
@@ -162,7 +162,7 @@
 
             android:text="12个月"/>
 
-        <Button
+        <RadioButton
             android:layout_width="130dp"
             android:layout_height="40dp"
             android:layout_alignParentLeft="true"

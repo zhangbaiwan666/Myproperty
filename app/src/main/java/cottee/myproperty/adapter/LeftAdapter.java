@@ -9,13 +9,13 @@ import android.widget.TextView;
 import java.util.List;
 
 import cottee.myproperty.R;
-import cottee.myproperty.constant.Repair;
+import cottee.myproperty.constant.RepairProject;
 
 
 public class LeftAdapter extends BaseAdapter {
 
 	private Context context;
-	List<Repair.ProinfoBean> list;
+	List<RepairProject.ProinfoBean> list;
 	public LeftAdapter(Context context, List list) {
 		super();
 		this.context = context;

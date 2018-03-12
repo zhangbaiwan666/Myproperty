@@ -18,14 +18,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import cottee.myproperty.activity.WorkersInfoActivity;
 import cottee.myproperty.activity.WorkersListActivity;
 import cottee.myproperty.adapter.LeftAdapter;
 import cottee.myproperty.adapter.RightAdapter;
 import cottee.myproperty.constant.BaseData;
 import cottee.myproperty.constant.Mechanic;
 import cottee.myproperty.constant.Properties;
-import cottee.myproperty.constant.Repair;
+import cottee.myproperty.constant.RepairProject;
+import cottee.myproperty.constant.RepairRecord;
 
 /**
  * Created by Administrator on 2018/1/30 0030.
@@ -38,37 +38,44 @@ public class RepairHandler extends Handler {
     private LeftAdapter leftAdapter;
     private RightAdapter rightAdapter;
     private Context context;
-    private Context context1;
+
     private ArrayList<BaseData> lists;
     private ArrayList<String> showTitle;
     private int lastPosition;
-    private List<Repair.ProinfoBean> proinfo;
+    private List<RepairProject.ProinfoBean> proinfo;
     private List<Mechanic.ProjectStaffBean> projectStaffBeans;
     private TextView tv_address;
     private String address;
     String bigProject;
     String smallProject;
     private ListView listView;
+    private Context RepairRecordcontext;
+    public ListView lv_RepairRecord;
+    private  List<RepairRecord.ListBean> listBeans;
     public  RepairHandler(Context context,ListView lv_left,ListView lv_Right,TextView tv_title){
         this.context=context;
         this.lv_left=lv_left;
         this.lv_Right=lv_Right;
         this.tv_title=tv_title;
     }
-    public RepairHandler(Context context,ListView listView,String bigProject,String smallProject){
-        this.context1=context;
-        this.listView=listView;
-        this.bigProject=bigProject;
-        this.smallProject=smallProject;
-    }
-    public RepairHandler(Context context,TextView tv_address){
-        this.tv_address=tv_address;
-    }
+//    public RepairHandler(Context context,ListView listView,String bigProject,String smallProject){
+//        this.context1=context;
+//        this.listView=listView;
+//        this.bigProject=bigProject;
+//        this.smallProject=smallProject;
+//    }
+//    public RepairHandler(Context context,TextView tv_address){
+//        this.tv_address=tv_address;
+//    }
+public RepairHandler(Context context,ListView lv_RepairRecord){
+    this.RepairRecordcontext=context;
+    this.lv_RepairRecord=lv_RepairRecord;
+}
     @Override
     public void handleMessage(Message msg) {
         switch (msg.what){
             case Properties.RepairProject: {
-                proinfo = (List<Repair.ProinfoBean>) msg.obj;
+                proinfo = (List<RepairProject.ProinfoBean>) msg.obj;
                 initRepairProjectData();
                 initRepairProjectView();
             }
@@ -79,10 +86,12 @@ public class RepairHandler extends Handler {
 
             }
 
+
         }
 
 
     }
+
     public  List<Mechanic.ProjectStaffBean> getProjectStaffBeans(){
         return projectStaffBeans;
     }
@@ -206,28 +215,28 @@ public class RepairHandler extends Handler {
 
         }
     }
-    public  void  initDataWorkersLists(){
-
-//        WorkersAdapter workersAdapter=new WorkersAdapter(context1,projectStaffBeans);
-//        listView.setAdapter(workersAdapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view,
-                                    int i, long l) {
-                Intent intent=new Intent(context1,WorkersInfoActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putString("photo",projectStaffBeans.get(i).getPhoto());
-                bundle.putString("name",projectStaffBeans.get(i).getName());
-                bundle.putString("id",projectStaffBeans.get(i).getId());
-                bundle.putString("bigProject",bigProject);
-                bundle.putString("smallProject",smallProject);
-                bundle.putString("phone",projectStaffBeans.get(i).getPhone());
-                bundle.putString("grade",projectStaffBeans.get(i).getGrade());
-                bundle.putString("time",projectStaffBeans.get(i).getTime());
-                intent.putExtras(bundle);
-               context.startActivity(intent);
-            }
-        });
-    }
+//    public  void  initDataWorkersLists(){
+//
+////        WorkersAdapter workersAdapter=new WorkersAdapter(context1,projectStaffBeans);
+////        listView.setAdapter(workersAdapter);
+//
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view,
+//                                    int i, long l) {
+//                Intent intent=new Intent(context1,WorkersInfoActivity.class);
+//                Bundle bundle=new Bundle();
+//                bundle.putString("photo",projectStaffBeans.get(i).getPhoto());
+//                bundle.putString("name",projectStaffBeans.get(i).getName());
+//                bundle.putString("id",projectStaffBeans.get(i).getId());
+//                bundle.putString("bigProject",bigProject);
+//                bundle.putString("smallProject",smallProject);
+//                bundle.putString("phone",projectStaffBeans.get(i).getPhone());
+//                bundle.putString("grade",projectStaffBeans.get(i).getGrade());
+//                bundle.putString("time",projectStaffBeans.get(i).getTime());
+//                intent.putExtras(bundle);
+//               context.startActivity(intent);
+//            }
+//        });
+//    }
 }

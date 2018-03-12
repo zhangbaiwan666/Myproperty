@@ -18,7 +18,7 @@ import java.util.List;
 import cottee.myproperty.constant.HouseListBean;
 import cottee.myproperty.constant.Properties;
 import cottee.myproperty.constant.PropertyListBean;
-import cottee.myproperty.constant.Repair;
+import cottee.myproperty.constant.RepairProject;
 import cottee.myproperty.constant.SubListBean;
 import cottee.myproperty.handler.LoginRegisterHandler;
 import cottee.myproperty.uitils.Session;
@@ -32,7 +32,7 @@ import okhttp3.Response;
 public class LoginRegisterManager implements Serializable {
     private Context context;
     private LoginRegisterHandler loginRegisterHandler;
-    private List<Repair.ProinfoBean> proinfo;
+    private List<RepairProject.ProinfoBean> proinfo;
     public LoginRegisterManager(Context context, LoginRegisterHandler handler) {
         this.context = context;
         this.loginRegisterHandler = handler;

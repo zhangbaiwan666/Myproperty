@@ -8,14 +8,14 @@ import java.util.List;
  * Created by Administrator on 2017/12/11 0011.
  */
 
-public class Repair {
+public class RepairProject {
 
 
     private List<ProinfoBean> proinfo;
 
-    public static Repair objectFromData(String str) {
+    public static RepairProject objectFromData(String str) {
 
-        return new Gson().fromJson(str, Repair.class);
+        return new Gson().fromJson(str, RepairProject.class);
     }
 
     public List<ProinfoBean> getProinfo() {
