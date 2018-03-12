@@ -17,6 +17,7 @@ import cottee.myproperty.R;
 import cottee.myproperty.activity.RepairRecordActivity;
 import cottee.myproperty.activity.ControlSubActivity;
 import cottee.myproperty.activity.LoginActivity;
+import cottee.myproperty.activity.ViewHouseAcivity;
 import cottee.myproperty.handler.LoginRegisterHandler;
 import cottee.myproperty.listener.NoDoubleClickListener;
 import cottee.myproperty.manager.LoginRegisterManager;
@@ -26,6 +27,7 @@ public class SettingFragment extends Fragment {
 
 	private View rl_house_control;
 	private View rl_login_out;
+	private View rl_view_house;
 	private boolean click=true;
 	private TextView repair_record;
 	private RelativeLayout rl_repair_record;
@@ -47,6 +49,7 @@ public class SettingFragment extends Fragment {
 			}
 		});
 		rl_house_control = inflate.findViewById(R.id.rl_house_control);
+		rl_view_house = inflate.findViewById(R.id.rl_view_house);
 		rl_login_out = inflate.findViewById(R.id.rl_login_out);
 
 		rl_house_control.setOnClickListener(new NoDoubleClickListener() {
@@ -56,6 +59,13 @@ public class SettingFragment extends Fragment {
 				LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getActivity(), loginRegisterHandler);
 				loginRegisterManager.GsonSubList();
 
+			}
+		});
+		rl_view_house.setOnClickListener(new NoDoubleClickListener() {
+			@Override
+			protected void onNoDoubleClick(View v) {
+				Intent intent1 = new Intent(getActivity(), ViewHouseAcivity.class);
+				startActivity(intent1);
 			}
 		});
 		rl_login_out.setOnClickListener(new NoDoubleClickListener() {

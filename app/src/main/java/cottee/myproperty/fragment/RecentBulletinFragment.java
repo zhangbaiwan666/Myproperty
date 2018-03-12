@@ -11,9 +11,11 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,12 +54,12 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
         }
         adapter = new RecentBulletinFragment.TabFragmentAdapter(getActivity(),R.layout.layout_bulletin_list,textList);
         rListView.setAdapter(adapter);
-//        rListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Toast.makeText(getContext(), "你点击了Listview"+(i-1), Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        rListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getActivity(), "你点击了Listview"+(i-1), Toast.LENGTH_SHORT).show();
+            }
+        });
         rListView.setOnRefreshListener(this);
         return rootView;
     }
@@ -107,6 +109,7 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
 
     @Override
     public void onDownPullRefresh() {
+        rListView.setClickable(false);
         new AsyncTask<Void, Void, Void>() {
 
             @Override
@@ -132,6 +135,7 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
 
     @Override
     public void onLoadingMore() {
+        rListView.setClickable(false);
         new AsyncTask<Void, Void, Void>() {
 
             @Override

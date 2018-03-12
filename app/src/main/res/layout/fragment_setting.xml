@@ -71,8 +71,10 @@
             <!--android:background="@drawable/img_next_arrow" />-->
     <!--</RelativeLayout>-->
     <RelativeLayout
+        android:clickable="true"
+        android:id="@+id/rl_view_house"
         android:layout_marginTop="15dp"
-        android:background="@color/White"
+        android:background="@drawable/selector_setting_choose_item"
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <ImageView
