@@ -33,6 +33,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import cottee.myproperty.R;
+import cottee.myproperty.activity.AddServerActivity;
 import cottee.myproperty.activity.PaymentActivity;
 import cottee.myproperty.activity.PropertyAdActivity;
 import cottee.myproperty.activity.RepairProjectActivity;
@@ -48,7 +49,6 @@ import cottee.myproperty.uitils.HealthMap;
 import cottee.myproperty.uitils.Session;
 
 public class MainFragment extends Fragment {
-	private Button bt_checkout;
 	private Button bt_placard;
 	private TextView tvRight;
 	private boolean click=true;
@@ -70,6 +70,9 @@ public class MainFragment extends Fragment {
 	private View inflate;
 	private Button bt_property_server;
 	private LinearLayout ll_placard;
+	private LinearLayout ll_payFee;
+	private LinearLayout ll_repair;
+	private LinearLayout ll_property_server;
 	private Button bt_repair;
 	private Button bt_payFee;
 	private static ArrayList<String> property_list;
@@ -85,13 +88,20 @@ public class MainFragment extends Fragment {
 		if (rootView == null) {
 			property_list = (ArrayList<String>) HealthMap.get("property_list");
 			rootView = inflater.inflate(R.layout.fragment_main, null);
-			bt_checkout = (Button) rootView.findViewById(R.id.bt_checkout);
 			bt_property_server = (Button) rootView.findViewById(R.id.bt_property_server);
 			positon_pro_name = rootView.findViewById(R.id.positon_pro_name);
 			bt_placard = (Button) rootView.findViewById(R.id.bt_placard);
 			bt_payFee = (Button) rootView.findViewById(R.id.bt_payFee);
 			bt_repair = (Button) rootView.findViewById(R.id.bt_repair);
 			ll_placard = (LinearLayout) rootView.findViewById(R.id.ll_placard);
+			ll_payFee = (LinearLayout) rootView.findViewById(R.id.ll_payFee);
+			ll_repair = (LinearLayout) rootView.findViewById(R.id.ll_repair);
+			ll_property_server = (LinearLayout) rootView.findViewById(R.id.ll_property_server);
+			ll_placard.setFocusable(true);
+			ll_payFee.setFocusable(true);
+			ll_repair.setFocusable(true);
+			ll_property_server.setFocusable(true);
+
 			pro_id_list = (ArrayList<String>) HealthMap.get("pro_id_list");
 			pop();
 			initEven();
@@ -153,7 +163,7 @@ public class MainFragment extends Fragment {
 	}
 
 	private void initEven() {
-		bt_placard.setOnClickListener(new View.OnClickListener() {
+		ll_placard.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				Intent intent = new Intent(getContext(), TabLessActivity.class);
@@ -161,20 +171,21 @@ public class MainFragment extends Fragment {
 			}
 		});
 
-		bt_property_server.setOnClickListener(new NoDoubleClickListener(){
+		ll_property_server.setOnClickListener(new NoDoubleClickListener(){
 			@Override
 			public void onNoDoubleClick(View view) {
-
+				Intent intent = new Intent(getActivity(), AddServerActivity.class);
+				startActivity(intent);
 			}
 		});
-		bt_repair.setOnClickListener(new View.OnClickListener() {
+		ll_repair.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
             Intent intent=new Intent(getActivity(), RepairProjectActivity.class);
             startActivity(intent);
 			}
 		});
-		bt_payFee.setOnClickListener(new View.OnClickListener() {
+		ll_payFee.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				Intent intent=new Intent(getActivity(), PaymentActivity.class);
@@ -182,12 +193,7 @@ public class MainFragment extends Fragment {
 
 			}
 		});
-		bt_checkout.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
 
-			}
-		});
 	}
 
 	//切换滚轮图片

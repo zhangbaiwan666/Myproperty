@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
@@ -155,9 +154,10 @@
         android:orientation="horizontal">
         <LinearLayout
             android:id="@+id/ll_placard"
-            android:background="@color/White"
+            android:background="@drawable/selector_setting_choose_item"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:clickable="true"
             android:layout_height="90dp"
             android:orientation="vertical">
           <Button
@@ -166,6 +166,7 @@
               android:layout_gravity="center_horizontal"
               android:background="@drawable/img_main_notice"
               android:layout_width="50dp"
+              android:clickable="false"
               android:layout_height="50dp" />
           <TextView
               android:layout_gravity="center_horizontal"
@@ -179,12 +180,15 @@
             <!--android:background="@color/gray3"-->
             <!--android:layout_gravity="center_vertical"></View>-->
         <LinearLayout
-            android:background="@color/White"
+            android:clickable="true"
+            android:id="@+id/ll_payFee"
+            android:background="@drawable/selector_setting_choose_item"
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="90dp">
             <Button
+                android:clickable="false"
                 android:id="@+id/bt_payFee"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
@@ -203,12 +207,15 @@
             <!--android:background="@color/gray3"-->
             <!--android:layout_gravity="center_vertical"></View>-->
         <LinearLayout
-            android:background="@color/White"
+            android:clickable="true"
+            android:id="@+id/ll_repair"
+            android:background="@drawable/selector_setting_choose_item"
             android:layout_width="0dp"
             android:orientation="vertical"
             android:layout_weight="1"
             android:layout_height="90dp">
             <Button
+                android:clickable="false"
                 android:id="@+id/bt_repair"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
@@ -227,12 +234,15 @@
             <!--android:layout_height="50dp"-->
             <!--android:layout_gravity="center_vertical"></View>-->
         <LinearLayout
+            android:clickable="true"
+            android:id="@+id/ll_property_server"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:background="@color/White"
+            android:background="@drawable/selector_setting_choose_item"
             android:orientation="vertical"
             android:layout_height="90dp">
             <Button
+                android:clickable="false"
                 android:id="@+id/bt_property_server"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
@@ -261,12 +271,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
-
-    <Button
-        android:visibility="gone"
-        android:id="@+id/bt_checkout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="退出登录"/>
 
 </LinearLayout>
