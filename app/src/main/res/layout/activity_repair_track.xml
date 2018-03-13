@@ -78,13 +78,26 @@
             android:layout_height="80dp"
             android:paddingLeft="10dp"
             android:src="@drawable/ff"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tv_trackOfworker"
+            android:layout_alignBottom="@id/tv_trackOfworker"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@+id/imv_photo"
+            android:layout_toRightOf="@+id/imv_photo"
+
+            android:paddingTop="10dp"
+            android:text="姓名:"/>
         <TextView
             android:id="@+id/tv_trackOfworker"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_toRightOf="@id/imv_photo"
             android:textSize="15dp"
-            android:paddingLeft="10dp"
+            android:paddingLeft="50dp"
             android:paddingTop="10dp"
             android:text="李师傅"/>
         <TextView
@@ -93,19 +106,23 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_trackOfworker"
             android:paddingLeft="10dp"
-            android:text="服务项目:"
+            android:text="项目:"
             android:textSize="15dp"
             android:paddingTop="5dp"
             android:layout_toRightOf="@id/imv_photo"/>
+
         <TextView
             android:id="@+id/tv_serProjectOftrack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tv_trackOfworker"
+            android:layout_marginLeft="11dp"
+            android:layout_marginStart="11dp"
+            android:layout_toEndOf="@id/tv_serProject"
+            android:layout_toRightOf="@id/tv_serProject"
             android:paddingTop="5dp"
             android:text="aaaaaaaaaaa"
-            android:textSize="15dp"
-            android:layout_toRightOf="@id/tv_serProject"
-            android:layout_below="@id/tv_trackOfworker"/>
+            android:textSize="15dp"/>
 
     </RelativeLayout>
     <RelativeLayout
@@ -231,7 +248,7 @@
             android:textSize="15dp"/>
 
         <TextView
-
+            android:id="@+id/repair_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_baoxiuxinxi2"
@@ -290,8 +307,8 @@
     <Button
         android:id="@+id/contact_person"
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rect"
+        android:layout_height="35dp"
+        android:background="@drawable/shape_btn_login"
         android:text="联系工人"
         android:textColor="#fff"
 
@@ -301,20 +318,22 @@
     <Button
         android:id="@+id/request_cancel"
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_toRightOf="@id/contact_person"
-        android:background="@drawable/rect"
+        android:background="@drawable/shape_btn_login"
         android:text="申请取消"
+        android:paddingLeft="5dp"
         android:textColor="#fff"
         />
     <Button
 
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_toRightOf="@id/request_cancel"
-        android:background="@drawable/rect"
+        android:background="@drawable/shape_btn_login"
         android:text="缴纳费用"
         android:textColor="#fff"
+        android:paddingLeft="5dp"
         android:onClick="payFee"
         />
 

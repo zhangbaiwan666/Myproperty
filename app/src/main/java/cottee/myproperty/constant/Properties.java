@@ -43,5 +43,7 @@ public class Properties {
     public  final static  int RepairProject=0;
     public  final static  int  WorkersList=1;
     public  final static  int RepairRecord=2;
+    public  final  static  int RepairAddress=3;
+    public  final  static  int RepairTrack=4;
 
 }

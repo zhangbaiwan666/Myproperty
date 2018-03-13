@@ -12,22 +12,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import cottee.myproperty.R;
+import cottee.myproperty.constant.Properties;
+import cottee.myproperty.manager.RepairManager;
 import cottee.myproperty.uitils.CustomDialog;
 import cottee.myproperty.uitils.NormalLoadPicture;
-import cottee.myproperty.uitils.Session;
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-
-import static android.widget.Toast.LENGTH_SHORT;
 
 public class RepairConfirmActivity extends Activity {
     private TextView tv_address;
@@ -38,7 +28,7 @@ public class RepairConfirmActivity extends Activity {
     private ImageView imv_takePhotoOne;
     private Bitmap bitmap;
     private Bundle bundle;
-
+    public String photo_url="haha";
     Handler handler;
     private String address;
     private String responseData;
@@ -49,14 +39,13 @@ public class RepairConfirmActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repair_confirm);
-        sendRequestOkHttp();
-        System.out.println("ssssssssssssssssssss"+Session.getSession());
+       // sendRequestOkHttp();
         initview();
         handler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
                 switch (msg.what){
-                    case 0:
+                    case Properties.RepairAddress:
 
                         tv_address = (TextView)findViewById(R.id.tv_address);
                         tv_address.setText(address);
@@ -64,41 +53,9 @@ public class RepairConfirmActivity extends Activity {
                 }
             }
         };
+        RepairManager repairManager=new RepairManager(handler);
+        repairManager.sendRequestRepairAddress();
     }
-    public    void sendRequestOkHttp() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    RequestBody requestBody = new FormBody.Builder().add
-                            ("session", Session.getSession()).build();
-                    Request request = new Request.Builder()
-                            .url("https://thethreestooges.cn:5210/maintain/user/address").post(requestBody)
-                            .build();
-                    Response response = client.newCall(request).execute();
-                    String responseData = response.body().string();
-                    parseJSONObject(responseData);
-                } catch (Exception e) {
-                    e.printStackTrace();
-
-                }
-            }
-
-
-
-        }).start();
-    }
-    private void parseJSONObject(String responseData) throws JSONException {
-        JSONObject jsonObject = new JSONObject(responseData);
-        address = jsonObject.getString("address");
-        System.out.println("-----------"+ address);
-        Message message = new Message();
-        message.what = 0;
-        message.obj = address;
-        handler.sendMessage(message);
-    }
-
     public void initview(){
         bundle = getIntent().getExtras();
 
@@ -180,7 +137,8 @@ public class RepairConfirmActivity extends Activity {
                 new android.content.DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        SubmissionToWeb();
+                        RepairManager.SubmissionToWeb(photo_url,bundle.getString("name"),et_inputInfo.getText().toString(),bundle.getString("bigProject")+"的"+ bundle.getString("smallProject"),
+                                bundle.getString("id")  );
                         Intent intent=new Intent(RepairConfirmActivity.this,RepairDetailInfoActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);
@@ -192,38 +150,6 @@ public class RepairConfirmActivity extends Activity {
 
 
 
-    public String photo_url="haha";
-    public void SubmissionToWeb(){
-        new Thread(new Runnable() {
 
 
-
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    RequestBody requestBody = new FormBody.Builder().add
-                            ("session",Session.getSession()).add("staff_name",bundle.getString("name"))
-                            .add("photo_url",photo_url).add("remark",et_inputInfo.getText().toString())
-                            .add("part",bundle.getString("bigProject")+"的"+ bundle.getString("smallProject"))
-                            .add("staff_id",bundle.getString("id")).build();
-                    Request request = new Request.Builder()
-                            .url("https://thethreestooges.cn:5210/maintain/indent/submit").post(requestBody)
-                            .build();
-                    Response response = client.newCall(request).execute();
-                    responseData = response.body().string();
-                    if (responseData=="1"){
-                        Toast.makeText(RepairConfirmActivity.this,"上传成功", LENGTH_SHORT).show();
-                    }
-                    System.out.println("rrrrrrrrrrrrr"+ responseData);
-                } catch (Exception e) {
-                    e.printStackTrace();
-
-                }
-            }
-
-
-
-        }).start();
-    }
 }

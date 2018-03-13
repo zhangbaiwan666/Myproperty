@@ -46,11 +46,10 @@ public class RepairHandler extends Handler {
     private List<Mechanic.ProjectStaffBean> projectStaffBeans;
     private TextView tv_address;
     private String address;
-    String bigProject;
-    String smallProject;
-    private ListView listView;
-    private Context RepairRecordcontext;
-    public ListView lv_RepairRecord;
+      private  TextView tv_trackOfWorker;
+      private  TextView tv_serProjectOftrack;
+      private  TextView tv_baoxiuxinxi;
+      private  TextView repair_time;
     private  List<RepairRecord.ListBean> listBeans;
     public  RepairHandler(Context context,ListView lv_left,ListView lv_Right,TextView tv_title){
         this.context=context;
@@ -67,10 +66,13 @@ public class RepairHandler extends Handler {
 //    public RepairHandler(Context context,TextView tv_address){
 //        this.tv_address=tv_address;
 //    }
-public RepairHandler(Context context,ListView lv_RepairRecord){
-    this.RepairRecordcontext=context;
-    this.lv_RepairRecord=lv_RepairRecord;
-}
+      public RepairHandler(Context context,TextView tv_trackOfWorker,TextView tv_serProjectOftrack,TextView tv_baoxiuxinxi,
+                           TextView repair_time){
+        this.tv_trackOfWorker=tv_trackOfWorker;
+        this.tv_serProjectOftrack=tv_serProjectOftrack;
+        this.tv_baoxiuxinxi=tv_baoxiuxinxi;
+        this.repair_time=repair_time;
+      }
     @Override
     public void handleMessage(Message msg) {
         switch (msg.what){
@@ -85,6 +87,7 @@ public RepairHandler(Context context,ListView lv_RepairRecord){
 //                listView.setAdapter(workersAdapter);
 
             }
+
 
 
         }

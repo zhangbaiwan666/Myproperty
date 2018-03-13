@@ -233,6 +233,6 @@
             android:textColor="#FFFFFF"
             android:textSize="15sp"
             android:onClick="Sure"
-            android:background="@drawable/rect"/>
+            android:background="@drawable/shape_btn_login"/>
     </RelativeLayout>
 </LinearLayout>

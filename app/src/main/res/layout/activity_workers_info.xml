@@ -257,7 +257,7 @@
             android:textColor="#FFFFFF"
             android:textSize="15sp"
             android:onClick="repair"
-            android:background="@drawable/rect"/>
+            android:background="@drawable/shape_btn_login"/>
     </RelativeLayout>
 
 </LinearLayout>

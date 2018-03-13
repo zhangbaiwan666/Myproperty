@@ -8,14 +8,19 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 import cottee.myproperty.constant.Mechanic;
 import cottee.myproperty.constant.Properties;
 import cottee.myproperty.constant.RepairProject;
 import cottee.myproperty.constant.RepairRecord;
+import cottee.myproperty.constant.RepairTrack;
 import cottee.myproperty.handler.RepairHandler;
 import cottee.myproperty.handler.RepairRecordHandler;
+import cottee.myproperty.handler.RepairTrackHandler;
 import cottee.myproperty.uitils.Session;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -37,7 +42,14 @@ public class RepairManager {
     RepairRecordHandler repairRecordHandler;
     ListView lv_RepairRecord;
     private Message message;
-
+     private  Handler repairAddresshandler;
+    Handler handler;
+    String order_id;
+    RepairTrackHandler repairTrackhandler;
+    public RepairManager(RepairTrackHandler repairTrackhandler,String order_id){
+        this.repairTrackhandler=repairTrackhandler;
+        this.order_id=order_id;
+    }
     public RepairManager (RepairHandler repairProjectHandler){
        this.repairProjectHandler = repairProjectHandler;
    }
@@ -46,11 +58,15 @@ public class RepairManager {
        this.lv_RepairRecord=lv_RepairRecord;
 
    }
-   Handler handler;
+   public  RepairManager(Handler repairAddresshandler){
+       this.repairAddresshandler=repairAddresshandler;
+   }
+
    public RepairManager(Handler handler,String project_id){
        this.project_id=project_id;
        this.handler=handler;
    }
+
     public void sendRequestRepairProject() {
         new Thread(new Runnable() {
             @Override
@@ -119,6 +135,38 @@ public class RepairManager {
 
 
     }
+    public static void  SubmissionToWeb(final String photo_url, final String remark, final String part, final String staff_id
+    , final String staff_name){
+        new Thread(new Runnable() {
+
+
+
+            @Override
+            public void run() {
+                try {
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder().add
+                            ("session",Session.getSession()).add("staff_name",staff_name)
+                            .add("photo_url",photo_url).add("remark",remark)
+                            .add("part",part)
+                            .add("staff_id",staff_id).build();
+                    Request request = new Request.Builder()
+                            .url("https://thethreestooges.cn:5210/maintain/indent/submit").post(requestBody)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                 String   responseData = response.body().string();
+
+                    System.out.println("rrrrrrrrrrrrr"+ responseData);
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                }
+            }
+
+
+
+        }).start();
+    }
     public  void sendRequestRepairRecord() {
         new Thread(new Runnable() {
             @Override
@@ -149,4 +197,71 @@ public class RepairManager {
         message.obj = listBeans;
         repairRecordHandler.sendMessage(message);
     }
+    public  void sendRequestRepairTrack(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    System.out.println(order_id);
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder().add
+                            ("session", Session.getSession()).add("order_id",order_id).build();
+                    Request request = new Request.Builder()
+                            .url("https://thethreestooges.cn:5210/maintain/indent/show").post(requestBody)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String responseData = response.body().string();
+                    System.out.println(responseData);
+                    parseJSONRepairTrack(responseData);
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                }
+            }
+        }).start();
+    }
+    public  void parseJSONRepairTrack(String responseData) {
+        Gson gson = new Gson();
+
+       Message message = new Message();
+        message.what = Properties.RepairTrack;
+        message.obj = gson.fromJson(responseData,RepairTrack.class).getIndent();
+        repairTrackhandler.sendMessage(message);
+
+    }
+    public    void sendRequestRepairAddress() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder().add
+                            ("session", Session.getSession()).build();
+                    Request request = new Request.Builder()
+                            .url("https://thethreestooges.cn:5210/maintain/user/address").post(requestBody)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String responseData = response.body().string();
+                    System.out.println("AAAAAAAAA"+responseData);
+                    parseJSONRepairAddress(responseData);
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                }
+            }
+
+
+
+        }).start();
+    }
+    private void parseJSONRepairAddress(String responseData) throws JSONException {
+        JSONObject jsonObject = new JSONObject(responseData);
+      String  address = jsonObject.getString("address");
+        System.out.println("-----------"+ address);
+        Message message = new Message();
+        message.what = Properties.RepairAddress;
+        message.obj = address;
+        repairAddresshandler.sendMessage(message);
+    }
+
 }
