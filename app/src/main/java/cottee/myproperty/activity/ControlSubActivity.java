@@ -22,7 +22,9 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,6 +68,7 @@ public class ControlSubActivity extends Activity {
     private List<Map<String, String>> listRight;
     private static ArrayList<String> address_list;
     private  ArrayList<String> home_id_list;
+    private List<String> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,13 +133,18 @@ public class ControlSubActivity extends Activity {
         }
         return subList;
     }
+    //-----------------------------------加载list中item的数据---------------------------------STA
     private List<SubInfo> initsub() {
+
         List<SubInfo> subList=new ArrayList<SubInfo>();
         for(int i=0;i<sub_remark_list.size();i++){
             String sub_remark = sub_remark_list.get(i);
             String sub_id = sub_id_list.get(i);
             String sub_phone = sub_phone_list.get(i);
-            SubInfo subInfo = new SubInfo(sub_remark,sub_id,sub_phone);
+            String str2=sub_phone.replace(" ", "");//去掉所用空格
+            list =  Arrays.asList(str2.split(","));
+//list的结果就是[113,123,123,123]
+            SubInfo subInfo = new SubInfo(sub_remark,sub_id, list.get(0));
             subList.add(subInfo);
         }
         return subList;
@@ -176,7 +184,7 @@ public class ControlSubActivity extends Activity {
                     ControlSubActivity.this, R.layout.layout_list_item,subList);
 
             //把R.layout.fruit_item和初始化完毕的ArrayList<Fruit>给FruitAdapter
-
+//------------------------------子账户listview的item点击事件----------------------------------------STA
             final ListView listView=(ListView)findViewById(R.id.sub_list);
             listView.setAdapter(sub_adapter);//把Subinfo给ListView
             sub_adapter.notifyDataSetChanged();
@@ -188,9 +196,10 @@ public class ControlSubActivity extends Activity {
                     sub_remark = sub_remark_list.get(position);
                     intent1.putExtra("remark",sub_remark);
                     sub_id = sub_id_list.get(position);
-                    intent1.putExtra("id",sub_id);
+                    intent1.putExtra("id", sub_id);
                     sub_phone = sub_phone_list.get(position);
-                    intent1.putExtra("phone",sub_phone);
+                    list =  Arrays.asList(sub_phone.split(","));
+                    intent1.putExtra("phone",(Serializable)list);
                     System.out.println("ControlSubActivtiy为sub_remark"+ sub_remark);
                     System.out.println("ControlSubActivtiy为sub_id"+ sub_id);
                     System.out.println("ControlSubActivtiy为sub_phone"+ sub_phone);
@@ -237,7 +246,6 @@ public class ControlSubActivity extends Activity {
 
     };
     private View.OnClickListener myListener = new View.OnClickListener() {
-
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
@@ -262,7 +270,7 @@ public class ControlSubActivity extends Activity {
                             menulistRight.setAdapter(listAdapter);
                             listAdapter.notifyDataSetChanged();
 
-                            // 点击listview中item的处理
+                            //----------------------- 点击listview中item的处理-------------------------------------STA
                             menulistRight
                                     .setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                         @Override
@@ -284,8 +292,8 @@ public class ControlSubActivity extends Activity {
                             popRight = new PopupWindow(layoutRight, 340,
                                     ViewGroup.LayoutParams.WRAP_CONTENT);
 
-                            ColorDrawable cd = new ColorDrawable(-0000);
-                            popRight.setBackgroundDrawable(cd);
+//                            ColorDrawable cd = new ColorDrawable(-0000);
+//                            popRight.setBackgroundDrawable(cd);
                             popRight.setAnimationStyle(R.style.PopupAnimation);
                             popRight.update();
                             popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);

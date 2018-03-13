@@ -64,6 +64,7 @@ public class EditextListAdapter extends BaseAdapter {
         if (position==0){
             holder.btn_delete_sub_phone.setVisibility(View.GONE);
         }
+        final ViewHolder finalHolder = holder;
         TextWatcher watcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -77,7 +78,9 @@ public class EditextListAdapter extends BaseAdapter {
             public void afterTextChanged(Editable s) {
                 if (TextUtils.isEmpty(s)) {
                     itemObj.setText("");
-                } else{}
+                } else{
+                    itemObj.setText(finalHolder.editText.getText().toString().trim());
+                }
 
             }
         };

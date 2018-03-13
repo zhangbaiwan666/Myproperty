@@ -359,7 +359,7 @@ public class MainFragment extends Fragment {
 		}
 		return proList;
 	}
-
+//--------------------物业切换栏--------------------------------------------------------------STA
 	private View.OnClickListener myListener = new View.OnClickListener() {
 
 		@Override
@@ -410,8 +410,8 @@ public class MainFragment extends Fragment {
 								popRight = new PopupWindow(layoutRight, 200,
 										ViewGroup.LayoutParams.WRAP_CONTENT);
 
-								ColorDrawable cd = new ColorDrawable(-1000);
-								popRight.setBackgroundDrawable(cd);
+//								ColorDrawable cd = new ColorDrawable(-1000);
+////								popRight.setBackgroundDrawable(cd);
 								popRight.setAnimationStyle(R.style.PopupAnimation);
 								popRight.update();
 								popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);

@@ -1,5 +1,6 @@
 package cottee.myproperty.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -18,6 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cottee.myproperty.R;
+import cottee.myproperty.adapter.SubPhoneAdapter;
+import cottee.myproperty.adapter.SubinfoAdapter;
+import cottee.myproperty.constant.SubPhoneBean;
 import cottee.myproperty.handler.LoginRegisterHandler;
 import cottee.myproperty.manager.LoginRegisterManager;
 import cottee.myproperty.uitils.Session;
@@ -30,7 +34,7 @@ public class DelateSubActivity extends Activity {
     private Title title;
     private boolean click=true;
     private TextView tv_sub_id;
-    private TextView tv_sub_phone;
+    private ListView list_sub_phone;
     private TextView tv_sub_remark;
     private LinearLayout ll_show_sub_info;
     private LinearLayout ll_modify_sub_info;
@@ -45,7 +49,7 @@ public class DelateSubActivity extends Activity {
     private List<ItemBean> mData;
     private EditextListAdapter mAdapter;
     private String id;
-    private String phone;
+    private List<String> list_phone;
     private String remark;
 
     @Override
@@ -63,21 +67,33 @@ public class DelateSubActivity extends Activity {
         title.setOnTitleButtonClickListener(onTitleButtonClickListener);
         title.mSetButtonInfo(new Title.ButtonInfo(true,Title.BUTTON_LEFT,R.drawable.img_back,null));
         title.mSetButtonInfo(new Title.ButtonInfo(true,Title.BUTTON_RIGHT1,R.mipmap.sub_info_modify,null));
-
+    }
+    private List<SubPhoneBean> initsubphonelist() {
+        List<SubPhoneBean> bullentinlist=new ArrayList<SubPhoneBean>();
+        return bullentinlist;
     }
 
+    @SuppressLint("ResourceType")
     private void initEven() {
         final Intent intent = getIntent();
         remark = intent.getStringExtra("remark");
-        phone = intent.getStringExtra("phone");
+        list_phone = (List<String>) getIntent().getSerializableExtra("phone");
         id = intent.getStringExtra("id");
         System.out.println("DelateSubActivity得备注" + remark);
-        System.out.println("DelateSubActivity得phone" + phone);
+        System.out.println("DelateSubActivity得phone" + list_phone);
         System.out.println("DelateSubActivity得id" + id);
         mListView = (ListView) findViewById(R.id.list_view);
         mButton = (Button) findViewById(R.id.button);
         tv_sub_id.setText(id);
-        tv_sub_phone.setText(phone);
+        List<SubPhoneBean> bullentinlist = initsubphonelist();
+        for (int i=0;i<list_phone.size();i++){
+            SubPhoneBean subPhoneBean = new SubPhoneBean();
+            subPhoneBean.setPhone(list_phone.get(i));
+            bullentinlist.add(subPhoneBean);
+        }
+        SubPhoneAdapter previewBulletinAdapter = new SubPhoneAdapter(this, R.layout.layout_item_sub_phone,bullentinlist);
+        list_sub_phone.setAdapter(previewBulletinAdapter);
+        previewBulletinAdapter.notifyDataSetChanged();
         tv_sub_remark.setText(remark);
         et_sub_id.setText(id);
 //        et_sub_phone.setText(phone);
@@ -89,14 +105,17 @@ public class DelateSubActivity extends Activity {
 //            String phone = mData.get(i).getText();
 //            sub_phones=phone+"#";
 //        }
-
-        mData = new ArrayList<ItemBean>();
-        ItemBean itemBean = new ItemBean();
-        itemBean.setText(phone);
-        mData.add(itemBean);
-
+        for (int i=0;i<list_phone.size();i++){
+            mData = new ArrayList<ItemBean>();
+            ItemBean itemBean = new ItemBean();
+            itemBean.setText(list_phone.get(i));
+            mData.add(itemBean);
+        }
+//取每个item得值并进行整合成字符串
         mAdapter = new EditextListAdapter(this, mData);
         mListView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
+
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,22 +131,26 @@ public class DelateSubActivity extends Activity {
         });
 
         btn_modify_sub.setOnClickListener(new View.OnClickListener() {
+            //todo 判断电话的位数是否正确，将电话整合成字符串进行提交
             @Override
             public void onClick(View view) {
-//                LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(DelateSubActivity.this, "", "");
-//                LoginRegisterManager loginRegisterManager = new LoginRegisterManager(DelateSubActivity.this, loginRegisterHandler);
-//                String session = Session.getSession();
-//                loginRegisterManager.UpdateSubAccount(
-//                        et_sub_id.getText().toString().trim(),
-//                        session,
-//                        et_sub_remark.getText().toString().trim(),
-//                        );
                 new AlertDialog.Builder(DelateSubActivity.this)
                         .setMessage("确定修改吗")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                finish();
+                                String result = "";
+                                for (int i=0;i < mListView.getChildCount(); i++) {
+                                    LinearLayout childAt = (LinearLayout) mListView.getChildAt(i);
+                                    TextView viewById = (TextView)childAt.findViewById(R.id.edit_text);
+                                    String trim = viewById.getText().toString().trim();
+                                    result=result+trim+",";
+                                }
+                                System.out.println("你张繁爸爸想看你得输出结果"+result);
+                                LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(DelateSubActivity.this, "", "");
+                                LoginRegisterManager loginRegisterManager = new LoginRegisterManager(DelateSubActivity.this, loginRegisterHandler);
+                                loginRegisterManager.UpdateSubAccount(et_sub_id.getText().toString().trim(),
+                                        et_sub_remark.getText().toString().trim(),result);
                                 dialog.dismiss();
 //                                    ((BaseActivity)getActivity()).goNextAnim();
                             }
@@ -177,7 +200,7 @@ public class DelateSubActivity extends Activity {
     private void init() {
 
         tv_sub_id = (TextView)findViewById(R.id.tv_sub_email);
-        tv_sub_phone = (TextView)findViewById(R.id.tv_sub_phone);
+        list_sub_phone = (ListView)findViewById(R.id.list_sub_phone);
         tv_sub_remark = (TextView)findViewById(R.id.tv_sub_remark);
         ll_show_sub_info = (LinearLayout) findViewById(R.id.ll_show_sub_info);
         ll_modify_sub_info = (LinearLayout) findViewById(R.id.ll_modify_sub_info);

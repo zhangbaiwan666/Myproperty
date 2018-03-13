@@ -21,7 +21,6 @@ public class MainActivity extends FragmentActivity {
 
     private LayoutInflater layoutInflater;
 
-
     private Class fragmentArray[] = {MainFragment.class, GroupBuyFragment.class,SettingFragment.class};
 
     private int mImageViewArray[] = {R.drawable.selector_tab_home_btn,R.drawable.selector_tab_groupby_btn,R.drawable.selector_tab_setting_btn};
@@ -34,7 +33,6 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         ActivityFinishManager.destoryActivity("destroy");
         initView();
-
     }
 
 
@@ -69,9 +67,6 @@ public class MainActivity extends FragmentActivity {
 
         return view;
     }
-
-
-
 
         }
 

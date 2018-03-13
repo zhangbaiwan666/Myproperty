@@ -9,8 +9,10 @@
         android:id="@+id/edit_text"
         android:layout_width="200dp"
         android:layout_height="60dp"
+        android:digits="1234567890"
         android:background="@android:drawable/editbox_background_normal"
         android:hint="输入电话"
+        android:maxLength="11"
         android:textColorHint="#7c7c7c"
         android:textSize="24sp" />
     <Button

@@ -430,6 +430,7 @@ public class LoginRegisterHandler extends Handler {
             case Properties.UPDATE_SUB_ACCOUNT_:
                 switch (msg.arg1) {
                     case UPDATESUBSUCCESS:
+                        ((Activity)context).finish();
                         Toast.makeText(context, "修改成功", Toast.LENGTH_SHORT).show();
                         break;
                     case UPDATESUBFAILED:

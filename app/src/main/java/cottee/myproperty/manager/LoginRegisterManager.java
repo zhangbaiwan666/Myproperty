@@ -867,7 +867,7 @@ public class LoginRegisterManager implements Serializable {
         }.start();
     }
 
-    public void UpdateSubAccount(final String sub_id,final String session,final String sub_remark,final String sub_phone) {
+    public void UpdateSubAccount(final String sub_id,final String sub_remark,final String sub_phone) {
         new Thread() {
             @Override
             public void run() {
@@ -887,6 +887,10 @@ public class LoginRegisterManager implements Serializable {
                     Response response = client.newCall(request).execute();
                     String recode = response.body().string();
                     String recode_trim = recode.trim();
+                    System.out.println("你张繁爸爸很难受之看看服务器返回的是啥"+recode_trim);
+                    System.out.println("你张繁爸爸很难受之看看服务器返回的是啥"+recode_trim);
+                    System.out.println("你张繁爸爸很难受之看看服务器返回的是啥"+recode_trim);
+                    System.out.println("你张繁爸爸很难受之看看服务器返回的是啥"+recode_trim);
                     //如果返回250，表示session过期，如果session通过返回之前正常的0,1逻辑
                     if (recode_trim.equals("250")){
                         //本地做重新登录得动作
@@ -907,7 +911,7 @@ public class LoginRegisterManager implements Serializable {
 //                                editor.putString("session", str);
 //                                editor.commit();
                             Session.setSession(str);
-                            UpdateSubAccount(sub_id,session,sub_remark,sub_phone);
+                            UpdateSubAccount(sub_id,sub_remark,sub_phone);
                         }
 
                     }else {

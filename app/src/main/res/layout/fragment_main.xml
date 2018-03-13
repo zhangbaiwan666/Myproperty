@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:background="@color/theme"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -16,6 +17,7 @@
             android:id="@+id/positon_pro_name"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:textColor="@color/White"
             android:text="尚未选择物业"
             android:textSize="17dp" />
         <TextView
@@ -23,7 +25,7 @@
         android:layout_width="30dip"
         android:layout_height="30dip"
         android:clickable="true"
-        android:background="@drawable/chuliliucheng"
+        android:background="@drawable/payfee_dingwei"
         android:gravity="center"
         android:textColor="@android:color/white"
         android:textSize="16sp" />
@@ -34,11 +36,11 @@
        <!--android:background="@drawable/activity_background"/>-->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="140dp" >
+        android:layout_height="180dp" >
 
         <FrameLayout
             android:layout_width="fill_parent"
-            android:layout_height="140dp"
+            android:layout_height="180dp"
             >
 
             <android.support.v4.view.ViewPager
@@ -53,7 +55,7 @@
                 android:orientation="vertical"
                 android:layout_gravity="bottom"
                 android:gravity="center"
-                android:background="#33000000"
+                android:background="@color/gray1"
                 >
 
                 <TextView
@@ -147,7 +149,7 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_marginTop="10dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
