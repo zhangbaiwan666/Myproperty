@@ -153,6 +153,7 @@ public class RepairManager {
                     Request request = new Request.Builder()
                             .url("https://thethreestooges.cn:5210/maintain/indent/submit").post(requestBody)
                             .build();
+                    System.out.println("staff_id"+staff_id);
                     Response response = client.newCall(request).execute();
                  String   responseData = response.body().string();
 

@@ -91,7 +91,7 @@ public class PayFeeManager {
                             .build();
                     Response response = client.newCall(request).execute();
                     String responseData = response.body().string();
-                    System.out.println( responseData);
+                    System.out.println("物业费"+responseData);
                     parsePropertyFee(responseData);
 
                 } catch (Exception e) {
@@ -112,6 +112,7 @@ public class PayFeeManager {
         Message message = new Message();
         message.what = 0;
           message.arg1=Integer.parseInt(area1);
+          message.arg2=Integer.parseInt(property_fee);
         PayFeeHandler.sendMessage(message);
 
 

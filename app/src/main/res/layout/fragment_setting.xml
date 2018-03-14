@@ -194,8 +194,10 @@
 
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/rl_pay_record"
         android:layout_width="match_parent"
         android:background="@color/White"
+
         android:layout_height="50dp">
         <ImageView
             android:layout_marginLeft="13dp"

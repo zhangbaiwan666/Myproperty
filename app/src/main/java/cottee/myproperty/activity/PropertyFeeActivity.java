@@ -1,10 +1,14 @@
 package cottee.myproperty.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import cottee.myproperty.R;
@@ -21,11 +25,32 @@ public class PropertyFeeActivity extends Activity {
      Handler handler;
     private TextView tv_area;
     private TextView tv_fee;
+    private RadioGroup radioGroup;
+    private RadioButton radioSix;
+    private RadioButton radioTwelve;
+    private RadioButton rb;
 
+    @SuppressLint("HandlerLeak")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_property_fee);
+        final TextView tv_propertyFee=(TextView)findViewById(R.id.tv_propertyFee);
+        radioGroup = (RadioGroup)findViewById(R.id.radioGroup);
+        radioSix = (RadioButton)findViewById(R.id.radioSix);
+        radioTwelve = (RadioButton)findViewById(R.id.radioTwelve);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                rb = (RadioButton)findViewById(radioGroup.getCheckedRadioButtonId());
+                System.out.println( rb.getText());
+                String money="240000";
+                String money2="480000";
+                if (rb.getText()=="6个月"){
+                    tv_propertyFee.setText(money2);
+                }
+            }
+        });
 
 
         handler = new Handler(){
@@ -35,10 +60,17 @@ public class PropertyFeeActivity extends Activity {
                     case 0:
                         System.out.println("aaaaaaaaaaaaa"+msg.arg1);
                         String area= String.valueOf(msg.arg1);
+                        String property_fee=String.valueOf(msg.arg2);
                         tv_area = (TextView)findViewById(R.id.tv_areaProperty);
                         tv_fee = (TextView)findViewById(R.id.tv_feeProperty);
                         tv_area.setText(area);
-                        tv_fee.setText(area);
+                        tv_fee.setText(property_fee);
+
+//                        if (rb.getText()=="6个月"){
+//                            tv_propertyFee.setText(200*200*6);
+//                        }else {
+//                            tv_propertyFee.setText(200*200*12);
+//                        }
                 }
             }
         };
@@ -49,6 +81,10 @@ public class PropertyFeeActivity extends Activity {
     }
     public void back(View view){
         finish();
+    }
+    public  void  Sure(View view){
+        Intent intent=new Intent(this,PayFeeFinishActivity.class);
+        startActivity(intent);
     }
 
 }

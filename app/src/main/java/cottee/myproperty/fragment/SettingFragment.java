@@ -1,5 +1,6 @@
 package cottee.myproperty.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,14 +15,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import cottee.myproperty.R;
-import cottee.myproperty.activity.RepairRecordActivity;
-import cottee.myproperty.activity.ControlSubActivity;
 import cottee.myproperty.activity.LoginActivity;
+import cottee.myproperty.activity.PayFeeRecordActivity;
+import cottee.myproperty.activity.RepairRecordActivity;
 import cottee.myproperty.activity.ViewHouseAcivity;
 import cottee.myproperty.handler.LoginRegisterHandler;
 import cottee.myproperty.listener.NoDoubleClickListener;
 import cottee.myproperty.manager.LoginRegisterManager;
-import cottee.myproperty.uitils.Session;
 
 public class SettingFragment extends Fragment {
 
@@ -31,7 +31,9 @@ public class SettingFragment extends Fragment {
 	private boolean click=true;
 	private TextView repair_record;
 	private RelativeLayout rl_repair_record;
+	private RelativeLayout rl_pay_record;
 
+	@SuppressLint("WrongViewCast")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View inflate = inflater.inflate(R.layout.fragment_setting, null);
@@ -39,6 +41,14 @@ public class SettingFragment extends Fragment {
 		int property_name = intent.getIntExtra("property_name", 0);
 		System.out.println("传到FragmentSetting的property_name为"+property_name);
 		repair_record = (TextView)inflate.findViewById(R.id.repair_record);
+		rl_pay_record = inflate.findViewById(R.id.rl_pay_record);
+		rl_pay_record.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent1=new Intent(getContext(), PayFeeRecordActivity.class);
+				startActivity(intent1);
+			}
+		});
 		rl_repair_record = inflate.findViewById(R.id.rl_repair_record);
 		rl_repair_record.setOnClickListener(new View.OnClickListener() {
 			@Override

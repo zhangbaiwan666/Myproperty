@@ -126,9 +126,15 @@
 
     </RelativeLayout>
     <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:background="#fff">
+
+    </RelativeLayout>
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-       android:paddingTop="10dp"
+        android:layout_height="30dp"
+       android:paddingTop="5dp"
         android:paddingLeft="20dp"
         android:background="#F5F5F5">
         <ImageView
@@ -143,6 +149,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:textSize="15dp"
+            android:layout_marginBottom="5dp"
             android:text="报修跟踪"/>
 
     </RelativeLayout>

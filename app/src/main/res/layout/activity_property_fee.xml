@@ -73,7 +73,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:minHeight="50dp"
-        android:paddingLeft="37dp"
+        android:paddingLeft="10dp"
         android:paddingRight="12dp"
         android:paddingTop="25dp"
         >
@@ -81,32 +81,31 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="住宅面积:"
+            android:text="住宅面积(平方米):"
             android:textSize="16sp"
-            />
+            android:id="@+id/textView2"/>
 
         <TextView
             android:id="@+id/tv_areaProperty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="92dp"
-            android:layout_marginStart="92dp"
-            android:textSize="17dp"
+            android:layout_alignBaseline="@id/textView2"
+            android:layout_alignBottom="@id/textView2"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:paddingTop="10dp"
-            android:text="xxx平方米"/>
+            android:text="xxx平方米"
+            android:textSize="17dp"/>
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:background="@drawable/line2"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:minHeight="50dp"
-        android:paddingLeft="37dp"
+        android:paddingLeft="10dp"
         android:paddingRight="12dp"
         android:paddingTop="25dp"
         >
@@ -114,23 +113,22 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="物业费/平方米"
+            android:text="物业费/平方米(元):"
             android:textSize="16sp"
-            />
+            android:id="@+id/textView3"/>
 
         <TextView
             android:id="@+id/tv_feeProperty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="92dp"
-            android:layout_marginStart="92dp"
-            android:textSize="17dp"
-            android:paddingTop="10dp"
+            android:layout_alignBaseline="@+id/textView3"
+            android:layout_alignBottom="@+id/textView3"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:paddingLeft="20dp"
-            android:text="xxx元"/>
+            android:paddingTop="10dp"
+            android:text="xxx元"
+            android:textSize="17dp"/>
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
@@ -140,7 +138,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:minHeight="50dp"
-        android:paddingLeft="37dp"
+        android:paddingLeft="10dp"
         android:paddingRight="12dp"
         android:paddingTop="25dp"
         >
@@ -158,12 +156,16 @@
         android:layout_height="1dp"
         android:background="@drawable/line2"/>
     <RelativeLayout
-        android:layout_width="400dp"
-        android:layout_height="wrap_content"
-        android:paddingLeft="50dp">
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:minHeight="50dp"
+        android:paddingLeft="80dp"
+        android:paddingRight="12dp"
+        android:paddingTop="25dp">
 
 
       <RadioGroup
+          android:id="@+id/radioGroup"
           android:layout_width="300dp"
           android:layout_height="wrap_content"
           android:orientation="horizontal">
@@ -188,38 +190,47 @@
           <!--android:text="6个月"-->
           <!--android:id="@+id/button"/>-->
           <RadioButton
+              android:id="@+id/radioSix"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="6个月"
               android:layout_weight="2"/>
 
           <RadioButton
+              android:id="@+id/radioTwelve"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
              android:layout_weight="1"
               android:text="12个月"/>
       </RadioGroup>
     </RelativeLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line2"/>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="85dp"
+        android:layout_height="60dp"
         android:minHeight="50dp"
-        android:paddingLeft="37dp"
+        android:paddingLeft="10dp"
         android:paddingRight="12dp"
-        android:paddingTop="50dp"
+        android:paddingTop="25dp"
         >
 
         <TextView
 
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:paddingLeft="10dp"
-            android:text="您需要支付"
+
+            android:text="您需要支付:"
             android:textSize="16sp"
             />
 
     </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line2"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -231,28 +242,26 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="110dp">
-            <EditText
-                android:layout_width="200dp"
-                android:layout_height="60dp"
-                android:paddingLeft="40dp"
-                android:background="@drawable/pay_amount"
-
-                />
             <TextView
+                android:id="@+id/tv_propertyFee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="70dp"
                 android:textSize="20sp"
-                android:paddingTop="20dp"
-                android:text="5000 元"/>
+                android:paddingTop="15dp"
+                />
         </FrameLayout>
 
     </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line2"/>
     <RelativeLayout
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:paddingTop="20dp"
-        android:paddingLeft="60dp">
+        android:paddingLeft="50dp">
         <Button
             android:layout_width="match_parent"
             android:layout_height="45dp"
@@ -266,6 +275,6 @@
             android:textColor="#FFFFFF"
             android:textSize="15sp"
             android:onClick="Sure"
-            android:background="@drawable/rect"/>
+            android:background="@drawable/shape_btn_login"/>
     </RelativeLayout>
 </LinearLayout>

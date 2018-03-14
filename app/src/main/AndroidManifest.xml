@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cottee.myproperty">
+          package="cottee.myproperty">
 
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:name=".uitils.Properties"
@@ -13,48 +13,54 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Light.NoTitleBar">
-        <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.EmailRegisterActivity" />
-        <activity android:name=".activity.SetPasswordActivity" />
-        <activity android:name=".activity.ForgetPasswordActivity" />
+        <activity android:name=".activity.LoginActivity"/>
+        <activity android:name=".activity.EmailRegisterActivity"/>
+        <activity android:name=".activity.SetPasswordActivity"/>
+        <activity android:name=".activity.ForgetPasswordActivity"/>
         <activity
             android:name=".activity.SplashScreenActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.ResetPassWordActivity" />
-        <activity android:name=".activity.AddSubActivity" />
-        <activity android:name=".activity.ControlSubActivity" />
-        <activity android:name=".activity.DelateSubActivity" />
-        <activity android:name=".activity.SubInfoModifyActivity" />
-        <activity android:name=".activity.TestSubActivity" />
+        <activity android:name=".activity.MainActivity"/>
+        <activity android:name=".activity.ResetPassWordActivity"/>
+        <activity android:name=".activity.AddSubActivity"/>
+        <activity android:name=".activity.ControlSubActivity"/>
+        <activity android:name=".activity.DelateSubActivity"/>
+        <activity android:name=".activity.SubInfoModifyActivity"/>
+        <activity android:name=".activity.TestSubActivity"/>
         <activity
             android:name=".activity.TabLessActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".activity.RepairProjectActivity" />
-        <activity android:name=".activity.WorkersListActivity" />
-        <activity android:name=".activity.WorkersInfoActivity" />
-        <activity android:name=".activity.RepairConfirmActivity" />
-        <activity android:name=".activity.CameraActivity" />
-        <activity android:name=".activity.RepairTrackActivity" />
-        <activity android:name=".activity.RepairPaymentActivity" />
-        <activity android:name=".activity.EvaluateActivity" />
-        <activity android:name=".activity.RepairDetailInfoActivity" />
-        <activity android:name=".activity.RepairRecordActivity" />
-        <activity android:name=".activity.PaymentActivity" />
-        <activity android:name=".activity.PropertyFeeActivity" />
-        <activity android:name=".activity.GarbageFeeActivity" />
-        <activity android:name=".activity.ParkingFeeActivity" />
-        <activity android:name=".activity.PropertyAdActivity" />
-        <activity android:name=".activity.BullDetailsActivity" />
-        <activity android:name=".activity.AddServerActivity" />
-        <activity android:name=".activity.ViewHouseAcivity"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".activity.RepairProjectActivity"/>
+        <activity android:name=".activity.WorkersListActivity"/>
+        <activity android:name=".activity.WorkersInfoActivity"/>
+        <activity android:name=".activity.RepairConfirmActivity"/>
+        <activity android:name=".activity.CameraActivity"/>
+        <activity android:name=".activity.RepairTrackActivity"/>
+        <activity android:name=".activity.RepairPaymentActivity"/>
+        <activity android:name=".activity.EvaluateActivity"/>
+        <activity android:name=".activity.RepairDetailInfoActivity"/>
+        <activity android:name=".activity.RepairRecordActivity"/>
+        <activity android:name=".activity.PaymentActivity"/>
+        <activity android:name=".activity.PropertyFeeActivity"/>
+        <activity android:name=".activity.GarbageFeeActivity"/>
+        <activity android:name=".activity.ParkingFeeActivity"/>
+        <activity android:name=".activity.PropertyAdActivity"/>
+        <activity android:name=".activity.BullDetailsActivity"/>
+        <activity android:name=".activity.AddServerActivity"/>
+        <activity android:name=".activity.ViewHouseAcivity"/>
+        <activity android:name=".activity.PayFeeFinishActivity">
+        </activity>
+        <activity android:name=".activity.PayFeeRecordActivity">
+        </activity>
+        <activity android:name=".activity.PayDetailInfoActivity">
+        </activity>
     </application>
 
 </manifest>

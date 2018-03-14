@@ -137,8 +137,8 @@ public class RepairConfirmActivity extends Activity {
                 new android.content.DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        RepairManager.SubmissionToWeb(photo_url,bundle.getString("name"),et_inputInfo.getText().toString(),bundle.getString("bigProject")+"的"+ bundle.getString("smallProject"),
-                                bundle.getString("id")  );
+                        RepairManager.SubmissionToWeb(photo_url,et_inputInfo.getText().toString(),bundle.getString("bigProject")+"的"+ bundle.getString("smallProject"), bundle.getString("id"),bundle.getString("name")
+                                 );
                         Intent intent=new Intent(RepairConfirmActivity.this,RepairDetailInfoActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);
