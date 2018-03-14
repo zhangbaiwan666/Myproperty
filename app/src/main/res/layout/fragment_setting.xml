@@ -1,44 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:orientation="vertical"
-    android:src="@drawable/activity_background"
-    android:layout_height="fill_parent">
-
-<RelativeLayout
-    android:background="@color/White"
-    android:layout_marginTop="40dp"
-    android:id="@+id/head_info"
     android:layout_width="match_parent"
-    android:layout_height="80dp">
-    <ImageView
-        android:layout_marginLeft="13dp"
-        android:id="@+id/img_head"
-        android:layout_width="80dp"
-        android:padding="15dp"
-        android:src="@drawable/img_logo"
-        android:layout_height="80dp" />
+    android:layout_height="match_parent"
+    android:background="@drawable/activity_background"
+    android:orientation="vertical">
+<cottee.myproperty.view.ZoomInScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/img_head"
-        android:layout_width="match_parent"
         android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:gravity="center_vertical"
-            android:text="邮箱"/>
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:gravity="center_vertical"
-            android:layout_height="0dp"
-            android:text="小宇物业"/>
-    </LinearLayout>
-</RelativeLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/relativelayout_height">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/img_setting_fragment"/>
+            <LinearLayout
+                android:id="@+id/meItemHead"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+                <!--android:layout_alignParentBottom="true"-->
+
+
+                <ImageView
+                    android:id="@+id/imageHeader"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:onClick="onButtonClick"
+                    android:src="@drawable/img_logo" />
+
+
+                <LinearLayout
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="邮箱"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="16dp"
+                        android:textColor="@android:color/white"/>
+
+
+                    <TextView
+                        android:id="@+id/textId"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="当前物业"
+                        android:textColor="@android:color/white"
+                        android:singleLine="true"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </FrameLayout>
 
     <!--<RelativeLayout-->
 
@@ -74,7 +108,7 @@
     <RelativeLayout
         android:clickable="true"
         android:id="@+id/rl_view_house"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/selector_setting_choose_item"
         android:layout_width="match_parent"
         android:layout_height="50dp">
@@ -212,4 +246,6 @@
             android:layout_centerVertical="true"
             android:background="@drawable/img_next_arrow" />
     </RelativeLayout>
+    </LinearLayout>
+</cottee.myproperty.view.ZoomInScrollView>
 </LinearLayout>
