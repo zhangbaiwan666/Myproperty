@@ -146,11 +146,14 @@ public class DelateSubActivity extends Activity {
                                     String trim = viewById.getText().toString().trim();
                                     result=result+trim+",";
                                 }
-                                System.out.println("你张繁爸爸想看你得输出结果"+result);
+
                                 LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(DelateSubActivity.this, "", "");
                                 LoginRegisterManager loginRegisterManager = new LoginRegisterManager(DelateSubActivity.this, loginRegisterHandler);
                                 loginRegisterManager.UpdateSubAccount(et_sub_id.getText().toString().trim(),
                                         et_sub_remark.getText().toString().trim(),result);
+                                System.out.println("你张繁爸爸想看你得输出结果"+et_sub_id.getText().toString().trim());
+                                System.out.println("你张繁爸爸想看你得输出结果"+et_sub_remark.getText().toString().trim());
+                                System.out.println("你张繁爸爸想看你得输出结果"+result);
                                 dialog.dismiss();
 //                                    ((BaseActivity)getActivity()).goNextAnim();
                             }

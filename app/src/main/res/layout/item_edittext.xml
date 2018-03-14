@@ -7,19 +7,20 @@
 
     <EditText
         android:id="@+id/edit_text"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:textSize="12dp"
         android:digits="1234567890"
         android:background="@android:drawable/editbox_background_normal"
         android:hint="输入电话"
         android:maxLength="11"
-        android:textColorHint="#7c7c7c"
-        android:textSize="24sp" />
+        android:textColorHint="#7c7c7c" />
     <Button
         android:id="@+id/btn_delete_sub_phone"
         android:layout_gravity="center_vertical"
         android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_height="35dp"
         android:text="删除"
+        android:textSize="12dp"
         />
 </LinearLayout>

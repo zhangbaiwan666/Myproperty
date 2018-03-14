@@ -878,8 +878,8 @@ public class LoginRegisterManager implements Serializable {
                     String session = Session.getSession();
                     OkHttpClient client = new OkHttpClient();
                     RequestBody requestBody = new FormBody.Builder()
-                            .add("sub_remark",sub_remark)
-                            .add("sub_phone",sub_phone)
+                            .add("remark",sub_remark)
+                            .add("phone",sub_phone)
                             .add("son_id",sub_id)
                             .add("session",session).build();
                     //把session add到requestbody中

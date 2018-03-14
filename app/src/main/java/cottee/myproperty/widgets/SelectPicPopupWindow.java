@@ -43,6 +43,7 @@ public class SelectPicPopupWindow extends PopupWindow {
         });
         PopSubPhoneAdapter popSubPhoneAdapter = new PopSubPhoneAdapter(context, R.layout.layout_item_sub_phone, list);
         lv_call_sub_phone.setAdapter(popSubPhoneAdapter);
+        popSubPhoneAdapter.notifyDataSetChanged();
         //设置按钮监听
         //设置SelectPicPopupWindow的View  
         this.setContentView(mMenuView);
