@@ -33,4 +33,7 @@ public class PayFeeRecordActivity extends Activity {
 
      });
     }
+    public  void  back(View view){
+        finish();
+    }
 }

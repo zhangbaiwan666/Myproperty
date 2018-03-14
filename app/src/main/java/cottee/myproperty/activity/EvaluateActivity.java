@@ -1,6 +1,7 @@
 package cottee.myproperty.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -18,7 +19,8 @@ public class EvaluateActivity extends Activity {
 
     }
     public void  Sure(View view){
-
+        Intent intent =new Intent(EvaluateActivity.this,MainActivity.class);
+        startActivity(intent);
     }
     public void back(View view){
         finish();
