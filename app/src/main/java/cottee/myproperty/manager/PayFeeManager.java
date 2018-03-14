@@ -66,7 +66,7 @@ public class PayFeeManager {
                     Response response = client.newCall(request).execute();
                    String responseData = response.body().string();
 
-                    System.out.println("rrrrrrrrrrrrrPAY"+ responseData);
+                    System.out.println( responseData);
                 } catch (Exception e) {
                     e.printStackTrace();
 
