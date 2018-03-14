@@ -19,6 +19,7 @@ import java.util.List;
 
 import cottee.myproperty.R;
 import cottee.myproperty.constant.SubInfo;
+import cottee.myproperty.constant.SubPhoneBean;
 import cottee.myproperty.widgets.SelectPicPopupWindow;
 
 /**
@@ -63,12 +64,12 @@ public class SubinfoAdapter extends ArrayAdapter<SubInfo> {
             viewHolder = (ViewHolder) view.getTag();//把之前暂存的ViewHolder赋给viewHolder
         }
         viewHolder.sub_name.setText(subInfo.getName());
-        viewHolder.sub_phone.setText(subInfo.getSub_phone());
+        viewHolder.sub_phone.setText(subInfo.getSub_phone().get(0));
         viewHolder.btn_call_phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 System.out.println("我点击了拨打电话得按钮");
-                menuWindow = new SelectPicPopupWindow((Activity) getContext(), itemsOnClick);
+                menuWindow = new SelectPicPopupWindow((Activity) getContext(), itemsOnClick,subInfo.getSub_phone());
                 //显示窗口
                 menuWindow.showAtLocation(view, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
             }
@@ -83,22 +84,22 @@ public class SubinfoAdapter extends ArrayAdapter<SubInfo> {
         public void onClick(View v) {
             menuWindow.dismiss();
             switch (v.getId()) {
-                case R.id.btn_phone_one:
-                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:18888888888"));
-                    if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                        // TODO: Consider calling
-                        //    ActivityCompat#requestPermissions
-                        // here to request the missing permissions, and then overriding
-                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                        //                                          int[] grantResults)
-                        // to handle the case where the user grants the permission. See the documentation
-                        // for ActivityCompat#requestPermissions for more details.
-                        return;
-                    }
-                    getContext().startActivity(intent);
-                    break;
-                case R.id.btn_phone_two:
-                    break;
+//                case R.id.btn_phone_one:
+//                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:18888888888"));
+//                    if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//                        // TODO: Consider calling
+//                        //    ActivityCompat#requestPermissions
+//                        // here to request the missing permissions, and then overriding
+//                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//                        //                                          int[] grantResults)
+//                        // to handle the case where the user grants the permission. See the documentation
+//                        // for ActivityCompat#requestPermissions for more details.
+//                        return;
+//                    }
+//                    getContext().startActivity(intent);
+//                    break;
+////                case R.id.btn_phone_two:
+//                    break;
                 default:
                     break;
             }

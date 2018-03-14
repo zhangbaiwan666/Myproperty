@@ -10,23 +10,28 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 
+import java.util.List;
+
 import cottee.myproperty.R;
+import cottee.myproperty.adapter.PopSubPhoneAdapter;
+import cottee.myproperty.adapter.SubPhoneAdapter;
 
 public class SelectPicPopupWindow extends PopupWindow {
 
 
-    private Button btn_phone_one, btn_phone_two, btn_cancel;
+    private Button  btn_cancel;
+    private ListView lv_call_sub_phone;
     private View mMenuView;
 
-    public SelectPicPopupWindow(Activity context,OnClickListener itemsOnClick) {
+    public SelectPicPopupWindow(Activity context, OnClickListener itemsOnClick, List list) {
         super(context);
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mMenuView = inflater.inflate(R.layout.pop_layout, null);
-        btn_phone_one = (Button) mMenuView.findViewById(R.id.btn_phone_one);
-        btn_phone_two = (Button) mMenuView.findViewById(R.id.btn_phone_two);
+        mMenuView = inflater.inflate(R.layout.pop_layout,null);
+        lv_call_sub_phone = (ListView) mMenuView.findViewById(R.id.lv_call_sub_phone);
         btn_cancel = (Button) mMenuView.findViewById(R.id.btn_cancel);
         //取消按钮  
         btn_cancel.setOnClickListener(new OnClickListener() {
@@ -36,9 +41,9 @@ public class SelectPicPopupWindow extends PopupWindow {
                 dismiss();
             }
         });
-        //设置按钮监听  
-        btn_phone_two.setOnClickListener(itemsOnClick);
-        btn_phone_one.setOnClickListener(itemsOnClick);
+        PopSubPhoneAdapter popSubPhoneAdapter = new PopSubPhoneAdapter(context, R.layout.layout_item_sub_phone, list);
+        lv_call_sub_phone.setAdapter(popSubPhoneAdapter);
+        //设置按钮监听
         //设置SelectPicPopupWindow的View  
         this.setContentView(mMenuView);
         //设置SelectPicPopupWindow弹出窗体的宽  
