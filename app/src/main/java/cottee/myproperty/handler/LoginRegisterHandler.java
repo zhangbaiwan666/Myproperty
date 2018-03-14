@@ -431,10 +431,12 @@ public class LoginRegisterHandler extends Handler {
                 switch (msg.arg1) {
                     case UPDATESUBSUCCESS:
                         ((Activity)context).finish();
+                        Intent intent = new Intent(context, ControlSubActivity.class);
+                        ((Activity)context).startActivity(intent);
                         Toast.makeText(context, "修改成功", Toast.LENGTH_SHORT).show();
                         break;
                     case UPDATESUBFAILED:
-                        Toast.makeText(context, "修改失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "修改失败,请检查输入信息是否正确", Toast.LENGTH_SHORT).show();
                         break;
                 }
                 break;

@@ -30,7 +30,8 @@
         <activity android:name=".activity.ResetPassWordActivity"/>
         <activity android:name=".activity.AddSubActivity"/>
         <activity android:name=".activity.ControlSubActivity"/>
-        <activity android:name=".activity.DelateSubActivity"/>
+        <activity android:name=".activity.DelateSubActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".activity.SubInfoModifyActivity"/>
         <activity android:name=".activity.TestSubActivity"/>
         <activity

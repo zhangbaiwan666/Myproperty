@@ -51,7 +51,7 @@ public class MainActivity extends FragmentActivity {
 
             mTabHost.addTab(tabSpec, fragmentArray[i], null);
 
-            mTabHost.getTabWidget().getChildAt(i).setBackgroundResource(R.drawable.bottom_background);
+            mTabHost.getTabWidget().getChildAt(i).setBackgroundResource(R.color.white);
         }
     }
 

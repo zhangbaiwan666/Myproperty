@@ -9,6 +9,7 @@
     <color name="gray3">#FF969696</color>
     <color name="gray1">#cfcfcf</color>
     <color name="theme">#effc8700</color>
+    <color name="main_tab">#effff7ee</color>
     <color name="titleTextColor">@color/White</color>
     <color name="titleBg">@color/transparent</color>
     <color name="transparent">#00000000</color>

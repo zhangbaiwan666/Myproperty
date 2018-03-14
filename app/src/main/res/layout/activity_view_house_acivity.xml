@@ -5,4 +5,9 @@
     android:layout_height="match_parent"
     tools:context="cottee.myproperty.activity.ViewHouseAcivity">
     <include layout="@layout/layout_title"/>
+    <ListView
+        android:id="@+id/lv_show_house"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
 </LinearLayout>
