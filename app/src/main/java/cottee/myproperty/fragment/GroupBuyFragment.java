@@ -33,7 +33,7 @@ public class GroupBuyFragment extends Fragment {
     private String[] titles;
     private ArrayList<ImageView> images;
     private ArrayList<View> dots;
-    private TextView title;
+//    private TextView title;
     private ViewPager mViewPager;
     private ViewPagerAdapter adapter;
     private View rootView;
@@ -112,8 +112,8 @@ public class GroupBuyFragment extends Fragment {
         dots.add(rootView.findViewById(R.id.dot_6));
         dots.add(rootView.findViewById(R.id.dot_7));
 
-        title = (TextView) rootView.findViewById(R.id.title);
-        title.setText(titles[0]);
+//        title = (TextView) rootView.findViewById(R.id.title);
+//        title.setText(titles[0]);
 
         mViewPager = (ViewPager)rootView.findViewById(R.id.vp);
 
@@ -125,7 +125,7 @@ public class GroupBuyFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 // TODO Auto-generated method stub
-                title.setText(titles[position]);
+//                title.setText(titles[position]);
 
                 dots.get(oldPosition).setBackgroundResource(R.drawable.dot_normal);
                 dots.get(position).setBackgroundResource(R.drawable.dot_focused);

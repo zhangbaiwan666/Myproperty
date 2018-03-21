@@ -14,6 +14,7 @@ import android.widget.EditText;
 import java.util.List;
 
 import cottee.myproperty.R;
+import cottee.myproperty.constant.ItemBean;
 
 /**
  * Created by z on 2016/8/17 0017.

@@ -1,5 +1,7 @@
 package cottee.myproperty;
 
+import android.util.Log;
+
 import org.junit.*;
 
 import java.io.IOException;
@@ -20,20 +22,23 @@ import static org.junit.Assert.*;
 public class TestTest {
     @org.junit.Test
     public void test1() throws Exception {
+        System.out.println("判断session是否过期");
         new Thread(){
             @Override
             public void run() {
                 String session = Session.getSession();
                 OkHttpClient client = new OkHttpClient();
                 RequestBody requestBody = new FormBody.Builder().add("session",session).build();
-                Request request = new Request.Builder().url(Properties.SUB_LIST_PATH).post(requestBody).build();
                 Response response = null;
+                Request request = new Request.Builder().url(Properties.SUB_LIST_PATH).post(requestBody).build();
                 try {
                     response = client.newCall(request).execute();
+                    System.out.println(response.body().string());
+                    assertEquals(1, response.body().string());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                System.out.println(response);
+
             }
         };
 

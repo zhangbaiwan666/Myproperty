@@ -19,6 +19,7 @@ public abstract class NoDoubleClickListener implements View.OnClickListener {
         if (currentTime - lastClickTime > MIN_CLICK_DELAY_TIME) {
             lastClickTime = currentTime;
             onNoDoubleClick(v);
+
         }
     }
     protected abstract void onNoDoubleClick(View v);

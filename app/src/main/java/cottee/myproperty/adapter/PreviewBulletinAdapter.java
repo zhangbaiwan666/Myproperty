@@ -33,7 +33,7 @@ public class PreviewBulletinAdapter extends ArrayAdapter<BullentinBean> {
         TextView bulletin_title;
         TextView bulletin_time;
         TextView bulletin_message;
-
+        TextView bulletin_flags;
     }
 
     @Override
@@ -48,6 +48,7 @@ public class PreviewBulletinAdapter extends ArrayAdapter<BullentinBean> {
             viewHolder.bulletin_title = view.findViewById(R.id.tv_bulletin_title);//从View中获取ImageView，并暂存新建的ViewHolder中
             viewHolder.bulletin_time = view.findViewById(R.id.tv_bulletin_time);//从View中获取TextView，并暂存新建的ViewHolder中
             viewHolder.bulletin_message = view.findViewById(R.id.tv_bulletin_message);
+            viewHolder.bulletin_flags = view.findViewById(R.id.tv_bulletin_flags);
             //对于item得操作
 
             view.setTag(viewHolder);//使用setTag把查找的view缓存起来方便多次重用
@@ -59,6 +60,9 @@ public class PreviewBulletinAdapter extends ArrayAdapter<BullentinBean> {
         }
         viewHolder.bulletin_title.setText(bullentinBean.getTitle());
         viewHolder.bulletin_time.setText(bullentinBean.getTime());
+        viewHolder.bulletin_message.setText(bullentinBean.getMessage());
+        viewHolder.bulletin_flags.setTextColor(bullentinBean.getColor());
+        viewHolder.bulletin_flags.setText(bullentinBean.getFlags());
         viewHolder.bulletin_message.setText(bullentinBean.getMessage());
         view.setOnClickListener(new NoDoubleClickListener() {
             @Override

@@ -78,7 +78,7 @@ public class EmailRegisterActivity extends Activity {
 //                        }
                     }
                     else {
-                        Toast.makeText(EmailRegisterActivity.this,"error",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EmailRegisterActivity.this,"输入的邮箱格式不正确",Toast.LENGTH_SHORT).show();
                         iv_emailjudge.setVisibility(View.VISIBLE);
                          iv_emailjudge.setBackgroundResource(R.drawable.email_error);
                     }

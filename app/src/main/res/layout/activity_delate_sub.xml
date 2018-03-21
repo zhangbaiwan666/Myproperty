@@ -170,6 +170,6 @@
         android:layout_height="40dp"
         android:text="保存修改信息"
         android:textSize="12dp"
-        android:background="@drawable/selector_button_suceess"
+        android:background="@drawable/selector_button_login"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>

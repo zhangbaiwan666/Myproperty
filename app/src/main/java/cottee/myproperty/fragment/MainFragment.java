@@ -56,7 +56,7 @@ public class MainFragment extends Fragment {
 	private String[] titles;
 	private ArrayList<ImageView> images;
 	private ArrayList<View> dots;
-	private TextView title;
+//	private TextView title;
 	private ViewPager mViewPager;
 	private ViewPagerAdapter adapter;
 	private PopupWindow popRight;
@@ -129,24 +129,31 @@ public class MainFragment extends Fragment {
 		BullentinBean bullentinBean = new BullentinBean();
 		bullentinBean.setTime("18:30");
 		bullentinBean.setTitle("供暖通知");
+		bullentinBean.setFlags("急");
 		bullentinBean.setMessage("小区将于清明节后停止供暖");
 		bullentinlist.add(0,bullentinBean);
 
 		BullentinBean bullentinBean1 = new BullentinBean();
 		bullentinBean1.setTime("11:30");
-		bullentinBean1.setTitle("停水通知");
-		bullentinBean1.setMessage("明天后两天小区停水，望周知");
+		bullentinBean1.setTitle("活动通知");
+		bullentinBean1.setFlags("活");
+		bullentinBean1.setColor(R.color.theme);
+		bullentinBean1.setMessage("篮球比赛，点击报名");
 		bullentinlist.add(1,bullentinBean1);
 
 		BullentinBean bullentinBean2 = new BullentinBean();
 		bullentinBean2.setTime("8:30");
 		bullentinBean2.setTitle("停电通知");
+		bullentinBean2.setFlags("急");
+		bullentinBean2.setColor(R.color.red2);
 		bullentinBean2.setMessage("明天后两天小区停电，望周知");
 		bullentinlist.add(2,bullentinBean2);
 
 		BullentinBean bullentinBean3 = new BullentinBean();
 		bullentinBean3.setTime("2:30");
-		bullentinBean3.setTitle("停水通知");
+		bullentinBean3.setTitle("停电通知");
+		bullentinBean3.setFlags("急");
+		bullentinBean3.setColor(R.color.red2);
 		bullentinBean3.setMessage("明天后两天小区停水，望周知");
 		bullentinlist.add(3,bullentinBean3);
 
@@ -255,8 +262,8 @@ public class MainFragment extends Fragment {
 				dots.add(rootView.findViewById(R.id.dot_6));
 				dots.add(rootView.findViewById(R.id.dot_7));
 
-				title = (TextView) rootView.findViewById(R.id.title);
-				title.setText(titles[0]);
+//				title = (TextView) rootView.findViewById(R.id.title);
+//				title.setText(titles[0]);
 
 				mViewPager = (ViewPager)rootView.findViewById(R.id.vp);
 
@@ -268,7 +275,7 @@ public class MainFragment extends Fragment {
 					@Override
 					public void onPageSelected(int position) {
 						// TODO Auto-generated method stub
-						title.setText(titles[position]);
+//						title.setText(titles[position]);
 
 						dots.get(oldPosition).setBackgroundResource(R.drawable.dot_normal);
 						dots.get(position).setBackgroundResource(R.drawable.dot_focused);
@@ -327,27 +334,18 @@ public class MainFragment extends Fragment {
 
 			//切换图片
 			private class ViewPagerTask implements Runnable {
-
 				@Override
 				public void run() {
-					// TODO Auto-generated method stub
 					currentItem = (currentItem +1) % imageIds.length;
-					//更新界面
             handler.sendEmptyMessage(0);
 					handler.obtainMessage().sendToTarget();
 				}
-
 			}
-
 			private Handler handler = new Handler(){
-
 				@Override
 				public void handleMessage(Message msg) {
-					// TODO Auto-generated method stub
-					//设置当前页面
 					mViewPager.setCurrentItem(currentItem);
 				}
-
 			};
 
 	private List<PropertyListBean> init() {

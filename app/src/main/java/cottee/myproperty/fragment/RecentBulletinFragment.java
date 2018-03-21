@@ -57,7 +57,7 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
         rListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), "你点击了Listview"+(i-1), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "网络请求超时", Toast.LENGTH_LONG).show();
             }
         });
         rListView.setOnRefreshListener(this);
@@ -65,8 +65,7 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
     }
     private class TabFragmentAdapter extends ArrayAdapter<BullentinBean> {
 
-        public TabFragmentAdapter(Context context, int textViewResourceId, List<BullentinBean>
-                objects) {
+        public TabFragmentAdapter(Context context, int textViewResourceId, List<BullentinBean> objects){
             super(context, textViewResourceId, objects);
         }
          class ViewHolder{

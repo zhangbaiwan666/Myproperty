@@ -448,7 +448,6 @@ public class LoginRegisterManager implements Serializable {
                 SharedPreferences preferences=context.getSharedPreferences("user", Context.MODE_PRIVATE);
 //                String session=preferences.getString("session", "");
                 String session = Session.getSession();
-                System.out.println("当前session为"+session);
                 OkHttpClient client = new OkHttpClient();
                 RequestBody requestBody = new FormBody.Builder().add("session",session).build();
                 Request request = new Request.Builder().url(Properties.SUB_LIST_PATH).post(requestBody).build();
@@ -957,6 +956,71 @@ public class LoginRegisterManager implements Serializable {
                 }
             }
         }.start();
+    }
+
+    public void ShowNotice(final String num_start){
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    SharedPreferences preferences=context.getSharedPreferences("user", Context.MODE_PRIVATE);
+                    String session = Session.getSession();
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("session",session)
+                            .add("start",num_start).build();
+                    //把session add到requestbody中
+                    Request request = new Request.Builder().url(Properties.MAIN_NOTICE_LIST).post(requestBody).build();
+                    Response response = client.newCall(request).execute();
+                    String recode = response.body().string();
+                    String recode_trim = recode.trim();
+
+                    //如果返回250，表示session过期，如果session通过返回之前正常的0,1逻辑
+                    if (recode_trim.equals("250")){
+                        //本地做重新登录得动作
+                        String email=preferences.getString("name", "");
+                        String password=preferences.getString("psword", "");
+                        final String id = email;
+                        final String psw = password;
+                        OkHttpClient client1 = new OkHttpClient();
+                        RequestBody requestBody1 = new FormBody.Builder().add("username", id).add("password", psw).build();
+                        Request request1 = new Request.Builder().url(Properties.LOGIN_PATH).post(requestBody1).build();
+                        Response response1 = client1.newCall(request1).execute();
+                        if (response1.isSuccessful()) {
+                            //获得新的session
+                            String str = response1.body().string();
+                            Session.setSession(str);
+                            ShowAllProperty(session);
+                        }
+
+                    }else {
+                        parseJSONWithGSON(recode_trim);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            private void parseJSONWithGSON(String recode_trim) {
+                //使用轻量级的Gson解析得到的json
+                JsonObject jsonObject = new JsonParser().parse(recode_trim).getAsJsonObject();
+                JsonArray notice_list = jsonObject.getAsJsonArray("notice_list");
+                System.out.println("公告表里都有什么"+notice_list);
+                System.out.println("公告表里都有什么"+notice_list);
+                System.out.println("公告表里都有什么"+notice_list);
+                Gson gson = new Gson();
+
+//                List<HouseListBean> houseListBeans = gson.fromJson(son_show, new TypeToken<List<HouseListBean>>() {
+//                }.getType());
+//
+//                System.out.println("propertyListBeans"+houseListBeans);
+//                Message msg = new Message();
+//                msg.what=Properties.SHOW_NOTICE;
+//                msg.obj=houseListBeans;
+//                System.out.println("propertyListBeans的传出字符串"+houseListBeans);
+//                loginRegisterHandler.sendMessage(msg);
+            }
+        }.start();
+
     }
 }
 

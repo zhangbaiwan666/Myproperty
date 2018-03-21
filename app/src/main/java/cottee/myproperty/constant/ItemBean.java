@@ -1,4 +1,4 @@
-package cottee.myproperty.widgets;
+package cottee.myproperty.constant;
 
 /**
  * Created by zengd on 2016/8/17 0017.

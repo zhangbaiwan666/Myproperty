@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,13 +19,12 @@ import java.util.List;
 
 import cottee.myproperty.R;
 import cottee.myproperty.adapter.SubPhoneAdapter;
-import cottee.myproperty.adapter.SubinfoAdapter;
 import cottee.myproperty.constant.SubPhoneBean;
 import cottee.myproperty.handler.LoginRegisterHandler;
 import cottee.myproperty.manager.LoginRegisterManager;
 import cottee.myproperty.uitils.Session;
 import cottee.myproperty.widgets.EditextListAdapter;
-import cottee.myproperty.widgets.ItemBean;
+import cottee.myproperty.constant.ItemBean;
 import cottee.myproperty.widgets.Title;
 
 public class DelateSubActivity extends Activity {

@@ -32,12 +32,14 @@ public class SettingFragment extends Fragment {
 	private TextView repair_record;
 	private RelativeLayout rl_repair_record;
 	private RelativeLayout rl_pay_record;
+	private boolean clicked=true;
 
 	@SuppressLint("WrongViewCast")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View inflate = inflater.inflate(R.layout.fragment_setting, null);
 		Intent intent = getActivity().getIntent();
+
 		int property_name = intent.getIntExtra("property_name", 0);
 		System.out.println("传到FragmentSetting的property_name为"+property_name);
 		repair_record = (TextView)inflate.findViewById(R.id.repair_record);
@@ -65,10 +67,12 @@ public class SettingFragment extends Fragment {
 		rl_house_control.setOnClickListener(new NoDoubleClickListener() {
 			@Override
 			public void onNoDoubleClick(View view) {
-				LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getActivity(), "","");
-				LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getActivity(), loginRegisterHandler);
-				loginRegisterManager.GsonSubList();
-
+				if (clicked) {
+					LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getActivity(), "", "");
+					LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getActivity(), loginRegisterHandler);
+					loginRegisterManager.GsonSubList();
+					clicked=false;
+				}
 			}
 		});
 		rl_view_house.setOnClickListener(new NoDoubleClickListener() {
@@ -110,6 +114,25 @@ public class SettingFragment extends Fragment {
 		return inflate;
 
 	}
+	private static volatile SettingFragment instance=null;
+	private static SettingFragment getInstance(){
+		synchronized(Intent.class){
+			if(instance==null){
 
+			}
+		}
+		return instance;
+	}
 
+	@Override
+	public void onPause() {
+		super.onPause();
+		clicked=true;
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		clicked=true;
+	}
 }

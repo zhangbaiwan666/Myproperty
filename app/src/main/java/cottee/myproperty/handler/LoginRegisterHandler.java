@@ -161,10 +161,10 @@ public class LoginRegisterHandler extends Handler {
             case Properties.CHECKOUT_EMAIL:
                 switch (msg.arg1) {
                     case SUBMITSUCCESSFUL:
-                        Toast.makeText(context, "请等待邮件", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "请等待邮件", Toast.LENGTH_LONG).show();
                         break;
                     case EMAILEXIST:
-                        Toast.makeText(context, "当前邮箱已注册", Toast.LENGTH_SHORT)
+                        Toast.makeText(context, "当前邮箱已注册", Toast.LENGTH_LONG)
                                 .show();
                         break;
                     case SUBMITFAILED: {
@@ -180,13 +180,17 @@ public class LoginRegisterHandler extends Handler {
                 break;
             case Properties.USER_LOGIN:
                 switch (msg.arg1) {
+                    case PSWFAILD:
+                        Toast.makeText(context, "帐号或密码错误", Toast.LENGTH_LONG)
+                                .show();
+                        break;
                     case LOGINSSUCCEED:
                         SharedPreferences preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString("name", email);
                         editor.putString("psword", password);
                         editor.commit();
-                        Toast.makeText(context, "登陆成功", Toast.LENGTH_SHORT)
+                        Toast.makeText(context, "登陆成功", Toast.LENGTH_LONG)
                                 .show();
                         LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "","");
                         LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
@@ -194,12 +198,9 @@ public class LoginRegisterHandler extends Handler {
                         loginRegisterManager.ShowAllProperty(session);
 
                         break;
-                    case PSWFAILD:
-                        Toast.makeText(context, "密码错误", Toast.LENGTH_SHORT)
-                                .show();
-                        break;
+
                     case USERUNEXIST:
-                        Toast.makeText(context, "当前账号不存在", Toast.LENGTH_SHORT)
+                        Toast.makeText(context, "当前账号不存在", Toast.LENGTH_LONG)
                                 .show();
                         break;
                 }
@@ -208,12 +209,12 @@ public class LoginRegisterHandler extends Handler {
             case Properties.CHECKOUT_EMAIL_VER:
                 switch (msg.arg1) {
                     case READINSSUCCEED:
-                        Toast.makeText(context, "注册成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "注册成功", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(context, MainActivity.class);
                         context.startActivity(intent);
                         break;
                     case READINFAILD:
-                        Toast.makeText(context, "注册失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "注册失败", Toast.LENGTH_LONG).show();
                         break;
 
                     default:
@@ -229,10 +230,10 @@ public class LoginRegisterHandler extends Handler {
                         context.startActivity(intent);
                         break;
                     case VERSFAILD:
-                        Toast.makeText(context, "验证码不匹配", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "验证码不匹配", Toast.LENGTH_LONG).show();
                         break;
                     case VERTIMOUTPASS:
-                        Toast.makeText(context, "验证码过期或邮箱不存在返回", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "验证码过期或邮箱不存在返回", Toast.LENGTH_LONG).show();
                         break;
                     case VERTIMOUTFAILED:
                         break;
@@ -246,7 +247,7 @@ public class LoginRegisterHandler extends Handler {
             case Properties.FORGET_PASS_WORD:
                 switch (msg.arg1) {
                     case SUBMITSUCCEE:
-                        Toast.makeText(context, "请等待邮件", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "请等待邮件", Toast.LENGTH_LONG).show();
                         break;
                     case SUBMITFAIL:
                         break;
@@ -264,7 +265,7 @@ public class LoginRegisterHandler extends Handler {
                         Intent intent = new Intent(context, ResetPassWordActivity.class);
                         intent.putExtra("forgetmail", email);
                         context.startActivity(intent);
-                        Toast.makeText(context, "身份验证成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "身份验证成功", Toast.LENGTH_LONG).show();
                         break;
                     case VERMISTAKE:
                         break;
@@ -281,7 +282,7 @@ public class LoginRegisterHandler extends Handler {
                     case RESETSUCCEE:
                         Intent intent = new Intent(context, MainActivity.class);
                         context.startActivity(intent);
-                        Toast.makeText(context, "修改成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "修改成功", Toast.LENGTH_LONG).show();
                         break;
                     case RESETFAILED:
                         break;
@@ -305,13 +306,13 @@ public class LoginRegisterHandler extends Handler {
                                 LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
 //                                loginRegisterManager.GsonProperyt();
                                 loginRegisterManager.GsonSubList();
-                                Toast.makeText(context, "添加子账户成功", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "添加子账户成功", Toast.LENGTH_LONG).show();
                         break;
                     case ADDFAILED:
-                        Toast.makeText(context, "添加失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "添加失败", Toast.LENGTH_LONG).show();
                         break;
                     case ADDFAILED_NOT_CHOOSE_HOUSE:
-                        Toast.makeText(context, "尚未选择房屋", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "尚未选择房屋", Toast.LENGTH_LONG).show();
                         break;
 
                     default:
@@ -386,7 +387,9 @@ public class LoginRegisterHandler extends Handler {
                 intent1.putExtra("property_name", property);
                 intent1.putExtra("property_pro_id", property_pro_id);
                 intent1.putExtra("property_home_id", property_home_id);
+
                 context.startActivity(intent1);
+
                 HealthMap.put("address_list", address_list);
                 HealthMap.put("home_id_list", home_id_list);
                 break;
@@ -420,11 +423,11 @@ public class LoginRegisterHandler extends Handler {
                         LoginRegisterManager loginRegisterManager1 = new LoginRegisterManager(context, loginRegisterHandler1);
 //                                loginRegisterManager.GsonProperyt();
                         loginRegisterManager1.GsonSubList();
-                        Toast.makeText(context, "删除成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "删除成功", Toast.LENGTH_LONG).show();
 
                         break;
                     case DELETESUBFAILED:
-                        Toast.makeText(context, "删除失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "删除失败", Toast.LENGTH_LONG).show();
                         break;
                 }
             case Properties.UPDATE_SUB_ACCOUNT_:
@@ -433,7 +436,7 @@ public class LoginRegisterHandler extends Handler {
                         ((Activity)context).finish();
                         Intent intent = new Intent(context, ControlSubActivity.class);
                         ((Activity)context).startActivity(intent);
-                        Toast.makeText(context, "修改成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "修改成功", Toast.LENGTH_LONG).show();
                         break;
                     case UPDATESUBFAILED:
                         Toast.makeText(context, "修改失败,请检查输入信息是否正确", Toast.LENGTH_SHORT).show();
@@ -444,7 +447,7 @@ public class LoginRegisterHandler extends Handler {
                 switch (msg.arg1) {
                     case LOGINSSUCCEED:
 
-                        Toast.makeText(context, "欢迎回来", Toast.LENGTH_SHORT)
+                        Toast.makeText(context, "欢迎回来", Toast.LENGTH_LONG)
                                 .show();
                         LoginRegisterHandler loginRegisterHandler1 = new LoginRegisterHandler(context, "", "");
                         LoginRegisterManager loginRegisterManager1 = new LoginRegisterManager(context, loginRegisterHandler1);
@@ -453,14 +456,17 @@ public class LoginRegisterHandler extends Handler {
 
                         break;
                     case PSWFAILD:
-                        Toast.makeText(context, "本地账户为空", Toast.LENGTH_SHORT)
+                        Toast.makeText(context, "本地账户为空", Toast.LENGTH_LONG)
                                 .show();
                         break;
                     case USERUNEXIST:
-                        Toast.makeText(context, "当前账号不存在", Toast.LENGTH_SHORT)
+                        Toast.makeText(context, "当前账号不存在", Toast.LENGTH_LONG)
                                 .show();
                         break;
                 }
+            case Properties.SHOW_NOTICE:
+
+                break;
 
         }
     }

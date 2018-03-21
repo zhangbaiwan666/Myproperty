@@ -126,9 +126,9 @@
             android:layout_height="match_parent"
             android:text="查看房屋信息"/>
         <Button
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_marginRight="10dp"
+            android:layout_width="16dp"
+            android:layout_height="19dp"
+            android:layout_marginRight="13dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:background="@drawable/img_next_arrow" />
@@ -155,9 +155,9 @@
             android:layout_height="match_parent"
             android:text="家庭成员管理"/>
         <Button
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_marginRight="10dp"
+            android:layout_width="16dp"
+            android:layout_height="19dp"
+            android:layout_marginRight="13dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:background="@drawable/img_next_arrow" />
@@ -185,9 +185,9 @@
             android:layout_toRightOf="@+id/img_notes_repaire"
             android:text="报修记录"/>
         <Button
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_marginRight="10dp"
+            android:layout_width="16dp"
+            android:layout_height="19dp"
+            android:layout_marginRight="13dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:background="@drawable/img_next_arrow" />
@@ -213,9 +213,9 @@
             android:layout_height="match_parent"
             android:text="缴费记录"/>
         <Button
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_marginRight="10dp"
+            android:layout_width="16dp"
+            android:layout_height="19dp"
+            android:layout_marginRight="13dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:background="@drawable/img_next_arrow" />
@@ -241,9 +241,9 @@
             android:layout_height="match_parent"
             android:text="设置"/>
         <Button
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_marginRight="10dp"
+            android:layout_width="16dp"
+            android:layout_height="19dp"
+            android:layout_marginRight="13dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:background="@drawable/img_next_arrow" />
