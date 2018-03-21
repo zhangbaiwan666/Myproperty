@@ -33,7 +33,6 @@ public class WorkersInfoActivity extends Activity {
         tv_project = (TextView)findViewById(R.id.tv_project);
         tv_phone = (TextView)findViewById(R.id.tv_phone);
         starLinearLayout = (StarLinearLayout)findViewById(R.id.star_pingjia);
-
         bundle = getIntent().getExtras();
         starLinearLayout.setScore(Float.parseFloat(bundle.getString("grade"))/
                 Float.parseFloat(bundle.getString("time")));
@@ -50,7 +49,7 @@ public class WorkersInfoActivity extends Activity {
         finish();
     }
     public  void  repair(View view){
-        Intent intent=new Intent(WorkersInfoActivity.this,RepairConfirmActivity.class);
+        Intent intent=new Intent(WorkersInfoActivity.this,RepairSubmitActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
     }

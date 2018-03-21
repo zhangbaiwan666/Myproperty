@@ -41,7 +41,7 @@
         <activity android:name=".activity.RepairProjectActivity"/>
         <activity android:name=".activity.WorkersListActivity"/>
         <activity android:name=".activity.WorkersInfoActivity"/>
-        <activity android:name=".activity.RepairConfirmActivity"/>
+        <activity android:name=".activity.RepairSubmitActivity"/>
         <activity android:name=".activity.CameraActivity"/>
         <activity android:name=".activity.RepairTrackActivity"/>
         <activity android:name=".activity.RepairPaymentActivity"/>

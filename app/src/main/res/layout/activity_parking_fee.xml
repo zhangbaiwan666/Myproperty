@@ -94,7 +94,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:paddingTop="10dp"
-            android:text="xx元"
+            android:text="xx"
             android:textSize="17dp"/>
     </RelativeLayout>
     <View

@@ -50,8 +50,8 @@ public class PropertyFeeActivity extends Activity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 rb = (RadioButton)findViewById(radioGroup.getCheckedRadioButtonId());
                 System.out.println( rb.getText());
-                money = "240000";
-                money2 = "480000";
+                money = "20000";
+                money2 = "40000";
                 if (rb.getText().equals("6个月"))
                    tv_propertyFee.setText(money +"元");
                 if (rb.getText().equals("12个月")){
@@ -91,6 +91,7 @@ public class PropertyFeeActivity extends Activity {
         finish();
     }
     public  void  Sure(View view){
+
         Intent intent=new Intent(this,PayFeeFinishActivity.class);
         Bundle bundle=new Bundle();
         bundle.putString("payFeeAmount",tv_propertyFee.getText().toString());

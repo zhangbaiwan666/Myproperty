@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cottee.myproperty.activity.WorkersListActivity;
-import cottee.myproperty.adapter.LeftAdapter;
-import cottee.myproperty.adapter.RightAdapter;
+import cottee.myproperty.adapter.LeftListViewAdapter;
+import cottee.myproperty.adapter.RightListViewAdapter;
 import cottee.myproperty.constant.BaseData;
 import cottee.myproperty.constant.Mechanic;
 import cottee.myproperty.constant.Properties;
@@ -35,8 +35,8 @@ public class RepairHandler extends Handler {
     private ListView lv_left;
     private ListView lv_Right;
     private TextView tv_title;
-    private LeftAdapter leftAdapter;
-    private RightAdapter rightAdapter;
+    private LeftListViewAdapter leftAdapter;
+    private RightListViewAdapter rightAdapter;
     private Context context;
 
     private ArrayList<BaseData> lists;
@@ -137,10 +137,9 @@ public class RepairHandler extends Handler {
     }
 
     public void initRepairProjectView() {
-        leftAdapter = new LeftAdapter(context,proinfo);
+        leftAdapter = new LeftListViewAdapter(context,proinfo);
         lv_left.setAdapter(leftAdapter);
-
-        rightAdapter = new RightAdapter(context,proinfo);
+        rightAdapter = new RightListViewAdapter(context,proinfo);
         lv_Right.setAdapter(rightAdapter);
         rightAdapter.updateData(lists);
 

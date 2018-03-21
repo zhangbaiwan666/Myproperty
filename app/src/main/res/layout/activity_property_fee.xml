@@ -78,13 +78,11 @@
         android:paddingTop="25dp"
         >
         <TextView
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="住宅面积(平方米):"
             android:textSize="16sp"
             android:id="@+id/textView2"/>
-
         <TextView
             android:id="@+id/tv_areaProperty"
             android:layout_width="wrap_content"
@@ -94,7 +92,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:paddingTop="10dp"
-            android:text="xxx平方米"
+            android:text="xxx"
             android:textSize="17dp"/>
     </RelativeLayout>
     <View
@@ -127,7 +125,7 @@
             android:layout_alignParentRight="true"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
-            android:text="xxx元"
+            android:text="xxx"
             android:textSize="17dp"/>
     </RelativeLayout>
     <View

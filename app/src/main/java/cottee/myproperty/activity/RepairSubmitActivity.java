@@ -19,7 +19,7 @@ import cottee.myproperty.manager.RepairManager;
 import cottee.myproperty.uitils.CustomDialog;
 import cottee.myproperty.uitils.NormalLoadPicture;
 
-public class RepairConfirmActivity extends Activity {
+public class RepairSubmitActivity extends Activity {
     private TextView tv_address;
     private ImageView imv_workerphoto;
     private TextView tv_confirmOfworker;
@@ -71,15 +71,15 @@ public class RepairConfirmActivity extends Activity {
         imv_takePhotoThree = (ImageView)findViewById(R.id.imv_takePhotoThree);
     }
     public  void takePhotoOne(View view){
-        Intent intent=new Intent(RepairConfirmActivity.this,CameraActivity.class);
+        Intent intent=new Intent(RepairSubmitActivity.this,CameraActivity.class);
         startActivityForResult(intent,1);
     }
     public  void takePhotoTwo(View view){
-        Intent intent=new Intent(RepairConfirmActivity.this,CameraActivity.class);
+        Intent intent=new Intent(RepairSubmitActivity.this,CameraActivity.class);
         startActivityForResult(intent,2);
     }
     public  void takePhotoThree(View view){
-        Intent intent=new Intent(RepairConfirmActivity.this,CameraActivity.class);
+        Intent intent=new Intent(RepairSubmitActivity.this,CameraActivity.class);
         startActivityForResult(intent,3);
     }
     @Override
@@ -89,11 +89,9 @@ public class RepairConfirmActivity extends Activity {
             case 1:
                 if(resultCode == RESULT_OK)
                 {
-
                     String filepath = data.getStringExtra( "filepath" );
                     bitmap = BitmapFactory.decodeFile( filepath );
                     imv_takePhotoOne.setImageBitmap(bitmap);
-
                 }
             case 2:
                 if(resultCode == RESULT_OK)
@@ -124,22 +122,22 @@ public class RepairConfirmActivity extends Activity {
 
 
         CustomDialog.Builder builder = new CustomDialog.Builder(this);
-        builder.setMessage("确定要提交报修单吗");
+        builder.setMessage("您还没有拍照，是否要拍照");
         // builder.setTitle("温馨小提示");
-        builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("否", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
 
             }
         });
 
-        builder.setNegativeButton("确定",
+        builder.setNegativeButton("是",
                 new android.content.DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         RepairManager.SubmissionToWeb(photo_url,et_inputInfo.getText().toString(),bundle.getString("bigProject")+"的"+ bundle.getString("smallProject"), bundle.getString("id"),bundle.getString("name")
                                  );
-                        Intent intent=new Intent(RepairConfirmActivity.this,RepairDetailInfoActivity.class);
+                        Intent intent=new Intent(RepairSubmitActivity.this,RepairDetailInfoActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);
                     }

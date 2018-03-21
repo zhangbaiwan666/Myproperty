@@ -12,11 +12,11 @@ import cottee.myproperty.R;
 import cottee.myproperty.constant.RepairProject;
 
 
-public class LeftAdapter extends BaseAdapter {
+public class LeftListViewAdapter extends BaseAdapter {
 
 	private Context context;
 	List<RepairProject.ProinfoBean> list;
-	public LeftAdapter(Context context, List list) {
+	public LeftListViewAdapter(Context context, List list) {
 		super();
 		this.context = context;
 		this.list=list;

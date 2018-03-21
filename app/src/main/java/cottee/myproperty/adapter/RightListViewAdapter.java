@@ -18,12 +18,12 @@ import cottee.myproperty.constant.RepairProject;
 import cottee.myproperty.uitils.NormalLoadPicture;
 
 
-public class RightAdapter extends BaseAdapter {
+public class RightListViewAdapter extends BaseAdapter {
 	private Context context;
 	private ArrayList<BaseData> data = new ArrayList<BaseData>();
 	List<RepairProject.ProinfoBean> list;
 	private ListView listView;
-	public RightAdapter(Context context, List list) {
+	public RightListViewAdapter(Context context, List list) {
 		super();
 		this.context = context;
 		this.list=list;

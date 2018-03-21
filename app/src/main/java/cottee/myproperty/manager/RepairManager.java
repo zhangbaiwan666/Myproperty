@@ -131,16 +131,10 @@ public class RepairManager {
         message.what = Properties.WorkersList;
         message.obj = projectStaffBeans;
         handler.sendMessage(message);
-
-
-
     }
     public static void  SubmissionToWeb(final String photo_url, final String remark, final String part, final String staff_id
     , final String staff_name){
         new Thread(new Runnable() {
-
-
-
             @Override
             public void run() {
                 try {
@@ -223,8 +217,7 @@ public class RepairManager {
     }
     public  void parseJSONRepairTrack(String responseData) {
         Gson gson = new Gson();
-
-       Message message = new Message();
+        Message message = new Message();
         message.what = Properties.RepairTrack;
         message.obj = gson.fromJson(responseData,RepairTrack.class).getIndent();
         repairTrackhandler.sendMessage(message);
@@ -258,11 +251,36 @@ public class RepairManager {
     private void parseJSONRepairAddress(String responseData) throws JSONException {
         JSONObject jsonObject = new JSONObject(responseData);
       String  address = jsonObject.getString("address");
-        System.out.println("-----------"+ address);
         Message message = new Message();
         message.what = Properties.RepairAddress;
         message.obj = address;
         repairAddresshandler.sendMessage(message);
     }
+    String RepairFee;
+    public    void sendRequestRepairPayment() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder().add
+                            ("session", Session.getSession())
+                            .add("repairFee",RepairFee).build();
+                    Request request = new Request.Builder()
+                            .url("https://thethreestooges.cn:5210/maintain/user/repairFee").post(requestBody)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String responseData = response.body().string();
+                    System.out.println("AAAAAAAAA"+responseData);
+                    parseJSONRepairAddress(responseData);
+                } catch (Exception e) {
+                    e.printStackTrace();
 
+                }
+            }
+
+
+
+        }).start();
+    }
 }

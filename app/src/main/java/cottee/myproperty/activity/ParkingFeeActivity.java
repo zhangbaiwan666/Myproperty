@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import cottee.myproperty.R;
-import cottee.myproperty.manager.PayFeeManager;
 
 public class ParkingFeeActivity extends Activity {
     Handler handler;
@@ -30,8 +29,8 @@ public class ParkingFeeActivity extends Activity {
                 }
             }
         };
-        PayFeeManager payFeeManager=new PayFeeManager(handler);
-        payFeeManager.sendRequestParkingFee();
+       // PayFeeManager payFeeManager=new PayFeeManager(handler);
+       // payFeeManager.sendRequestParkingFee();
     }
     public  void back(View view){
         finish();
