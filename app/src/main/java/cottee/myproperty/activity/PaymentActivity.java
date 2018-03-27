@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import cottee.myproperty.R;
 
 public class PaymentActivity extends Activity {
+
+    private LinearLayout ll_payRecord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +21,14 @@ public class PaymentActivity extends Activity {
         {
             actionBar.hide();
         }
+        ll_payRecord = (LinearLayout)findViewById(R.id.ll_payRecord);
+        ll_payRecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(PaymentActivity.this,PayFeeRecordActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     public void  back(View view){
         finish();

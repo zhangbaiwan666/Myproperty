@@ -67,6 +67,7 @@
             android:layout_height="wrap_content"
             android:text="￥2500"
             android:textSize="27dp"
+            android:textColor="#161616"
             android:paddingLeft="100dp"/>
 
     </LinearLayout>

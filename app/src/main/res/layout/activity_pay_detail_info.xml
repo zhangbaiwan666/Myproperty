@@ -377,12 +377,7 @@
             android:textSize="15dp"
             android:layout_weight="2"
             />
-        <!--<TextView-->
-        <!--android:id="@+id/repair_order"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:paddingRight="200dp"-->
-        <!--android:text="11"/>-->
+
 
         <ImageView
             android:layout_width="30dp"
