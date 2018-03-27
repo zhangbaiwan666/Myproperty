@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cottee.myproperty.R;
 import cottee.myproperty.manager.PayFeeManager;
@@ -50,8 +52,8 @@ public class PropertyFeeActivity extends Activity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 rb = (RadioButton)findViewById(radioGroup.getCheckedRadioButtonId());
                 System.out.println( rb.getText());
-                money = "20000";
-                money2 = "40000";
+                money = "2500";
+                money2 = "5000";
                 if (rb.getText().equals("6个月"))
                    tv_propertyFee.setText(money +"元");
                 if (rb.getText().equals("12个月")){
@@ -91,14 +93,18 @@ public class PropertyFeeActivity extends Activity {
         finish();
     }
     public  void  Sure(View view){
+        if (TextUtils.isEmpty( tv_propertyFee.getText() )){
+            Toast.makeText(this,"请选择要缴纳的月数",Toast.LENGTH_SHORT).show();
+        }else {
+            Intent intent = new Intent(this, PayFeeFinishActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("payFeeAmount", tv_propertyFee.getText().toString());
 
-        Intent intent=new Intent(this,PayFeeFinishActivity.class);
-        Bundle bundle=new Bundle();
-        bundle.putString("payFeeAmount",tv_propertyFee.getText().toString());
-        intent.putExtras(bundle);
-        PayFeeManager payFeeManager=new PayFeeManager(type,address,property_fee,rb.getText().toString(),tv_propertyFee.getText().toString(),area1);
-        payFeeManager.sendRequestPayFee();
-        startActivity(intent);
+            intent.putExtras(bundle);
+            PayFeeManager payFeeManager = new PayFeeManager(type, address, property_fee, rb.getText().toString(), tv_propertyFee.getText().toString(), area1);
+            payFeeManager.sendRequestPayFee();
+            startActivity(intent);
+        }
     }
 
 }

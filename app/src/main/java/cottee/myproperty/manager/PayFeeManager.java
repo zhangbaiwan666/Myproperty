@@ -10,8 +10,10 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+import cottee.myproperty.constant.PayDetailInfo;
 import cottee.myproperty.constant.PayFeeRecord;
 import cottee.myproperty.constant.Properties;
+import cottee.myproperty.handler.PayFeeDetailHandler;
 import cottee.myproperty.handler.PayFeeHandler;
 import cottee.myproperty.uitils.Session;
 import okhttp3.FormBody;
@@ -33,8 +35,9 @@ public class PayFeeManager {
     Handler PayFeeHandler;
     private String area;
     private String property_fee;
-    private PayFeeHandler payFeeHandler;
-
+    private PayFeeHandler payFeeRecordHandler;
+    private PayFeeDetailHandler payFeeDetailHandler;
+    private  String order_id;
     public PayFeeManager(String type, String address, String cost, String cost_time, String money,
                          String area){
         this.type=type;
@@ -46,14 +49,18 @@ public class PayFeeManager {
 
 
     }
-    public PayFeeManager(Handler PayFeeHandler){
-        this.PayFeeHandler=PayFeeHandler;
+    public PayFeeManager(Handler payFeeRecordHandler){
+        this.PayFeeHandler= payFeeRecordHandler;
     }
 
-public PayFeeManager(PayFeeHandler payFeeHandler){
-        this.payFeeHandler=payFeeHandler;
-}
-
+    public PayFeeManager(PayFeeHandler payFeeRecordHandler){
+        this.payFeeRecordHandler = payFeeRecordHandler;
+    }
+     public PayFeeManager(PayFeeDetailHandler payFeeDetailHandler,String order_id)
+    {
+    this.payFeeDetailHandler=payFeeDetailHandler;
+    this.order_id=order_id;
+    }
 
     public void sendRequestPayFee(){
         new Thread(new Runnable() {
@@ -70,7 +77,7 @@ public PayFeeManager(PayFeeHandler payFeeHandler){
                             .add("cost",cost)
                             .add("cost_time",cost_time)
                             .add("money",money).add("area",area).build();
-                    System.out.println("钱钱钱"+money);
+                    System.out.println("钱钱钱"+money+" "+type+" "+address+" "+cost+" "+cost_time+area);
                     Request request = new Request.Builder()
                             .url("https://thethreestooges.cn:5210/order_manage/payment/create").post(requestBody)
                             .build();
@@ -162,7 +169,7 @@ public PayFeeManager(PayFeeHandler payFeeHandler){
             @Override
             public void run() {
                 try {
-                    String start="6";
+                    String start="8";
                     OkHttpClient client = new OkHttpClient();
                     RequestBody requestBody = new FormBody.Builder().add
                             ("session", Session.getSession()).add("start",start)
@@ -185,12 +192,45 @@ public PayFeeManager(PayFeeHandler payFeeHandler){
         List<PayFeeRecord.ListBean> listBeans=gson.fromJson(responseData,PayFeeRecord.class).getList();
         System.out.println(listBeans.get(0).getC_time()+listBeans.get(0).getMoney()+listBeans.get(0).getOrder_id()
                 +listBeans.get(0).getType());
-
         Message message = new Message();
         message.what = Properties.PayFeeRecord;
        message.obj = listBeans;
-       payFeeHandler.sendMessage(message);
+       payFeeRecordHandler.sendMessage(message);
 
     }
+    public  void  sendRequestPayFeeDetail(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder().add
+                            ("session", Session.getSession()).add("order_id",order_id)
+                            .build();
+                    Request request = new Request.Builder()
+                            .url("https://thethreestooges.cn:5210/order_manage/payment/info").post(requestBody)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String responseData = response.body().string();
+                    System.out.println("详细"+responseData);
+                    parseJSONPayFeeDetail(responseData);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+    public  void parseJSONPayFeeDetail(String responseData) {
+        Gson gson = new Gson();
+        PayDetailInfo.PaymentinfoBean paymentinfo=gson.fromJson(responseData,PayDetailInfo.class).getPaymentinfo();
+        System.out.println(paymentinfo.getAddress()+paymentinfo.getArea());
+        Message message = new Message();
+        message.what = Properties.PayFeeDetail;
+        message.obj =paymentinfo;
+        payFeeDetailHandler.sendMessage(message);
+
+    }
+
 
 }

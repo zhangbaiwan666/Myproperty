@@ -347,6 +347,7 @@
             android:layout_alignParentTop="true"
             android:paddingTop="12dp"
              android:layout_weight="1"
+            android:paddingLeft="50dp"
             android:src="@drawable/lookaddress"/>
     </LinearLayout>
     <LinearLayout
@@ -391,6 +392,7 @@
             android:layout_alignParentTop="true"
             android:paddingTop="12dp"
             android:layout_weight="1"
+            android:paddingLeft="50dp"
             android:src="@drawable/lookaddress"/>
     </LinearLayout>
 </LinearLayout>

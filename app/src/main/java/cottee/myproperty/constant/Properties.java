@@ -51,5 +51,6 @@ public class Properties {
     public  final  static  int RepairAddress=3;
     public  final  static  int RepairTrack=4;
     public  final  static  int PayFeeRecord=5;
+    public final  static  int PayFeeDetail=6;
 
 }
