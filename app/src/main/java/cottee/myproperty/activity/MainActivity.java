@@ -25,7 +25,6 @@ public class MainActivity extends FragmentActivity {
 
     private int mImageViewArray[] = {R.drawable.selector_tab_home_btn,R.drawable.selector_tab_groupby_btn,R.drawable.selector_tab_setting_btn};
 
-
     private String mTextviewArray[] = {"首页","小区团购","我的"};
 
     public void onCreate(Bundle savedInstanceState) {

@@ -15,10 +15,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Arrays;
 import java.util.List;
 
 import cottee.myproperty.R;
 import cottee.myproperty.constant.SubInfo;
+import cottee.myproperty.constant.SubListBean;
 import cottee.myproperty.constant.SubPhoneBean;
 import cottee.myproperty.widgets.SelectPicPopupWindow;
 
@@ -26,8 +28,7 @@ import cottee.myproperty.widgets.SelectPicPopupWindow;
  * Created by Administrator on 2018/1/4.
  */
 
-public class SubinfoAdapter extends ArrayAdapter<SubInfo> {
-
+public class SubinfoAdapter extends ArrayAdapter<SubListBean> {
 
     private SelectPicPopupWindow menuWindow;
 
@@ -36,16 +37,15 @@ public class SubinfoAdapter extends ArrayAdapter<SubInfo> {
         TextView sub_name;
         TextView sub_phone;
         Button btn_call_phone;
-
     }
 
-    public SubinfoAdapter(Context context, int textViewResourceId, List<SubInfo>
+    public SubinfoAdapter(Context context, int textViewResourceId, List<SubListBean>
             objects) {
-        super(context, textViewResourceId, objects);
+        super(context,textViewResourceId,objects);
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
-        final SubInfo subInfo = getItem(position);//实例化在ArrayList<SubListBean>中第“position”个当前Fruit对象
+        final SubListBean subInfo = getItem(position);//实例化在ArrayList<SubListBean>中第“position”个当前Fruit对象
         View view;
         final ViewHolder viewHolder;
         if (convertView == null)//如果布局从来没有被加载过
@@ -56,19 +56,21 @@ public class SubinfoAdapter extends ArrayAdapter<SubInfo> {
             viewHolder.sub_phone = (TextView) view.findViewById(R.id.tv_sub_phone);//从View中获取TextView，并暂存新建的ViewHolder中
             viewHolder.btn_call_phone = view.findViewById(R.id.btn_call_phone);
             //对于item得操作
-
             view.setTag(viewHolder);//使用setTag把查找的view缓存起来方便多次重用
         } else//布局被加载过
         {
             view = convertView;
             viewHolder = (ViewHolder) view.getTag();//把之前暂存的ViewHolder赋给viewHolder
         }
-        viewHolder.sub_name.setText(subInfo.getName());
-        viewHolder.sub_phone.setText(subInfo.getSub_phone().get(0));
+        viewHolder.sub_name.setText(subInfo.getRemark());
+        viewHolder.sub_phone.setText(subInfo.getPhone_num());
         viewHolder.btn_call_phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                menuWindow = new SelectPicPopupWindow((Activity) getContext(), itemsOnClick,subInfo.getSub_phone());
+                String phone_num = subInfo.getPhone_num();
+                String str2=phone_num.replace(" ", "");//去掉所用空格
+                List  list =  Arrays.asList(str2.split(","));
+                menuWindow = new SelectPicPopupWindow((Activity) getContext(), itemsOnClick,list);
                 //显示窗口
                 menuWindow.showAtLocation(view, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
             }
@@ -83,7 +85,6 @@ public class SubinfoAdapter extends ArrayAdapter<SubInfo> {
         public void onClick(View v) {
             menuWindow.dismiss();
             switch (v.getId()) {
-//
                 default:
                     break;
             }

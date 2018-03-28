@@ -22,7 +22,9 @@ import java.util.List;
 import cottee.myproperty.R;
 import cottee.myproperty.constant.BullentinBean;
 import cottee.myproperty.constant.SubInfo;
+import cottee.myproperty.handler.LoginRegisterHandler;
 import cottee.myproperty.listener.OnRefreshListener;
+import cottee.myproperty.manager.LoginRegisterManager;
 import cottee.myproperty.widgets.RefreshListView;
 
 
@@ -113,6 +115,9 @@ public class PastBulletinFragment extends Fragment implements OnRefreshListener 
 
     @Override
     public void onDownPullRefresh() {
+        LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getActivity(), "", "");
+        LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getActivity(), loginRegisterHandler);
+        loginRegisterManager.ShowRecentNotice("1");
         new AsyncTask<Void, Void, Void>() {
 
             @Override
@@ -142,8 +147,7 @@ public class PastBulletinFragment extends Fragment implements OnRefreshListener 
 
             @Override
             protected Void doInBackground(Void... params) {
-                SystemClock.sleep(5000);
-
+                SystemClock.sleep(3000);
                 BullentinBean bullentinBean1 = new BullentinBean();
                 bullentinBean1.setTitle("更多公告");
                 bullentinBean1.setTime("12:00");

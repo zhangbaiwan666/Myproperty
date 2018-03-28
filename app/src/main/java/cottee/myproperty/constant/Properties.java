@@ -12,7 +12,6 @@ public class Properties {
     public static final String FORGET_SUBMIT_PATH ="https://thethreestooges.cn/property/bean/login/forget_submit.php";
     public static final String FORGET_VALIDATE_PATH ="https://thethreestooges.cn/property/bean/login/forget_validate.php";
     public static final String RESET_USER_PATH ="https://thethreestooges.cn/property/bean/login/user_forget.php";
-    public static final String PROPERTY_PATH ="https://thethreestooges.cn/property/bean/housemanage/myhouse.php";
     public static final String ADD_SUB_ACCOUNT="https://thethreestooges.cn:5210/housemanage/son/add";
     public static final String DELETE_SUB_ACCOUNT="https://thethreestooges.cn:5210/housemanage/son/delete";
     public static final String UPDATE_SUB_ACCOUNT="https://thethreestooges.cn:5210/housemanage/son/update";
@@ -44,6 +43,9 @@ public class Properties {
     public final static int UPDATE_SUB_ACCOUNT_ = 17;
     public final static int REUSER_LOGIN = 18;
     public final static int SHOW_NOTICE = 19;
+    public final static int VIEW_HOUSE_LIST = 20;
+    public final static int SHOW_RECENT_NOTICE = 21;
+    public final static int SHOW_EXCEPT_LIST = 22;
     public final static String SUCCESS = "0";
     public  final static  int RepairProject=0;
     public  final static  int  WorkersList=1;

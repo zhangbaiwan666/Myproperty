@@ -180,7 +180,6 @@ public class DelateSubActivity extends Activity {
                                 String session = Session.getSession();
                                 loginRegisterManager.DeleteSubAccount(id.toString().trim(),session);
                                 dialog.dismiss();
-                                finish();
 //                                    ((BaseActivity)getActivity()).goNextAnim();
                             }
                         })

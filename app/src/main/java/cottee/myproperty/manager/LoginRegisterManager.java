@@ -2,6 +2,7 @@ package cottee.myproperty.manager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
@@ -15,10 +16,12 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
+import cottee.myproperty.constant.BullentinInfo;
 import cottee.myproperty.constant.HouseListBean;
 import cottee.myproperty.constant.Properties;
 import cottee.myproperty.constant.PropertyListBean;
 import cottee.myproperty.constant.RepairProject;
+import cottee.myproperty.constant.SubInfo;
 import cottee.myproperty.constant.SubListBean;
 import cottee.myproperty.handler.LoginRegisterHandler;
 import cottee.myproperty.uitils.Session;
@@ -479,11 +482,11 @@ public class LoginRegisterManager implements Serializable {
                     Message msg = new Message();
                     msg.what=Properties.SHOW_SUB_INFO_NULL;
                     loginRegisterHandler.sendMessage(msg);
-                }else {
+                }else{
 
                     parseJSONWithGSON(json);
                 }
-                Log.d("Property","Json" + json);
+
                 //Json的解析类对象
             } catch (Exception e) {
                 e.printStackTrace();
@@ -498,6 +501,7 @@ public class LoginRegisterManager implements Serializable {
 
             JsonArray son_show = jsonObject.getAsJsonArray("son_show");
             System.out.println(son_show);
+
             Gson gson = new Gson();
                 List<SubListBean> userBeanList = gson.fromJson(son_show, new TypeToken<List<SubListBean>>() {
                 }.getType());
@@ -562,7 +566,6 @@ public class LoginRegisterManager implements Serializable {
         }.start();
     }
 
-
     /**
      ##切换物业
      */
@@ -621,11 +624,12 @@ public class LoginRegisterManager implements Serializable {
                 List<PropertyListBean> propertyListBeans = gson.fromJson(son_show, new TypeToken<List<PropertyListBean>>() {
                 }.getType());
 
-                System.out.println("propertyListBeans"+propertyListBeans);
+                System.out.println("罗的物业表有吗"+propertyListBeans);
+
                 Message msg = new Message();
                 msg.what=Properties.ALL_PROPERTY_LIST;
                 msg.obj=propertyListBeans;
-                System.out.println("propertyListBeans的传出字符串"+propertyListBeans);
+
                 loginRegisterHandler.sendMessage(msg);
             }
         }.start();
@@ -668,6 +672,7 @@ public class LoginRegisterManager implements Serializable {
                             Session.setSession(str);
                             ChooseProperty(session,pro_id);
                         }else{
+                            System.out.println("张繁切换物业执行了");
                             Message msg = new Message();
                             msg.what = Properties.CHANGE_UESR_PROPERTY;
                             msg.arg1 = Integer.parseInt(recode_trim);
@@ -683,7 +688,7 @@ public class LoginRegisterManager implements Serializable {
         }.start();
     }
 
-    public void ShowAllHouse(final String session){
+    public void ShowAllHouse(){
         new Thread() {
             @Override
             public void run() {
@@ -698,9 +703,7 @@ public class LoginRegisterManager implements Serializable {
                     Response response = client.newCall(request).execute();
                     String recode = response.body().string();
                     String recode_trim = recode.trim();
-                    System.out.println("获得的房屋表是"+recode_trim);
-                    System.out.println("获得的房屋表是"+recode_trim);
-                    System.out.println("获得的房屋表是"+recode_trim);
+
                     //如果返回250，表示session过期，如果session通过返回之前正常的0,1逻辑
                     if (recode_trim.equals("250")){
                         //本地做重新登录得动作
@@ -744,7 +747,6 @@ public class LoginRegisterManager implements Serializable {
                 Message msg = new Message();
                 msg.what=Properties.ALL_HOUSE_LIST;
                 msg.obj=houseListBeans;
-                System.out.println("propertyListBeans的传出字符串"+houseListBeans);
                 loginRegisterHandler.sendMessage(msg);
             }
         }.start();
@@ -768,13 +770,7 @@ public class LoginRegisterManager implements Serializable {
                     String recode_trim = recode.trim();
                     System.out.println("选择的房屋信息服务器返回值"+recode);
                     System.out.println("选择的房屋信息服务器返回值"+recode);
-                    System.out.println("选择的房屋信息服务器返回值"+recode);
-                    System.out.println("选择的房屋信息服务器返回值"+recode);
-                    System.out.println("选择的房屋信息服务器返回值"+recode);
-                    System.out.println("选择的房屋信息服务器返回值"+recode);
-                    System.out.println("选择的房屋信息服务器返回值"+recode);
-                    System.out.println("选择的房屋信息服务器返回值"+recode);
-                    System.out.println("选择的房屋信息服务器返回值"+recode);
+
                     if (recode_trim.equals("250")){
                         //本地做重新登录得动作
                         String email=preferences.getString("name", "");
@@ -795,13 +791,12 @@ public class LoginRegisterManager implements Serializable {
 //                                editor.commit();
                             Session.setSession(str);
                             ChooseHouse(session,home_id);
-                        }else{
-                            Message msg = new Message();
-                            msg.what = Properties.CHANGE_UESR_HOUSE;
-                            msg.arg1 = Integer.parseInt(recode_trim);
-                            loginRegisterHandler.sendMessage(msg);
-                            Log.d("MainActivity", "返回值" + recode);
                         }
+                    }else{
+                        Message msg = new Message();
+                        msg.what = Properties.CHANGE_UESR_HOUSE;
+                        msg.arg1 = Integer.parseInt(recode_trim);
+                        loginRegisterHandler.sendMessage(msg);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -927,6 +922,7 @@ public class LoginRegisterManager implements Serializable {
             }
         }.start();
     }
+
     public void ReUserLogin(final String mailAddress, final String password) {
         new Thread() {
             @Override
@@ -1004,20 +1000,202 @@ public class LoginRegisterManager implements Serializable {
                 //使用轻量级的Gson解析得到的json
                 JsonObject jsonObject = new JsonParser().parse(recode_trim).getAsJsonObject();
                 JsonArray notice_list = jsonObject.getAsJsonArray("notice_list");
-                System.out.println("公告表里都有什么"+notice_list);
-                System.out.println("公告表里都有什么"+notice_list);
-                System.out.println("公告表里都有什么"+notice_list);
+                System.out.println("张繁看看物业表字段"+notice_list);
                 Gson gson = new Gson();
+                List<BullentinInfo> userBeanList = gson.fromJson(notice_list, new TypeToken<List<BullentinInfo>>() {
+                }.getType());
 
-//                List<HouseListBean> houseListBeans = gson.fromJson(son_show, new TypeToken<List<HouseListBean>>() {
-//                }.getType());
-//
-//                System.out.println("propertyListBeans"+houseListBeans);
-//                Message msg = new Message();
-//                msg.what=Properties.SHOW_NOTICE;
-//                msg.obj=houseListBeans;
-//                System.out.println("propertyListBeans的传出字符串"+houseListBeans);
-//                loginRegisterHandler.sendMessage(msg);
+
+                Message message = new Message();
+                message.what=Properties.SHOW_NOTICE;
+                message.obj=userBeanList;
+                loginRegisterHandler.sendMessage(message);
+
+            }
+        }.start();
+
+    }
+
+    public void ViewAllHouse(){
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    SharedPreferences preferences=context.getSharedPreferences("user", Context.MODE_PRIVATE);
+                    String session = Session.getSession();
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("session",session).build();
+                    //把session add到requestbody中
+                    Request request = new Request.Builder().url(Properties.SHOW_ALL_HOUSE).post(requestBody).build();
+                    Response response = client.newCall(request).execute();
+                    String recode = response.body().string();
+                    String recode_trim = recode.trim();
+
+                    //如果返回250，表示session过期，如果session通过返回之前正常的0,1逻辑
+                    if (recode_trim.equals("250")){
+                        //本地做重新登录得动作
+                        String email=preferences.getString("name", "");
+                        String password=preferences.getString("psword", "");
+                        final String id = email;
+                        final String psw = password;
+                        OkHttpClient client1 = new OkHttpClient();
+                        RequestBody requestBody1 = new FormBody.Builder().add("username", id).add("password", psw).build();
+                        Request request1 = new Request.Builder().url(Properties.LOGIN_PATH).post(requestBody1).build();
+                        Response response1 = client1.newCall(request1).execute();
+                        if (response1.isSuccessful()) {
+                            //获得新的session
+                            String str = response1.body().string();
+//                                    SharedPreferences preferences=context.getSharedPreferences("user",Context.MODE_PRIVATE);
+                            //新session存到本地
+//                                SharedPreferences.Editor editor=preferences.edit();
+//                                editor.putString("session", str);
+//                                editor.commit();
+                            Session.setSession(str);
+                            ShowAllProperty(session);
+                        }
+
+                    }else {
+                        parseJSONWithGSON(recode_trim);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            private void parseJSONWithGSON(String recode_trim) {
+                //使用轻量级的Gson解析得到的json
+                JsonObject jsonObject = new JsonParser().parse(recode_trim).getAsJsonObject();
+                JsonArray son_show = jsonObject.getAsJsonArray("home_list");
+                System.out.println(son_show);
+                Gson gson = new Gson();
+                List<HouseListBean> houseListBeans = gson.fromJson(son_show, new TypeToken<List<HouseListBean>>() {
+                }.getType());
+
+                System.out.println("propertyListBeans"+houseListBeans);
+                Message msg = new Message();
+                msg.what=Properties.VIEW_HOUSE_LIST;
+                msg.obj=houseListBeans;
+                loginRegisterHandler.sendMessage(msg);
+            }
+        }.start();
+
+    }
+
+    public void ShowRecentNotice(final String num_start){
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    SharedPreferences preferences=context.getSharedPreferences("user", Context.MODE_PRIVATE);
+                    String session = Session.getSession();
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("session",session)
+                            .add("start",num_start).build();
+                    //把session add到requestbody中
+                    Request request = new Request.Builder().url(Properties.WEEKIN_NOTICE_LIST).post(requestBody).build();
+                    Response response = client.newCall(request).execute();
+                    String recode = response.body().string();
+                    String recode_trim = recode.trim();
+
+                    //如果返回250，表示session过期，如果session通过返回之前正常的0,1逻辑
+                    if (recode_trim.equals("250")){
+                        //本地做重新登录得动作
+                        String email=preferences.getString("name", "");
+                        String password=preferences.getString("psword", "");
+                        final String id = email;
+                        final String psw = password;
+                        OkHttpClient client1 = new OkHttpClient();
+                        RequestBody requestBody1 = new FormBody.Builder().add("username", id).add("password", psw).build();
+                        Request request1 = new Request.Builder().url(Properties.LOGIN_PATH).post(requestBody1).build();
+                        Response response1 = client1.newCall(request1).execute();
+                        if (response1.isSuccessful()) {
+                            //获得新的session
+                            String str = response1.body().string();
+                            Session.setSession(str);
+                            ShowAllProperty(session);
+                        }
+
+                    }else {
+                        parseJSONWithGSON(recode_trim);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            private void parseJSONWithGSON(String recode_trim) {
+                //使用轻量级的Gson解析得到的json
+                JsonObject jsonObject = new JsonParser().parse(recode_trim).getAsJsonObject();
+                JsonArray notice_list = jsonObject.getAsJsonArray("notice_list");
+                Gson gson = new Gson();
+                final List<BullentinInfo> userBeanList = gson.fromJson(notice_list, new TypeToken<List<BullentinInfo>>() {
+                }.getType());
+                    Message message = new Message();
+                    message.what=Properties.SHOW_RECENT_NOTICE;
+                    message.obj=userBeanList;
+                    loginRegisterHandler.sendMessage(message);
+            }
+        }.start();
+
+    }
+
+    public void ShowExceptNotice(final String num_start){
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    SharedPreferences preferences=context.getSharedPreferences("user", Context.MODE_PRIVATE);
+                    String session = Session.getSession();
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("session",session)
+                            .add("start",num_start).build();
+                    //把session add到requestbody中
+                    Request request = new Request.Builder().url(Properties.EXCEPT_NOTICE_LIST).post(requestBody).build();
+                    Response response = client.newCall(request).execute();
+                    String recode = response.body().string();
+                    String recode_trim = recode.trim();
+
+                    //如果返回250，表示session过期，如果session通过返回之前正常的0,1逻辑
+                    if (recode_trim.equals("250")){
+                        //本地做重新登录得动作
+                        String email=preferences.getString("name", "");
+                        String password=preferences.getString("psword", "");
+                        final String id = email;
+                        final String psw = password;
+                        OkHttpClient client1 = new OkHttpClient();
+                        RequestBody requestBody1 = new FormBody.Builder().add("username", id).add("password", psw).build();
+                        Request request1 = new Request.Builder().url(Properties.LOGIN_PATH).post(requestBody1).build();
+                        Response response1 = client1.newCall(request1).execute();
+                        if (response1.isSuccessful()) {
+                            //获得新的session
+                            String str = response1.body().string();
+                            Session.setSession(str);
+                            ShowAllProperty(session);
+                        }
+
+                    }else {
+                        parseJSONWithGSON(recode_trim);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            private void parseJSONWithGSON(String recode_trim) {
+                //使用轻量级的Gson解析得到的json
+                JsonObject jsonObject = new JsonParser().parse(recode_trim).getAsJsonObject();
+                JsonArray notice_list = jsonObject.getAsJsonArray("notice_list");
+                System.out.println("张繁看看物业表字段"+notice_list);
+                Gson gson = new Gson();
+                List<BullentinInfo> userBeanList = gson.fromJson(notice_list, new TypeToken<List<BullentinInfo>>() {
+                }.getType());
+
+
+                Message message = new Message();
+                message.what=Properties.SHOW_EXCEPT_LIST;
+                message.obj=userBeanList;
+                loginRegisterHandler.sendMessage(message);
+
             }
         }.start();
 

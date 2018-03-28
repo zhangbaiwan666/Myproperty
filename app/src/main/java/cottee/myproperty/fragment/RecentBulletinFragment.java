@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,16 +23,18 @@ import java.util.List;
 
 import cottee.myproperty.R;
 import cottee.myproperty.constant.BullentinBean;
+import cottee.myproperty.constant.BullentinInfo;
+import cottee.myproperty.handler.LoginRegisterHandler;
 import cottee.myproperty.listener.OnRefreshListener;
+import cottee.myproperty.manager.LoginRegisterManager;
 import cottee.myproperty.widgets.RefreshListView;
 
 
 public class RecentBulletinFragment extends Fragment implements OnRefreshListener {
 
-    private List<BullentinBean> textList;
-    private TabFragmentAdapter adapter;
+    public static List<BullentinInfo> textList;
+    public static TabFragmentAdapter adapter;
     private RefreshListView rListView;
-    private BullentinBean bullentinBean;
 
     public static RecentBulletinFragment newInstance() {
         RecentBulletinFragment fragment = new RecentBulletinFragment();
@@ -44,12 +47,12 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
         View rootView = inflater.inflate(R.layout.fragment_recentbulletin, null);
         rListView = (RefreshListView) rootView.findViewById(R.id.refreshlistview);
         //假数据
-        textList = new ArrayList<BullentinBean>();
+        textList = new ArrayList<BullentinInfo>();
         for (int i = 0; i < 3; i++) {
-            BullentinBean bullentinBean1 = new BullentinBean();
+            BullentinInfo bullentinBean1 = new BullentinInfo();
             bullentinBean1.setTitle("一周内公告");
-            bullentinBean1.setTime("12:00");
-            bullentinBean1.setMessage("库鲁猛谁，库鲁懵哈，库鲁懵谁懵谁哈啊");
+            bullentinBean1.setCreate_time("12:00");
+            bullentinBean1.setOutline("库鲁猛谁，库鲁懵哈，库鲁懵谁懵谁哈啊");
             textList.add(bullentinBean1);
         }
         adapter = new RecentBulletinFragment.TabFragmentAdapter(getActivity(),R.layout.layout_bulletin_list,textList);
@@ -57,15 +60,15 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
         rListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), "网络请求超时", Toast.LENGTH_LONG).show();
+
             }
         });
         rListView.setOnRefreshListener(this);
         return rootView;
     }
-    private class TabFragmentAdapter extends ArrayAdapter<BullentinBean> {
+    private class TabFragmentAdapter extends ArrayAdapter<BullentinInfo> {
 
-        public TabFragmentAdapter(Context context, int textViewResourceId, List<BullentinBean> objects){
+        public TabFragmentAdapter(Context context, int textViewResourceId, List<BullentinInfo> objects){
             super(context, textViewResourceId, objects);
         }
          class ViewHolder{
@@ -77,7 +80,7 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            final BullentinBean bullentinBean = getItem(position);
+            final BullentinInfo bullentinBean = getItem(position);
             View view;
             final ViewHolder viewHolder;
             // TODO Auto-generated method stub
@@ -96,8 +99,8 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
                 view = convertView;
                 viewHolder = (ViewHolder) view.getTag();//把之前暂存的ViewHolder赋给viewHolder
             }
-            viewHolder.time.setText(bullentinBean.getTime());
-            viewHolder.message.setText(bullentinBean.getMessage());
+            viewHolder.time.setText(bullentinBean.getCreate_time());
+            viewHolder.message.setText(bullentinBean.getOutline());
             viewHolder.title.setText(bullentinBean.getTitle());
 
             return view;
@@ -105,20 +108,22 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
 
     }
 
-
-    @Override
+        @Override
     public void onDownPullRefresh() {
         rListView.setClickable(false);
+            LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getActivity(), "", "");
+            LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getActivity(), loginRegisterHandler);
+            loginRegisterManager.ShowRecentNotice("1");
         new AsyncTask<Void, Void, Void>() {
-
             @Override
             protected Void doInBackground(Void... params) {
-                SystemClock.sleep(2000);
+                SystemClock.sleep(3000);
+
                 for (int i = 0; i < 2; i++) {
-                    BullentinBean bullentinBean1 = new BullentinBean();
+                    BullentinInfo bullentinBean1 = new BullentinInfo();
                     bullentinBean1.setTitle("新加载");
-                    bullentinBean1.setTime("12:00");
-                    bullentinBean1.setMessage("库鲁猛谁，库鲁懵哈，库鲁懵谁懵谁哈啊");
+                    bullentinBean1.setCreate_time("12:00");
+                    bullentinBean1.setOutline("库鲁猛谁，库鲁懵哈，库鲁懵谁懵谁哈啊");
                     textList.add(bullentinBean1);
                 }
                 return null;
@@ -130,6 +135,8 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
                 rListView.hideHeaderView();
             }
         }.execute(new Void[] {});
+
+
     }
 
     @Override
@@ -140,10 +147,10 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
             @Override
             protected Void doInBackground(Void... params) {
                 SystemClock.sleep(5000);
-                BullentinBean bullentinBean1 = new BullentinBean();
+                BullentinInfo bullentinBean1 = new BullentinInfo();
                 bullentinBean1.setTitle("更多公告");
-                bullentinBean1.setTime("12:00");
-                bullentinBean1.setMessage("库鲁猛谁，库鲁懵哈，库鲁懵谁懵谁哈啊");
+                bullentinBean1.setCreate_time("12:00");
+                bullentinBean1.setOutline("库鲁猛谁，库鲁懵哈，库鲁懵谁懵谁哈啊");
                 textList.add(bullentinBean1);
                 return null;
             }

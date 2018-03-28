@@ -14,14 +14,20 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cottee.myproperty.R;
 import cottee.myproperty.activity.LoginActivity;
 import cottee.myproperty.activity.PayFeeRecordActivity;
 import cottee.myproperty.activity.RepairRecordActivity;
+import cottee.myproperty.activity.SettingActivity;
 import cottee.myproperty.activity.ViewHouseAcivity;
+import cottee.myproperty.constant.BullentinBean;
 import cottee.myproperty.handler.LoginRegisterHandler;
 import cottee.myproperty.listener.NoDoubleClickListener;
 import cottee.myproperty.manager.LoginRegisterManager;
+import cottee.myproperty.uitils.HealthMap;
 
 public class SettingFragment extends Fragment {
 
@@ -33,12 +39,15 @@ public class SettingFragment extends Fragment {
 	private RelativeLayout rl_repair_record;
 	private RelativeLayout rl_pay_record;
 	private boolean clicked=true;
+	private static  List<BullentinBean> bullentin_list;
+
 
 	@SuppressLint("WrongViewCast")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View inflate = inflater.inflate(R.layout.fragment_setting, null);
+		final View inflate = inflater.inflate(R.layout.fragment_setting, null);
 		Intent intent = getActivity().getIntent();
+
 
 		int property_name = intent.getIntExtra("property_name", 0);
 		System.out.println("传到FragmentSetting的property_name为"+property_name);
@@ -70,8 +79,9 @@ public class SettingFragment extends Fragment {
 				if (clicked) {
 					LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getActivity(), "", "");
 					LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getActivity(), loginRegisterHandler);
-					loginRegisterManager.GsonSubList();
+					loginRegisterManager.ShowAllHouse();
 					clicked=false;
+
 				}
 			}
 		});
@@ -85,30 +95,8 @@ public class SettingFragment extends Fragment {
 		rl_login_out.setOnClickListener(new NoDoubleClickListener() {
 			@Override
 			protected void onNoDoubleClick(View v) {
-				new AlertDialog.Builder(getActivity())
-						.setMessage("确定要退出吗")
-						.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								SharedPreferences preferences=getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
-								String email=preferences.getString("name", "");
-								String password=preferences.getString("psword", "");
-								Intent intent = new Intent(getActivity(), LoginActivity.class);
-								intent.putExtra("name",email);
-								intent.putExtra("psword",password);
-								startActivity(intent);
-								dialog.dismiss();
-//                                    ((BaseActivity)getActivity()).goNextAnim();
-							}
-						})
-						.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								dialog.dismiss();
-							}
-						})
-						.create()
-						.show();
+				Intent intent1 = new Intent(getContext(), SettingActivity.class);
+				getActivity().startActivity(intent1);
 			}
 		});
 		return inflate;

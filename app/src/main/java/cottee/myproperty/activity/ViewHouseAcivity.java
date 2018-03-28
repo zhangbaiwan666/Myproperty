@@ -10,6 +10,8 @@ import java.util.List;
 
 import cottee.myproperty.R;
 import cottee.myproperty.adapter.ViewHouseApater;
+import cottee.myproperty.handler.LoginRegisterHandler;
+import cottee.myproperty.manager.LoginRegisterManager;
 import cottee.myproperty.widgets.Title;
 
 public class ViewHouseAcivity extends Activity {
@@ -20,12 +22,16 @@ public class ViewHouseAcivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_house_acivity);
+        LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(this, "", "");
+        LoginRegisterManager loginRegisterManager = new LoginRegisterManager(this, loginRegisterHandler);
+        loginRegisterManager.ViewAllHouse();
         initTitle();
         initEvent();
     }
 
     private void initEvent() {
         lv_show_house = (ListView)findViewById(R.id.lv_show_house);
+
 //        new ViewHouseApater(this,R.layout.pop_menuitem,)
     }
 

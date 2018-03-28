@@ -15,6 +15,7 @@ import java.util.List;
 import cottee.myproperty.R;
 import cottee.myproperty.activity.BullDetailsActivity;
 import cottee.myproperty.constant.BullentinBean;
+import cottee.myproperty.constant.BullentinInfo;
 import cottee.myproperty.constant.SubInfo;
 import cottee.myproperty.listener.NoDoubleClickListener;
 
@@ -22,8 +23,8 @@ import cottee.myproperty.listener.NoDoubleClickListener;
  * Created by Administrator on 2018/3/7.
  */
 
-public class PreviewBulletinAdapter extends ArrayAdapter<BullentinBean> {
-    public PreviewBulletinAdapter(Context context, int textViewResourceId, List<BullentinBean>
+public class PreviewBulletinAdapter extends ArrayAdapter<BullentinInfo> {
+    public PreviewBulletinAdapter(Context context, int textViewResourceId, List<BullentinInfo>
             objects) {
         super(context,textViewResourceId,objects);
 
@@ -37,8 +38,8 @@ public class PreviewBulletinAdapter extends ArrayAdapter<BullentinBean> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        final BullentinBean bullentinBean = getItem(position);
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        final BullentinInfo bullentinBean = getItem(position);
         View view;
         final ViewHolder viewHolder;
         if (convertView == null)//如果布局从来没有被加载过
@@ -50,24 +51,24 @@ public class PreviewBulletinAdapter extends ArrayAdapter<BullentinBean> {
             viewHolder.bulletin_message = view.findViewById(R.id.tv_bulletin_message);
             viewHolder.bulletin_flags = view.findViewById(R.id.tv_bulletin_flags);
             //对于item得操作
-
             view.setTag(viewHolder);//使用setTag把查找的view缓存起来方便多次重用
         } else//布局被加载过
         {
             view = convertView;
             viewHolder = (ViewHolder)view.getTag();//把之前暂存的ViewHolder赋给viewHolder
-
         }
         viewHolder.bulletin_title.setText(bullentinBean.getTitle());
-        viewHolder.bulletin_time.setText(bullentinBean.getTime());
-        viewHolder.bulletin_message.setText(bullentinBean.getMessage());
-        viewHolder.bulletin_flags.setTextColor(bullentinBean.getColor());
-        viewHolder.bulletin_flags.setText(bullentinBean.getFlags());
-        viewHolder.bulletin_message.setText(bullentinBean.getMessage());
+        viewHolder.bulletin_time.setText(bullentinBean.getCreate_time());
+        viewHolder.bulletin_message.setText(bullentinBean.getOutline());
+        viewHolder.bulletin_flags.setText(bullentinBean.getNotice_id());
         view.setOnClickListener(new NoDoubleClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
                 Intent intent = new Intent(getContext(), BullDetailsActivity.class);
+                intent.putExtra("bullentin_time",getItem(position).getCreate_time());
+                intent.putExtra("bullentin_title",getItem(position).getTitle());
+                intent.putExtra("bullentin_outline",getItem(position).getOutline());
+                intent.putExtra("bullentin_id",getItem(position).getNotice_id());
                 getContext().startActivity(intent);
             }
         });

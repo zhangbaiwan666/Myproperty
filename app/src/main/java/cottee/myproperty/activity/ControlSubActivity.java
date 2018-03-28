@@ -36,6 +36,7 @@ import cottee.myproperty.adapter.SubinfoAdapter;
 import cottee.myproperty.constant.HouseListBean;
 import cottee.myproperty.constant.PropertyListBean;
 import cottee.myproperty.constant.SubInfo;
+import cottee.myproperty.constant.SubListBean;
 import cottee.myproperty.handler.LoginRegisterHandler;
 import cottee.myproperty.manager.LoginRegisterManager;
 import cottee.myproperty.uitils.HealthMap;
@@ -62,13 +63,14 @@ public class ControlSubActivity extends Activity {
     private String sub_remark;
     private String sub_phone;
     private String sub_id;
-    private int property_home_id;
-    private int property_pro_id;
-    private SubinfoAdapter sub_adapter;
+    private static int property_home_id;
+    private static int property_pro_id;
+    public static SubinfoAdapter  sub_adapter;
     private List<Map<String, String>> listRight;
     private static ArrayList<String> address_list;
     private  ArrayList<String> home_id_list;
     private List<String> list;
+    private static String choosed_property_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +82,7 @@ public class ControlSubActivity extends Activity {
         address_list = (ArrayList<String>) HealthMap.get("address_list");
         home_id_list = (ArrayList<String>) HealthMap.get("home_id_list");
         final Intent intent = getIntent();
-        String choosed_property_name = intent.getStringExtra("choosed_property_name");
+        choosed_property_name = intent.getStringExtra("choosed_property_name");
         sub_remark_list = intent.getStringArrayListExtra("sub_remark_list");
         sub_phone_list = intent.getStringArrayListExtra("sub_phone_list");
         sub_id_list = intent.getStringArrayListExtra("sub_id_list");
@@ -134,22 +136,21 @@ public class ControlSubActivity extends Activity {
         return subList;
     }
     //-----------------------------------加载list中item的数据---------------------------------STA
-    private List<SubInfo> initsub() {
-
-        List<SubInfo> subList=new ArrayList<SubInfo>();
-        for(int i=0;i<sub_remark_list.size();i++){
-            String sub_remark = sub_remark_list.get(i);
-            String sub_id = sub_id_list.get(i);
-            String sub_phone = sub_phone_list.get(i);
-            String str2=sub_phone.replace(" ", "");//去掉所用空格
-            list =  Arrays.asList(str2.split(","));
-//list的结果就是[113,123,123,123]
-            SubInfo subInfo = new SubInfo(sub_remark,sub_id,list);
-            subList.add(subInfo);
-        }
-        return subList;
+    private List<SubListBean> initsub() {
+        List<SubListBean> subList1 =( List<SubListBean>) HealthMap.get("sub_list");
+//        List<SubInfo> subList=new ArrayList<SubInfo>();
+//        for(int i=0;i<sub_remark_list.size();i++){
+//            String sub_remark = sub_remark_list.get(i);
+//            String sub_id = sub_id_list.get(i);
+//            String sub_phone = sub_phone_list.get(i);
+//            String str2=sub_phone.replace(" ", "");//去掉所用空格
+//            list =  Arrays.asList(str2.split(","));
+////list的结果就是[113,123,123,123]
+//            SubInfo subInfo = new SubInfo(sub_remark,sub_id,list);
+//            subList.add(subInfo);
+//        }
+        return subList1;
     }
-
 
     private void initTitle() {
         title = (Title) findViewById(R.id.title);
@@ -179,10 +180,9 @@ public class ControlSubActivity extends Activity {
     protected void onStart() {
         super.onStart();
         if (sub_remark_list!=null){
-            List<SubInfo> subList = initsub();
+            List<SubListBean> subList = initsub();
             sub_adapter = new SubinfoAdapter(
                     ControlSubActivity.this, R.layout.layout_list_item,subList);
-
             //把R.layout.fruit_item和初始化完毕的ArrayList<Fruit>给FruitAdapter
 //------------------------------子账户listview的item点击事件----------------------------------------STA
             final ListView listView=(ListView)findViewById(R.id.sub_list);
@@ -216,7 +216,6 @@ public class ControlSubActivity extends Activity {
         }
         System.out.println("ControlSubActivity执行了onStart操作");
     }
-
 
     private View.OnClickListener itemsOnClick = new View.OnClickListener() {
 
@@ -262,7 +261,7 @@ public class ControlSubActivity extends Activity {
                                     R.layout.pop_menulist, null);
                             menulistRight = (ListView) layoutRight
                                     .findViewById(R.id.menulist);
-                            ChooseHouseAdapter listAdapter = new ChooseHouseAdapter(
+                            final ChooseHouseAdapter listAdapter = new ChooseHouseAdapter(
 //								getContext(), listRight, R.layout.pop_menuitem,
 //								new String[] { "item" },
 //								new int[] { R.id.menuitem }
@@ -282,7 +281,6 @@ public class ControlSubActivity extends Activity {
                                             LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(ControlSubActivity.this, "", "");
                                             LoginRegisterManager loginRegisterManager = new LoginRegisterManager(ControlSubActivity.this, loginRegisterHandler);
                                             loginRegisterManager.ChooseHouse(session,home_id_list.get(position));
-
                                             if (popRight != null && popRight.isShowing()) {
                                                 popRight.dismiss();
                                             }
@@ -328,4 +326,10 @@ public class ControlSubActivity extends Activity {
         }
 
     };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
 }

@@ -1,7 +1,9 @@
 package cottee.myproperty.fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,10 +39,12 @@ import cottee.myproperty.activity.AddServerActivity;
 import cottee.myproperty.activity.PaymentActivity;
 import cottee.myproperty.activity.PropertyAdActivity;
 import cottee.myproperty.activity.RepairProjectActivity;
+import cottee.myproperty.activity.SplashScreenActivity;
 import cottee.myproperty.activity.TabLessActivity;
 import cottee.myproperty.adapter.ChoosePropertyAdapter;
 import cottee.myproperty.adapter.PreviewBulletinAdapter;
 import cottee.myproperty.constant.BullentinBean;
+import cottee.myproperty.constant.BullentinInfo;
 import cottee.myproperty.constant.PropertyListBean;
 import cottee.myproperty.handler.LoginRegisterHandler;
 import cottee.myproperty.listener.NoDoubleClickListener;
@@ -77,15 +81,24 @@ public class MainFragment extends Fragment {
 	private Button bt_payFee;
 	private static ArrayList<String> property_list;
 	private static ArrayList<String> pro_id_list;
+	private static ArrayList<String> not_time;
+	private static ArrayList<String> not_message;
+	private static ArrayList<String> not_title;
 	private TextView positon_pro_name;
 	private View rootView;
 	private ListView list_preview_bulletin;
+	private static String strItem;
 
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
+//		not_title =(ArrayList<String>) HealthMap.get("not_title");
+//		not_message =(ArrayList<String>) HealthMap.get("not_message");
+//		not_time =(ArrayList<String>) HealthMap.get("not_time");
+
 		if (rootView == null) {
+
 			property_list = (ArrayList<String>) HealthMap.get("property_list");
 			rootView = inflater.inflate(R.layout.fragment_main, null);
 			bt_property_server = (Button) rootView.findViewById(R.id.bt_property_server);
@@ -101,6 +114,8 @@ public class MainFragment extends Fragment {
 			ll_payFee.setFocusable(true);
 			ll_repair.setFocusable(true);
 			ll_property_server.setFocusable(true);
+			Intent intent = getActivity().getIntent();
+			String[] property_lists = intent.getStringArrayExtra("property_list");
 
 			pro_id_list = (ArrayList<String>) HealthMap.get("pro_id_list");
 			pop();
@@ -125,36 +140,40 @@ public class MainFragment extends Fragment {
 			listRight.add(mapTemp);
 		}
 		list_preview_bulletin = rootView.findViewById(R.id.list_preview_bulletin);
-		List<BullentinBean> bullentinlist = initbullentinlist();
-		BullentinBean bullentinBean = new BullentinBean();
-		bullentinBean.setTime("18:30");
+		List<BullentinInfo> bullentinlist = initbullentinlist();
+//		for (int i=0;i<not_title.size();i++){
+//			BullentinBean bullentinBean = new BullentinBean();
+//			bullentinBean.setTime(not_time.get(i));
+//			bullentinBean.setTitle(not_title.get(i));
+//			bullentinBean.setMessage(not_message.get(i));
+//			bullentinlist.add(i,bullentinBean);
+//		}
+		BullentinInfo bullentinBean = new BullentinInfo();
+		bullentinBean.setCreate_time("18:30");
 		bullentinBean.setTitle("供暖通知");
-		bullentinBean.setFlags("急");
-		bullentinBean.setMessage("小区将于清明节后停止供暖");
+		bullentinBean.setNotice_id("急");
+		bullentinBean.setOutline("小区将于清明节后停止供暖");
 		bullentinlist.add(0,bullentinBean);
 
-		BullentinBean bullentinBean1 = new BullentinBean();
-		bullentinBean1.setTime("11:30");
+		BullentinInfo bullentinBean1 = new BullentinInfo();
+		bullentinBean1.setCreate_time("11:30");
 		bullentinBean1.setTitle("活动通知");
-		bullentinBean1.setFlags("活");
-		bullentinBean1.setColor(R.color.theme);
-		bullentinBean1.setMessage("篮球比赛，点击报名");
+		bullentinBean1.setNotice_id("活");
+		bullentinBean1.setOutline("篮球比赛，点击报名");
 		bullentinlist.add(1,bullentinBean1);
 
-		BullentinBean bullentinBean2 = new BullentinBean();
-		bullentinBean2.setTime("8:30");
+		BullentinInfo bullentinBean2 = new BullentinInfo();
+		bullentinBean2.setCreate_time("8:30");
 		bullentinBean2.setTitle("停电通知");
-		bullentinBean2.setFlags("急");
-		bullentinBean2.setColor(R.color.red2);
-		bullentinBean2.setMessage("明天后两天小区停电，望周知");
+		bullentinBean2.setNotice_id("急");
+		bullentinBean2.setOutline("明天后两天小区停电，望周知");
 		bullentinlist.add(2,bullentinBean2);
 
-		BullentinBean bullentinBean3 = new BullentinBean();
-		bullentinBean3.setTime("2:30");
+		BullentinInfo bullentinBean3 = new BullentinInfo();
+		bullentinBean3.setCreate_time("2:30");
 		bullentinBean3.setTitle("停电通知");
-		bullentinBean3.setFlags("急");
-		bullentinBean3.setColor(R.color.red2);
-		bullentinBean3.setMessage("明天后两天小区停水，望周知");
+		bullentinBean3.setNotice_id("急");
+		bullentinBean3.setOutline("明天后两天小区停水，望周知");
 		bullentinlist.add(3,bullentinBean3);
 
 		PreviewBulletinAdapter previewBulletinAdapter = new PreviewBulletinAdapter(getContext(), R.layout.layout_bulletin_list, bullentinlist);
@@ -164,8 +183,8 @@ public class MainFragment extends Fragment {
 		previewBulletinAdapter.notifyDataSetChanged();
 	}
 
-	private List<BullentinBean> initbullentinlist() {
-		List<BullentinBean> bullentinlist=new ArrayList<BullentinBean>();
+	private List<BullentinInfo> initbullentinlist() {
+		List<BullentinInfo> bullentinlist=new ArrayList<BullentinInfo>();
 		return bullentinlist;
 	}
 
@@ -377,9 +396,6 @@ public class MainFragment extends Fragment {
 								menulistRight = (ListView) layoutRight
 										.findViewById(R.id.menulist);
 								ChoosePropertyAdapter listAdapter = new ChoosePropertyAdapter(
-//								getContext(), listRight, R.layout.pop_menuitem,
-//								new String[] { "item" },
-//								new int[] { R.id.menuitem }
 										getContext(), R.layout.pop_menuitem, subList);
 								menulistRight.setAdapter(listAdapter);
 								listAdapter.notifyDataSetChanged();
@@ -390,15 +406,18 @@ public class MainFragment extends Fragment {
 											@Override
 											public void onItemClick(AdapterView<?> parent,
 																	View view, int position, long id) {
-												String strItem = property_list.get(position);
-//												tvRight.setText(strItem);
+												strItem = property_list.get(position);
+												tvRight.setText(strItem);
 												positon_pro_name.setText(strItem);
 												HealthMap.put("choosed_property_name", strItem);
 												String session = Session.getSession();
 												LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getContext(), "", "");
 												LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getContext(), loginRegisterHandler);
 												loginRegisterManager.ChooseProperty(session, pro_id_list.get(position));
-
+												//todo 切换物业无响应，添加子账户崩溃
+												LoginRegisterHandler loginRegisterHandler1 = new LoginRegisterHandler(getContext(), "", "");
+												LoginRegisterManager loginRegisterManager1 = new LoginRegisterManager(getContext(), loginRegisterHandler1);
+												loginRegisterManager1.ShowNotice("0");
 												if (popRight != null && popRight.isShowing()) {
 													popRight.dismiss();
 												}
@@ -476,4 +495,5 @@ public class MainFragment extends Fragment {
 //
 //		popupMenu.show();
 //	}
+
 }

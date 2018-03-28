@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/gray1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/layout_title"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/gray1" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/linearlayout_height"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="接受新消息通知"
+            android:layout_marginLeft="15dp"
+            android:textColor="@color/Black"
+            android:textSize="@dimen/all_tv_textSize"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="已开启"
+            android:gravity="center"
+            android:textColor="@color/red2"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/Black" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="如果您要关闭或开启新消息通知，请在手机的“设置”-“通知”功能中，找到应用程序“爱尚家”更改"
+        android:layout_margin="10dp"
+        android:textSize="@dimen/activity_carinfo_tv_message_textSize"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/Black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/linearlayout_height"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:textColor="@color/Black"
+            android:gravity="center_vertical"
+            android:text="通知显示消息详情"
+            android:layout_marginLeft="15dp"
+            android:textSize="@dimen/all_tv_textSize"/>
+
+        <cottee.myproperty.view.SwitchButton
+            android:id="@+id/sch_btn_details"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/Black" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="关闭后，当收到爱尚家消息时，通知提示将不显示发信人和内容摘要"
+        android:textSize="@dimen/activity_carinfo_tv_message_textSize"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/Black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/linearlayout_height"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:textColor="@color/Black"
+            android:gravity="center_vertical"
+            android:text="声音"
+            android:layout_marginLeft="15dp"
+            android:textSize="@dimen/all_tv_textSize"/>
+
+        <cottee.myproperty.view.SwitchButton
+            android:id="@+id/sch_btn_voice"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="10dp"
+        android:background="@color/Black"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/linearlayout_height"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:textColor="@color/Black"
+            android:gravity="center_vertical"
+            android:text="震动"
+            android:layout_marginLeft="15dp"
+            android:textSize="@dimen/all_tv_textSize"/>
+
+        <cottee.myproperty.view.SwitchButton
+            android:id="@+id/sch_btn_shock"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/Black" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="当爱尚家在运行时，您可以设置是否需要声音或者振动"
+        android:layout_margin="10dp"
+        android:textSize="@dimen/activity_carinfo_tv_message_textSize"/>
+
+</LinearLayout>

@@ -17,7 +17,7 @@
         android:id="@+id/realtabcontent"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
-        android:layout_weight="10" />
+        android:layout_weight="11" />
 
     <android.support.v4.app.FragmentTabHost
         android:background="@color/white"
