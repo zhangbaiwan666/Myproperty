@@ -424,7 +424,7 @@ public class MainFragment extends Fragment {
 											}
 										});
 
-								popRight = new PopupWindow(layoutRight, 200,
+								popRight = new PopupWindow(layoutRight, 300,
 										ViewGroup.LayoutParams.WRAP_CONTENT);
 
 //								ColorDrawable cd = new ColorDrawable(-1000);

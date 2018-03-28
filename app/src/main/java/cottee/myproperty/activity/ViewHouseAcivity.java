@@ -3,13 +3,16 @@ package cottee.myproperty.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.List;
 
 
 import cottee.myproperty.R;
+import cottee.myproperty.adapter.ChooseHouseAdapter;
 import cottee.myproperty.adapter.ViewHouseApater;
+import cottee.myproperty.constant.HouseListBean;
 import cottee.myproperty.handler.LoginRegisterHandler;
 import cottee.myproperty.manager.LoginRegisterManager;
 import cottee.myproperty.widgets.Title;
@@ -30,9 +33,18 @@ public class ViewHouseAcivity extends Activity {
     }
 
     private void initEvent() {
+        List<HouseListBean> listBeans=null;
         lv_show_house = (ListView)findViewById(R.id.lv_show_house);
-
-//        new ViewHouseApater(this,R.layout.pop_menuitem,)
+//        ChooseHouseAdapter houseListAdapter = new ChooseHouseAdapter(
+//                this, R.layout.pop_menuitem, null);
+//        lv_show_house.setAdapter(houseListAdapter);
+//        houseListAdapter.notifyDataSetChanged();
+        lv_show_house.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                finish();
+            }
+        });
     }
 
     private void initTitle() {

@@ -363,14 +363,28 @@ public class LoginRegisterManager implements Serializable {
     /**
      ##添加子账户
      */
+    public Response ReLogintoSession(){
+        SharedPreferences preferences=context.getSharedPreferences("user", Context.MODE_PRIVATE);
+        String email=preferences.getString("name", "");
+        String password=preferences.getString("psword", "");
+        final String id = email;
+        final String psw = password;
+        OkHttpClient client1 = new OkHttpClient();
+        RequestBody requestBody1 = new FormBody.Builder().add("username", id).add("password", psw).build();
+        Request request1 = new Request.Builder().url(Properties.LOGIN_PATH).post(requestBody1).build();
+        Response response1 = null;
+        try {
+            response1 = client1.newCall(request1).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return  response1;
+    }
     public void AddSubAccount(final String sub_id,final String sub_remark,final String sub_phone) {
         new Thread() {
             @Override
             public void run() {
                 try {
-                    //从SharedPreferences中获得登陆时存的session
-                    SharedPreferences preferences=context.getSharedPreferences("user", Context.MODE_PRIVATE);
-//                    String session=preferences.getString("session", "");
                     String session = Session.getSession();
                     OkHttpClient client = new OkHttpClient();
                     RequestBody requestBody = new FormBody.Builder()
@@ -388,22 +402,10 @@ public class LoginRegisterManager implements Serializable {
                     //如果返回250，表示session过期，如果session通过返回之前正常的0,1逻辑
                         if (recode_trim.equals("250")){
                             //本地做重新登录得动作
-                            String email=preferences.getString("name", "");
-                            String password=preferences.getString("psword", "");
-                            final String id = email;
-                            final String psw = password;
-                            OkHttpClient client1 = new OkHttpClient();
-                            RequestBody requestBody1 = new FormBody.Builder().add("username", id).add("password", psw).build();
-                            Request request1 = new Request.Builder().url(Properties.LOGIN_PATH).post(requestBody1).build();
-                            Response response1 = client1.newCall(request1).execute();
+                            Response response1 = ReLogintoSession();
                             if (response1.isSuccessful()) {
                                 //获得新的session
                                 String str = response1.body().string();
-//                                    SharedPreferences preferences=context.getSharedPreferences("user",Context.MODE_PRIVATE);
-                                //新session存到本地
-//                                SharedPreferences.Editor editor=preferences.edit();
-//                                editor.putString("session", str);
-//                                editor.commit();
                                 Session.setSession(str);
                                 AddSubAccount(sub_id,sub_remark,sub_phone);
                             }
@@ -587,23 +589,10 @@ public class LoginRegisterManager implements Serializable {
                     System.out.println("获得的物业表是"+recode_trim);
                     //如果返回250，表示session过期，如果session通过返回之前正常的0,1逻辑
                     if (recode_trim.equals("250")){
-                        //本地做重新登录得动作
-                        String email=preferences.getString("name", "");
-                        String password=preferences.getString("psword", "");
-                        final String id = email;
-                        final String psw = password;
-                        OkHttpClient client1 = new OkHttpClient();
-                        RequestBody requestBody1 = new FormBody.Builder().add("username", id).add("password", psw).build();
-                        Request request1 = new Request.Builder().url(Properties.LOGIN_PATH).post(requestBody1).build();
-                        Response response1 = client1.newCall(request1).execute();
+                        Response response1 = ReLogintoSession();
                         if (response1.isSuccessful()) {
                             //获得新的session
                             String str = response1.body().string();
-//                                    SharedPreferences preferences=context.getSharedPreferences("user",Context.MODE_PRIVATE);
-                            //新session存到本地
-//                                SharedPreferences.Editor editor=preferences.edit();
-//                                editor.putString("session", str);
-//                                editor.commit();
                             Session.setSession(str);
                             ShowAllProperty(session);
                         }

@@ -119,7 +119,7 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                SystemClock.sleep(3000);
+                SystemClock.sleep(1000);
 
 //                for (int i = 0; i < 2; i++) {
 //                    BullentinInfo bullentinBean1 = new BullentinInfo();

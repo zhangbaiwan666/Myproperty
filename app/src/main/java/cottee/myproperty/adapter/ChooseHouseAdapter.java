@@ -48,6 +48,7 @@ public class ChooseHouseAdapter extends ArrayAdapter<HouseListBean> {
         }
         viewHolder.property_name.setText(pro_Info.getAddress());
 
+
         return view;
     }
 

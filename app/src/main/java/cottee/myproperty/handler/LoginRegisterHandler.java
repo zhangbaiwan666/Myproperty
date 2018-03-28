@@ -513,15 +513,17 @@ public class LoginRegisterHandler extends Handler {
             case Properties.VIEW_HOUSE_LIST:
                 Object view_house = msg.obj;
                 List<HouseListBean> houseList = (List<HouseListBean>) view_house;
-                final ChooseHouseAdapter houseListAdapter = new ChooseHouseAdapter(
+                ListView lv_show_house = ((Activity) context).findViewById(R.id.lv_show_house);
+                ChooseHouseAdapter houseListAdapter = new ChooseHouseAdapter(
                         context, R.layout.pop_menuitem, houseList);
-                //显示房屋item
-                layoutRight = ((Activity) context).getLayoutInflater().inflate(
-                        R.layout.pop_menulist, null);
-                menulistRight = (ListView) layoutRight
-                        .findViewById(R.id.menulist);
-                menulistRight.setAdapter(houseListAdapter);
+//                //显示房屋item
+//                layoutRight = ((Activity) context).getLayoutInflater().inflate(
+//                        R.layout.pop_menulist, null);
+//                menulistRight = (ListView) layoutRight
+//                        .findViewById(R.id.menulist);
+                lv_show_house.setAdapter(houseListAdapter);
                 houseListAdapter.notifyDataSetChanged();
+
                 break;
             case Properties.SHOW_RECENT_NOTICE:
                 Object recent_notice = msg.obj;

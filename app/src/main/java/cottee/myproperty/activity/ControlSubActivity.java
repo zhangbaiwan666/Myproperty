@@ -186,6 +186,7 @@ public class ControlSubActivity extends Activity {
             //把R.layout.fruit_item和初始化完毕的ArrayList<Fruit>给FruitAdapter
 //------------------------------子账户listview的item点击事件----------------------------------------STA
             final ListView listView=(ListView)findViewById(R.id.sub_list);
+            if (listView==null){}
             listView.setAdapter(sub_adapter);//把Subinfo给ListView
             sub_adapter.notifyDataSetChanged();
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
