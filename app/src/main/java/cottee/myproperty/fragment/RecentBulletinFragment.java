@@ -66,7 +66,7 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
         rListView.setOnRefreshListener(this);
         return rootView;
     }
-    private class TabFragmentAdapter extends ArrayAdapter<BullentinInfo> {
+    public static class TabFragmentAdapter extends ArrayAdapter<BullentinInfo> {
 
         public TabFragmentAdapter(Context context, int textViewResourceId, List<BullentinInfo> objects){
             super(context, textViewResourceId, objects);
@@ -111,21 +111,23 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
         @Override
     public void onDownPullRefresh() {
         rListView.setClickable(false);
+        int count=0;
             LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getActivity(), "", "");
             LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getActivity(), loginRegisterHandler);
-            loginRegisterManager.ShowRecentNotice("1");
+            loginRegisterManager.ShowRecentNotice(String.valueOf(count));
+            count++;
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
                 SystemClock.sleep(3000);
 
-                for (int i = 0; i < 2; i++) {
-                    BullentinInfo bullentinBean1 = new BullentinInfo();
-                    bullentinBean1.setTitle("新加载");
-                    bullentinBean1.setCreate_time("12:00");
-                    bullentinBean1.setOutline("库鲁猛谁，库鲁懵哈，库鲁懵谁懵谁哈啊");
-                    textList.add(bullentinBean1);
-                }
+//                for (int i = 0; i < 2; i++) {
+//                    BullentinInfo bullentinBean1 = new BullentinInfo();
+//                    bullentinBean1.setTitle("新加载");
+//                    bullentinBean1.setCreate_time("12:00");
+//                    bullentinBean1.setOutline("库鲁猛谁，库鲁懵哈，库鲁懵谁懵谁哈啊");
+//                    textList.add(bullentinBean1);
+//                }
                 return null;
             }
 

@@ -36,6 +36,9 @@ import cottee.myproperty.fragment.RecentBulletinFragment;
 import cottee.myproperty.manager.LoginRegisterManager;
 import cottee.myproperty.uitils.HealthMap;
 import cottee.myproperty.uitils.Session;
+import cottee.myproperty.widgets.RefreshListView;
+
+import static cottee.myproperty.fragment.RecentBulletinFragment.adapter;
 
 
 public class LoginRegisterHandler extends Handler {
@@ -522,15 +525,18 @@ public class LoginRegisterHandler extends Handler {
                 break;
             case Properties.SHOW_RECENT_NOTICE:
                 Object recent_notice = msg.obj;
-                System.out.println("张繁show_notice"+recent_notice);
                 List<BullentinInfo> list_recent_notice = (List<BullentinInfo>) recent_notice;
                 List<BullentinInfo> textList = RecentBulletinFragment.textList;
-                System.out.println("张繁show_list"+textList);
-                int size = list_recent_notice.size();
-                for (int i=0;i<=size;i++){
-                    BullentinInfo bullentinInfo = textList.get(i);
-                    textList.add(bullentinInfo);
-                }
+//                System.out.println("张繁show_list"+textList.size());
+//                int size = list_recent_notice.size();
+//                for (int i=0;i<=size;i++){
+//                    BullentinInfo bullentinInfo = textList.get(i);
+//                   textList.add(bullentinInfo);
+//                }
+                RefreshListView rListView = ((Activity) context).findViewById(R.id.refreshlistview);
+                adapter = new RecentBulletinFragment.TabFragmentAdapter(context,R.layout.layout_bulletin_list,list_recent_notice);
+                System.out.println("张繁show_notice"+textList.size());
+                rListView.setAdapter(adapter);
                 break;
 
             case Properties.SHOW_EXCEPT_LIST:
