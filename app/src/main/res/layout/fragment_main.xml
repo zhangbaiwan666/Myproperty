@@ -260,13 +260,24 @@
         </LinearLayout>
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_height="30dp"
         android:layout_marginLeft="10dp"
         android:text="小区公告："
         android:textSize="18dp"/>
+        <Button
+            android:id="@+id/bt_oss"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:text="oss"
+            android:textSize="10dp"/>
+    </LinearLayout>
     <ListView
         android:id="@+id/list_preview_bulletin"
         android:background="@color/White"

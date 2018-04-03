@@ -36,6 +36,7 @@ import java.util.concurrent.TimeUnit;
 
 import cottee.myproperty.R;
 import cottee.myproperty.activity.AddServerActivity;
+import cottee.myproperty.activity.OssTestActivity;
 import cottee.myproperty.activity.PaymentActivity;
 import cottee.myproperty.activity.PropertyAdActivity;
 import cottee.myproperty.activity.RepairProjectActivity;
@@ -79,6 +80,7 @@ public class MainFragment extends Fragment {
 	private LinearLayout ll_property_server;
 	private Button bt_repair;
 	private Button bt_payFee;
+	private Button bt_oss;
 	private static ArrayList<String> property_list;
 	private static ArrayList<String> pro_id_list;
 	private static ArrayList<String> not_time;
@@ -110,6 +112,7 @@ public class MainFragment extends Fragment {
 			ll_payFee = (LinearLayout) rootView.findViewById(R.id.ll_payFee);
 			ll_repair = (LinearLayout) rootView.findViewById(R.id.ll_repair);
 			ll_property_server = (LinearLayout) rootView.findViewById(R.id.ll_property_server);
+			bt_oss = (Button) rootView.findViewById(R.id.bt_oss);
 			ll_placard.setFocusable(true);
 			ll_payFee.setFocusable(true);
 			ll_repair.setFocusable(true);
@@ -217,6 +220,13 @@ public class MainFragment extends Fragment {
 				Intent intent=new Intent(getActivity(), PaymentActivity.class);
 				startActivity(intent);
 
+			}
+		});
+		bt_oss.setOnClickListener(new NoDoubleClickListener() {
+			@Override
+			protected void onNoDoubleClick(View v) {
+				Intent intent = new Intent(getContext(), OssTestActivity.class);
+				startActivity(intent);
 			}
 		});
 

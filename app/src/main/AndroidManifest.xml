@@ -61,7 +61,8 @@
         <activity android:name=".activity.PayFeeRecordActivity" />
         <activity android:name=".activity.PayDetailInfoActivity" />
         <activity android:name=".activity.SettingActivity" />
-        <activity android:name=".activity.PersonNoticeActivity"></activity>
+        <activity android:name=".activity.PersonNoticeActivity" />
+        <activity android:name=".activity.OssTestActivity"></activity>
     </application>
 
 </manifest>
