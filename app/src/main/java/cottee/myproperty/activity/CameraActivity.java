@@ -37,7 +37,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback, 
     private RelativeLayout rel_shutter;
     private RelativeLayout rel_photoOk;
     private int cameraPosition=1;
-    String filepath= Properties.getContext().getFilesDir()+"/myImage";
+    String filepath= Properties.getContext().getFilesDir()+"/myImage.jpg";
     private float ratio;
     private Camera.Size mBestPictureSizes;
     private Camera.Size mBestPreviewSize;

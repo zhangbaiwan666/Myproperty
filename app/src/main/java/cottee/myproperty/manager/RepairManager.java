@@ -206,7 +206,6 @@ public class RepairManager {
                             .build();
                     Response response = client.newCall(request).execute();
                     String responseData = response.body().string();
-                    System.out.println(responseData);
                     parseJSONRepairTrack(responseData);
                 } catch (Exception e) {
                     e.printStackTrace();
