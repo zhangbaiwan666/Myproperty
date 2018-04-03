@@ -310,7 +310,7 @@
 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingLeft="40dp">
+    android:paddingLeft="20dp">
     <Button
         android:id="@+id/contact_person"
         android:layout_width="100dp"
@@ -330,6 +330,7 @@
         android:background="@drawable/shape_btn_login"
         android:text="申请取消"
         android:paddingLeft="5dp"
+        android:layout_marginLeft="10dp"
         android:textColor="#fff"
         />
     <Button
@@ -341,6 +342,7 @@
         android:text="缴纳费用"
         android:textColor="#fff"
         android:paddingLeft="5dp"
+        android:layout_marginLeft="10dp"
         android:onClick="payFee"
         />
 

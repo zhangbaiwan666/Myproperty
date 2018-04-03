@@ -169,7 +169,7 @@ public class PayFeeManager {
             @Override
             public void run() {
                 try {
-                    String start="8";
+                    String start="1";
                     OkHttpClient client = new OkHttpClient();
                     RequestBody requestBody = new FormBody.Builder().add
                             ("session", Session.getSession()).add("start",start)
