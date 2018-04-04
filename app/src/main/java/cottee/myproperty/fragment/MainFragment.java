@@ -480,7 +480,11 @@ public class MainFragment extends Fragment {
 				super.onStop();
 			}
 
-
+	@Override
+	public void onResume() {
+		super.onResume();
+		property_list=property_list;
+	}
 
 //	private void showPopupMenu(View view) {
 //		// View当前PopupMenu显示的相对View的位置

@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
@@ -57,12 +58,7 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
         }
         adapter = new RecentBulletinFragment.TabFragmentAdapter(getActivity(),R.layout.layout_bulletin_list,textList);
         rListView.setAdapter(adapter);
-        rListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-            }
-        });
         rListView.setOnRefreshListener(this);
         return rootView;
     }
@@ -82,6 +78,7 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
         public View getView(int position, View convertView, ViewGroup parent) {
             final BullentinInfo bullentinBean = getItem(position);
             View view;
+
             final ViewHolder viewHolder;
             // TODO Auto-generated method stub
             if (convertView == null)//如果布局从来没有被加载过
@@ -110,7 +107,8 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
 
         @Override
     public void onDownPullRefresh() {
-        rListView.setClickable(false);
+        rListView.getParent().requestDisallowInterceptTouchEvent(false);
+        //todo 改成RefreshListView里面包括listView
         int count=0;
             LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getActivity(), "", "");
             LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getActivity(), loginRegisterHandler);
@@ -135,6 +133,7 @@ public class RecentBulletinFragment extends Fragment implements OnRefreshListene
             protected void onPostExecute(Void result) {
                 adapter.notifyDataSetChanged();
                 rListView.hideHeaderView();
+                rListView.requestDisallowInterceptTouchEvent(true);
             }
         }.execute(new Void[] {});
 

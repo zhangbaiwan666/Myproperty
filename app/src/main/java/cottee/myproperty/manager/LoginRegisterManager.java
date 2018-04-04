@@ -744,11 +744,12 @@ public class LoginRegisterManager implements Serializable {
 
     }
 
-    public void ChooseHouse(final String session,final String home_id){
+    public void ChooseHouse(final String home_id){
         new Thread() {
             @Override
             public void run() {
                 try {
+                    String session = Session.getSession();
                     SharedPreferences preferences=context.getSharedPreferences("user", Context.MODE_PRIVATE);
                     OkHttpClient client = new OkHttpClient();
                     RequestBody requestBody = new FormBody.Builder()
@@ -781,7 +782,7 @@ public class LoginRegisterManager implements Serializable {
 //                                editor.putString("session", str);
 //                                editor.commit();
                             Session.setSession(str);
-                            ChooseHouse(session,home_id);
+                            ChooseHouse(home_id);
                         }
                     }else{
                         Message msg = new Message();
@@ -1253,6 +1254,59 @@ public class LoginRegisterManager implements Serializable {
 
         }.start();
 
+    }
+
+    public void ChooseHouseToPay(final String home_id){
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    String session = Session.getSession();
+                    SharedPreferences preferences=context.getSharedPreferences("user", Context.MODE_PRIVATE);
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("session", session)
+                            .add("home_id", home_id).build();
+                    Request request = new Request.Builder().url(Properties.CHOOSE_ALL_HOUSE)
+                            .post(requestBody).build();
+                    Response response = client.newCall(request).execute();
+                    String recode = response.body().string();
+                    String recode_trim = recode.trim();
+                    System.out.println("选择的房屋信息服务器返回值"+recode);
+                    System.out.println("选择的房屋信息服务器返回值"+recode);
+
+                    if (recode_trim.equals("250")){
+                        //本地做重新登录得动作
+                        String email=preferences.getString("name", "");
+                        String password=preferences.getString("psword", "");
+                        final String id = email;
+                        final String psw = password;
+                        OkHttpClient client1 = new OkHttpClient();
+                        RequestBody requestBody1 = new FormBody.Builder().add("username", id).add("password", psw).build();
+                        Request request1 = new Request.Builder().url(Properties.LOGIN_PATH).post(requestBody1).build();
+                        Response response1 = client1.newCall(request1).execute();
+                        if (response1.isSuccessful()) {
+                            //获得新的session
+                            String str = response1.body().string();
+//                                    SharedPreferences preferences=context.getSharedPreferences("user",Context.MODE_PRIVATE);
+                            //新session存到本地
+//                                SharedPreferences.Editor editor=preferences.edit();
+//                                editor.putString("session", str);
+//                                editor.commit();
+                            Session.setSession(str);
+                            ChooseHouseToPay(home_id);
+                        }
+                    }else{
+                        Message msg = new Message();
+                        msg.what = Properties.CHANGE_UESR_HOUSE_TO_PAY;
+                        msg.arg1 = Integer.parseInt(recode_trim);
+                        loginRegisterHandler.sendMessage(msg);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 }
 

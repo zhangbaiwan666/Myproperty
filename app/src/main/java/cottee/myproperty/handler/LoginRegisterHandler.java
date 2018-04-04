@@ -24,6 +24,7 @@ import java.util.List;
 
 import cottee.myproperty.R;
 import cottee.myproperty.activity.ControlSubActivity;
+import cottee.myproperty.activity.PaymentActivity;
 import cottee.myproperty.activity.ResetPassWordActivity;
 import cottee.myproperty.adapter.ChooseHouseAdapter;
 import cottee.myproperty.adapter.ChoosePropertyAdapter;
@@ -432,7 +433,6 @@ public class LoginRegisterHandler extends Handler {
                 popRight.showAsDropDown(tvRight, 0,
                         (topBarHeight - tvRight.getHeight()) / 2);
                 popRight.setTouchInterceptor(new View.OnTouchListener() {
-
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
                         // 如果点击了popupwindow的外部，popupwindow也会消失
@@ -451,7 +451,7 @@ public class LoginRegisterHandler extends Handler {
                                 String session = Session.getSession();
                                 LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "", "");
                                 LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
-                                loginRegisterManager.ChooseHouse(session,houseListBean.get(position).getHome_id());
+                                loginRegisterManager.ChooseHouse(houseListBean.get(position).getHome_id());
                                 if (popRight != null && popRight.isShowing()) {
                                     popRight.dismiss();
                                 }
@@ -601,6 +601,17 @@ public class LoginRegisterHandler extends Handler {
                 break;
             case Properties.SHOW_FIND_LIST_DEFULT:
                 Toast.makeText(context, "暂无相关公告", Toast.LENGTH_SHORT).show();
+                break;
+            case Properties.CHANGE_UESR_HOUSE_TO_PAY:
+                switch (msg.arg1) {
+                    case CHANGEHOUSESUCCESS:
+                        Intent intent = new Intent(context, PaymentActivity.class);
+                        context.startActivity(intent);
+                        break;
+                    case CHANGEHOUSEFAILED:
+                        Toast.makeText(context, "选择房失败", Toast.LENGTH_SHORT).show();
+                        break;
+                }
                 break;
 
         }

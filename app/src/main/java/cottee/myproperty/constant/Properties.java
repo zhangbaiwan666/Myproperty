@@ -50,6 +50,7 @@ public class Properties {
     public final static int SHOW_EXCEPT_LIST = 22;
     public final static int SHOW_FIND_LIST = 23;
     public final static int SHOW_FIND_LIST_DEFULT = 24;
+    public final static int CHANGE_UESR_HOUSE_TO_PAY = 25;
     public final static String SUCCESS = "0";
     public  final static  int RepairProject=0;
     public  final static  int  WorkersList=1;

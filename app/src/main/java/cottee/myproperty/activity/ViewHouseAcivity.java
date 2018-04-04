@@ -47,11 +47,12 @@ public class ViewHouseAcivity extends Activity {
         lv_show_house.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(ViewHouseAcivity.this, PaymentActivity.class);
                 HouseListBean item = (HouseListBean) lv_show_house.getAdapter().getItem(i);
-                intent.putExtra("house_id",item.getHome_id());
-                intent.putExtra("house_access",item.getAddress());
-                startActivity(intent);
+                LoginRegisterHandler loginRegisterHandler1 = new LoginRegisterHandler(ViewHouseAcivity.this, "", "");
+                LoginRegisterManager loginRegisterManager1 = new LoginRegisterManager(ViewHouseAcivity.this, loginRegisterHandler1);
+                loginRegisterManager1.ChooseHouseToPay(item.getHome_id());
+//                intent.putExtra("house_id",item.getHome_id());
+//                intent.putExtra("house_access",item.getAddress());
             }
         });
         if(lv_show_house==null){

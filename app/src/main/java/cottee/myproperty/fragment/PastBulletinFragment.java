@@ -115,6 +115,7 @@ public class PastBulletinFragment extends Fragment implements OnRefreshListener 
 
     @Override
     public void onDownPullRefresh() {
+        rListView.setOnItemClickListener(null);
         LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getActivity(), "", "");
         LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getActivity(), loginRegisterHandler);
         loginRegisterManager.ShowRecentNotice("1");
@@ -137,6 +138,12 @@ public class PastBulletinFragment extends Fragment implements OnRefreshListener 
             protected void onPostExecute(Void result) {
                 adapter.notifyDataSetChanged();
                 rListView.hideHeaderView();
+                rListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                Toast.makeText(getActivity(), "你点击了Listview"+(i-1), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         }.execute(new Void[] {});
     }
