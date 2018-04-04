@@ -418,7 +418,6 @@ public class MainFragment extends Fragment {
 											public void onItemClick(AdapterView<?> parent,
 																	View view, int position, long id) {
 												strItem = property_list.get(position);
-												tvRight.setText(strItem);
 												positon_pro_name.setText(strItem);
 												HealthMap.put("choosed_property_name", strItem);
 												String session = Session.getSession();

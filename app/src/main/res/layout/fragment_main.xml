@@ -29,7 +29,7 @@
             android:background="@mipmap/img_change_property"
             android:gravity="center"
             android:textColor="@android:color/white"
-            android:textSize="16sp" />
+             />
     </LinearLayout>
    <!--<ImageView-->
        <!--android:layout_width="match_parent"-->
