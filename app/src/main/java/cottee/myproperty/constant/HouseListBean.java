@@ -7,20 +7,20 @@ import java.io.Serializable;
  */
 
 public class HouseListBean implements Serializable {
-    private String address;
+    private String house_name;
     private String home_id;
 
-    public HouseListBean(String address)
+    public HouseListBean(String house_name)
     {
-        this.address=address;
+        this.house_name=house_name;
     }
 
     public String getAddress() {
-        return address;
+        return house_name;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAddress(String house_name) {
+        this.house_name = house_name;
     }
 
     public String getHome_id() {

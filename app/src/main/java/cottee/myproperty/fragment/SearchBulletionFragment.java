@@ -18,6 +18,7 @@ import java.util.List;
 
 import cottee.myproperty.R;
 import cottee.myproperty.constant.BullentinBean;
+import cottee.myproperty.constant.BullentinFindInfo;
 import cottee.myproperty.listener.OnRefreshListener;
 import cottee.myproperty.widgets.RefreshListView;
 
@@ -26,7 +27,7 @@ import cottee.myproperty.widgets.RefreshListView;
  */
 
 public class SearchBulletionFragment extends Fragment implements OnRefreshListener {
-    private List<BullentinBean> textList;
+    private List<BullentinFindInfo> textList;
     private TabFragmentAdapter adapter;
     private RefreshListView rListView;
     @Override
@@ -35,14 +36,14 @@ public class SearchBulletionFragment extends Fragment implements OnRefreshListen
         View rootView= inflater.inflate(R.layout.fragment_searchbulletin, null);
         rListView = (RefreshListView) rootView.findViewById(R.id.search_refreshlv);
         //假数据
-        textList = new ArrayList<BullentinBean>();
-        for (int i = 0; i < 5; i++) {
-            BullentinBean bullentinBean1 = new BullentinBean();
-            bullentinBean1.setTitle("查询结果公告");
-            bullentinBean1.setTime("12:00");
-            bullentinBean1.setMessage("库鲁猛谁，库鲁懵哈，库鲁懵谁懵谁哈啊");
-            textList.add(bullentinBean1);
-        }
+        textList = new ArrayList<BullentinFindInfo>();
+//        for (int i = 0; i < 5; i++) {
+//            BullentinFindInfo bullentinBean1 = new BullentinFindInfo();
+//            bullentinBean1.setTitle("查询结果公告");
+//            bullentinBean1.setCreate_time("12:00");
+//            bullentinBean1.setOutline("库鲁猛谁，库鲁懵哈，库鲁懵谁懵谁哈啊");
+//            textList.add(bullentinBean1);
+//        }
         adapter = new TabFragmentAdapter(getActivity(),R.layout.layout_bulletin_list,textList);
         rListView.setAdapter(adapter);
 //        rListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -54,8 +55,9 @@ public class SearchBulletionFragment extends Fragment implements OnRefreshListen
         rListView.setOnRefreshListener(this);
         return rootView;
     }
-    private class TabFragmentAdapter extends ArrayAdapter<BullentinBean> {
-        public TabFragmentAdapter(Context context, int textViewResourceId, List<BullentinBean>
+    public static class TabFragmentAdapter extends ArrayAdapter<BullentinFindInfo> {
+
+        public TabFragmentAdapter(Context context, int textViewResourceId, List<BullentinFindInfo>
                 objects) {
             super(context, textViewResourceId, objects);
         }
@@ -68,7 +70,7 @@ public class SearchBulletionFragment extends Fragment implements OnRefreshListen
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            final BullentinBean bullentinBean = getItem(position);
+            final BullentinFindInfo bullentinBean = getItem(position);
             View view;
             final ViewHolder viewHolder;
             // TODO Auto-generated method stub
@@ -87,8 +89,8 @@ public class SearchBulletionFragment extends Fragment implements OnRefreshListen
                 view = convertView;
                 viewHolder = (ViewHolder) view.getTag();//把之前暂存的ViewHolder赋给viewHolder
             }
-            viewHolder.time.setText(bullentinBean.getTime());
-            viewHolder.message.setText(bullentinBean.getMessage());
+            viewHolder.time.setText(bullentinBean.getCreate_time());
+            viewHolder.message.setText(bullentinBean.getOutline());
             viewHolder.title.setText(bullentinBean.getTitle());
 
             return view;
@@ -104,10 +106,10 @@ public class SearchBulletionFragment extends Fragment implements OnRefreshListen
             protected Void doInBackground(Void... params) {
                 SystemClock.sleep(2000);
                 for (int i = 0; i < 2; i++) {
-                    BullentinBean bullentinBean1 = new BullentinBean();
+                    BullentinFindInfo bullentinBean1 = new BullentinFindInfo();
                     bullentinBean1.setTitle("新加载");
-                    bullentinBean1.setTime("12:00");
-                    bullentinBean1.setMessage("库鲁猛谁，库鲁懵哈，库鲁懵谁懵谁哈啊");
+                    bullentinBean1.setCreate_time("12:00");
+                    bullentinBean1.setOutline("库鲁猛谁，库鲁懵哈，库鲁懵谁懵谁哈啊");
                     textList.add(bullentinBean1);
                 }
                 return null;
@@ -129,10 +131,10 @@ public class SearchBulletionFragment extends Fragment implements OnRefreshListen
             protected Void doInBackground(Void... params) {
                 SystemClock.sleep(5000);
 
-                BullentinBean bullentinBean1 = new BullentinBean();
+                BullentinFindInfo bullentinBean1 = new BullentinFindInfo();
                 bullentinBean1.setTitle("更多");
-                bullentinBean1.setTime("12:00");
-                bullentinBean1.setMessage("库鲁猛谁，库鲁懵哈，库鲁懵谁懵谁哈啊");
+                bullentinBean1.setCreate_time("12:00");
+                bullentinBean1.setOutline("库鲁猛谁，库鲁懵哈，库鲁懵谁懵谁哈啊");
                 textList.add(bullentinBean1);
                 return null;
             }

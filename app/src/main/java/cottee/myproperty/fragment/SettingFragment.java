@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cottee.myproperty.R;
+import cottee.myproperty.activity.ControlSubActivity;
 import cottee.myproperty.activity.LoginActivity;
 import cottee.myproperty.activity.PayFeeRecordActivity;
 import cottee.myproperty.activity.RepairRecordActivity;
@@ -77,9 +78,8 @@ public class SettingFragment extends Fragment {
 			@Override
 			public void onNoDoubleClick(View view) {
 				if (clicked) {
-					LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getActivity(), "", "");
-					LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getActivity(), loginRegisterHandler);
-					loginRegisterManager.ShowAllHouse();
+					Intent intent = new Intent(getContext(), ControlSubActivity.class);
+					startActivity(intent);
 					clicked=false;
 
 				}

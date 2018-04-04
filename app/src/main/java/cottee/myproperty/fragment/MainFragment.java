@@ -42,6 +42,7 @@ import cottee.myproperty.activity.PropertyAdActivity;
 import cottee.myproperty.activity.RepairProjectActivity;
 import cottee.myproperty.activity.SplashScreenActivity;
 import cottee.myproperty.activity.TabLessActivity;
+import cottee.myproperty.activity.ViewHouseAcivity;
 import cottee.myproperty.adapter.ChoosePropertyAdapter;
 import cottee.myproperty.adapter.PreviewBulletinAdapter;
 import cottee.myproperty.constant.BullentinBean;
@@ -217,7 +218,7 @@ public class MainFragment extends Fragment {
 		ll_payFee.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent intent=new Intent(getActivity(), PaymentActivity.class);
+				Intent intent=new Intent(getActivity(), ViewHouseAcivity.class);
 				startActivity(intent);
 
 			}

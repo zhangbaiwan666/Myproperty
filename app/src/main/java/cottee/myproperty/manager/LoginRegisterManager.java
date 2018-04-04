@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
+import cottee.myproperty.constant.BullentinFindInfo;
 import cottee.myproperty.constant.BullentinInfo;
 import cottee.myproperty.constant.HouseListBean;
 import cottee.myproperty.constant.Properties;
@@ -33,7 +35,8 @@ import okhttp3.Response;
 
 
 public class LoginRegisterManager implements Serializable {
-    private Context context;
+    public static final Message MESSAGE = new Message();
+    private static Context context;
     private LoginRegisterHandler loginRegisterHandler;
     private List<RepairProject.ProinfoBean> proinfo;
     public LoginRegisterManager(Context context, LoginRegisterHandler handler) {
@@ -363,7 +366,7 @@ public class LoginRegisterManager implements Serializable {
     /**
      ##添加子账户
      */
-    public Response ReLogintoSession(){
+    public static Response ReLogintoSession(){
         SharedPreferences preferences=context.getSharedPreferences("user", Context.MODE_PRIVATE);
         String email=preferences.getString("name", "");
         String password=preferences.getString("psword", "");
@@ -380,6 +383,7 @@ public class LoginRegisterManager implements Serializable {
         }
         return  response1;
     }
+
     public void AddSubAccount(final String sub_id,final String sub_remark,final String sub_phone) {
         new Thread() {
             @Override
@@ -576,12 +580,10 @@ public class LoginRegisterManager implements Serializable {
             @Override
             public void run() {
                 try {
-                    SharedPreferences preferences=context.getSharedPreferences("user", Context.MODE_PRIVATE);
                     String session = Session.getSession();
                     OkHttpClient client = new OkHttpClient();
                     RequestBody requestBody = new FormBody.Builder()
                             .add("session",session).build();
-                    //把session add到requestbody中
                     Request request = new Request.Builder().url(Properties.SHOW_ALL_PROPERTY).post(requestBody).build();
                     Response response = client.newCall(request).execute();
                     String recode = response.body().string();
@@ -596,7 +598,6 @@ public class LoginRegisterManager implements Serializable {
                             Session.setSession(str);
                             ShowAllProperty(session);
                         }
-
                     }else {
                       parseJSONWithGSON(recode_trim);
                     }
@@ -690,9 +691,9 @@ public class LoginRegisterManager implements Serializable {
                     //把session add到requestbody中
                     Request request = new Request.Builder().url(Properties.SHOW_ALL_HOUSE).post(requestBody).build();
                     Response response = client.newCall(request).execute();
+
                     String recode = response.body().string();
                     String recode_trim = recode.trim();
-
                     //如果返回250，表示session过期，如果session通过返回之前正常的0,1逻辑
                     if (recode_trim.equals("250")){
                         //本地做重新登录得动作
@@ -713,7 +714,7 @@ public class LoginRegisterManager implements Serializable {
 //                                editor.putString("session", str);
 //                                editor.commit();
                             Session.setSession(str);
-                            ShowAllProperty(session);
+                            ShowAllHouse();
                         }
 
                     }else {
@@ -726,7 +727,7 @@ public class LoginRegisterManager implements Serializable {
             private void parseJSONWithGSON(String recode_trim) {
                 //使用轻量级的Gson解析得到的json
                 JsonObject jsonObject = new JsonParser().parse(recode_trim).getAsJsonObject();
-                JsonArray son_show = jsonObject.getAsJsonArray("home_list");
+                JsonArray son_show = jsonObject.getAsJsonArray("house_list");
                 System.out.println(son_show);
                 Gson gson = new Gson();
                 List<HouseListBean> houseListBeans = gson.fromJson(son_show, new TypeToken<List<HouseListBean>>() {
@@ -736,6 +737,7 @@ public class LoginRegisterManager implements Serializable {
                 Message msg = new Message();
                 msg.what=Properties.ALL_HOUSE_LIST;
                 msg.obj=houseListBeans;
+
                 loginRegisterHandler.sendMessage(msg);
             }
         }.start();
@@ -1041,7 +1043,7 @@ public class LoginRegisterManager implements Serializable {
 //                                editor.putString("session", str);
 //                                editor.commit();
                             Session.setSession(str);
-                            ShowAllProperty(session);
+                            ViewAllHouse();
                         }
 
                     }else {
@@ -1054,7 +1056,7 @@ public class LoginRegisterManager implements Serializable {
             private void parseJSONWithGSON(String recode_trim) {
                 //使用轻量级的Gson解析得到的json
                 JsonObject jsonObject = new JsonParser().parse(recode_trim).getAsJsonObject();
-                JsonArray son_show = jsonObject.getAsJsonArray("home_list");
+                JsonArray son_show = jsonObject.getAsJsonArray("house_list");
                 System.out.println(son_show);
                 Gson gson = new Gson();
                 List<HouseListBean> houseListBeans = gson.fromJson(son_show, new TypeToken<List<HouseListBean>>() {
@@ -1102,7 +1104,7 @@ public class LoginRegisterManager implements Serializable {
                             //获得新的session
                             String str = response1.body().string();
                             Session.setSession(str);
-                            ShowAllProperty(session);
+                            ShowRecentNotice(session);
                         }
 
                     }else {
@@ -1186,6 +1188,69 @@ public class LoginRegisterManager implements Serializable {
                 loginRegisterHandler.sendMessage(message);
 
             }
+        }.start();
+
+    }
+
+    public void ShowFindNotice(final String notic_part){
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    SharedPreferences preferences=context.getSharedPreferences("user", Context.MODE_PRIVATE);
+                    String session = Session.getSession();
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("session",session)
+                            .add("notic_part",notic_part).build();
+                    //把session add到requestbody中
+                    Request request = new Request.Builder().url(Properties.NOTICE_FIND).post(requestBody).build();
+                    Response response = client.newCall(request).execute();
+                    String recode = response.body().string();
+                    String recode_trim = recode.trim();
+
+                    //如果返回250，表示session过期，如果session通过返回之前正常的0,1逻辑
+                    if (recode_trim.equals("250")){
+                        //本地做重新登录得动作
+                        String email=preferences.getString("name", "");
+                        String password=preferences.getString("psword", "");
+                        final String id = email;
+                        final String psw = password;
+                        OkHttpClient client1 = new OkHttpClient();
+                        RequestBody requestBody1 = new FormBody.Builder().add("username", id).add("password", psw).build();
+                        Request request1 = new Request.Builder().url(Properties.LOGIN_PATH).post(requestBody1).build();
+                        Response response1 = client1.newCall(request1).execute();
+                        if (response1.isSuccessful()) {
+                            //获得新的session
+                            String str = response1.body().string();
+                            Session.setSession(str);
+                            ShowFindNotice(session);
+                        }
+
+                    }else if (recode_trim.equals("0")) {
+                        Message message = new Message();
+                        message.what = Properties.SHOW_FIND_LIST_DEFULT;
+                        loginRegisterHandler.sendMessage(message);
+                    }else {
+                        parseJSONWithGSON(recode_trim);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            private void parseJSONWithGSON(String recode_trim) {
+                //使用轻量级的Gson解析得到的json
+                JsonObject jsonObject = new JsonParser().parse(recode_trim).getAsJsonObject();
+                    JsonArray notice_list = jsonObject.getAsJsonArray("find_notic");
+                    Gson gson = new Gson();
+                    final List<BullentinFindInfo> userBeanList = gson.fromJson(notice_list, new TypeToken<List<BullentinFindInfo>>() {
+                    }.getType());
+                    Message message = new Message();
+                    message.what = Properties.SHOW_FIND_LIST;
+                    message.obj = userBeanList;
+                    loginRegisterHandler.sendMessage(message);
+                }
+
         }.start();
 
     }

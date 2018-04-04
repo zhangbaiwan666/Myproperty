@@ -128,10 +128,12 @@ public class ControlSubActivity extends Activity {
 
     private List<HouseListBean> init() {
         List<HouseListBean> subList=new ArrayList<HouseListBean>();
-        for(int i=0;i<address_list.size();i++){
-            String s = address_list.get(i);
-            HouseListBean houseInfo = new HouseListBean(s);
-            subList.add(houseInfo);
+        if(address_list==null){}else {
+            for (int i = 0; i < address_list.size(); i++) {
+                String s = address_list.get(i);
+                HouseListBean houseInfo = new HouseListBean(s);
+                subList.add(houseInfo);
+            }
         }
         return subList;
     }
@@ -173,13 +175,13 @@ public class ControlSubActivity extends Activity {
         tv_show_house = (TextView)findViewById(R.id.tv_show_house);
         tv_show_property = (TextView)findViewById(R.id.tv_show_property);
         tvRight.setOnClickListener(myListener);
+
         // 初始化数据项
         }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if (sub_remark_list!=null){
             List<SubListBean> subList = initsub();
             sub_adapter = new SubinfoAdapter(
                     ControlSubActivity.this, R.layout.layout_list_item,subList);
@@ -187,18 +189,20 @@ public class ControlSubActivity extends Activity {
 //------------------------------子账户listview的item点击事件----------------------------------------STA
             final ListView listView=(ListView)findViewById(R.id.sub_list);
             if (listView==null){}
-            listView.setAdapter(sub_adapter);//把Subinfo给ListView
-            sub_adapter.notifyDataSetChanged();
+//            listView.setAdapter(sub_adapter);//把Subinfo给ListView
+//            sub_adapter.notifyDataSetChanged();
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent intent1 = new Intent(ControlSubActivity.this, DelateSubActivity.class);
                     SubinfoAdapter adpter= (SubinfoAdapter) parent.getAdapter();
-                    sub_remark = sub_remark_list.get(position);
-                    intent1.putExtra("remark",sub_remark);
-                    sub_id = sub_id_list.get(position);
-                    intent1.putExtra("id", sub_id);
-                    sub_phone = sub_phone_list.get(position);
+                    SubListBean item = (SubListBean)listView.getAdapter().getItem(position);
+                    intent1.putExtra("remark",item.getRemark());
+                    intent1.putExtra("id",item.getUser_id());
+                    sub_phone = item.getPhone_num();
+                    if (sub_phone.toString().trim()==null){
+                        sub_phone="";
+                    }
                     list =  Arrays.asList(sub_phone.split(","));
                     intent1.putExtra("phone",(Serializable)list);
                     System.out.println("ControlSubActivtiy为sub_remark"+ sub_remark);
@@ -212,9 +216,7 @@ public class ControlSubActivity extends Activity {
 
 
             });
-        }else{
-            Toast.makeText(ControlSubActivity.this, "您尚未添加任何子账户，请点击添加", Toast.LENGTH_SHORT).show();
-        }
+
         System.out.println("ControlSubActivity执行了onStart操作");
     }
 
@@ -253,71 +255,26 @@ public class ControlSubActivity extends Activity {
                     if (popRight != null && popRight.isShowing()) {
                         popRight.dismiss();
                     } else {
-                        if (address_list==null) {
-                            Toast.makeText(ControlSubActivity.this, "当前物业无房屋", Toast.LENGTH_SHORT).show();
-                            System.out.println("房屋的列表信息"+address_list);
-                        } else {
-                            List<HouseListBean> subList = init();
-                            layoutRight = getLayoutInflater().inflate(
-                                    R.layout.pop_menulist, null);
-                            menulistRight = (ListView) layoutRight
-                                    .findViewById(R.id.menulist);
-                            final ChooseHouseAdapter listAdapter = new ChooseHouseAdapter(
-//								getContext(), listRight, R.layout.pop_menuitem,
-//								new String[] { "item" },
-//								new int[] { R.id.menuitem }
-                                    ControlSubActivity.this, R.layout.pop_menuitem, subList);
-                            menulistRight.setAdapter(listAdapter);
-                            listAdapter.notifyDataSetChanged();
+                        LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(ControlSubActivity.this, "", "");
+                        LoginRegisterManager loginRegisterManager = new LoginRegisterManager(ControlSubActivity.this, loginRegisterHandler);
+                        loginRegisterManager.ShowAllHouse();
+//                            final ChooseHouseAdapter listAdapter = new ChooseHouseAdapter(
+////								getContext(), listRight, R.layout.pop_menuitem,
+////								new String[] { "item" },
+////								new int[] { R.id.menuitem }
+//                                    ControlSubActivity.this, R.layout.pop_menuitem, subList);
+//                            menulistRight.setAdapter(listAdapter);
+//                            listAdapter.notifyDataSetChanged();
 
                             //----------------------- 点击listview中item的处理-------------------------------------STA
-                            menulistRight
-                                    .setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                        @Override
-                                        public void onItemClick(AdapterView<?> parent,
-                                                                View view, int position, long id) {
-                                            String strItem = address_list.get(position);
-                                            tv_show_house.setText(strItem);
-                                            String session = Session.getSession();
-                                            LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(ControlSubActivity.this, "", "");
-                                            LoginRegisterManager loginRegisterManager = new LoginRegisterManager(ControlSubActivity.this, loginRegisterHandler);
-                                            loginRegisterManager.ChooseHouse(session,home_id_list.get(position));
-                                            if (popRight != null && popRight.isShowing()) {
-                                                popRight.dismiss();
-                                            }
-                                        }
-                                    });
+                        View layoutRight = ControlSubActivity.this.getLayoutInflater().inflate(
+                                R.layout.pop_menulist, null);
+                        final ListView menulistRight = layoutRight.findViewById(R.id.menulist);
+//                        ChooseHouseAdapter listAdapter = new ChooseHouseAdapter(
+//                                ControlSubActivity.this, R.layout.pop_menuitem, init());
+//                        menulistRight.setAdapter(listAdapter);
+//                        listAdapter.notifyDataSetChanged();
 
-                            popRight = new PopupWindow(layoutRight, 340,
-                                    ViewGroup.LayoutParams.WRAP_CONTENT);
-
-//                            ColorDrawable cd = new ColorDrawable(-0000);
-//                            popRight.setBackgroundDrawable(cd);
-                            popRight.setAnimationStyle(R.style.PopupAnimation);
-                            popRight.update();
-                            popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-                            popRight.setTouchable(true); // 设置popupwindow可点击
-                            popRight.setOutsideTouchable(true); // 设置popupwindow外部可点击
-                            popRight.setFocusable(true); // 获取焦点
-
-                            // 设置popupwindow的位置
-                            int topBarHeight = 30;
-                            popRight.showAsDropDown(tvRight, 0,
-                                    (topBarHeight - tvRight.getHeight()) / 2);
-
-                            popRight.setTouchInterceptor(new View.OnTouchListener() {
-
-                                @Override
-                                public boolean onTouch(View v, MotionEvent event) {
-                                    // 如果点击了popupwindow的外部，popupwindow也会消失
-                                    if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-                                        popRight.dismiss();
-                                        return true;
-                                    }
-                                    return false;
-                                }
-                            });
-                        }
                         break;
                     }
 

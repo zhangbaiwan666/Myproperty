@@ -18,12 +18,14 @@ public class Properties {
     public static final String SUB_LIST_PATH="https://thethreestooges.cn:5210/housemanage/son/show";
     public static final String SHOW_ALL_PROPERTY="https://thethreestooges.cn:5210/housemanage/find/property";
     public static final String CHOOSE_PROPERTY="https://thethreestooges.cn:5210/housemanage/set/property";
-    public static final String SHOW_ALL_HOUSE="https://thethreestooges.cn:5210/housemanage/user/house";
+  //  public static final String SHOW_ALL_HOUSE="https://thethreestooges.cn:5210/housemanage/user/house";
+    public static final String SHOW_ALL_HOUSE="https://thethreestooges.cn:5210/housemanage/hous_all/show";
     public static final String CHOOSE_ALL_HOUSE="https://thethreestooges.cn:5210/housemanage/set/home";
     public static final String MAIN_NOTICE_LIST="https://thethreestooges.cn:5210/notice/notice/list";
     public static final String WEEKIN_NOTICE_LIST="https://thethreestooges.cn:5210/notice/notice_week/within";
     public static final String EXCEPT_NOTICE_LIST="https://https://thethreestooges.cn:5210/notice/notice_week/except";
     public static final String NOTICE_INFO="https://thethreestooges.cn:5210/notice/notice/info";
+    public static final String NOTICE_FIND="https://thethreestooges.cn:5210/notice/find/notic";
     public final static int USER_LOGIN = 1;
     public final static int CHECKOUT_EMAIL = 2;
     public final static int CHECKOUT_EMAIL_VER = 3;
@@ -46,6 +48,8 @@ public class Properties {
     public final static int VIEW_HOUSE_LIST = 20;
     public final static int SHOW_RECENT_NOTICE = 21;
     public final static int SHOW_EXCEPT_LIST = 22;
+    public final static int SHOW_FIND_LIST = 23;
+    public final static int SHOW_FIND_LIST_DEFULT = 24;
     public final static String SUCCESS = "0";
     public  final static  int RepairProject=0;
     public  final static  int  WorkersList=1;

@@ -25,6 +25,8 @@ import cottee.myproperty.R;
 import cottee.myproperty.fragment.RecentBulletinFragment;
 import cottee.myproperty.fragment.PastBulletinFragment;
 import cottee.myproperty.fragment.SearchBulletionFragment;
+import cottee.myproperty.handler.LoginRegisterHandler;
+import cottee.myproperty.manager.LoginRegisterManager;
 import cottee.myproperty.widgets.Title;
 
 
@@ -133,10 +135,13 @@ public class TabLessActivity extends Activity implements View.OnClickListener {
 
             case R.id.btn_bulletin_search:
                 user_search = edit_search.getText().toString().trim();
-                setBackgroundColorById(R.id.btn_bulletin_search);
                 if (user_search.trim().isEmpty()){
                     Toast.makeText(this, "输入的信息为空", Toast.LENGTH_SHORT).show();
                 }else{
+                    setBackgroundColorById(R.id.btn_bulletin_search);
+                    LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(TabLessActivity.this, "", "");
+                    LoginRegisterManager loginRegisterManager = new LoginRegisterManager(TabLessActivity.this, loginRegisterHandler);
+                    loginRegisterManager.ShowFindNotice(user_search);
                     InputMethodManager imm2 = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm2.hideSoftInputFromWindow(btn_bulletin_search.getWindowToken(), 0);
                 ft.replace(R.id.fragment_content,new SearchBulletionFragment());

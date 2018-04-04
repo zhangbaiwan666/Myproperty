@@ -1,10 +1,13 @@
 package cottee.myproperty.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import java.util.List;
 
@@ -20,6 +23,7 @@ import cottee.myproperty.widgets.Title;
 public class ViewHouseAcivity extends Activity {
     private Title title = null;
     private ListView lv_show_house;
+    private ProgressBar pb_listview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,7 @@ public class ViewHouseAcivity extends Activity {
         loginRegisterManager.ViewAllHouse();
         initTitle();
         initEvent();
+
     }
 
     private void initEvent() {
@@ -42,9 +47,16 @@ public class ViewHouseAcivity extends Activity {
         lv_show_house.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                finish();
+                Intent intent = new Intent(ViewHouseAcivity.this, PaymentActivity.class);
+                HouseListBean item = (HouseListBean) lv_show_house.getAdapter().getItem(i);
+                intent.putExtra("house_id",item.getHome_id());
+                intent.putExtra("house_access",item.getAddress());
+                startActivity(intent);
             }
         });
+        if(lv_show_house==null){
+            pb_listview.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initTitle() {

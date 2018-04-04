@@ -14,11 +14,11 @@ public class SubListBean implements Serializable {
     private String remark;
     private String phone_num;
 
-    public SubListBean(String user_id, String remark, String phone_num) {
-        this.user_id = user_id;
-        this.remark = remark;
-        this.phone_num = phone_num;
-    }
+//    public SubListBean(String user_id, String remark, String phone_num) {
+//        this.user_id = user_id;
+//        this.remark = remark;
+//        this.phone_num = phone_num;
+//    }
 
     public String getUser_id() {
         return user_id;

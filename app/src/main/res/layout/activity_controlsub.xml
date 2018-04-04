@@ -24,10 +24,8 @@
                 android:clickable="true"
                 android:gravity="center"
                 android:layout_centerVertical="true"
-                android:text="right"
-                android:textColor="@android:color/white"
                 android:background="@drawable/switch_house"
-                android:textSize="16sp" />
+               />
             <!--<Button-->
             <!--android:id="@+id/btn_change_house"-->
             <!--android:layout_marginLeft="5dp"-->

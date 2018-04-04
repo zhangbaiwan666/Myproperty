@@ -7,8 +7,14 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.Serializable;
@@ -24,6 +30,7 @@ import cottee.myproperty.adapter.ChoosePropertyAdapter;
 import cottee.myproperty.adapter.PreviewBulletinAdapter;
 import cottee.myproperty.adapter.SubinfoAdapter;
 import cottee.myproperty.constant.BullentinBean;
+import cottee.myproperty.constant.BullentinFindInfo;
 import cottee.myproperty.constant.BullentinInfo;
 import cottee.myproperty.constant.HouseListBean;
 import cottee.myproperty.constant.Properties;
@@ -33,6 +40,7 @@ import cottee.myproperty.constant.PropertyListBean;
 import cottee.myproperty.constant.SubInfo;
 import cottee.myproperty.constant.SubListBean;
 import cottee.myproperty.fragment.RecentBulletinFragment;
+import cottee.myproperty.fragment.SearchBulletionFragment;
 import cottee.myproperty.manager.LoginRegisterManager;
 import cottee.myproperty.uitils.HealthMap;
 import cottee.myproperty.uitils.Session;
@@ -45,6 +53,8 @@ public class LoginRegisterHandler extends Handler {
     private String email;
     private String password;
     private Context context;
+    private PopupWindow popRight;
+    private TextView tvRight;
     /*
      * 发送成功返回   0 （要给用户提示注意查看邮件之类的提示）
      * 发送失败返回   1
@@ -389,36 +399,65 @@ public class LoginRegisterHandler extends Handler {
                 ((Activity) context).startActivity(intent2);
                 break;
             case Properties.ALL_HOUSE_LIST:
-                ArrayList<String> address_list = new ArrayList<String>();
-                ArrayList<String> home_id_list = new ArrayList<>();
                 Object obj_house = msg.obj;
-
-
                 Object choosed_property_name = HealthMap.get("choosed_property_name");
                 if (choosed_property_name == null) {
                     choosed_property_s = "尚未选择物业";
                 } else {
                     choosed_property_s = choosed_property_name.toString();
                 }
-                List<HouseListBean> houseListBean = (List<HouseListBean>) obj_house;
-                for (int i = 0; i < houseListBean.size(); i++) {
-                    address_list.add(houseListBean.get(i).getAddress());
-                    home_id_list.add(houseListBean.get(i).getHome_id());
-                }
-                Intent intent1 = new Intent(context, ControlSubActivity.class);
-                intent1.putStringArrayListExtra("sub_remark_list", sub_remark_list);
-                intent1.putStringArrayListExtra("sub_phone_list", sub_phone_list);
-                intent1.putStringArrayListExtra("sub_id_list", sub_id_list);
-                intent1.putExtra("choosed_property_name", choosed_property_s);
+                final List<HouseListBean> houseListBean = (List<HouseListBean>) obj_house;
+                  View layoutRight1 = ((Activity) context).getLayoutInflater().inflate(
+                        R.layout.pop_menulist, null);
+               final ListView menulistRight1 = layoutRight1.findViewById(R.id.menulist);
+                System.out.println("张繁周三过生日"+menulistRight1);
+                ChooseHouseAdapter listAdapter1 = new ChooseHouseAdapter(
+                        context, R.layout.pop_menuitem, houseListBean);
+                System.out.println("张繁周三过生日"+listAdapter1);
+                menulistRight1.setAdapter(listAdapter1);
+                listAdapter1.notifyDataSetChanged();
+                tvRight = (TextView)((Activity) context).findViewById(R.id.tv_right);
+                popRight = new PopupWindow(layoutRight1, 340,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+//                            ColorDrawable cd = new ColorDrawable(-0000);
+//                            popRight.setBackgroundDrawable(cd);
+                popRight.setAnimationStyle(R.style.PopupAnimation);
+                popRight.update();
+                popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+                popRight.setTouchable(true); // 设置popupwindow可点击
+                popRight.setOutsideTouchable(true); // 设置popupwindow外部可点击
+                popRight.setFocusable(true); // 获取焦点
+                // 设置popupwindow的位置
+                int topBarHeight = 30;
+                popRight.showAsDropDown(tvRight, 0,
+                        (topBarHeight - tvRight.getHeight()) / 2);
+                popRight.setTouchInterceptor(new View.OnTouchListener() {
 
-                intent1.putExtra("property_name", property);
-                intent1.putExtra("property_pro_id", property_pro_id);
-                intent1.putExtra("property_home_id", property_home_id);
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        // 如果点击了popupwindow的外部，popupwindow也会消失
+                        if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+                            popRight.dismiss();
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+                menulistRight1
+                        .setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                                String strItem = menulistRight1.get(position);
+                                String session = Session.getSession();
+                                LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "", "");
+                                LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
+                                loginRegisterManager.ChooseHouse(session,houseListBean.get(position).getHome_id());
+                                if (popRight != null && popRight.isShowing()) {
+                                    popRight.dismiss();
+                                }
+                            }
+                        });
 
-                context.startActivity(intent1);
-
-                HealthMap.put("address_list", address_list);
-                HealthMap.put("home_id_list", home_id_list);
                 break;
             case Properties.CHANGE_UESR_PROPERTY:
                 switch (msg.arg1) {
@@ -512,8 +551,12 @@ public class LoginRegisterHandler extends Handler {
                 }
             case Properties.VIEW_HOUSE_LIST:
                 Object view_house = msg.obj;
+                ProgressBar pb_listview =((Activity) context).findViewById(R.id.pb_listview);
                 List<HouseListBean> houseList = (List<HouseListBean>) view_house;
                 ListView lv_show_house = ((Activity) context).findViewById(R.id.lv_show_house);
+                if (lv_show_house!=null){
+                 pb_listview.setVisibility(View.GONE);
+                }
                 ChooseHouseAdapter houseListAdapter = new ChooseHouseAdapter(
                         context, R.layout.pop_menuitem, houseList);
 //                //显示房屋item
@@ -529,19 +572,35 @@ public class LoginRegisterHandler extends Handler {
                 Object recent_notice = msg.obj;
                 List<BullentinInfo> list_recent_notice = (List<BullentinInfo>) recent_notice;
                 List<BullentinInfo> textList = RecentBulletinFragment.textList;
-//                System.out.println("张繁show_list"+textList.size());
-//                int size = list_recent_notice.size();
-//                for (int i=0;i<=size;i++){
-//                    BullentinInfo bullentinInfo = textList.get(i);
-//                   textList.add(bullentinInfo);
-//                }
+                System.out.println("张繁show_list"+textList.size());
+                int size = list_recent_notice.size();
+                for (int i=0;i<=size;i++){
+                    BullentinInfo bullentinInfo = textList.get(i);
+                   textList.add(bullentinInfo);
+                }
                 RefreshListView rListView = ((Activity) context).findViewById(R.id.refreshlistview);
                 adapter = new RecentBulletinFragment.TabFragmentAdapter(context,R.layout.layout_bulletin_list,list_recent_notice);
                 System.out.println("张繁show_notice"+textList.size());
                 rListView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
                 break;
 
             case Properties.SHOW_EXCEPT_LIST:
+                break;
+            case Properties.SHOW_FIND_LIST:
+                Object find_notice = msg.obj;
+                if (find_notice==null){
+
+                }else {
+                    List<BullentinFindInfo> list_find_notice = (List<BullentinFindInfo>) find_notice;
+                    RefreshListView search_refreshlv = ((Activity) context).findViewById(R.id.search_refreshlv);
+                    SearchBulletionFragment.TabFragmentAdapter tabFragmentAdapter = new SearchBulletionFragment.TabFragmentAdapter(context, R.layout.layout_bulletin_list, list_find_notice);
+                    search_refreshlv.setAdapter(tabFragmentAdapter);
+                    tabFragmentAdapter.notifyDataSetChanged();
+                }
+                break;
+            case Properties.SHOW_FIND_LIST_DEFULT:
+                Toast.makeText(context, "暂无相关公告", Toast.LENGTH_SHORT).show();
                 break;
 
         }

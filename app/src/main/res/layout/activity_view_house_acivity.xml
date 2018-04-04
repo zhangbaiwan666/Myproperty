@@ -6,9 +6,20 @@
     android:orientation="vertical"
     tools:context="cottee.myproperty.activity.ViewHouseAcivity">
     <include layout="@layout/layout_title"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ListView
         android:id="@+id/lv_show_house"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </ListView>
+        <ProgressBar
+            android:id="@+id/pb_listview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateDrawable="@drawable/common_progressbar"
+            android:visibility="visible" />
+    </FrameLayout>
 </LinearLayout>
