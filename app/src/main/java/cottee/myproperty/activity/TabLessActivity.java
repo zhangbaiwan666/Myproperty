@@ -119,6 +119,7 @@ public class TabLessActivity extends Activity implements View.OnClickListener {
         switch (v.getId()) {
 
             case R.id.tv_btn:
+                edit_search.clearFocus();
                 setBackgroundColorById(R.id.tv_btn);
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(btn_bulletin_search.getWindowToken(), 0);
@@ -127,6 +128,7 @@ public class TabLessActivity extends Activity implements View.OnClickListener {
 
 
             case R.id.variety_btn:
+                edit_search.clearFocus();
                 setBackgroundColorById(R.id.variety_btn);
                 InputMethodManager imm1 = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm1.hideSoftInputFromWindow(btn_bulletin_search.getWindowToken(), 0);
@@ -134,6 +136,7 @@ public class TabLessActivity extends Activity implements View.OnClickListener {
                 break;
 
             case R.id.btn_bulletin_search:
+
                 user_search = edit_search.getText().toString().trim();
                 if (user_search.trim().isEmpty()){
                     Toast.makeText(this, "输入的信息为空", Toast.LENGTH_SHORT).show();

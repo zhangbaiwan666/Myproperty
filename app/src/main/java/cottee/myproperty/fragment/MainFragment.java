@@ -241,7 +241,7 @@ public class MainFragment extends Fragment {
 		//每隔5秒钟切换一张图片
 		scheduledExecutorService.scheduleWithFixedDelay(new ViewPagerTask(), 3, 3, TimeUnit.SECONDS);
 				imageIds = new int[]{
-						R.mipmap.ad5,
+						R.mipmap.ad1,
 						R.mipmap.ad2,
 						R.mipmap.ad3,
 						R.mipmap.ad4,

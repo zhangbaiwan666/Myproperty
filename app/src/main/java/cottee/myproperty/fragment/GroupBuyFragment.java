@@ -61,7 +61,7 @@ public class GroupBuyFragment extends Fragment {
         scheduledExecutorService.scheduleWithFixedDelay(new ViewPagerTask(), 3, 3, TimeUnit.SECONDS);
         imageIds = new int[]{
                 R.mipmap.splash,
-                R.mipmap.ad2,
+                R.mipmap.ad1,
                 R.mipmap.ad3,
                 R.mipmap.ad4,
                 R.mipmap.ad5,

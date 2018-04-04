@@ -977,7 +977,7 @@ public class LoginRegisterManager implements Serializable {
                             //获得新的session
                             String str = response1.body().string();
                             Session.setSession(str);
-                            ShowAllProperty(session);
+                            ShowNotice(num_start);
                         }
 
                     }else {
@@ -1104,7 +1104,7 @@ public class LoginRegisterManager implements Serializable {
                             //获得新的session
                             String str = response1.body().string();
                             Session.setSession(str);
-                            ShowRecentNotice(session);
+                            ShowRecentNotice(num_start);
                         }
 
                     }else {
@@ -1224,7 +1224,7 @@ public class LoginRegisterManager implements Serializable {
                             //获得新的session
                             String str = response1.body().string();
                             Session.setSession(str);
-                            ShowFindNotice(session);
+                            ShowFindNotice(notic_part);
                         }
 
                     }else if (recode_trim.equals("0")) {

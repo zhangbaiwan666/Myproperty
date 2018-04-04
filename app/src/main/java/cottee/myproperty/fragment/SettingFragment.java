@@ -85,13 +85,13 @@ public class SettingFragment extends Fragment {
 				}
 			}
 		});
-		rl_view_house.setOnClickListener(new NoDoubleClickListener() {
-			@Override
-			protected void onNoDoubleClick(View v) {
-				Intent intent1 = new Intent(getActivity(), ViewHouseAcivity.class);
-				startActivity(intent1);
-			}
-		});
+//		rl_view_house.setOnClickListener(new NoDoubleClickListener() {
+//			@Override
+//			protected void onNoDoubleClick(View v) {
+//				Intent intent1 = new Intent(getActivity(), ViewHouseAcivity.class);
+//				startActivity(intent1);
+//			}
+//		});
 		rl_login_out.setOnClickListener(new NoDoubleClickListener() {
 			@Override
 			protected void onNoDoubleClick(View v) {

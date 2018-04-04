@@ -30,7 +30,7 @@ public class PropertyAdActivity extends Activity{
         ad_name = intent.getStringExtra("Ad_name");
         imageIds = new int[]{
                 R.mipmap.ad5,
-                R.mipmap.ad2,
+                R.mipmap.ad1,
                 R.mipmap.ad3,
 
                 R.mipmap.ad4,
