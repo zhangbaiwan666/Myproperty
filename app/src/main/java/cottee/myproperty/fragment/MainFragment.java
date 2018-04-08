@@ -39,6 +39,7 @@ import cottee.myproperty.activity.AddServerActivity;
 import cottee.myproperty.activity.OssTestActivity;
 import cottee.myproperty.activity.PaymentActivity;
 import cottee.myproperty.activity.PropertyAdActivity;
+import cottee.myproperty.activity.RepairChooeseHouseActivity;
 import cottee.myproperty.activity.RepairProjectActivity;
 import cottee.myproperty.activity.SplashScreenActivity;
 import cottee.myproperty.activity.TabLessActivity;
@@ -211,7 +212,7 @@ public class MainFragment extends Fragment {
 		ll_repair.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-            Intent intent=new Intent(getActivity(), RepairProjectActivity.class);
+            Intent intent=new Intent(getActivity(), RepairChooeseHouseActivity.class);
             startActivity(intent);
 			}
 		});
@@ -395,6 +396,7 @@ public class MainFragment extends Fragment {
 			if (property_list == null) {
 				Toast.makeText(getContext(), "当前无物业", Toast.LENGTH_SHORT).show();
 			} else {
+				//todo add property list json to show
 				switch (v.getId()) {
 					case R.id.tv_right:
 						if (popRight != null && popRight.isShowing()) {

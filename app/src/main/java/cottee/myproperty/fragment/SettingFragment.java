@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cottee.myproperty.R;
+import cottee.myproperty.activity.ChooseHoustActivity;
 import cottee.myproperty.activity.ControlSubActivity;
 import cottee.myproperty.activity.LoginActivity;
 import cottee.myproperty.activity.PayFeeRecordActivity;
@@ -85,13 +86,13 @@ public class SettingFragment extends Fragment {
 				}
 			}
 		});
-//		rl_view_house.setOnClickListener(new NoDoubleClickListener() {
-//			@Override
-//			protected void onNoDoubleClick(View v) {
-//				Intent intent1 = new Intent(getActivity(), ViewHouseAcivity.class);
-//				startActivity(intent1);
-//			}
-//		});
+		rl_view_house.setOnClickListener(new NoDoubleClickListener() {
+			@Override
+			protected void onNoDoubleClick(View v) {
+				Intent intent1 = new Intent(getActivity(), ChooseHoustActivity.class);
+				startActivity(intent1);
+			}
+		});
 		rl_login_out.setOnClickListener(new NoDoubleClickListener() {
 			@Override
 			protected void onNoDoubleClick(View v) {

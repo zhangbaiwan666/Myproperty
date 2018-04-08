@@ -1,23 +1,12 @@
 package cottee.myproperty.activity;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.view.Gravity;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,22 +14,16 @@ import android.widget.Toast;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import cottee.myproperty.R;
-import cottee.myproperty.adapter.ChooseHouseAdapter;
-import cottee.myproperty.adapter.ChoosePropertyAdapter;
 import cottee.myproperty.adapter.SubinfoAdapter;
 import cottee.myproperty.constant.HouseListBean;
-import cottee.myproperty.constant.PropertyListBean;
-import cottee.myproperty.constant.SubInfo;
 import cottee.myproperty.constant.SubListBean;
 import cottee.myproperty.handler.LoginRegisterHandler;
 import cottee.myproperty.manager.LoginRegisterManager;
 import cottee.myproperty.uitils.HealthMap;
-import cottee.myproperty.uitils.Session;
 import cottee.myproperty.widgets.SelectPicPopupWindow;
 import cottee.myproperty.widgets.Title;
 
@@ -257,7 +240,7 @@ public class ControlSubActivity extends Activity {
                     } else {
                         LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(ControlSubActivity.this, "", "");
                         LoginRegisterManager loginRegisterManager = new LoginRegisterManager(ControlSubActivity.this, loginRegisterHandler);
-                        loginRegisterManager.ShowAllHouse();
+                        loginRegisterManager.ShowAllHouseForSub();
 //                            final ChooseHouseAdapter listAdapter = new ChooseHouseAdapter(
 ////								getContext(), listRight, R.layout.pop_menuitem,
 ////								new String[] { "item" },
@@ -271,7 +254,7 @@ public class ControlSubActivity extends Activity {
                                 R.layout.pop_menulist, null);
                         final ListView menulistRight = layoutRight.findViewById(R.id.menulist);
 //                        ChooseHouseAdapter listAdapter = new ChooseHouseAdapter(
-//                                ControlSubActivity.this, R.layout.pop_menuitem, init());
+//                                ControlSubActivity.this, R.layout.pop_menuitem, T());
 //                        menulistRight.setAdapter(listAdapter);
 //                        listAdapter.notifyDataSetChanged();
 

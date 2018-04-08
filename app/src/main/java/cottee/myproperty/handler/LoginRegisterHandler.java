@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,20 +16,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import cottee.myproperty.R;
 import cottee.myproperty.activity.ControlSubActivity;
 import cottee.myproperty.activity.PaymentActivity;
+import cottee.myproperty.activity.RepairProjectActivity;
 import cottee.myproperty.activity.ResetPassWordActivity;
 import cottee.myproperty.adapter.ChooseHouseAdapter;
 import cottee.myproperty.adapter.ChoosePropertyAdapter;
 import cottee.myproperty.adapter.PreviewBulletinAdapter;
 import cottee.myproperty.adapter.SubinfoAdapter;
-import cottee.myproperty.constant.BullentinBean;
 import cottee.myproperty.constant.BullentinFindInfo;
 import cottee.myproperty.constant.BullentinInfo;
 import cottee.myproperty.constant.HouseListBean;
@@ -38,7 +35,6 @@ import cottee.myproperty.constant.Properties;
 import cottee.myproperty.activity.MainActivity;
 import cottee.myproperty.activity.SetPasswordActivity;
 import cottee.myproperty.constant.PropertyListBean;
-import cottee.myproperty.constant.SubInfo;
 import cottee.myproperty.constant.SubListBean;
 import cottee.myproperty.fragment.RecentBulletinFragment;
 import cottee.myproperty.fragment.SearchBulletionFragment;
@@ -217,7 +213,7 @@ public class LoginRegisterHandler extends Handler {
                         LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "", "");
                         LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
                         String session = Session.getSession();
-                        loginRegisterManager.ShowAllProperty(session);
+                        loginRegisterManager.ShowAllProperty();
 
                         break;
 
@@ -364,7 +360,7 @@ public class LoginRegisterHandler extends Handler {
 //                LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "","");
 //                LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
 //                String session = Session.getSession();
-//                loginRegisterManager.ShowAllHouse();
+//                loginRegisterManager.ShowAllHouseForSub();
 
                 System.out.println("传递前得sub_remark_list为" + sub_remark_list);
                 break;
@@ -372,7 +368,7 @@ public class LoginRegisterHandler extends Handler {
                 LoginRegisterHandler loginRegisterHandler3 = new LoginRegisterHandler(context, "", "");
                 LoginRegisterManager loginRegisterManager3 = new LoginRegisterManager(context, loginRegisterHandler3);
                 String session3 = Session.getSession();
-                loginRegisterManager3.ShowAllHouse();
+                loginRegisterManager3.ShowAllHouseForSub();
                 break;
             case Properties.ALL_PROPERTY_LIST:
                 ArrayList<String> property_list = new ArrayList<String>();
@@ -399,7 +395,7 @@ public class LoginRegisterHandler extends Handler {
 
                 ((Activity) context).startActivity(intent2);
                 break;
-            case Properties.ALL_HOUSE_LIST:
+            case Properties.ALL_HOUSE_LIST_FOR_SUB:
                 Object obj_house = msg.obj;
                 Object choosed_property_name = HealthMap.get("choosed_property_name");
                 if (choosed_property_name == null) {
@@ -508,11 +504,10 @@ public class LoginRegisterHandler extends Handler {
             case Properties.REUSER_LOGIN:
                 switch (msg.arg1) {
                     case LOGINSSUCCEED:
-
+                            //todo just to user Relogin without ShowAllProperty and draw it when the right POP onClick;
                         LoginRegisterHandler loginRegisterHandler1 = new LoginRegisterHandler(context, "", "");
                         LoginRegisterManager loginRegisterManager1 = new LoginRegisterManager(context, loginRegisterHandler1);
-                        String session1 = Session.getSession();
-                        loginRegisterManager1.ShowAllProperty(session1);
+                        loginRegisterManager1.ShowAllProperty();
 
                         break;
                     case PSWFAILD:
@@ -551,8 +546,8 @@ public class LoginRegisterHandler extends Handler {
                 }
             case Properties.VIEW_HOUSE_LIST:
                 Object view_house = msg.obj;
-                ProgressBar pb_listview =((Activity) context).findViewById(R.id.pb_listview);
                 List<HouseListBean> houseList = (List<HouseListBean>) view_house;
+                ProgressBar pb_listview =((Activity) context).findViewById(R.id.pb_listview);
                 ListView lv_show_house = ((Activity) context).findViewById(R.id.lv_show_house);
                 if (lv_show_house!=null){
                  pb_listview.setVisibility(View.GONE);
@@ -613,6 +608,25 @@ public class LoginRegisterHandler extends Handler {
                         break;
                 }
                 break;
+            case Properties.CHANGE_UESR_HOUSE_FOR_VIEW:
+                switch (msg.arg1){
+                    case CHANGEHOUSESUCCESS:
+                        ((Activity)context).finish();
+                        break;
+                    case CHANGEHOUSEFAILED:
+                        break;
+
+                }
+                break;
+            case Properties.CHANGE_UESR_HOUSE_FOR_REPAIR:
+                switch (msg.arg1){
+                    case CHANGEHOUSESUCCESS:
+                        Intent intent = new Intent(context, RepairProjectActivity.class);
+                        context.startActivity(intent);
+                        break;
+                    case CHANGEHOUSEFAILED:
+                        break;
+                }
 
         }
     }

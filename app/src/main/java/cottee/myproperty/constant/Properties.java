@@ -37,7 +37,7 @@ public class Properties {
     public final static int ADD_SUB_ACCOUNT_ = 9;
     public final static int SHOW_SUB_INFO = 10;
     public final static int ALL_PROPERTY_LIST = 11;
-    public final static int ALL_HOUSE_LIST = 12;
+    public final static int ALL_HOUSE_LIST_FOR_SUB = 12;
     public final static int CHANGE_UESR_PROPERTY = 13;
     public final static int CHANGE_UESR_HOUSE = 14;
     public final static int SHOW_SUB_INFO_NULL = 15;
@@ -51,6 +51,8 @@ public class Properties {
     public final static int SHOW_FIND_LIST = 23;
     public final static int SHOW_FIND_LIST_DEFULT = 24;
     public final static int CHANGE_UESR_HOUSE_TO_PAY = 25;
+    public final static int CHANGE_UESR_HOUSE_FOR_VIEW = 26;
+    public final static int CHANGE_UESR_HOUSE_FOR_REPAIR = 27;
     public final static String SUCCESS = "0";
     public  final static  int RepairProject=0;
     public  final static  int  WorkersList=1;

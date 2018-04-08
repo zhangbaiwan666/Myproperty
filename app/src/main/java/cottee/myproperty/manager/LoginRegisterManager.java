@@ -2,10 +2,8 @@ package cottee.myproperty.manager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -23,7 +21,6 @@ import cottee.myproperty.constant.HouseListBean;
 import cottee.myproperty.constant.Properties;
 import cottee.myproperty.constant.PropertyListBean;
 import cottee.myproperty.constant.RepairProject;
-import cottee.myproperty.constant.SubInfo;
 import cottee.myproperty.constant.SubListBean;
 import cottee.myproperty.handler.LoginRegisterHandler;
 import cottee.myproperty.uitils.Session;
@@ -575,7 +572,7 @@ public class LoginRegisterManager implements Serializable {
     /**
      ##切换物业
      */
-    public void ShowAllProperty(final String session){
+    public void ShowAllProperty(){
         new Thread() {
             @Override
             public void run() {
@@ -596,7 +593,7 @@ public class LoginRegisterManager implements Serializable {
                             //获得新的session
                             String str = response1.body().string();
                             Session.setSession(str);
-                            ShowAllProperty(session);
+                            ShowAllProperty();
                         }
                     }else {
                       parseJSONWithGSON(recode_trim);
@@ -678,7 +675,7 @@ public class LoginRegisterManager implements Serializable {
         }.start();
     }
 
-    public void ShowAllHouse(){
+    public void ShowAllHouseForSub(){
         new Thread() {
             @Override
             public void run() {
@@ -714,7 +711,7 @@ public class LoginRegisterManager implements Serializable {
 //                                editor.putString("session", str);
 //                                editor.commit();
                             Session.setSession(str);
-                            ShowAllHouse();
+                            ShowAllHouseForSub();
                         }
 
                     }else {
@@ -735,7 +732,7 @@ public class LoginRegisterManager implements Serializable {
 
                 System.out.println("propertyListBeans"+houseListBeans);
                 Message msg = new Message();
-                msg.what=Properties.ALL_HOUSE_LIST;
+                msg.what=Properties.ALL_HOUSE_LIST_FOR_SUB;
                 msg.obj=houseListBeans;
 
                 loginRegisterHandler.sendMessage(msg);
@@ -1027,6 +1024,7 @@ public class LoginRegisterManager implements Serializable {
                     //如果返回250，表示session过期，如果session通过返回之前正常的0,1逻辑
                     if (recode_trim.equals("250")){
                         //本地做重新登录得动作
+                        System.out.println("进行了session重新请求");
                         String email=preferences.getString("name", "");
                         String password=preferences.getString("psword", "");
                         final String id = email;
@@ -1163,7 +1161,7 @@ public class LoginRegisterManager implements Serializable {
                             //获得新的session
                             String str = response1.body().string();
                             Session.setSession(str);
-                            ShowAllProperty(session);
+                            ShowAllProperty();
                         }
 
                     }else {
@@ -1299,6 +1297,112 @@ public class LoginRegisterManager implements Serializable {
                     }else{
                         Message msg = new Message();
                         msg.what = Properties.CHANGE_UESR_HOUSE_TO_PAY;
+                        msg.arg1 = Integer.parseInt(recode_trim);
+                        loginRegisterHandler.sendMessage(msg);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+    public void ChooseHouseForView(final String home_id){
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    String session = Session.getSession();
+                    SharedPreferences preferences=context.getSharedPreferences("user", Context.MODE_PRIVATE);
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("session", session)
+                            .add("home_id", home_id).build();
+                    Request request = new Request.Builder().url(Properties.CHOOSE_ALL_HOUSE)
+                            .post(requestBody).build();
+                    Response response = client.newCall(request).execute();
+                    String recode = response.body().string();
+                    String recode_trim = recode.trim();
+                    System.out.println("选择的房屋信息服务器返回值"+recode);
+                    System.out.println("选择的房屋信息服务器返回值"+recode);
+
+                    if (recode_trim.equals("250")){
+                        //本地做重新登录得动作
+                        String email=preferences.getString("name", "");
+                        String password=preferences.getString("psword", "");
+                        final String id = email;
+                        final String psw = password;
+                        OkHttpClient client1 = new OkHttpClient();
+                        RequestBody requestBody1 = new FormBody.Builder().add("username", id).add("password", psw).build();
+                        Request request1 = new Request.Builder().url(Properties.LOGIN_PATH).post(requestBody1).build();
+                        Response response1 = client1.newCall(request1).execute();
+                        if (response1.isSuccessful()) {
+                            //获得新的session
+                            String str = response1.body().string();
+//                                    SharedPreferences preferences=context.getSharedPreferences("user",Context.MODE_PRIVATE);
+                            //新session存到本地
+//                                SharedPreferences.Editor editor=preferences.edit();
+//                                editor.putString("session", str);
+//                                editor.commit();
+                            Session.setSession(str);
+                            ChooseHouseForView(home_id);
+                        }
+                    }else{
+                        Message msg = new Message();
+                        msg.what = Properties.CHANGE_UESR_HOUSE_FOR_VIEW;
+                        msg.arg1 = Integer.parseInt(recode_trim);
+                        loginRegisterHandler.sendMessage(msg);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+    public void ChooseHouseForRepair(final String home_id){
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    String session = Session.getSession();
+                    SharedPreferences preferences=context.getSharedPreferences("user", Context.MODE_PRIVATE);
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("session", session)
+                            .add("home_id", home_id).build();
+                    Request request = new Request.Builder().url(Properties.CHOOSE_ALL_HOUSE)
+                            .post(requestBody).build();
+                    Response response = client.newCall(request).execute();
+                    String recode = response.body().string();
+                    String recode_trim = recode.trim();
+                    System.out.println("选择的房屋信息服务器返回值"+recode);
+                    System.out.println("选择的房屋信息服务器返回值"+recode);
+
+                    if (recode_trim.equals("250")){
+                        //本地做重新登录得动作
+                        String email=preferences.getString("name", "");
+                        String password=preferences.getString("psword", "");
+                        final String id = email;
+                        final String psw = password;
+                        OkHttpClient client1 = new OkHttpClient();
+                        RequestBody requestBody1 = new FormBody.Builder().add("username", id).add("password", psw).build();
+                        Request request1 = new Request.Builder().url(Properties.LOGIN_PATH).post(requestBody1).build();
+                        Response response1 = client1.newCall(request1).execute();
+                        if (response1.isSuccessful()) {
+                            //获得新的session
+                            String str = response1.body().string();
+//                                    SharedPreferences preferences=context.getSharedPreferences("user",Context.MODE_PRIVATE);
+                            //新session存到本地
+//                                SharedPreferences.Editor editor=preferences.edit();
+//                                editor.putString("session", str);
+//                                editor.commit();
+                            Session.setSession(str);
+                            ChooseHouseForRepair(home_id);
+                        }
+                    }else{
+                        Message msg = new Message();
+                        msg.what = Properties.CHANGE_UESR_HOUSE_FOR_REPAIR;
                         msg.arg1 = Integer.parseInt(recode_trim);
                         loginRegisterHandler.sendMessage(msg);
                     }
