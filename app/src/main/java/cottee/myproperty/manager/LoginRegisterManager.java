@@ -623,11 +623,12 @@ public class LoginRegisterManager implements Serializable {
 
     }
 
-    public void ChooseProperty(final String session,final String pro_id){
+    public void ChooseProperty(final String pro_id){
         new Thread() {
             @Override
             public void run() {
                 try {
+                    String session = Session.getSession();
                     SharedPreferences preferences=context.getSharedPreferences("user", Context.MODE_PRIVATE);
                     OkHttpClient client = new OkHttpClient();
                     RequestBody requestBody = new FormBody.Builder()
@@ -657,16 +658,18 @@ public class LoginRegisterManager implements Serializable {
 //                                editor.putString("session", str);
 //                                editor.commit();
                             Session.setSession(str);
-                            ChooseProperty(session,pro_id);
+                            ChooseProperty(pro_id);
                         }else{
-                            System.out.println("张繁切换物业执行了");
-                            Message msg = new Message();
-                            msg.what = Properties.CHANGE_UESR_PROPERTY;
-                            msg.arg1 = Integer.parseInt(recode_trim);
-                            loginRegisterHandler.sendMessage(msg);
-                            Log.d("MainActivity", "返回值" + recode);
+
                         }
 
+                    }else {
+                        System.out.println("张繁切换物业执行了");
+                        Message msg = new Message();
+                        msg.what = Properties.CHANGE_UESR_PROPERTY;
+                        msg.arg1 = Integer.parseInt(recode_trim);
+                        loginRegisterHandler.sendMessage(msg);
+                        Log.d("MainActivity", "返回值" + recode);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

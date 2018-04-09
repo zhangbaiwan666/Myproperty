@@ -5,16 +5,19 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <FrameLayout
         android:background="@color/white"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="40dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <TextView
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
-            android:gravity="center"
+           android:layout_centerHorizontal="true"
             android:id="@+id/positon_pro_name"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
@@ -25,12 +28,16 @@
             android:layout_width="20dip"
             android:layout_height="20dip"
             android:clickable="true"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/positon_pro_name"
             android:layout_gravity="center"
             android:background="@mipmap/img_change_property"
             android:gravity="center"
             android:textColor="@android:color/white"
              />
-    </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
    <!--<ImageView-->
        <!--android:layout_width="match_parent"-->
        <!--android:layout_height="200dp"-->

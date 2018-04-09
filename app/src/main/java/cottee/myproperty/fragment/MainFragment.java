@@ -381,11 +381,11 @@ public class MainFragment extends Fragment {
 
 	private List<PropertyListBean> init() {
 		List<PropertyListBean> proList=new ArrayList<PropertyListBean>();
-		for(int i=0;i<property_list.size();i++){
-			String s = property_list.get(i);
-			PropertyListBean pro_Info = new PropertyListBean(s);
-			proList.add(pro_Info);
-		}
+//		for(int i=0;i<property_list.size();i++){
+//			String s = property_list.get(i);
+//			PropertyListBean pro_Info = new PropertyListBean(s);
+//			proList.add(pro_Info);
+//		}
 		return proList;
 	}
 //--------------------物业切换栏--------------------------------------------------------------STA
@@ -393,79 +393,80 @@ public class MainFragment extends Fragment {
 
 		@Override
 		public void onClick(View v) {
-			if (property_list == null) {
-				Toast.makeText(getContext(), "当前无物业", Toast.LENGTH_SHORT).show();
-			} else {
 				//todo add property list json to show
 				switch (v.getId()) {
 					case R.id.tv_right:
 						if (popRight != null && popRight.isShowing()) {
 							popRight.dismiss();
 						} else {
-							if (property_list.size() > 0) {
-								List<PropertyListBean> subList = init();
+								LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getContext(), "", "");
+								LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getContext(), loginRegisterHandler);
+								loginRegisterManager.ShowAllProperty();
+
+
+//								List<PropertyListBean> subList = init();
 								layoutRight = getLayoutInflater().inflate(
 										R.layout.pop_menulist, null);
 								menulistRight = (ListView) layoutRight
 										.findViewById(R.id.menulist);
-								ChoosePropertyAdapter listAdapter = new ChoosePropertyAdapter(
-										getContext(), R.layout.pop_menuitem, subList);
-								menulistRight.setAdapter(listAdapter);
-								listAdapter.notifyDataSetChanged();
+//								ChoosePropertyAdapter listAdapter = new ChoosePropertyAdapter(
+//										getContext(), R.layout.pop_menuitem, subList);
+//								menulistRight.setAdapter(listAdapter);
+//								listAdapter.notifyDataSetChanged();
 
 								// 点击listview中item的处理
-								menulistRight
-										.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-											@Override
-											public void onItemClick(AdapterView<?> parent,
-																	View view, int position, long id) {
-												strItem = property_list.get(position);
-												positon_pro_name.setText(strItem);
-												HealthMap.put("choosed_property_name", strItem);
-												String session = Session.getSession();
-												LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getContext(), "", "");
-												LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getContext(), loginRegisterHandler);
-												loginRegisterManager.ChooseProperty(session, pro_id_list.get(position));
-												//todo 切换物业无响应，添加子账户崩溃
-												LoginRegisterHandler loginRegisterHandler1 = new LoginRegisterHandler(getContext(), "", "");
-												LoginRegisterManager loginRegisterManager1 = new LoginRegisterManager(getContext(), loginRegisterHandler1);
-												loginRegisterManager1.ShowNotice("0");
-												if (popRight != null && popRight.isShowing()) {
-													popRight.dismiss();
-												}
-											}
-										});
+//								menulistRight
+//										.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//											@Override
+//											public void onItemClick(AdapterView<?> parent,
+//																	View view, int position, long id) {
+//												strItem = property_list.get(position);
+//												positon_pro_name.setText(strItem);
+//												HealthMap.put("choosed_property_name", strItem);
+//												String session = Session.getSession();
+//												LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getContext(), "", "");
+//												LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getContext(), loginRegisterHandler);
+//												loginRegisterManager.ChooseProperty(pro_id_list.get(position));
+//												//todo 切换物业无响应，添加子账户崩溃
+//												LoginRegisterHandler loginRegisterHandler1 = new LoginRegisterHandler(getContext(), "", "");
+//												LoginRegisterManager loginRegisterManager1 = new LoginRegisterManager(getContext(), loginRegisterHandler1);
+//												loginRegisterManager1.ShowNotice("0");
+//												if (popRight != null && popRight.isShowing()) {
+//													popRight.dismiss();
+//												}
+//											}
+//										});
+//
+//								popRight = new PopupWindow(layoutRight, 300,
+//										ViewGroup.LayoutParams.WRAP_CONTENT);
+//
+////								ColorDrawable cd = new ColorDrawable(-1000);
+//////								popRight.setBackgroundDrawable(cd);
+//								popRight.setAnimationStyle(R.style.PopupAnimation);
+//								popRight.update();
+//								popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+//								popRight.setTouchable(true); // 设置popupwindow可点击
+//								popRight.setOutsideTouchable(true); // 设置popupwindow外部可点击
+//								popRight.setFocusable(true); // 获取焦点
+//
+//								// 设置popupwindow的位置
+//								int topBarHeight = 30;
+//								popRight.showAsDropDown(tvRight, 0,
+//										(topBarHeight - tvRight.getHeight()) / 2);
+//
+//								popRight.setTouchInterceptor(new View.OnTouchListener() {
+//
+//									@Override
+//									public boolean onTouch(View v, MotionEvent event) {
+//										// 如果点击了popupwindow的外部，popupwindow也会消失
+//										if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+//											popRight.dismiss();
+//											return true;
+//										}
+//										return false;
+//									}
+//								});
 
-								popRight = new PopupWindow(layoutRight, 300,
-										ViewGroup.LayoutParams.WRAP_CONTENT);
-
-//								ColorDrawable cd = new ColorDrawable(-1000);
-////								popRight.setBackgroundDrawable(cd);
-								popRight.setAnimationStyle(R.style.PopupAnimation);
-								popRight.update();
-								popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-								popRight.setTouchable(true); // 设置popupwindow可点击
-								popRight.setOutsideTouchable(true); // 设置popupwindow外部可点击
-								popRight.setFocusable(true); // 获取焦点
-
-								// 设置popupwindow的位置
-								int topBarHeight = 30;
-								popRight.showAsDropDown(tvRight, 0,
-										(topBarHeight - tvRight.getHeight()) / 2);
-
-								popRight.setTouchInterceptor(new View.OnTouchListener() {
-
-									@Override
-									public boolean onTouch(View v, MotionEvent event) {
-										// 如果点击了popupwindow的外部，popupwindow也会消失
-										if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-											popRight.dismiss();
-											return true;
-										}
-										return false;
-									}
-								});
-							}
 							break;
 						}
 
@@ -473,7 +474,7 @@ public class MainFragment extends Fragment {
 						break;
 				}
 			}
-		}
+
 	};
 
 			@Override
@@ -485,7 +486,6 @@ public class MainFragment extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		property_list=property_list;
 	}
 
 //	private void showPopupMenu(View view) {

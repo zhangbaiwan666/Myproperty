@@ -370,32 +370,60 @@ public class LoginRegisterHandler extends Handler {
                 String session3 = Session.getSession();
                 loginRegisterManager3.ShowAllHouseForSub();
                 break;
-            case Properties.ALL_PROPERTY_LIST:
-                ArrayList<String> property_list = new ArrayList<String>();
-                ArrayList<String> pro_id_list = new ArrayList<>();
+            case Properties.ALL_PROPERTY_LIST:      //todo 1
                 Object obj_property = msg.obj;
-                System.out.println("userBeanList的强转字符串的test" + obj_property);
-                List<PropertyListBean> propertyListBean = (List<PropertyListBean>) obj_property;
-                for (int i = 0; i < propertyListBean.size(); i++) {
-                    property_list.add(propertyListBean.get(i).getName());
-                    pro_id_list.add(propertyListBean.get(i).getPro_id());
-                }
+
+                final  List<PropertyListBean> propertyListBean = (List<PropertyListBean>) obj_property;
                 View layoutRight = ((Activity) context).getLayoutInflater().inflate(
                         R.layout.pop_menulist, null);
-                ListView menulistRight = layoutRight.findViewById(R.id.menulist);
+
+                final ListView menulistRight = layoutRight.findViewById(R.id.menulist);
                 ChoosePropertyAdapter listAdapter = new ChoosePropertyAdapter(
                         context, R.layout.pop_menuitem, propertyListBean);
+
                 menulistRight.setAdapter(listAdapter);
                 listAdapter.notifyDataSetChanged();
-                System.out.println("看你俩谁空menulistRight" + menulistRight);
-                System.out.println("看你俩谁空listAdapter" + listAdapter);
-                HealthMap.put("property_list", property_list);
-                HealthMap.put("pro_id_list", pro_id_list);
-                Intent intent2 = new Intent(context, MainActivity.class);
 
-                ((Activity) context).startActivity(intent2);
+                tvRight = (TextView)((Activity) context).findViewById(R.id.tv_right);
+                popRight = new PopupWindow(layoutRight, ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);//todo pop's width modify
+//                            ColorDrawable cd = new ColorDrawable(-0000);
+//                            popRight.setBackgroundDrawable(cd);
+                popRight.setAnimationStyle(R.style.PopupAnimation);
+                popRight.update();
+                popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+                popRight.setTouchable(true); // 设置popupwindow可点击
+                popRight.setOutsideTouchable(true); // 设置popupwindow外部可点击
+                popRight.setFocusable(true); // 获取焦点
+                // 设置popupwindow的位置
+                int topBarHeight1 = 35;
+                popRight.showAsDropDown(tvRight, 0,
+                        (topBarHeight1 - tvRight.getHeight()) / 2);
+                popRight.setTouchInterceptor(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        // 如果点击了popupwindow的外部，popupwindow也会消失
+                        if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+                            popRight.dismiss();
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+                menulistRight
+                        .setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "", "");
+                                LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
+                                loginRegisterManager.ChooseProperty(propertyListBean.get(position).getPro_id());
+                                if (popRight != null && popRight.isShowing()) {
+                                    popRight.dismiss();
+                                }
+                            }
+                        });
                 break;
-            case Properties.ALL_HOUSE_LIST_FOR_SUB:
+            case Properties.ALL_HOUSE_LIST_FOR_SUB:         //todo 2
                 Object obj_house = msg.obj;
                 Object choosed_property_name = HealthMap.get("choosed_property_name");
                 if (choosed_property_name == null) {
@@ -406,11 +434,10 @@ public class LoginRegisterHandler extends Handler {
                 final List<HouseListBean> houseListBean = (List<HouseListBean>) obj_house;
                   View layoutRight1 = ((Activity) context).getLayoutInflater().inflate(
                         R.layout.pop_menulist, null);
+
                final ListView menulistRight1 = layoutRight1.findViewById(R.id.menulist);
-                System.out.println("张繁周三过生日"+menulistRight1);
                 ChooseHouseAdapter listAdapter1 = new ChooseHouseAdapter(
                         context, R.layout.pop_menuitem, houseListBean);
-                System.out.println("张繁周三过生日"+listAdapter1);
                 menulistRight1.setAdapter(listAdapter1);
                 listAdapter1.notifyDataSetChanged();
                 tvRight = (TextView)((Activity) context).findViewById(R.id.tv_right);
@@ -425,7 +452,7 @@ public class LoginRegisterHandler extends Handler {
                 popRight.setOutsideTouchable(true); // 设置popupwindow外部可点击
                 popRight.setFocusable(true); // 获取焦点
                 // 设置popupwindow的位置
-                int topBarHeight = 30;
+                int topBarHeight = 35;
                 popRight.showAsDropDown(tvRight, 0,
                         (topBarHeight - tvRight.getHeight()) / 2);
                 popRight.setTouchInterceptor(new View.OnTouchListener() {
@@ -458,6 +485,9 @@ public class LoginRegisterHandler extends Handler {
             case Properties.CHANGE_UESR_PROPERTY:
                 switch (msg.arg1) {
                     case CHANGEPROSUCCESS:
+                        LoginRegisterHandler loginRegisterHandler1 = new LoginRegisterHandler(context, "", "");
+                        LoginRegisterManager loginRegisterManager1 = new LoginRegisterManager(context, loginRegisterHandler1);
+                        loginRegisterManager1.ShowNotice("0");
                         break;
                     case CHANGEPROFAILED:
                         break;
@@ -505,10 +535,8 @@ public class LoginRegisterHandler extends Handler {
                 switch (msg.arg1) {
                     case LOGINSSUCCEED:
                             //todo just to user Relogin without ShowAllProperty and draw it when the right POP onClick;
-                        LoginRegisterHandler loginRegisterHandler1 = new LoginRegisterHandler(context, "", "");
-                        LoginRegisterManager loginRegisterManager1 = new LoginRegisterManager(context, loginRegisterHandler1);
-                        loginRegisterManager1.ShowAllProperty();
-
+                        Intent intent = new Intent(context, MainActivity.class);
+                        ((Activity) context).startActivity(intent);
                         break;
                     case PSWFAILD:
                         Toast.makeText(context, "本地账户为空", Toast.LENGTH_LONG)
