@@ -8,6 +8,7 @@ import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -28,12 +29,13 @@ public class PayFeeHandler extends Handler {
     private List<PayFeeRecord.ListBean> listBeans;
     PayDetailInfo.PaymentinfoBean paymentinfo;
     private TextView tv_feeType;
-
+   ProgressBar pb_payRecord;
     public PayFeeHandler(Context context, ListView lv_PayFeeRecord, TextView
-            tv_feeType){
+            tv_feeType, ProgressBar pb_payRecord){
         this.context=context;
         this.lv_PayFeeRecord=lv_PayFeeRecord;
         this.tv_feeType=tv_feeType;
+       this.pb_payRecord=pb_payRecord;
     }
 
     @Override
@@ -48,8 +50,12 @@ public class PayFeeHandler extends Handler {
         }
     }
     public void initPayFeeRecordView(){
+
         PayFeeRecordAdapter payFeeRecordAdapter=new PayFeeRecordAdapter(context,listBeans);
         lv_PayFeeRecord.setAdapter(payFeeRecordAdapter);
+        if (lv_PayFeeRecord!=null){
+            pb_payRecord.setVisibility(View.GONE);
+        }
         lv_PayFeeRecord.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 

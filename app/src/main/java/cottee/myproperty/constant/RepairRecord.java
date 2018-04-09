@@ -33,12 +33,17 @@ public class RepairRecord {
 
         private String order_id;
         private String c_time;
-
+        private  String photo_url;
         public static ListBean objectFromData(String str) {
 
             return new Gson().fromJson(str, ListBean.class);
         }
-
+public String getPhoto_url(){
+            return photo_url;
+}
+public void setPhoto_url(String photo_url){
+    this.photo_url=photo_url;
+}
         public String getOrder_id() {
             return order_id;
         }

@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/payfee_time"
         android:text="2018-3-21"
-        android:textSize="10dp"/>
+        android:textSize="10dp"
+        android:textColor="#fff"/>
 
 </LinearLayout>

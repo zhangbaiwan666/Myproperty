@@ -8,15 +8,11 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.Calendar;
-import java.util.Locale;
 
 import cottee.myproperty.R;
 import cottee.myproperty.manager.RepairManager;
@@ -41,7 +37,7 @@ public class RepairSubmitActivity extends Activity {
     private String responseData;
     private ImageView imv_takePhotoTwo;
     private ImageView imv_takePhotoThree;
-    private String upload_objectKey;
+    private static String upload_objectKey;
     private String filepath;
 
     @Override
@@ -66,16 +62,6 @@ public class RepairSubmitActivity extends Activity {
                     case ConfigOfOssClient.WHAT_FAILED_UPLOAD:
                         String failed_upload = (String) msg.obj;
                         Toast.makeText(RepairSubmitActivity.this, failed_upload, Toast.LENGTH_SHORT).show();
-                        break;
-                    case ConfigOfOssClient.WHAT_SUCCESS_DOWNLOAD:
-                        Bitmap bitmap = (Bitmap) msg.obj;
-                        //iv_download.setImageBitmap(bitmap);
-                        String success_download = "成功下载";
-                        Toast.makeText(RepairSubmitActivity.this, success_download, Toast.LENGTH_SHORT).show();
-                        break;
-                    case ConfigOfOssClient.WHAT_FAILED_DOWNLOAD:
-                        String failed_download = (String) msg.obj;
-                        Toast.makeText(RepairSubmitActivity.this, failed_download, Toast.LENGTH_SHORT).show();
                         break;
                     default:
                         break;
@@ -148,7 +134,7 @@ public class RepairSubmitActivity extends Activity {
     }
     public  void  Sure(View view){
         CustomDialog.Builder builder = new CustomDialog.Builder(this);
-        builder.setMessage("您还没有拍照，是否要拍照");
+        builder.setMessage("您确定要提交报修单吗");
         // builder.setTitle("温馨小提示");
         builder.setPositiveButton("否", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
@@ -162,11 +148,11 @@ public class RepairSubmitActivity extends Activity {
                 new android.content.DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        upload_objectKey = "property/"+ "xujingjing"+"/item"
-                                +"/"+new DateFormat().format( "yyyyMMdd_hhmmss",
-                                Calendar.getInstance( Locale.CHINA ) ) + ".jpg";
-                        UploadUtils.uploadFileToOss(handler, ConfigOfOssClient.BUCKET_NAME, upload_objectKey, filepath);
-                        RepairManager.SubmissionToWeb(upload_objectKey,et_inputInfo.getText().toString(),bundle.getString("bigProject")+"的"+ bundle.getString("smallProject"), bundle.getString("id"),bundle.getString("name")
+//                        upload_objectKey = "property/"+ "xujingjing"+"/item"
+//                                +"/"+new DateFormat().format( "yyyyMMdd_hhmmss",
+//                                Calendar.getInstance( Locale.CHINA ) ) + ".jpg";
+                        UploadUtils.uploadFileToOss(handler, ConfigOfOssClient.BUCKET_NAME,  ConfigOfOssClient.upload_objectKey, filepath);
+                        RepairManager.SubmissionToWeb( ConfigOfOssClient.upload_objectKey,et_inputInfo.getText().toString(),bundle.getString("bigProject")+"的"+ bundle.getString("smallProject"), bundle.getString("id"),bundle.getString("name")
                                  );
                         Intent intent=new Intent(RepairSubmitActivity.this,RepairDetailInfoActivity.class);
                         intent.putExtras(bundle);

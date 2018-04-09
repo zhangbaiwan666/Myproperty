@@ -8,6 +8,7 @@ import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import java.util.List;
 
@@ -24,10 +25,11 @@ public class RepairRecordHandler extends Handler {
     private Context RepairRecordcontext;
     public ListView lv_RepairRecord;
     private List<RepairRecord.ListBean> listBeans;
-
-    public RepairRecordHandler(Context context, ListView lv_RepairRecord) {
+     ProgressBar pb_repairRecord;
+    public RepairRecordHandler(Context context, ListView lv_RepairRecord,  ProgressBar pb_repairRecord) {
         this.RepairRecordcontext = context;
         this.lv_RepairRecord = lv_RepairRecord;
+        this.pb_repairRecord=pb_repairRecord;
     }
 
     @Override
@@ -39,12 +41,16 @@ public class RepairRecordHandler extends Handler {
                 initRepairRecordView();
             }
 
+
         }
     }
 
     public void initRepairRecordView() {
-        RepairRecordAdapter repairRecordAdapter = new RepairRecordAdapter(RepairRecordcontext, listBeans);
+        RepairRecordAdapter repairRecordAdapter = new RepairRecordAdapter(RepairRecordcontext, listBeans,this);
         lv_RepairRecord.setAdapter(repairRecordAdapter);
+        if (repairRecordAdapter!=null){
+            pb_repairRecord.setVisibility(View.GONE);
+        }
         lv_RepairRecord.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 

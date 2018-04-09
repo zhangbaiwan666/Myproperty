@@ -39,10 +39,10 @@
             />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <ListView
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <cottee.myproperty.view.MyListview
             android:paddingLeft="10dp"
             android:id="@+id/lv_payFeeRecord"
             android:layout_width="match_parent"
@@ -51,8 +51,17 @@
             android:dividerHeight="20dp"
             android:layout_centerInParent="true"
              android:paddingTop="15dp"
+            android:listSelector="@android:color/transparent"
             android:clickable="true"
+
             >
-        </ListView>
-    </RelativeLayout>
+        </cottee.myproperty.view.MyListview>
+        <ProgressBar
+            android:id="@+id/pb_payRecord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateDrawable="@drawable/common_progressbar"
+            android:visibility="visible" />
+    </FrameLayout>
 </LinearLayout>

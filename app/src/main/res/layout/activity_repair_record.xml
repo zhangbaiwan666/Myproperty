@@ -38,10 +38,10 @@
             android:textSize="20dp"
             />
     </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <ListView
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <cottee.myproperty.view.MyListview
             android:paddingLeft="10dp"
             android:id="@+id/lv_repairRecord"
             android:layout_width="match_parent"
@@ -49,9 +49,16 @@
             android:divider="@android:color/transparent"
             android:dividerHeight="20dp"
             android:layout_centerInParent="true"
-
-            android:clickable="true"
+            android:listSelector="@android:color/transparent"
+            android:clickable="false"
              >
-        </ListView>
-    </RelativeLayout>
+        </cottee.myproperty.view.MyListview>
+        <ProgressBar
+            android:id="@+id/pb_repairRecord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateDrawable="@drawable/common_progressbar"
+            android:visibility="visible" />
+    </FrameLayout>
 </LinearLayout>

@@ -15,6 +15,7 @@ import java.util.List;
 import cottee.myproperty.R;
 import cottee.myproperty.constant.BaseData;
 import cottee.myproperty.constant.RepairProject;
+import cottee.myproperty.uitils.AsyncImageLoader;
 import cottee.myproperty.uitils.NormalLoadPicture;
 
 
@@ -22,12 +23,16 @@ public class RightListViewAdapter extends BaseAdapter {
 	private Context context;
 	private ArrayList<BaseData> data = new ArrayList<BaseData>();
 	List<RepairProject.ProinfoBean> list;
-	private ListView listView;
-	public RightListViewAdapter(Context context, List list) {
+	private ListView lv_right;
+	private AsyncImageLoader asyncImageLoader;
+	private String image;
+
+	public RightListViewAdapter(Context context, List list,ListView lv_right) {
 		super();
 		this.context = context;
 		this.list=list;
-		//asyncImageLoader = new AsyncImageLoader();
+		this.lv_right=lv_right;
+		asyncImageLoader = new AsyncImageLoader();
 		//this.listView=listView;
 	}
 
@@ -61,30 +66,21 @@ public class RightListViewAdapter extends BaseAdapter {
 		if (convertView == null) {
 			convertView = View.inflate(context, R.layout.item_right, null);
 			vh = new ViewHold();
-			convertView.setTag(vh);
+
 			vh.tv_content = (TextView) convertView
 					.findViewById(R.id.tv_content);
 			vh.tv_right = (TextView) convertView.findViewById(R.id.tv_right);
 			vh.imv_right=(ImageView)convertView.findViewById(R.id.imv);
-			new NormalLoadPicture().getPicture(data.get(position).getUrl(),vh.imv_right);
+			convertView.setTag(vh);
+			image = data.get(position).getUrl();
 
-		} else {
-			vh = (ViewHold) convertView.getTag();
 		}
-		String image=data.get(position).getUrl();
-		//vh.imv_right.setTag(image);
+			vh = (ViewHold) convertView.getTag();
+			System.out.println("rrrrrrrrrrrrrrrrrright");
+
+		vh.imv_right.setTag(image);
+		new NormalLoadPicture().getPicture(image,vh.imv_right);
 		vh.tv_content.setText(data.get(position).getName());
-//		        Drawable cachedImage = asyncImageLoader.loadDrawable(image, new
-//                AsyncImageLoader.ImageCallback() {
-//                    public void imageLoaded(Drawable imageDrawable, String
-//                            imageUrl) {
-//                        ImageView imageViewByTag = (ImageView)listView
-//                                .findViewWithTag(imageUrl);
-//                        if (imageViewByTag != null) {
-//                            imageViewByTag.setImageDrawable(imageDrawable);
-//                        }
-//                    }
-//                });
 		if (position == 0) {
 			vh.tv_right.setVisibility(View.VISIBLE);
 			vh.tv_right.setText(data.get(position).getTitle());

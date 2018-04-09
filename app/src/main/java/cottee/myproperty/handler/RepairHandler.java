@@ -80,6 +80,7 @@ public class RepairHandler extends Handler {
                 proinfo = (List<RepairProject.ProinfoBean>) msg.obj;
                 initRepairProjectData();
                 initRepairProjectView();
+
             }
             case  Properties.WorkersList:{
                 projectStaffBeans= (List<Mechanic.ProjectStaffBean>) msg.obj;
@@ -139,12 +140,10 @@ public class RepairHandler extends Handler {
     public void initRepairProjectView() {
         leftAdapter = new LeftListViewAdapter(context,proinfo);
         lv_left.setAdapter(leftAdapter);
-        rightAdapter = new RightListViewAdapter(context,proinfo);
+        rightAdapter = new RightListViewAdapter(context,proinfo,lv_Right);
         lv_Right.setAdapter(rightAdapter);
         rightAdapter.updateData(lists);
-
         tv_title.setText(lists.get(0).getTitle());
-
         lv_left.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override

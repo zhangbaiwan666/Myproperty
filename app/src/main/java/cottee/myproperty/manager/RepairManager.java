@@ -127,6 +127,7 @@ public class RepairManager {
     private void parseJSONWorkersList(String responseData) {
         Gson gson = new Gson();
         projectStaffBeans = gson.fromJson(responseData,Mechanic.class).getProject_staff();
+        System.out.println(projectStaffBeans);
         Message message = new Message();
         message.what = Properties.WorkersList;
         message.obj = projectStaffBeans;
@@ -151,7 +152,7 @@ public class RepairManager {
                     Response response = client.newCall(request).execute();
                  String   responseData = response.body().string();
 
-                    System.out.println("rrrrrrrrrrrrr"+ responseData);
+                    System.out.println("报修订单返回"+ responseData+"        "+"提交的数据"+photo_url+part+staff_id+staff_name);
                 } catch (Exception e) {
                     e.printStackTrace();
 
@@ -175,6 +176,7 @@ public class RepairManager {
                             .build();
                     Response response = client.newCall(request).execute();
                     String responseData = response.body().string();
+                    System.out.println("记录"+responseData);
                    parseJSONRepairRecord(responseData);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -186,7 +188,7 @@ public class RepairManager {
     public void parseJSONRepairRecord(String responseData) {
         Gson gson = new Gson();
         List<RepairRecord.ListBean> listBeans=gson.fromJson(responseData,RepairRecord.class).getList();
-        System.out.println(listBeans.get(0).getOrder_id()+listBeans.get(0).getC_time());
+        System.out.println("图片"+listBeans.get(0).getPhoto_url());
         Message message = new Message();
         message.what = Properties.RepairRecord;
         message.obj = listBeans;

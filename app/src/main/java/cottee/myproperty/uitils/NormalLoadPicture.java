@@ -18,10 +18,12 @@ public class NormalLoadPicture {
     private String uri;
     private ImageView imageView;
     private  byte[] picByte;
+
     public  void getPicture(String uri, ImageView imageView){
         this.uri=uri;
         this.imageView=imageView;
         new Thread(runnable).start();
+
     }
     Handler handle=new Handler(){
         @Override
@@ -56,6 +58,7 @@ public class NormalLoadPicture {
                     fis.close();
                     Message message=new Message();
                     message.what=1;
+
                     handle.sendMessage(message);
 
                 }

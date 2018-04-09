@@ -129,6 +129,7 @@
         android:paddingTop="90dp"
         android:paddingLeft="50dp">
         <Button
+            android:id="@+id/btn_evalute"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_gravity="center_horizontal"
@@ -140,7 +141,7 @@
             android:text="确定"
             android:textColor="#FFFFFF"
             android:textSize="15sp"
-            android:onClick="Sure"
+            android:clickable="true"
             android:background="@drawable/shape_btn_login"/>
     </RelativeLayout>
 </LinearLayout>

@@ -1,5 +1,6 @@
 package cottee.myproperty.uitils.oss;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
@@ -22,7 +23,7 @@ import java.io.InputStream;
 
 public class DownloadUtils {
     //需要一个保存在本地的地址，一个handler，一个oss服务器的存储空间名（在ConfigOfOssClient里有），一个要下载文件的key
-    public static void downloadFileFromOss(final File file, final Handler handler, String bucketName, String objectKey){
+    public static void downloadFileFromOss(final File file, final Handler handler, String bucketName, String objectKey, final Context context){
 
         GetObjectRequest get = new GetObjectRequest(bucketName, objectKey);
         OSSAsyncTask task = InitOssClient.ossClient.asyncGetObject(get, new OSSCompletedCallback<GetObjectRequest, GetObjectResult>() {
@@ -30,13 +31,16 @@ public class DownloadUtils {
             public void onSuccess(GetObjectRequest request, GetObjectResult result) {
                 // 请求成功
                 InputStream inputStream = result.getObjectContent();
-
+                System.out.println("流"+inputStream);
                 try {
                     StreamUtils.writeStreamToCache(inputStream, file);
                     inputStream.close();
+
                     Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                   // BitmapUtils bitmapUtils = new BitmapUtils( context);
+                  // Bitmap bitmap = bitmapUtils.decodeFile(file.getAbsolutePath());
                     Message message = new Message();
-                    message.obj = bitmap;
+                    message.obj = file.getAbsolutePath();
                     message.what = ConfigOfOssClient.WHAT_SUCCESS_DOWNLOAD;
                     handler.sendMessage(message);
                 } catch (IOException e) {

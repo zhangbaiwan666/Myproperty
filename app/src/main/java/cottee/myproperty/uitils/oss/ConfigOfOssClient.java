@@ -1,5 +1,10 @@
 package cottee.myproperty.uitils.oss;
 
+import android.text.format.DateFormat;
+
+import java.util.Calendar;
+import java.util.Locale;
+
 /**
  * Created by 37444 on 2018/3/23.
  */
@@ -16,4 +21,7 @@ public class ConfigOfOssClient {
     public static final int WHAT_SUCCESS_UPLOAD = 1;
     public static final int WHAT_FAILED_UPLOAD = 2;
     public static final int WHAT_FAILED_DOWNLOAD = 4;
+    public static  final String upload_objectKey = "property/"+ "xujingjing"+"/item"
+            +"/"+new DateFormat().format( "yyyyMMdd_hhmmss",
+            Calendar.getInstance( Locale.CHINA ) ) + ".jpg";
 }

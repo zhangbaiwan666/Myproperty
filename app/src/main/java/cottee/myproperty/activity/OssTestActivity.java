@@ -13,24 +13,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.text.format.DateFormat;
-import android.util.Base64;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Calendar;
-import java.util.Locale;
 
 import cottee.myproperty.R;
-import cottee.myproperty.uitils.oss.ConfigOfOssClient;
-import cottee.myproperty.uitils.oss.DownloadUtils;
-import cottee.myproperty.uitils.oss.InitOssClient;
-import cottee.myproperty.uitils.oss.UploadUtils;
 
 /**
  * Created by z on 2018/4/3.
@@ -58,7 +48,7 @@ public class OssTestActivity extends Activity {
 //                    break;
 //                case 3:
 //                    Bitmap bitmap = (Bitmap) msg.obj;
-//                    iv_download.setImageBitmap(bitmap);
+ //                 iv_download.setImageBitmap(bitmap);
 //                    String success_download = "成功下载";
 //                    Toast.makeText(OssTestActivity.this, success_download, Toast.LENGTH_SHORT).show();
 //                    break;
@@ -103,16 +93,16 @@ public class OssTestActivity extends Activity {
             }
         }
         //先初始化oss客户端  //必备  //报空说明线程没执行完
-        InitOssClient.initOssClient(this, ConfigOfOssClient.TOKEN_ADDRESS, ConfigOfOssClient.ENDPOINT);
-        albumButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//        InitOssClient.initOssClient(this, ConfigOfOssClient.TOKEN_ADDRESS, ConfigOfOssClient.ENDPOINT);
+//        albumButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                Intent intent=new Intent(Intent.ACTION_PICK);
 //                Intent intent=new Intent(Intent.ACTION_PICK);
-                Intent intent=new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent,PICK_PHOTO);
-            }
-        });
+//                intent.setType("image/*");
+//                startActivityForResult(intent,PICK_PHOTO);
+//            }
+//        });
 
     }
 
@@ -127,26 +117,23 @@ public class OssTestActivity extends Activity {
         return bitmap;
     }
 
-    public void upload(View v) {
-        upload_objectKey = "property/"+ "xujingjing"+"/item"
-                +"/"+new DateFormat().format( "yyyyMMdd_hhmmss",
-                Calendar.getInstance( Locale.CHINA ) ) + ".jpg";//CHINA 是随机给的数值
-        String uploadFilePath = et_filepath.getText().toString().trim();
-        UploadUtils.uploadFileToOss(handler, ConfigOfOssClient.BUCKET_NAME, upload_objectKey, uploadFilePath);
-    }
+//    public void upload(View v) {
+//        upload_objectKey = "property/"+ "xujingjing"+"/item"
+//                +"/"+new DateFormat().format( "yyyyMMdd_hhmmss",
+//                Calendar.getInstance( Locale.CHINA ) ) + ".jpg";//CHINA 是随机给的数值
+//        String uploadFilePath = et_filepath.getText().toString().trim();
+//        UploadUtils.uploadFileToOss(handler, ConfigOfOssClient.BUCKET_NAME, upload_objectKey, uploadFilePath);
+//    }
 
-    public void download(View v) {
-        new Thread() {
-            @Override
-            public void run() {
-//                String download_objectKey = "property/"+ "zhangxingyu"+"/item"
-//                        +"/"+new DateFormat().format( "yyyyMMdd_hhmmss",
-//                        Calendar.getInstance( Locale.CHINA ) ) + ".jpg";
-                final File cache_image = new File(getCacheDir(), Base64.encodeToString(upload_objectKey.getBytes(), Base64.DEFAULT));
-                DownloadUtils.downloadFileFromOss(cache_image, handler, ConfigOfOssClient.BUCKET_NAME, upload_objectKey);
-            }
-        }.start();
-    }
+//    public void download(View v) {
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                final File cache_image = new File(getCacheDir(), Base64.encodeToString(upload_objectKey.getBytes(), Base64.DEFAULT));
+//                DownloadUtils.downloadFileFromOss(cache_image, handler, ConfigOfOssClient.BUCKET_NAME, upload_objectKey);
+//            }
+//        }.start();
+//    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
