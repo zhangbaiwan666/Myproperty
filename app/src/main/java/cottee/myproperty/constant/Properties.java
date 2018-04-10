@@ -5,13 +5,13 @@ package cottee.myproperty.constant;
  */
 
 public class Properties {
-    public static final String EMAIL_SUBMIT_PATH = "https://thethreestooges.cn/property/bean/login/mail_submit.php";
-    public static final String MAIL_VERIFICATION_PATH= "https://thethreestooges.cn/property/bean/login/mail_validate.php";
-    public static final String USER_BUILD_PATH = "https://thethreestooges.cn/property/bean/login/user_write.php";
+    public static final String EMAIL_SUBMIT_PATH = "https://thethreestooges.cn:5210/application/login/mail_submit.php";
+    public static final String MAIL_VERIFICATION_PATH= "https://thethreestooges.cn:5210/application/login/mail_validate.php";
+    public static final String USER_BUILD_PATH = "https://thethreestooges.cn:5210/application/login/user_write.php";
     public static final String LOGIN_PATH = "https://thethreestooges.cn:5210/identity/login/login.php";
-    public static final String FORGET_SUBMIT_PATH ="https://thethreestooges.cn/property/bean/login/forget_submit.php";
-    public static final String FORGET_VALIDATE_PATH ="https://thethreestooges.cn/property/bean/login/forget_validate.php";
-    public static final String RESET_USER_PATH ="https://thethreestooges.cn/property/bean/login/user_forget.php";
+    public static final String FORGET_SUBMIT_PATH ="https://thethreestooges.cn:5210/application/login/forget_submit.php";
+    public static final String FORGET_VALIDATE_PATH ="https://thethreestooges.cn:5210/application/login/forget_validate.php";
+    public static final String RESET_USER_PATH ="https://thethreestooges.cn:5210/application/login/user_forget.php";
     public static final String ADD_SUB_ACCOUNT="https://thethreestooges.cn:5210/housemanage/son/add";
     public static final String DELETE_SUB_ACCOUNT="https://thethreestooges.cn:5210/housemanage/son/delete";
     public static final String UPDATE_SUB_ACCOUNT="https://thethreestooges.cn:5210/housemanage/son/update";
