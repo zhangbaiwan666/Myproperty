@@ -35,6 +35,7 @@ import cottee.myproperty.adapter.SubinfoAdapter;
 import cottee.myproperty.constant.BullentinFindInfo;
 import cottee.myproperty.constant.BullentinInfo;
 import cottee.myproperty.constant.HouseListBean;
+import cottee.myproperty.constant.ProName;
 import cottee.myproperty.constant.Properties;
 import cottee.myproperty.activity.MainActivity;
 import cottee.myproperty.activity.SetPasswordActivity;
@@ -44,6 +45,7 @@ import cottee.myproperty.fragment.MainFragment;
 import cottee.myproperty.fragment.PastBulletinFragment;
 import cottee.myproperty.fragment.RecentBulletinFragment;
 import cottee.myproperty.fragment.SearchBulletionFragment;
+import cottee.myproperty.fragment.SettingFragment;
 import cottee.myproperty.manager.LoginRegisterManager;
 import cottee.myproperty.uitils.HealthMap;
 import cottee.myproperty.uitils.Session;
@@ -125,8 +127,8 @@ public class LoginRegisterHandler extends Handler {
     ##提交字段：mail_address（邮件地址）   password（密码）
                 * 成功返回 0
                 * 失败返回 1*/
-    private static final int RESETSUCCEE = 26;
-    private static final int RESETFAILED = 1;
+    private static final int RESETSUCCEE = 1;
+    private static final int RESETFAILED = 0;
     /* #添加子账户
              ##提交字段：father_id（查询拥有房屋返还的id）$user_id（子账户id） power_service（报修权限）
               power_payment（缴费权限） power_affiche（公告权限）
@@ -309,6 +311,7 @@ public class LoginRegisterHandler extends Handler {
                         Toast.makeText(context, "修改成功", Toast.LENGTH_LONG).show();
                         break;
                     case RESETFAILED:
+                        Toast.makeText(context, "修改失败，请检查网络或联系客服咨询", Toast.LENGTH_SHORT).show();
                         break;
                 }
                 break;
@@ -433,6 +436,9 @@ public class LoginRegisterHandler extends Handler {
                                  LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "", "");
                                  LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
                                  loginRegisterManager.ChooseProperty(propertyListBean.get(position).getPro_id());
+                                 TextView tv_pro_name= (TextView) ((Activity) context).findViewById(R.id.positon_pro_name);
+                                 tv_pro_name.setText(propertyListBean.get(position).getName());
+                                 ProName.setPro_name(propertyListBean.get(position).getName());
                                  if (MainFragment.popRight != null && MainFragment.popRight.isShowing()) {
                                      MainFragment.popRight.dismiss();
                                  }
@@ -475,7 +481,7 @@ public class LoginRegisterHandler extends Handler {
                         // 设置popupwindow的位置
                         int topBarHeight = 35;
                     ControlSubActivity.popRight.showAsDropDown(tvRight, 0,
-                                (topBarHeight - tvRight.getHeight()) / 2);
+                                40);
 
 //                popRight.setTouchInterceptor(new View.OnTouchListener() {
 //                    @Override
@@ -497,8 +503,11 @@ public class LoginRegisterHandler extends Handler {
                                     LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "", "");
                                     LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
                                     loginRegisterManager.ChooseHouse(houseListBean.get(position).getHome_id());
+                                    TextView tv_house_name = (TextView) ((Activity) context).findViewById(R.id.tv_show_house);
+                                    tv_house_name.setText(houseListBean.get(position).getAddress());
                                     if (ControlSubActivity.popRight != null && ControlSubActivity.popRight.isShowing()) {
                                         ControlSubActivity.popRight.dismiss();
+
                                     }
                                 }
                             });

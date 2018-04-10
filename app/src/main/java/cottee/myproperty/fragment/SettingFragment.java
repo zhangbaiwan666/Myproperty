@@ -26,6 +26,7 @@ import cottee.myproperty.activity.RepairRecordActivity;
 import cottee.myproperty.activity.SettingActivity;
 import cottee.myproperty.activity.ViewHouseAcivity;
 import cottee.myproperty.constant.BullentinBean;
+import cottee.myproperty.constant.ProName;
 import cottee.myproperty.handler.LoginRegisterHandler;
 import cottee.myproperty.listener.NoDoubleClickListener;
 import cottee.myproperty.manager.LoginRegisterManager;
@@ -38,6 +39,7 @@ public class SettingFragment extends Fragment {
 	private View rl_view_house;
 	private boolean click=true;
 	private TextView repair_record;
+	private TextView textId;
 	private RelativeLayout rl_repair_record;
 	private RelativeLayout rl_pay_record;
 	private boolean clicked=true;
@@ -54,6 +56,7 @@ public class SettingFragment extends Fragment {
 		int property_name = intent.getIntExtra("property_name", 0);
 		System.out.println("传到FragmentSetting的property_name为"+property_name);
 		repair_record = (TextView)inflate.findViewById(R.id.repair_record);
+		textId = (TextView)inflate.findViewById(R.id.textId);
 		rl_pay_record = inflate.findViewById(R.id.rl_pay_record);
 		rl_pay_record.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -74,7 +77,7 @@ public class SettingFragment extends Fragment {
 		rl_house_control = inflate.findViewById(R.id.rl_house_control);
 		rl_view_house = inflate.findViewById(R.id.rl_view_house);
 		rl_login_out = inflate.findViewById(R.id.rl_login_out);
-
+        textId.setText(ProName.getPro_name());
 		rl_house_control.setOnClickListener(new NoDoubleClickListener() {
 			@Override
 			public void onNoDoubleClick(View view) {
@@ -113,7 +116,13 @@ public class SettingFragment extends Fragment {
 		return instance;
 	}
 
-	@Override
+    @Override
+    public void onResume() {
+        super.onResume();
+        textId.setText(ProName.getPro_name());
+    }
+
+    @Override
 	public void onPause() {
 		super.onPause();
 		clicked=true;
