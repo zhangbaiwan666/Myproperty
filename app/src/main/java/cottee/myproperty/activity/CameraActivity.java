@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -44,6 +45,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback, 
     private LinearLayout ll_takePhoto;
     private LinearLayout ll_retakePhoto;
     private Bitmap bmp;
+    private Button btn_convert;
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -56,7 +58,48 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback, 
         holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
         rel_shutter = (RelativeLayout)findViewById(R.id.rel_shutter);
         rel_photoOk = (RelativeLayout)findViewById(R.id.rel_photook);
+        btn_convert = (Button)findViewById(R.id.btn_convert);
+        btn_convert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //释放当前的相机资源
+                myCamera.stopPreview();
+                myCamera.release();
+                myCamera=null;
+                //1代表后置摄像头，0代表前置摄像头
+                if (cameraPosition==1){
+                    myCamera=Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
+                    cameraPosition=0;
+                }
+                else {
+                    myCamera=Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK);
+                    cameraPosition=1;
+                }
+                Camera.Parameters parameters = myCamera.getParameters();
+                List pictureSizes=parameters.getSupportedPictureSizes();
+                if (mBestPictureSizes==null){
+                    mBestPictureSizes=findBestPictureSize(pictureSizes,parameters.getPictureSize(),ratio);
 
+                }
+                parameters.setPictureSize(mBestPictureSizes.width,mBestPictureSizes.height);
+                List previewSizes=parameters.getSupportedPreviewSizes();
+                if (mBestPreviewSize==null)
+                {
+                    mBestPreviewSize=findBestPreviewSize(previewSizes,parameters.getPreviewSize(),
+                            mBestPictureSizes,ratio);
+
+                }
+                parameters.setPreviewSize(mBestPreviewSize.width,mBestPreviewSize.height);
+                myCamera.setParameters(parameters);
+                try {
+                    myCamera.setPreviewDisplay(holder);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                myCamera.setDisplayOrientation(90);
+                myCamera.startPreview();
+            }
+        });
 
     }
     @Override
@@ -137,46 +180,11 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback, 
             System.out.println("--------"+originalBitmap.getWidth()+"------"+originalBitmap.getHeight());
         }
     };
-    public void convertCamera(View view){
-        //释放当前的相机资源
-        myCamera.stopPreview();
-        myCamera.release();
-        myCamera=null;
-        //1代表后置摄像头，0代表前置摄像头
-        if (cameraPosition==1){
-            myCamera=Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
-            cameraPosition=0;
-        }
-        else {
-            myCamera=Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK);
-            cameraPosition=1;
-        }
-        Camera.Parameters parameters = myCamera.getParameters();
-        List pictureSizes=parameters.getSupportedPictureSizes();
-        if (mBestPictureSizes==null){
-            mBestPictureSizes=findBestPictureSize(pictureSizes,parameters.getPictureSize(),ratio);
-
-        }
-        parameters.setPictureSize(mBestPictureSizes.width,mBestPictureSizes.height);
-        List previewSizes=parameters.getSupportedPreviewSizes();
-        if (mBestPreviewSize==null)
-        {
-            mBestPreviewSize=findBestPreviewSize(previewSizes,parameters.getPreviewSize(),
-                    mBestPictureSizes,ratio);
-
-        }
-        parameters.setPreviewSize(mBestPreviewSize.width,mBestPreviewSize.height);
-        myCamera.setParameters(parameters);
-        try {
-            myCamera.setPreviewDisplay(holder);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        myCamera.setDisplayOrientation(90);
-        myCamera.startPreview();
-
-
-    }
+//    public void convertCamera(View view){
+//
+//
+//
+//    }
 
     public  void  shutter(View view){
         if (!isClicked) {

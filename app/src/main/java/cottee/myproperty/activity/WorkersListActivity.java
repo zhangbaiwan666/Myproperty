@@ -8,6 +8,7 @@ import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import java.util.List;
 
@@ -24,10 +25,12 @@ public class WorkersListActivity extends Activity {
     String bigProject;
     String smallProject;
     private ListView listView;
+    private ProgressBar pb_techInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workers_list);
+        pb_techInfo=(ProgressBar)findViewById(R.id.pb_techInfo);
         Bundle bundle=getIntent().getExtras();
         project_id=bundle.getString("id");
         bigProject=bundle.getString("title");
@@ -47,11 +50,17 @@ public class WorkersListActivity extends Activity {
 //        RepairHandler repairHandler=new RepairHandler(this,listView,bigProject,smallProject);
         RepairManager repairManager=new RepairManager(handler,project_id);
         repairManager.sendRequestWorkersList();
+        if (listView==null){
+            pb_techInfo.setVisibility(View.VISIBLE);
+        }
     }
     public  void  initData(){
 
         WorkersAdapter workersAdapter=new WorkersAdapter(this,projectStaffBeans);
         listView.setAdapter(workersAdapter);
+        if (listView!=null){
+            pb_techInfo.setVisibility(View.GONE);
+        }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

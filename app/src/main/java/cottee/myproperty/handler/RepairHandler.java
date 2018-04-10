@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -51,11 +52,13 @@ public class RepairHandler extends Handler {
       private  TextView tv_baoxiuxinxi;
       private  TextView repair_time;
     private  List<RepairRecord.ListBean> listBeans;
-    public  RepairHandler(Context context,ListView lv_left,ListView lv_Right,TextView tv_title){
+    private ProgressBar pb_repairProject;
+    public  RepairHandler(Context context,ListView lv_left,ListView lv_Right,TextView tv_title, ProgressBar pb_repairProject){
         this.context=context;
         this.lv_left=lv_left;
         this.lv_Right=lv_Right;
         this.tv_title=tv_title;
+        this.pb_repairProject=pb_repairProject;
     }
 //    public RepairHandler(Context context,ListView listView,String bigProject,String smallProject){
 //        this.context1=context;
@@ -82,12 +85,12 @@ public class RepairHandler extends Handler {
                 initRepairProjectView();
 
             }
-            case  Properties.WorkersList:{
-                projectStaffBeans= (List<Mechanic.ProjectStaffBean>) msg.obj;
-//                WorkersAdapter workersAdapter=new WorkersAdapter(context,projectStaffBeans);
-//                listView.setAdapter(workersAdapter);
-
-            }
+//            case  Properties.WorkersList:{
+//                projectStaffBeans= (List<Mechanic.ProjectStaffBean>) msg.obj;
+////                WorkersAdapter workersAdapter=new WorkersAdapter(context,projectStaffBeans);
+////                listView.setAdapter(workersAdapter);
+//
+//            }
 
 
 
@@ -142,6 +145,10 @@ public class RepairHandler extends Handler {
         lv_left.setAdapter(leftAdapter);
         rightAdapter = new RightListViewAdapter(context,proinfo,lv_Right);
         lv_Right.setAdapter(rightAdapter);
+        if (lv_Right!=null&&lv_left!=null){
+            pb_repairProject.setVisibility(View.GONE);
+
+        }
         rightAdapter.updateData(lists);
         tv_title.setText(lists.get(0).getTitle());
         lv_left.setOnItemClickListener(new AdapterView.OnItemClickListener() {

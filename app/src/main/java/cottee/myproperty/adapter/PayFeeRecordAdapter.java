@@ -64,7 +64,7 @@ public class PayFeeRecordAdapter extends BaseAdapter {
             return view;
         }
         System.out.println("bbbbbbbbbbbbbbbbbbb getview");
-        vh.tv_feeAmount.setText(listBeans.get(i).getMoney());
+        vh.tv_feeAmount.setText("￥"+listBeans.get(i).getMoney());
             vh.tv_feeType.setText(listBeans.get(i).getType());
             vh.tv_payTime.setText(listBeans.get(i).getC_time());
 

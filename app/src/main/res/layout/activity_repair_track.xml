@@ -99,7 +99,7 @@
             android:textSize="15dp"
             android:paddingLeft="50dp"
             android:paddingTop="10dp"
-            android:text="李师傅"/>
+            android:text="---"/>
         <TextView
             android:id="@+id/tv_serProject"
             android:layout_width="wrap_content"
@@ -121,7 +121,7 @@
             android:layout_toEndOf="@id/tv_serProject"
             android:layout_toRightOf="@id/tv_serProject"
             android:paddingTop="5dp"
-            android:text="aaaaaaaaaaa"
+            android:text="---"
             android:textSize="15dp"/>
 
     </RelativeLayout>
@@ -153,7 +153,9 @@
             android:text="报修跟踪"/>
 
     </RelativeLayout>
-
+<FrameLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
     <RelativeLayout
         android:id="@+id/rel1"
         android:layout_width="wrap_content"
@@ -183,13 +185,22 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_baoxiuxinxi"
             android:paddingLeft="10dp"
-            android:text="2017-12-13 13:12"
+            android:text="2018-04-11 16:12"
             android:textSize="15dp"
             android:textColor="#808a87"
             android:layout_toRightOf="@id/imv_zhengzaichuli"/>
-
     </RelativeLayout>
+    <ProgressBar
+        android:id="@+id/pb_repairTrack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingLeft="190dp"
+        android:paddingTop="10dp"
+        android:indeterminateDrawable="@drawable/common_progressbar"
+        android:visibility="invisible" />
 
+</FrameLayout>
     <RelativeLayout
         android:id="@+id/rel2"
         android:layout_width="wrap_content"
@@ -224,7 +235,7 @@
             android:layout_below="@id/tv_baoxiuxinxi1"
             android:layout_toRightOf="@id/imv_zhengzaichuli1"
             android:paddingLeft="10dp"
-            android:text="2017-12-13 13:20"
+            android:text="2018-04-11 16:20"
             android:textColor="#808a87"
             android:textSize="15dp"/>
 
@@ -318,6 +329,7 @@
         android:background="@drawable/shape_btn_login"
         android:text="联系工人"
         android:textColor="#fff"
+        android:onClick="contactWorker"
 
 
         />
@@ -332,6 +344,7 @@
         android:paddingLeft="5dp"
         android:layout_marginLeft="10dp"
         android:textColor="#fff"
+        android:onClick="requestCancle"
         />
     <Button
 

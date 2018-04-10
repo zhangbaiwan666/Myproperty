@@ -95,18 +95,18 @@
             android:layout_marginTop="15dp"
             android:paddingLeft="20dp"
             android:inputType="number"
-            android:id="@+id/editText"/>
+            android:id="@+id/et_inputFee"/>
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/editText"
-            android:layout_alignBottom="@+id/editText"
+            android:layout_alignBaseline="@+id/et_inputFee"
+            android:layout_alignBottom="@+id/et_inputFee"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            android:layout_toEndOf="@+id/editText"
-            android:layout_toRightOf="@+id/editText"
+            android:layout_toEndOf="@+id/et_inputFee"
+            android:layout_toRightOf="@+id/et_inputFee"
 
             android:text="元"
             android:textSize="20dp"/>

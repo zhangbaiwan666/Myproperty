@@ -89,7 +89,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:paddingTop="10dp"
-                android:text="￥2500"
+                android:text="--"
                 android:textColor="#808080"
                 android:textSize="18dp"/>
         </RelativeLayout>
@@ -127,7 +127,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:paddingTop="10dp"
-            android:text="支付成功"
+            android:text="--"
             android:textColor="#808080"
             android:textSize="13dp"/>
     </RelativeLayout>
@@ -159,7 +159,7 @@
             android:layout_marginRight="16dp"
             android:paddingTop="10dp"
             android:textColor="#808080"
-            android:text="物业费缴费"
+            android:text="--"
             android:textSize="13dp"/>
     </RelativeLayout>
     <RelativeLayout
@@ -189,7 +189,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:textColor="#808080"
-            android:text="xx号楼xx单元xx室"
+            android:text="---"
             android:textSize="13dp"/>
     </RelativeLayout>
     <RelativeLayout
@@ -218,7 +218,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:text="12个月"
+            android:text="--"
             android:textColor="#808080"
             android:textSize="13dp"/>
     </RelativeLayout>
@@ -248,7 +248,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:text="2018-3-13 12：00：29"
+            android:text="----"
             android:textColor="#808080"
             android:textSize="13dp"/>
     </RelativeLayout>

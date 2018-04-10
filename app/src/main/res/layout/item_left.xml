@@ -13,7 +13,6 @@
         android:text="左边条目"
         android:padding="12dp"
         android:textColor="#000000"
-
         android:textSize="14sp" />
 
 </LinearLayout>

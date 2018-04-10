@@ -82,21 +82,21 @@ public class RepairSubmitActivity extends Activity {
         tv_confirmOfworker.setText(bundle.getString("name"));
         tv_serverProject.setText(bundle.getString("bigProject")+"的"+ bundle.getString("smallProject"));
         new NormalLoadPicture().getPicture(bundle.getString("photo"),imv_workerphoto);
-        imv_takePhotoTwo = (ImageView)findViewById(R.id.imv_takePhotoTwo);
-        imv_takePhotoThree = (ImageView)findViewById(R.id.imv_takePhotoThree);
+        //imv_takePhotoTwo = (ImageView)findViewById(R.id.imv_takePhotoTwo);
+        //imv_takePhotoThree = (ImageView)findViewById(R.id.imv_takePhotoThree);
     }
     public  void takePhotoOne(View view){
         Intent intent=new Intent(RepairSubmitActivity.this,CameraActivity.class);
         startActivityForResult(intent,1);
     }
-    public  void takePhotoTwo(View view){
-        Intent intent=new Intent(RepairSubmitActivity.this,CameraActivity.class);
-        startActivityForResult(intent,2);
-    }
-    public  void takePhotoThree(View view){
-        Intent intent=new Intent(RepairSubmitActivity.this,CameraActivity.class);
-        startActivityForResult(intent,3);
-    }
+//    public  void takePhotoTwo(View view){
+//        Intent intent=new Intent(RepairSubmitActivity.this,CameraActivity.class);
+//        startActivityForResult(intent,2);
+//    }
+//    public  void takePhotoThree(View view){
+//        Intent intent=new Intent(RepairSubmitActivity.this,CameraActivity.class);
+//        startActivityForResult(intent,3);
+//    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent
             data) {
@@ -109,23 +109,23 @@ public class RepairSubmitActivity extends Activity {
                     bitmap = BitmapFactory.decodeFile(filepath);
                     imv_takePhotoOne.setImageBitmap(bitmap);
                 }
-            case 2:
-                if(resultCode == RESULT_OK)
-            {
-                String filepath = data.getStringExtra( "filepath" );
-                bitmap = BitmapFactory.decodeFile( filepath );
-                imv_takePhotoTwo.setImageBitmap(bitmap);
-
-            }
-            case 3:
-                if(resultCode == RESULT_OK)
-                {
-
-                    String filepath = data.getStringExtra( "filepath" );
-                    bitmap = BitmapFactory.decodeFile( filepath );
-
-                    imv_takePhotoThree.setImageBitmap(bitmap);
-                }
+//            case 2:
+//                if(resultCode == RESULT_OK)
+//            {
+//                String filepath = data.getStringExtra( "filepath" );
+//                bitmap = BitmapFactory.decodeFile( filepath );
+//                imv_takePhotoTwo.setImageBitmap(bitmap);
+//
+//            }
+//            case 3:
+//                if(resultCode == RESULT_OK)
+//                {
+//
+//                    String filepath = data.getStringExtra( "filepath" );
+//                    bitmap = BitmapFactory.decodeFile( filepath );
+//
+//                    imv_takePhotoThree.setImageBitmap(bitmap);
+//                }
         }
     }
 
@@ -157,6 +157,7 @@ public class RepairSubmitActivity extends Activity {
                         Intent intent=new Intent(RepairSubmitActivity.this,RepairDetailInfoActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);
+                        finish();
                     }
                 });
 

@@ -75,7 +75,7 @@ public class RepairManager {
                     OkHttpClient client = new OkHttpClient();
 
                     Request request = new Request.Builder()
-                            .url("http://120.25.96.141/temp/file/project_static.json")
+                            .url("https://thethreestooges.cn:5210/static/static.json")
                             .build();
                     Response response = client.newCall(request).execute();
                     String responseData = response.body().string();

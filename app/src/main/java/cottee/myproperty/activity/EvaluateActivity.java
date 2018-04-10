@@ -27,6 +27,7 @@ public class EvaluateActivity extends Activity {
                 protected void onNoDoubleClick(View v) {
                     Intent intent =new Intent(EvaluateActivity.this,MainActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             });
         }catch (Exception e){

@@ -2,7 +2,6 @@ package cottee.myproperty.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
 import java.util.List;
 
 import cottee.myproperty.R;
 import cottee.myproperty.constant.RepairRecord;
-import cottee.myproperty.handler.OssHandler;
 import cottee.myproperty.handler.RepairRecordHandler;
-import cottee.myproperty.uitils.oss.ConfigOfOssClient;
-import cottee.myproperty.uitils.oss.DownloadUtils;
 
 /**
  * Created by Administrator on 2018/1/31 0031.
@@ -79,11 +74,11 @@ public class RepairRecordAdapter extends BaseAdapter {
         //vh.repair_order.setText(listBeans.get(i).getOrder_id());
         vh.order_time.setText(listBeans.get(i).getC_time());
         vh.imageview_item.setTag(image);
-        final OssHandler ossHandler = new OssHandler(context,vh.imageview_item);
-        //InitOssClient.initOssClient(context, ConfigOfOssClient.TOKEN_ADDRESS, ConfigOfOssClient.ENDPOINT);
-        final File cache_image = new File(context.getCacheDir(), Base64.encodeToString(listBeans.get(i).getPhoto_url().getBytes(), Base64.DEFAULT));
-                DownloadUtils.downloadFileFromOss(cache_image, ossHandler,
-                        ConfigOfOssClient.BUCKET_NAME,image,context);
+//        final OssHandler ossHandler = new OssHandler(context,vh.imageview_item);
+//        //InitOssClient.initOssClient(context, ConfigOfOssClient.TOKEN_ADDRESS, ConfigOfOssClient.ENDPOINT);
+//        final File cache_image = new File(context.getCacheDir(), Base64.encodeToString(listBeans.get(i).getPhoto_url().getBytes(), Base64.DEFAULT));
+//                DownloadUtils.downloadFileFromOss(cache_image, ossHandler,
+//                        ConfigOfOssClient.BUCKET_NAME,image,context);
 
         return view;
     }
