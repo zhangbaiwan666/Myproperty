@@ -66,7 +66,7 @@ public class MainFragment extends Fragment {
 //	private TextView title;
 	private ViewPager mViewPager;
 	private ViewPagerAdapter adapter;
-	private static PopupWindow popRight;
+	public static PopupWindow popRight;
 	private View layoutRight;
 	private ListView menulistRight;
 	private List<Map<String, String>> listRight;
@@ -396,23 +396,28 @@ public class MainFragment extends Fragment {
 				//todo add property list json to show
 				switch (v.getId()) {
 					case R.id.tv_right:
-
-								LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getContext(), "", "");
-								LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getContext(), loginRegisterHandler);
-								loginRegisterManager.ShowAllProperty();
+						if (popRight!=null&&popRight.isShowing()) {
+							MainFragment.popRight.dismiss();
+						}else {
+							layoutRight = getLayoutInflater().inflate(
+									R.layout.pop_menulist, null);
+							menulistRight = (ListView) layoutRight
+									.findViewById(R.id.menulist);
+							popRight = new PopupWindow(layoutRight, ViewGroup.LayoutParams.WRAP_CONTENT,
+									ViewGroup.LayoutParams.WRAP_CONTENT);
+							LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getContext(), "", "");
+							LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getContext(), loginRegisterHandler);
+							loginRegisterManager.ShowAllProperty();
 
 
 //								List<PropertyListBean> subList = init();
-								layoutRight = getLayoutInflater().inflate(
-										R.layout.pop_menulist, null);
-								menulistRight = (ListView) layoutRight
-										.findViewById(R.id.menulist);
+
 //								ChoosePropertyAdapter listAdapter = new ChoosePropertyAdapter(
 //										getContext(), R.layout.pop_menuitem, subList);
 //								menulistRight.setAdapter(listAdapter);
 //								listAdapter.notifyDataSetChanged();
 
-								// 点击listview中item的处理
+							// 点击listview中item的处理
 //								menulistRight
 //										.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //											@Override
@@ -464,7 +469,7 @@ public class MainFragment extends Fragment {
 //										return false;
 //									}
 //								});
-
+						}
 							break;
 
 					default:

@@ -232,10 +232,19 @@ public class ControlSubActivity extends Activity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.tv_right:
+                    if (popRight!=null&&popRight.isShowing()) {
+                        ControlSubActivity.popRight.dismiss();
+                    }else {
+                        layoutRight = getLayoutInflater().inflate(
+                                R.layout.pop_menulist, null);
+                        menulistRight = (ListView) layoutRight
+                                .findViewById(R.id.menulist);
+                        popRight = new PopupWindow(layoutRight, ViewGroup.LayoutParams.WRAP_CONTENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT);
 
-                       LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(ControlSubActivity.this, "", "");
-                       LoginRegisterManager loginRegisterManager = new LoginRegisterManager(ControlSubActivity.this, loginRegisterHandler);
-                       loginRegisterManager.ShowAllHouseForSub();
+                        LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(ControlSubActivity.this, "", "");
+                        LoginRegisterManager loginRegisterManager = new LoginRegisterManager(ControlSubActivity.this, loginRegisterHandler);
+                        loginRegisterManager.ShowAllHouseForSub();
 //                            final ChooseHouseAdapter listAdapter = new ChooseHouseAdapter(
 ////								getContext(), listRight, R.layout.pop_menuitem,
 ////								new String[] { "item" },
@@ -244,15 +253,15 @@ public class ControlSubActivity extends Activity {
 //                            menulistRight.setAdapter(listAdapter);
 //                            listAdapter.notifyDataSetChanged();
 
-                       //----------------------- 点击listview中item的处理-------------------------------------STA
-                       View layoutRight = ControlSubActivity.this.getLayoutInflater().inflate(
-                               R.layout.pop_menulist, null);
-                       final ListView menulistRight = layoutRight.findViewById(R.id.menulist);
+                        //----------------------- 点击listview中item的处理-------------------------------------STA
+                        View layoutRight = ControlSubActivity.this.getLayoutInflater().inflate(
+                                R.layout.pop_menulist, null);
+                        final ListView menulistRight = layoutRight.findViewById(R.id.menulist);
 //                        ChooseHouseAdapter listAdapter = new ChooseHouseAdapter(
 //                                ControlSubActivity.this, R.layout.pop_menuitem, T());
 //                        menulistRight.setAdapter(listAdapter);
 //                        listAdapter.notifyDataSetChanged();
-
+                    }
                         break;
 
 

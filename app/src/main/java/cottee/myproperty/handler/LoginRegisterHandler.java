@@ -397,23 +397,22 @@ public class LoginRegisterHandler extends Handler {
                  listAdapter.notifyDataSetChanged();
                  tvRight = (TextView) ((Activity) context).findViewById(R.id.tv_right);
                  //todo pop's width modify
-                 if (popRight!=null&&popRight.isShowing()) {
-                     popRight.dismiss();
-                 }else {
-                     popRight = new PopupWindow(layoutRight, ViewGroup.LayoutParams.WRAP_CONTENT,
-                             ViewGroup.LayoutParams.WRAP_CONTENT);
+
+//                     popRight = new PopupWindow(layoutRight, ViewGroup.LayoutParams.WRAP_CONTENT,
+//                             ViewGroup.LayoutParams.WRAP_CONTENT);
 //                            ColorDrawable cd = new ColorDrawable(-0000);
 //                            popRight.setBackgroundDrawable(cd);
-                     popRight.setAnimationStyle(R.style.PopupAnimation);
-                     popRight.update();
-                     popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-                     popRight.setTouchable(true); // 设置popupwindow可点击
-                     popRight.setBackgroundDrawable(new BitmapDrawable());
+                     MainFragment.popRight.setContentView(layoutRight);
+                     MainFragment.popRight.setAnimationStyle(R.style.PopupAnimation);
+                     MainFragment.popRight.update();
+                     MainFragment.popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+                     MainFragment.popRight.setTouchable(true); // 设置popupwindow可点击
+                     MainFragment.popRight.setBackgroundDrawable(new BitmapDrawable());
 //                 popRight.setOutsideTouchable(true); // 设置popupwindow外部可点击
-                     popRight.setFocusable(true); // 获取焦点
+                     MainFragment.popRight.setFocusable(true); // 获取焦点
                      // 设置popupwindow的位置
                      int topBarHeight1 = 35;
-                     popRight.showAsDropDown(tvRight, 0,
+                     MainFragment.popRight.showAsDropDown(tvRight, 0,
                              40);
 //                 popRight.setTouchInterceptor(new View.OnTouchListener() {
 //                     @Override
@@ -426,7 +425,7 @@ public class LoginRegisterHandler extends Handler {
 //                         return false;
 //                     }
 //                 });
-                 }
+
                  menulistRight
                          .setOnItemClickListener(new AdapterView.OnItemClickListener() {
                              @Override
@@ -434,8 +433,8 @@ public class LoginRegisterHandler extends Handler {
                                  LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "", "");
                                  LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
                                  loginRegisterManager.ChooseProperty(propertyListBean.get(position).getPro_id());
-                                 if (popRight != null && popRight.isShowing()) {
-                                     popRight.dismiss();
+                                 if (MainFragment.popRight != null && MainFragment.popRight.isShowing()) {
+                                     MainFragment.popRight.dismiss();
                                  }
                              }
                          });
@@ -443,8 +442,8 @@ public class LoginRegisterHandler extends Handler {
                 break;
             case Properties.ALL_HOUSE_LIST_FOR_SUB:         //todo 2
                 Object obj_house = msg.obj;
-                if (popRight!=null&&popRight.isShowing()) {
-                    popRight.dismiss();
+                if (ControlSubActivity.popRight!=null&&ControlSubActivity.popRight.isShowing()) {
+                    ControlSubActivity.popRight.dismiss();
                 }else {
                     Object choosed_property_name = HealthMap.get("choosed_property_name");
                     if (choosed_property_name == null) {
@@ -462,25 +461,22 @@ public class LoginRegisterHandler extends Handler {
                     menulistRight1.setAdapter(listAdapter1);
                     listAdapter1.notifyDataSetChanged();
                     tvRight = (TextView) ((Activity) context).findViewById(R.id.tv_right);
-                    if (popRight!=null&&popRight.isShowing()) {
-                        popRight.dismiss();
-                    }else {
-                        popRight = new PopupWindow(layoutRight1, 340,
-                                ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                    ControlSubActivity.popRight .setContentView(layoutRight1);
 //                            ColorDrawable cd = new ColorDrawable(-0000);
 //                            popRight.setBackgroundDrawable(cd);
-                        popRight.setAnimationStyle(R.style.PopupAnimation);
-                        popRight.update();
-                        popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-                        popRight.setBackgroundDrawable(new BitmapDrawable());
-                        popRight.setTouchable(true); // 设置popupwindow可点击
+                    ControlSubActivity.popRight.setAnimationStyle(R.style.PopupAnimation);
+                    ControlSubActivity.popRight.update();
+                    ControlSubActivity.popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+                    ControlSubActivity.popRight.setBackgroundDrawable(new BitmapDrawable());
+                    ControlSubActivity.popRight.setTouchable(true); // 设置popupwindow可点击
 //                popRight.setOutsideTouchable(true); // 设置popupwindow外部可点击
-                        popRight.setFocusable(true); // 获取焦点
+                    ControlSubActivity. popRight.setFocusable(true); // 获取焦点
                         // 设置popupwindow的位置
                         int topBarHeight = 35;
-                        popRight.showAsDropDown(tvRight, 0,
+                    ControlSubActivity.popRight.showAsDropDown(tvRight, 0,
                                 (topBarHeight - tvRight.getHeight()) / 2);
-                    }
+
 //                popRight.setTouchInterceptor(new View.OnTouchListener() {
 //                    @Override
 //                    public boolean onTouch(View v, MotionEvent event) {
@@ -501,8 +497,8 @@ public class LoginRegisterHandler extends Handler {
                                     LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "", "");
                                     LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
                                     loginRegisterManager.ChooseHouse(houseListBean.get(position).getHome_id());
-                                    if (popRight != null && popRight.isShowing()) {
-                                        popRight.dismiss();
+                                    if (ControlSubActivity.popRight != null && ControlSubActivity.popRight.isShowing()) {
+                                        ControlSubActivity.popRight.dismiss();
                                     }
                                 }
                             });
