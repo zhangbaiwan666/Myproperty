@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -37,7 +38,7 @@ public class ControlSubActivity extends Activity {
     private TextView tvRight;
     private TextView tv_show_house;
     private TextView tv_show_property;
-    private PopupWindow popRight;
+    public static PopupWindow popRight;
     private View layoutRight;
     private ListView menulistRight;
     private  ArrayList<String> sub_remark_list;
@@ -91,10 +92,7 @@ public class ControlSubActivity extends Activity {
         bt_add_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (tv_show_house.getText().toString().trim().equals("未选择房屋")||tv_show_property.getText().toString().trim().equals("尚未选择物业")) {
 
-                    Toast.makeText(ControlSubActivity.this, "您尚未选择添加子账户的物业或房屋", Toast.LENGTH_SHORT).show();
-                } else {
                     Intent intent = new Intent(ControlSubActivity.this, AddSubActivity.class);
                     intent.putExtra("home_id", property_home_id);
                     intent.putExtra("pro_id", property_pro_id);
@@ -102,7 +100,7 @@ public class ControlSubActivity extends Activity {
                     finish();
                     if (click) {
                         click = false;
-                    }
+
                 }
             }
         });
@@ -235,9 +233,6 @@ public class ControlSubActivity extends Activity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.tv_right:
-                    if (popRight != null && popRight.isShowing()) {
-                        popRight.dismiss();
-                    } else {
                         LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(ControlSubActivity.this, "", "");
                         LoginRegisterManager loginRegisterManager = new LoginRegisterManager(ControlSubActivity.this, loginRegisterHandler);
                         loginRegisterManager.ShowAllHouseForSub();
@@ -259,7 +254,7 @@ public class ControlSubActivity extends Activity {
 //                        listAdapter.notifyDataSetChanged();
 
                         break;
-                    }
+
 
                 default:
                     break;

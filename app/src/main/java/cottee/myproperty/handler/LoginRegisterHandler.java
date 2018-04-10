@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.view.MotionEvent;
@@ -36,6 +39,8 @@ import cottee.myproperty.activity.MainActivity;
 import cottee.myproperty.activity.SetPasswordActivity;
 import cottee.myproperty.constant.PropertyListBean;
 import cottee.myproperty.constant.SubListBean;
+import cottee.myproperty.fragment.MainFragment;
+import cottee.myproperty.fragment.PastBulletinFragment;
 import cottee.myproperty.fragment.RecentBulletinFragment;
 import cottee.myproperty.fragment.SearchBulletionFragment;
 import cottee.myproperty.manager.LoginRegisterManager;
@@ -50,8 +55,8 @@ public class LoginRegisterHandler extends Handler {
     private String email;
     private String password;
     private Context context;
-    private PopupWindow popRight;
     private TextView tvRight;
+    private Resources resources ;
     /*
      * 发送成功返回   0 （要给用户提示注意查看邮件之类的提示）
      * 发送失败返回   1
@@ -165,6 +170,7 @@ public class LoginRegisterHandler extends Handler {
     private static ArrayList<String> sub_phone_list;
     private static ArrayList<String> sub_remark_list;
     private String choosed_property_s;
+    private PopupWindow popRight;
 
 
     public LoginRegisterHandler(Context context, String email, String password) {
@@ -351,11 +357,15 @@ public class LoginRegisterHandler extends Handler {
                     sub_phone_list.add(subListBeanslist.get(i).getPhone_num());
                     sub_remark_list.add(subListBeanslist.get(i).getRemark());
                 }
-                final ListView listView = (ListView) ((Activity) context).findViewById(R.id.sub_list);
-                SubinfoAdapter sub_adapter = new SubinfoAdapter(
-                        context, R.layout.layout_list_item, subListBeanslist);
-                listView.setAdapter(sub_adapter);
-                sub_adapter.notifyDataSetChanged();
+                if (subListBeanslist==null){
+                }else {
+                    final ListView listView = (ListView) ((Activity) context).findViewById(R.id.sub_list);
+                    SubinfoAdapter sub_adapter = new SubinfoAdapter(
+                            context, R.layout.layout_list_item, subListBeanslist);
+                    listView.setAdapter(sub_adapter);
+                    sub_adapter.notifyDataSetChanged();
+                }
+
                 HealthMap.put("sub_list", subListBeanslist);
 //                LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "","");
 //                LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
@@ -372,115 +382,123 @@ public class LoginRegisterHandler extends Handler {
                 break;
             case Properties.ALL_PROPERTY_LIST:      //todo 1
                 Object obj_property = msg.obj;
+             if (popRight!=null&&popRight.isShowing()) {
+                 popRight.dismiss();
+             }else {
+                 final List<PropertyListBean> propertyListBean = (List<PropertyListBean>) obj_property;
+                 View layoutRight = ((Activity) context).getLayoutInflater().inflate(
+                         R.layout.pop_menulist, null);
 
-                final  List<PropertyListBean> propertyListBean = (List<PropertyListBean>) obj_property;
-                View layoutRight = ((Activity) context).getLayoutInflater().inflate(
-                        R.layout.pop_menulist, null);
+                 final ListView menulistRight = layoutRight.findViewById(R.id.menulist);
+                 ChoosePropertyAdapter listAdapter = new ChoosePropertyAdapter(
+                         context, R.layout.pop_menuitem, propertyListBean);
 
-                final ListView menulistRight = layoutRight.findViewById(R.id.menulist);
-                ChoosePropertyAdapter listAdapter = new ChoosePropertyAdapter(
-                        context, R.layout.pop_menuitem, propertyListBean);
-
-                menulistRight.setAdapter(listAdapter);
-                listAdapter.notifyDataSetChanged();
-
-                tvRight = (TextView)((Activity) context).findViewById(R.id.tv_right);
-                popRight = new PopupWindow(layoutRight, ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);//todo pop's width modify
+                 menulistRight.setAdapter(listAdapter);
+                 listAdapter.notifyDataSetChanged();
+                 tvRight = (TextView) ((Activity) context).findViewById(R.id.tv_right);
+                 //todo pop's width modify
+                 popRight = new PopupWindow(layoutRight, ViewGroup.LayoutParams.WRAP_CONTENT,
+                         ViewGroup.LayoutParams.WRAP_CONTENT);
 //                            ColorDrawable cd = new ColorDrawable(-0000);
 //                            popRight.setBackgroundDrawable(cd);
-                popRight.setAnimationStyle(R.style.PopupAnimation);
-                popRight.update();
-                popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-                popRight.setTouchable(true); // 设置popupwindow可点击
-                popRight.setOutsideTouchable(true); // 设置popupwindow外部可点击
-                popRight.setFocusable(true); // 获取焦点
-                // 设置popupwindow的位置
-                int topBarHeight1 = 35;
-                popRight.showAsDropDown(tvRight, 0,
-                        (topBarHeight1 - tvRight.getHeight()) / 2);
-                popRight.setTouchInterceptor(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        // 如果点击了popupwindow的外部，popupwindow也会消失
-                        if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-                            popRight.dismiss();
-                            return true;
-                        }
-                        return false;
-                    }
-                });
-                menulistRight
-                        .setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "", "");
-                                LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
-                                loginRegisterManager.ChooseProperty(propertyListBean.get(position).getPro_id());
-                                if (popRight != null && popRight.isShowing()) {
-                                    popRight.dismiss();
-                                }
-                            }
-                        });
+                 popRight.setAnimationStyle(R.style.PopupAnimation);
+                 popRight.update();
+                 popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+                 popRight.setTouchable(true); // 设置popupwindow可点击
+                 popRight.setBackgroundDrawable(new BitmapDrawable());
+//                 popRight.setOutsideTouchable(true); // 设置popupwindow外部可点击
+                 popRight.setFocusable(true); // 获取焦点
+                 // 设置popupwindow的位置
+                 int topBarHeight1 = 35;
+                 popRight.showAsDropDown(tvRight, 0,
+                         40);
+//                 popRight.setTouchInterceptor(new View.OnTouchListener() {
+//                     @Override
+//                     public boolean onTouch(View v, MotionEvent event) {
+//                         // 如果点击了popupwindow的外部，popupwindow也会消失
+//                         if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+//                             popRight.dismiss();
+//                             return true;
+//                         }
+//                         return false;
+//                     }
+//                 });
+                 menulistRight
+                         .setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                             @Override
+                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                 LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "", "");
+                                 LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
+                                 loginRegisterManager.ChooseProperty(propertyListBean.get(position).getPro_id());
+                                 if (popRight != null && popRight.isShowing()) {
+                                     popRight.dismiss();
+                                 }
+                             }
+                         });
+             }
                 break;
             case Properties.ALL_HOUSE_LIST_FOR_SUB:         //todo 2
                 Object obj_house = msg.obj;
-                Object choosed_property_name = HealthMap.get("choosed_property_name");
-                if (choosed_property_name == null) {
-                    choosed_property_s = "尚未选择物业";
-                } else {
-                    choosed_property_s = choosed_property_name.toString();
-                }
-                final List<HouseListBean> houseListBean = (List<HouseListBean>) obj_house;
-                  View layoutRight1 = ((Activity) context).getLayoutInflater().inflate(
-                        R.layout.pop_menulist, null);
+                if (popRight!=null&&popRight.isShowing()) {
+                    popRight.dismiss();
+                }else {
+                    Object choosed_property_name = HealthMap.get("choosed_property_name");
+                    if (choosed_property_name == null) {
+                        choosed_property_s = "尚未选择物业";
+                    } else {
+                        choosed_property_s = choosed_property_name.toString();
+                    }
+                    final List<HouseListBean> houseListBean = (List<HouseListBean>) obj_house;
+                    View layoutRight1 = ((Activity) context).getLayoutInflater().inflate(
+                            R.layout.pop_menulist, null);
 
-               final ListView menulistRight1 = layoutRight1.findViewById(R.id.menulist);
-                ChooseHouseAdapter listAdapter1 = new ChooseHouseAdapter(
-                        context, R.layout.pop_menuitem, houseListBean);
-                menulistRight1.setAdapter(listAdapter1);
-                listAdapter1.notifyDataSetChanged();
-                tvRight = (TextView)((Activity) context).findViewById(R.id.tv_right);
-                popRight = new PopupWindow(layoutRight1, 340,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
+                    final ListView menulistRight1 = layoutRight1.findViewById(R.id.menulist);
+                    ChooseHouseAdapter listAdapter1 = new ChooseHouseAdapter(
+                            context, R.layout.pop_menuitem, houseListBean);
+                    menulistRight1.setAdapter(listAdapter1);
+                    listAdapter1.notifyDataSetChanged();
+                    tvRight = (TextView) ((Activity) context).findViewById(R.id.tv_right);
+                    popRight = new PopupWindow(layoutRight1, 340,
+                            ViewGroup.LayoutParams.WRAP_CONTENT);
 //                            ColorDrawable cd = new ColorDrawable(-0000);
 //                            popRight.setBackgroundDrawable(cd);
-                popRight.setAnimationStyle(R.style.PopupAnimation);
-                popRight.update();
-                popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-                popRight.setTouchable(true); // 设置popupwindow可点击
-                popRight.setOutsideTouchable(true); // 设置popupwindow外部可点击
-                popRight.setFocusable(true); // 获取焦点
-                // 设置popupwindow的位置
-                int topBarHeight = 35;
-                popRight.showAsDropDown(tvRight, 0,
-                        (topBarHeight - tvRight.getHeight()) / 2);
-                popRight.setTouchInterceptor(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        // 如果点击了popupwindow的外部，popupwindow也会消失
-                        if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-                            popRight.dismiss();
-                            return true;
-                        }
-                        return false;
-                    }
-                });
-                menulistRight1
-                        .setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    popRight.setAnimationStyle(R.style.PopupAnimation);
+                    popRight.update();
+                    popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+                    popRight.setBackgroundDrawable(new BitmapDrawable());
+                    popRight.setTouchable(true); // 设置popupwindow可点击
+//                popRight.setOutsideTouchable(true); // 设置popupwindow外部可点击
+                    popRight.setFocusable(true); // 获取焦点
+                    // 设置popupwindow的位置
+                    int topBarHeight = 35;
+                    popRight.showAsDropDown(tvRight, 0,
+                            (topBarHeight - tvRight.getHeight()) / 2);
+//                popRight.setTouchInterceptor(new View.OnTouchListener() {
+//                    @Override
+//                    public boolean onTouch(View v, MotionEvent event) {
+//                        // 如果点击了popupwindow的外部，popupwindow也会消失
+//                        if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+//                            popRight.dismiss();
+//                            return true;
+//                        }
+//                        return false;
+//                    }
+//                });
+                    menulistRight1
+                            .setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                                String strItem = menulistRight1.get(position);
-                                String session = Session.getSession();
-                                LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "", "");
-                                LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
-                                loginRegisterManager.ChooseHouse(houseListBean.get(position).getHome_id());
-                                if (popRight != null && popRight.isShowing()) {
-                                    popRight.dismiss();
+                                    String session = Session.getSession();
+                                    LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "", "");
+                                    LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
+                                    loginRegisterManager.ChooseHouse(houseListBean.get(position).getHome_id());
+                                    if (popRight != null && popRight.isShowing()) {
+                                        popRight.dismiss();
+                                    }
                                 }
-                            }
-                        });
-
+                            });
+                }
                 break;
             case Properties.CHANGE_UESR_PROPERTY:
                 switch (msg.arg1) {
@@ -522,7 +540,7 @@ public class LoginRegisterHandler extends Handler {
                 switch (msg.arg1) {
                     case UPDATESUBSUCCESS:
                         ((Activity) context).finish();
-                        Intent intent = new Intent(context, ControlSubActivity.class);
+                        Intent intent = new Intent(context,ControlSubActivity.class);
                         ((Activity) context).startActivity(intent);
                         Toast.makeText(context, "修改成功", Toast.LENGTH_LONG).show();
                         break;
@@ -591,7 +609,7 @@ public class LoginRegisterHandler extends Handler {
                 houseListAdapter.notifyDataSetChanged();
 
                 break;
-            case Properties.SHOW_RECENT_NOTICE:
+            case Properties.SHOW_RECENT_NOTICE:  //todo 1
                 Object recent_notice = msg.obj;
                 List<BullentinInfo> list_recent_notice = (List<BullentinInfo>) recent_notice;
                 List<BullentinInfo> textList = RecentBulletinFragment.textList;
@@ -608,7 +626,13 @@ public class LoginRegisterHandler extends Handler {
                 adapter.notifyDataSetChanged();
                 break;
 
-            case Properties.SHOW_EXCEPT_LIST:
+            case Properties.SHOW_EXCEPT_LIST: //todo 2
+                Object except_notice = msg.obj;
+                List<BullentinInfo> list_except_notice = (List<BullentinInfo>) except_notice;
+                RefreshListView Lv_except_notice = ((Activity) context).findViewById(R.id.refreshlistview);
+                PastBulletinFragment.TabFragmentAdapter  adapter = new PastBulletinFragment.TabFragmentAdapter(context,R.layout.layout_bulletin_list,list_except_notice);
+                Lv_except_notice.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
                 break;
             case Properties.SHOW_FIND_LIST:
                 Object find_notice = msg.obj;

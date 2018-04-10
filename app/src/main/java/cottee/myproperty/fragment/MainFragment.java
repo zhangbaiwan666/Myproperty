@@ -66,7 +66,7 @@ public class MainFragment extends Fragment {
 //	private TextView title;
 	private ViewPager mViewPager;
 	private ViewPagerAdapter adapter;
-	private PopupWindow popRight;
+	private static PopupWindow popRight;
 	private View layoutRight;
 	private ListView menulistRight;
 	private List<Map<String, String>> listRight;
@@ -389,16 +389,14 @@ public class MainFragment extends Fragment {
 		return proList;
 	}
 //--------------------物业切换栏--------------------------------------------------------------STA
-	private View.OnClickListener myListener = new View.OnClickListener() {
+	private NoDoubleClickListener myListener = new NoDoubleClickListener() {
 
 		@Override
-		public void onClick(View v) {
+		public void onNoDoubleClick(View v) {
 				//todo add property list json to show
 				switch (v.getId()) {
 					case R.id.tv_right:
-						if (popRight != null && popRight.isShowing()) {
-							popRight.dismiss();
-						} else {
+
 								LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(getContext(), "", "");
 								LoginRegisterManager loginRegisterManager = new LoginRegisterManager(getContext(), loginRegisterHandler);
 								loginRegisterManager.ShowAllProperty();
@@ -468,14 +466,14 @@ public class MainFragment extends Fragment {
 //								});
 
 							break;
-						}
 
 					default:
 						break;
 				}
 			}
 
-	};
+
+};
 
 			@Override
 			public void onStop() {

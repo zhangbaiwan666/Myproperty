@@ -108,6 +108,7 @@ public class LoginRegisterManager implements Serializable {
                     Request request = new Request.Builder().url(Properties
                             .EMAIL_SUBMIT_PATH).post(requestBody).build();
                     Response response = client.newCall(request).execute();
+                    System.out.println("张繁早起看Log"+response);
                     if (response.isSuccessful()) {
                         String str = response.body().string();
                         System.out.println("服务器响应为: " + str);
@@ -1164,7 +1165,7 @@ public class LoginRegisterManager implements Serializable {
                             //获得新的session
                             String str = response1.body().string();
                             Session.setSession(str);
-                            ShowAllProperty();
+                            ShowExceptNotice(num_start);
                         }
 
                     }else {
