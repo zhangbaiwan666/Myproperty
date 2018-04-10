@@ -27,6 +27,7 @@ public class ForgetPasswordActivity extends Activity {
         setContentView(R.layout.activity_forget_password);
         init();
         inEvent();
+        initTitle();
     }
 
     private void inEvent() {
@@ -43,7 +44,6 @@ public class ForgetPasswordActivity extends Activity {
         }); bt_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ForgetPasswordActivity.this, "验证成功", Toast.LENGTH_SHORT).show();
                 LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(ForgetPasswordActivity.this,et_email.getText().toString().trim(),"");
                 LoginRegisterManager loginRegisterManager = new LoginRegisterManager(ForgetPasswordActivity.this, loginRegisterHandler);
                 System.out.println("email为"+et_email.getText().toString().trim()+"验证码为"+et_psword.getText().toString().trim());
@@ -62,9 +62,23 @@ public class ForgetPasswordActivity extends Activity {
        bt_register = (Button) findViewById(R.id.btn_forgetr_register);
 
     }
-
-    public void back(View view){
-        finish();
+    private void initTitle() {
+        title = (Title) findViewById(R.id.title);
+        title.setTitleNameStr("身份验证");
+        title.setOnTitleButtonClickListener(onTitleButtonClickListener);
+        title.mSetButtonInfo(new Title.ButtonInfo(true,Title.BUTTON_LEFT,R.drawable.img_back,null));
     }
+    private Title.OnTitleButtonClickListener onTitleButtonClickListener = new Title.OnTitleButtonClickListener() {
+        @Override
+        public void onClick(int id, Title.ButtonViewHolder viewHolder) {
+            if (id == Title.BUTTON_LEFT){
+                finish();
+                if(click){
+                    click=false;}
+            }else if (id == Title.BUTTON_RIGHT1){
+            }
+        }
+    };
+
 
     }

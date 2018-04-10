@@ -246,7 +246,7 @@ public class MainFragment extends Fragment {
 						R.mipmap.ad2,
 						R.mipmap.ad3,
 						R.mipmap.ad4,
-						R.mipmap.splash,
+						R.mipmap.ad6,
 						R.mipmap.ad3,
 						R.mipmap.ad5,
 						R.mipmap.ad2

@@ -10,25 +10,29 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="wrap_content">
         <RelativeLayout
+            android:background="@drawable/title_gradual_change"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="40dp">
         <TextView
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
-           android:layout_centerHorizontal="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:id="@+id/positon_pro_name"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:textColor="@color/white"
             android:text="尚未选择物业"
+           android:typeface="serif"
             android:textSize="17dp" />
         <TextView
             android:id="@+id/tv_right"
             android:layout_width="20dip"
             android:layout_height="20dip"
             android:clickable="true"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="6dp"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/positon_pro_name"
             android:layout_gravity="center"
@@ -157,7 +161,6 @@
     </RelativeLayout>
 
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -268,9 +271,9 @@
 
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginTop="5dp"
+        android:background="@drawable/main_fragment_notice"
         android:orientation="horizontal">
     <TextView
         android:layout_width="match_parent"
@@ -283,6 +286,7 @@
             android:layout_width="200dp"
             android:layout_height="30dp"
             android:text="oss"
+            android:visibility="gone"
             android:textSize="10dp"/>
     </LinearLayout>
     <ListView

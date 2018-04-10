@@ -29,7 +29,7 @@
            android:divider="@null"
            android:id="@+id/lv_call_sub_phone"
            android:layout_width="match_parent"
-           android:layout_height="20dp">
+           android:layout_height="wrap_content">
        </ListView>
 
         <Button
@@ -39,7 +39,7 @@
             android:layout_marginTop="10dip"
             android:layout_marginBottom="15dip"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:text="取消"
             android:background="@drawable/shape_btn_cancle"
             android:textColor="@color/blue_gray"

@@ -177,8 +177,11 @@ public class LoginRegisterManager implements Serializable {
                 public void run() {
                     try {
                         OkHttpClient client = new OkHttpClient();
-                        RequestBody requestBody = new FormBody.Builder().add("mail_address", email).add(" password", Password).build();
+                        System.out.println("设置密码name"+email);
+                        System.out.println("设置密码pw"+Password);
+                        RequestBody requestBody = new FormBody.Builder().add("username", email).add(" password", Password).build();
                         Request request = new Request.Builder().url(Properties.USER_BUILD_PATH).post(requestBody).build();
+                        System.out.println("张繁周二"+request);
                         Response response = client.newCall(request).execute();
                         if (response.isSuccessful()) {
                             String str = response.body().string();
@@ -278,11 +281,12 @@ public class LoginRegisterManager implements Serializable {
             public void run() {
                 try {
                     OkHttpClient client = new OkHttpClient();
-                    RequestBody requestBody = new FormBody.Builder().add("mail_address", email).add(" password", Password).build();
+                    RequestBody requestBody = new FormBody.Builder().add("username", email).add(" password", Password).build();
                     Request request = new Request.Builder().url(Properties.RESET_USER_PATH).post(requestBody).build();
                     Response response = client.newCall(request).execute();
                     if (response.isSuccessful()) {
                         String str = response.body().string();
+                        System.out.println("最后的张繁"+str);
                         Message msg = new Message();
                         msg.what = Properties.RESET_USER;
                         msg.arg1 = str.length();
@@ -382,7 +386,7 @@ public class LoginRegisterManager implements Serializable {
         return  response1;
     }
 
-    public void AddSubAccount(final String sub_id,final String sub_remark,final String sub_phone) {
+    public void AddSubAccount(final String son_name,final String sub_remark,final String sub_phone) {
         new Thread() {
             @Override
             public void run() {
@@ -390,7 +394,7 @@ public class LoginRegisterManager implements Serializable {
                     String session = Session.getSession();
                     OkHttpClient client = new OkHttpClient();
                     RequestBody requestBody = new FormBody.Builder()
-                            .add("son_id",sub_id)
+                            .add("son_name",son_name)
                             .add("remark",sub_remark)
                             .add("phone",sub_phone)
                             .add("session",session).build();
@@ -409,7 +413,7 @@ public class LoginRegisterManager implements Serializable {
                                 //获得新的session
                                 String str = response1.body().string();
                                 Session.setSession(str);
-                                AddSubAccount(sub_id,sub_remark,sub_phone);
+                                AddSubAccount(son_name,sub_remark,sub_phone);
                             }
 
                         }else {
@@ -698,6 +702,7 @@ public class LoginRegisterManager implements Serializable {
                     //如果返回250，表示session过期，如果session通过返回之前正常的0,1逻辑
                     if (recode_trim.equals("250")){
                         //本地做重新登录得动作
+                        System.out.println("如果session过期了就告诉罗一声");
                         String email=preferences.getString("name", "");
                         String password=preferences.getString("psword", "");
                         final String id = email;
@@ -719,6 +724,7 @@ public class LoginRegisterManager implements Serializable {
                         }
 
                     }else {
+                        System.out.println("session没过期");
                         parseJSONWithGSON(recode_trim);
                     }
                 } catch (IOException e) {
@@ -1165,7 +1171,7 @@ public class LoginRegisterManager implements Serializable {
                             //获得新的session
                             String str = response1.body().string();
                             Session.setSession(str);
-                            ShowExceptNotice(n);
+                            ShowExceptNotice(num_start);
                         }
 
                     }else {

@@ -4,7 +4,7 @@
     android:id="@+id/title"
     android:layout_width="match_parent"
     android:layout_height="45dp"
-    android:background="@color/titleBg">
+   >
 
     <TextView
         android:id="@+id/titleName"
@@ -135,6 +135,7 @@
         android:id="@+id/titleDivider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:visibility="gone"
         android:layout_alignParentBottom="true"
         android:background="@android:color/white" />
 

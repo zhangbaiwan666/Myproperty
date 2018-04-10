@@ -3,7 +3,6 @@ package cottee.myproperty.constant;
 /**
  * Created by Administrator on 2017/11/20.
  */
-
 public class Properties {
     public static final String EMAIL_SUBMIT_PATH = "https://thethreestooges.cn:5210/application/login/mail_submit.php";
     public static final String MAIL_VERIFICATION_PATH= "https://thethreestooges.cn:5210/application/login/mail_validate.php";

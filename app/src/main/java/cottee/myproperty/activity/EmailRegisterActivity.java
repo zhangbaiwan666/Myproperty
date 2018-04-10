@@ -38,6 +38,7 @@ public class EmailRegisterActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email_register);
         init();
+        initTitle();
 
     }
     private  void  init(){
@@ -55,8 +56,7 @@ public class EmailRegisterActivity extends Activity {
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(et_input_email.getText().toString().trim())){
                     if (isEmail(et_input_email.getText().toString().trim())){
-                        Toast.makeText(EmailRegisterActivity.this,"correct",Toast.LENGTH_SHORT).show();
-                         iv_emailjudge.setVisibility(View.VISIBLE);
+                          iv_emailjudge.setVisibility(View.VISIBLE);
                           iv_emailjudge.setBackgroundResource(R.drawable.email_correct);
                         LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(EmailRegisterActivity.this,et_input_email.getText().toString().trim(),"");
                         LoginRegisterManager loginRegisterManager = new LoginRegisterManager(EmailRegisterActivity.this, loginRegisterHandler);
@@ -67,15 +67,6 @@ public class EmailRegisterActivity extends Activity {
                         editor.commit();
                         if(click){
                             click=false;}
-//                        if (chk_agreement.isChecked()==true){
-//                            et_input_verificationCode.setVisibility(View.VISIBLE);
-//                            tv_agreement.setVisibility(View.GONE);
-//                            EmailRegisterActivity.this.btn_send_code.setVisibility(View.GONE);
-//                            btn_register.setVisibility(View.VISIBLE);
-//                            view.setVisibility(View.VISIBLE);
-//                        }else {
-//                            Toast.makeText(EmailRegisterActivity.this,"请勾选协议",Toast.LENGTH_SHORT);
-//                        }
                     }
                     else {
                         Toast.makeText(EmailRegisterActivity.this,"输入的邮箱格式不正确",Toast.LENGTH_SHORT).show();
@@ -88,7 +79,7 @@ public class EmailRegisterActivity extends Activity {
                 }
             }
         });
-        btn_register.setOnClickListener(new View.OnClickListener() {
+                                      btn_register.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
                                                 LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(EmailRegisterActivity.this,et_input_email.getText().toString().trim(),"");
@@ -106,11 +97,22 @@ public class EmailRegisterActivity extends Activity {
 
         return m.matches();
     }
-    public void back(View view){
-        finish();
+    private void initTitle() {
+        title = (Title) findViewById(R.id.title);
+        title.setTitleNameStr("注册");
+        title.setOnTitleButtonClickListener(onTitleButtonClickListener);
+        title.mSetButtonInfo(new Title.ButtonInfo(true,Title.BUTTON_LEFT,R.drawable.img_back,null));
     }
-    public void submitCode(View view){
-        Intent intent=new Intent(EmailRegisterActivity.this,SetPasswordActivity.class);
-        startActivity(intent);
-    }
+    private Title.OnTitleButtonClickListener onTitleButtonClickListener = new Title.OnTitleButtonClickListener() {
+        @Override
+        public void onClick(int id, Title.ButtonViewHolder viewHolder) {
+            if (id == Title.BUTTON_LEFT){
+                finish();
+                if(click){
+                    click=false;}
+            }else if (id == Title.BUTTON_RIGHT1){
+            }
+        }
+    };
+
 }

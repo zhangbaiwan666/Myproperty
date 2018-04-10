@@ -13,7 +13,7 @@ import cottee.myproperty.manager.LoginRegisterManager;
 import cottee.myproperty.uitils.Session;
 
 public class SplashScreenActivity extends Activity {
-    private static int SPLASH_TIME_OUT = 3500;
+    private static int SPLASH_TIME_OUT = 500;
     private static String email;
     private static String password;
 
@@ -21,13 +21,6 @@ public class SplashScreenActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        SharedPreferences pref = getSharedPreferences("user", Context.MODE_PRIVATE |Context.MODE_MULTI_PROCESS);
-        email = pref.getString("name", "");
-        password = pref.getString("psword", "");
-        LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(SplashScreenActivity.this, "", "");
-        LoginRegisterManager loginRegisterManager = new LoginRegisterManager(SplashScreenActivity.this, loginRegisterHandler);
-        loginRegisterManager.ReUserLogin(email.toString().trim(),password.toString().trim());
-        password = pref.getString("psword", "");
 
         //登录容易跳两遍，写存session方法就好
         new Handler().postDelayed(new Runnable() {
@@ -35,21 +28,20 @@ public class SplashScreenActivity extends Activity {
                  * Showing splash screen with a timer. This will be useful when you
                  * want to show case your app logo / company
                  */
-
             @Override
             public void run() {
-                // This method will be executed once the timer is over
-                // Start your app main activity
+                SharedPreferences pref = getSharedPreferences("user", Context.MODE_PRIVATE |Context.MODE_MULTI_PROCESS);
+                email = pref.getString("name", "");
+                password = pref.getString("psword", "");
                 if (email ==""|| password ==""){
                     Intent i = new Intent(SplashScreenActivity.this, LoginActivity.class);
                     startActivity(i);
                 }else {
-//                    Intent i = new Intent(SplashScreenActivity.this, MainActivity.class);
-//                    startActivity(i);
+                    LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(SplashScreenActivity.this, "", "");
+                    LoginRegisterManager loginRegisterManager = new LoginRegisterManager(SplashScreenActivity.this, loginRegisterHandler);
+                    loginRegisterManager.ReUserLogin(email.toString().trim(), password.toString().trim());
+                    password = pref.getString("psword", "");
                 }
-
-                // close this activity
-                finish();
             }
         }, SPLASH_TIME_OUT);
     }

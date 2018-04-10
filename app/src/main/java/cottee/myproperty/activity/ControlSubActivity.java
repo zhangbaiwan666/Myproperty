@@ -33,7 +33,7 @@ public class ControlSubActivity extends Activity {
     private SelectPicPopupWindow menuWindow;
     private Title title;
     private Button bt_add_sub;
-    private Button btn_change_house,btn_host_phone;
+//    private Button btn_change_house,btn_host_phone;
     private boolean click=true;
     private TextView tvRight;
     private TextView tv_show_house;
@@ -77,18 +77,18 @@ public class ControlSubActivity extends Activity {
         property_pro_id = intent.getIntExtra("property_pro_id", 0);
         System.out.println("property_home_id"+property_home_id);
         bt_add_sub = (Button) findViewById(R.id.btn_delete_sub);
-        btn_host_phone = (Button)findViewById(R.id.btn_host_phone);
+//        btn_host_phone = (Button)findViewById(R.id.btn_host_phone);
 
         tv_show_property.setText(choosed_property_name);
 
-        btn_host_phone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                menuWindow = new SelectPicPopupWindow(ControlSubActivity.this, itemsOnClick);
-//                //显示窗口
-//                menuWindow.showAtLocation(view, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-            }
-        });
+//        btn_host_phone.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                menuWindow = new SelectPicPopupWindow(ControlSubActivity.this, itemsOnClick);
+////                //显示窗口
+////                menuWindow.showAtLocation(view, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+//            }
+//        });
         bt_add_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -192,7 +192,6 @@ public class ControlSubActivity extends Activity {
 //                for (int i=0;i<adpter.getCount();i++) {
 //                    SubInfo item = adpter.getItem(i);//拿到当前数据值并强转   adpter.getItem(i)即为当前数据对象
                     startActivity(intent1);
-                    finish();
                 }
 
 
@@ -233,9 +232,10 @@ public class ControlSubActivity extends Activity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.tv_right:
-                        LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(ControlSubActivity.this, "", "");
-                        LoginRegisterManager loginRegisterManager = new LoginRegisterManager(ControlSubActivity.this, loginRegisterHandler);
-                        loginRegisterManager.ShowAllHouseForSub();
+
+                       LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(ControlSubActivity.this, "", "");
+                       LoginRegisterManager loginRegisterManager = new LoginRegisterManager(ControlSubActivity.this, loginRegisterHandler);
+                       loginRegisterManager.ShowAllHouseForSub();
 //                            final ChooseHouseAdapter listAdapter = new ChooseHouseAdapter(
 ////								getContext(), listRight, R.layout.pop_menuitem,
 ////								new String[] { "item" },
@@ -244,10 +244,10 @@ public class ControlSubActivity extends Activity {
 //                            menulistRight.setAdapter(listAdapter);
 //                            listAdapter.notifyDataSetChanged();
 
-                            //----------------------- 点击listview中item的处理-------------------------------------STA
-                        View layoutRight = ControlSubActivity.this.getLayoutInflater().inflate(
-                                R.layout.pop_menulist, null);
-                        final ListView menulistRight = layoutRight.findViewById(R.id.menulist);
+                       //----------------------- 点击listview中item的处理-------------------------------------STA
+                       View layoutRight = ControlSubActivity.this.getLayoutInflater().inflate(
+                               R.layout.pop_menulist, null);
+                       final ListView menulistRight = layoutRight.findViewById(R.id.menulist);
 //                        ChooseHouseAdapter listAdapter = new ChooseHouseAdapter(
 //                                ControlSubActivity.this, R.layout.pop_menuitem, T());
 //                        menulistRight.setAdapter(listAdapter);

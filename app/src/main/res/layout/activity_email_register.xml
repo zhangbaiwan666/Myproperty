@@ -29,17 +29,17 @@
         android:minHeight="50dp">
 
         <EditText
-            android:background="@drawable/rect"
-            android:id="@+id/et_input_email"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="35dp"
-            android:layout_marginRight="35dp"
-            android:hint="请输入您的邮箱账号"
+            android:textSize="16sp"
             android:paddingLeft="15dp"
             android:paddingTop="8dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:background="@drawable/rect"
             android:textColorHint="#BEBEBE"
-            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/et_input_email"
+            android:hint="请输入您的邮箱账号"
             />
         <Button
             android:id="@+id/btn_emailJudge"
@@ -112,6 +112,7 @@
         android:paddingTop="20dp">
 
         <Button
+            android:text="注册"
             android:id="@+id/btn_register"
             android:layout_width="200dp"
             android:layout_height="30dp"
@@ -119,7 +120,6 @@
             android:layout_centerHorizontal="true"
             android:background="@drawable/selector_button_login"
             android:gravity="center"
-            android:text="注册"
             android:textColor="#fff"
             android:textSize="15sp" />
         <ImageView

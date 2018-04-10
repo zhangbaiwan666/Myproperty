@@ -24,6 +24,7 @@ import java.util.List;
 
 import cottee.myproperty.R;
 import cottee.myproperty.activity.ControlSubActivity;
+import cottee.myproperty.activity.LoginActivity;
 import cottee.myproperty.activity.PaymentActivity;
 import cottee.myproperty.activity.RepairProjectActivity;
 import cottee.myproperty.activity.ResetPassWordActivity;
@@ -77,8 +78,8 @@ public class LoginRegisterHandler extends Handler {
      * 无该用户记录返回 5*
      * 提交字段有误 返回 4
      */
-    private static final int VERSSUCCEED = 0;
-    private static final int VERSFAILD = 1;
+    private static final int VERSSUCCEED = 1;
+    private static final int VERSFAILD = 0;
     private static final int VERTIMOUTPASS = 2;
     private static final int VERTIMOUTFAILED = 3;
     private static final int SUBMITDNULL = 4;
@@ -90,22 +91,22 @@ public class LoginRegisterHandler extends Handler {
      * 提交字段有误返回 4*/
 
     private static final int LOGINSSUCCEED = 32;
-    private static final int PSWFAILD = 1;
+    private static final int PSWFAILD = 0;
     private static final int USERUNEXIST = 4;
 
     /*     * 成功返回 0
      * 验证码未通过匹配 1*/
 
-    private static final int READINSSUCCEED = 26;
-    private static final int READINFAILD = 1;
+    private static final int READINSSUCCEED = 1;
+    private static final int READINFAILD = 0;
 
     /*  * 发送成功返回   0 （要给用户提示注意查看邮件之类的提示）
      * 发送失败返回   1
      * 验证码发送频率过快返回 2  （测试时间100秒）
      * 邮箱不存在返回 3
      * 提交字段有误返回 4*/
-    private static final int SUBMITSUCCEE = 0;
-    private static final int SUBMITFAIL = 1;
+    private static final int SUBMITSUCCEE = 1;
+    private static final int SUBMITFAIL = 0;
     private static final int SUBMITSUCCESFAST = 2;
     private static final int EMAILNULL = 3;
     private static final int PUTEMAILWRONG = 4;
@@ -115,8 +116,8 @@ public class LoginRegisterHandler extends Handler {
      * 验证码过期并重新发送失败返回 3
      * 无该用户记录返回 5
      * 提交字段有误 返回 4*/
-    private static final int VERSTURE = 0;
-    private static final int VERMISTAKE = 1;
+    private static final int VERSTURE = 1;
+    private static final int VERMISTAKE = 0;
     private static final int VEROUT = 3;
     private static final int VERNULL = 5;
     private static final int VERNWORDWRONG = 4;
@@ -170,7 +171,7 @@ public class LoginRegisterHandler extends Handler {
     private static ArrayList<String> sub_phone_list;
     private static ArrayList<String> sub_remark_list;
     private String choosed_property_s;
-    private PopupWindow popRight;
+    public static PopupWindow popRight;
 
 
     public LoginRegisterHandler(Context context, String email, String password) {
@@ -216,10 +217,9 @@ public class LoginRegisterHandler extends Handler {
                         editor.commit();
                         Toast.makeText(context, "登陆成功", Toast.LENGTH_LONG)
                                 .show();
-                        LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "", "");
-                        LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
-                        String session = Session.getSession();
-                        loginRegisterManager.ShowAllProperty();
+
+                        Intent intent = new Intent(context, MainActivity.class);
+                        context.startActivity(intent);
 
                         break;
 
@@ -304,7 +304,7 @@ public class LoginRegisterHandler extends Handler {
             case Properties.RESET_USER:
                 switch (msg.arg1) {
                     case RESETSUCCEE:
-                        Intent intent = new Intent(context, MainActivity.class);
+                        Intent intent = new Intent(context, LoginActivity.class);
                         context.startActivity(intent);
                         Toast.makeText(context, "修改成功", Toast.LENGTH_LONG).show();
                         break;
@@ -397,21 +397,24 @@ public class LoginRegisterHandler extends Handler {
                  listAdapter.notifyDataSetChanged();
                  tvRight = (TextView) ((Activity) context).findViewById(R.id.tv_right);
                  //todo pop's width modify
-                 popRight = new PopupWindow(layoutRight, ViewGroup.LayoutParams.WRAP_CONTENT,
-                         ViewGroup.LayoutParams.WRAP_CONTENT);
+                 if (popRight!=null&&popRight.isShowing()) {
+                     popRight.dismiss();
+                 }else {
+                     popRight = new PopupWindow(layoutRight, ViewGroup.LayoutParams.WRAP_CONTENT,
+                             ViewGroup.LayoutParams.WRAP_CONTENT);
 //                            ColorDrawable cd = new ColorDrawable(-0000);
 //                            popRight.setBackgroundDrawable(cd);
-                 popRight.setAnimationStyle(R.style.PopupAnimation);
-                 popRight.update();
-                 popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-                 popRight.setTouchable(true); // 设置popupwindow可点击
-                 popRight.setBackgroundDrawable(new BitmapDrawable());
+                     popRight.setAnimationStyle(R.style.PopupAnimation);
+                     popRight.update();
+                     popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+                     popRight.setTouchable(true); // 设置popupwindow可点击
+                     popRight.setBackgroundDrawable(new BitmapDrawable());
 //                 popRight.setOutsideTouchable(true); // 设置popupwindow外部可点击
-                 popRight.setFocusable(true); // 获取焦点
-                 // 设置popupwindow的位置
-                 int topBarHeight1 = 35;
-                 popRight.showAsDropDown(tvRight, 0,
-                         40);
+                     popRight.setFocusable(true); // 获取焦点
+                     // 设置popupwindow的位置
+                     int topBarHeight1 = 35;
+                     popRight.showAsDropDown(tvRight, 0,
+                             40);
 //                 popRight.setTouchInterceptor(new View.OnTouchListener() {
 //                     @Override
 //                     public boolean onTouch(View v, MotionEvent event) {
@@ -423,6 +426,7 @@ public class LoginRegisterHandler extends Handler {
 //                         return false;
 //                     }
 //                 });
+                 }
                  menulistRight
                          .setOnItemClickListener(new AdapterView.OnItemClickListener() {
                              @Override
@@ -458,21 +462,25 @@ public class LoginRegisterHandler extends Handler {
                     menulistRight1.setAdapter(listAdapter1);
                     listAdapter1.notifyDataSetChanged();
                     tvRight = (TextView) ((Activity) context).findViewById(R.id.tv_right);
-                    popRight = new PopupWindow(layoutRight1, 340,
-                            ViewGroup.LayoutParams.WRAP_CONTENT);
+                    if (popRight!=null&&popRight.isShowing()) {
+                        popRight.dismiss();
+                    }else {
+                        popRight = new PopupWindow(layoutRight1, 340,
+                                ViewGroup.LayoutParams.WRAP_CONTENT);
 //                            ColorDrawable cd = new ColorDrawable(-0000);
 //                            popRight.setBackgroundDrawable(cd);
-                    popRight.setAnimationStyle(R.style.PopupAnimation);
-                    popRight.update();
-                    popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-                    popRight.setBackgroundDrawable(new BitmapDrawable());
-                    popRight.setTouchable(true); // 设置popupwindow可点击
+                        popRight.setAnimationStyle(R.style.PopupAnimation);
+                        popRight.update();
+                        popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+                        popRight.setBackgroundDrawable(new BitmapDrawable());
+                        popRight.setTouchable(true); // 设置popupwindow可点击
 //                popRight.setOutsideTouchable(true); // 设置popupwindow外部可点击
-                    popRight.setFocusable(true); // 获取焦点
-                    // 设置popupwindow的位置
-                    int topBarHeight = 35;
-                    popRight.showAsDropDown(tvRight, 0,
-                            (topBarHeight - tvRight.getHeight()) / 2);
+                        popRight.setFocusable(true); // 获取焦点
+                        // 设置popupwindow的位置
+                        int topBarHeight = 35;
+                        popRight.showAsDropDown(tvRight, 0,
+                                (topBarHeight - tvRight.getHeight()) / 2);
+                    }
 //                popRight.setTouchInterceptor(new View.OnTouchListener() {
 //                    @Override
 //                    public boolean onTouch(View v, MotionEvent event) {
@@ -555,14 +563,13 @@ public class LoginRegisterHandler extends Handler {
                             //todo just to user Relogin without ShowAllProperty and draw it when the right POP onClick;
                         Intent intent = new Intent(context, MainActivity.class);
                         ((Activity) context).startActivity(intent);
+                        ((Activity) context).finish();
                         break;
                     case PSWFAILD:
-                        Toast.makeText(context, "本地账户为空", Toast.LENGTH_LONG)
-                                .show();
+
                         break;
                     case USERUNEXIST:
-                        Toast.makeText(context, "当前账号不存在", Toast.LENGTH_LONG)
-                                .show();
+
                         break;
                 }
             case Properties.SHOW_NOTICE:

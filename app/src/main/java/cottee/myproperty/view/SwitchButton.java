@@ -58,7 +58,7 @@ public class SwitchButton extends View {
     private RadialGradient shadowGradient;
 
     protected float ratioAspect = 0.68f; // (0,1]
-    protected float animationSpeed = 0.1f; // (0,1]
+    protected float animationSpeed = 0.3f; // (0,1]
 
     public int state;
     public int lastState;

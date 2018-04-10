@@ -40,6 +40,7 @@ public class MainActivity extends FragmentActivity {
     private int mImageViewArray[] = {R.drawable.selector_tab_home_btn,R.drawable.selector_tab_groupby_btn,R.drawable.selector_tab_setting_btn};
 
     private String mTextviewArray[] = {"首页","小区团购","我的"};
+    private BroadcastReceiver receiver;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,7 +99,7 @@ public class MainActivity extends FragmentActivity {
          }
      }
     private void setBreoadcast() {
-        BroadcastReceiver receiver=new NetBroadCastReciver();
+        receiver = new NetBroadCastReciver();
         IntentFilter filter=new IntentFilter();
         filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
         filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
@@ -106,6 +107,11 @@ public class MainActivity extends FragmentActivity {
         registerReceiver(receiver, filter);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);//LS:重点！
+    }
 }
 
 

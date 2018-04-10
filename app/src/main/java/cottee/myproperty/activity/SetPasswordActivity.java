@@ -29,6 +29,7 @@ public class SetPasswordActivity extends Activity {
         setContentView(R.layout.activity_set_password);
         init();
         inEven();
+        initTitle();
     }
 
     private void inEven() {
@@ -39,7 +40,6 @@ public class SetPasswordActivity extends Activity {
         btn_register_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (et_set_password.getText()==et_set_second_password.getText()){
                 Intent intent = getIntent();
                 String email = intent.getStringExtra("email");
                 LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(SetPasswordActivity.this,email,"");
@@ -49,12 +49,8 @@ public class SetPasswordActivity extends Activity {
                 SharedPreferences.Editor editor=preferences.edit();
                 editor.putString("psword", et_set_password.getText().toString().trim());
                 editor.commit();}
-                if(click){
-                    click=false;}
-                else {
-                    Toast.makeText(SetPasswordActivity.this, "两遍密码不一样！这智商", Toast.LENGTH_SHORT).show();
-                }
-            }
+
+
         });
 
     }
@@ -68,4 +64,22 @@ public class SetPasswordActivity extends Activity {
     public  void  back(View view){
         finish();
     }
+
+    private void initTitle() {
+        title = (Title) findViewById(R.id.title);
+        title.setTitleNameStr("设置密码");
+        title.setOnTitleButtonClickListener(onTitleButtonClickListener);
+        title.mSetButtonInfo(new Title.ButtonInfo(true,Title.BUTTON_LEFT,R.drawable.img_back,null));
+    }
+    private Title.OnTitleButtonClickListener onTitleButtonClickListener = new Title.OnTitleButtonClickListener() {
+        @Override
+        public void onClick(int id, Title.ButtonViewHolder viewHolder) {
+            if (id == Title.BUTTON_LEFT){
+                finish();
+                if(click){
+                    click=false;}
+            }else if (id == Title.BUTTON_RIGHT1){
+            }
+        }
+    };
 }

@@ -67,7 +67,7 @@ public class AddSubActivity extends Activity {
                                                       loginRegisterManager.AddSubAccount(et_sub_account.getText().toString().trim(),
                                 et_sub_remark.getText().toString().trim(), et_sub_phone.getText().toString().trim());
                         dialog.dismiss();
-                        finish();
+
                     }
                 })
                         .setNegativeButton("取消", new DialogInterface.OnClickListener() {

@@ -25,10 +25,8 @@ public class NetBroadCastReciver extends BroadcastReceiver {
             NetworkInfo info = intent.getParcelableExtra(ConnectivityManager.EXTRA_NETWORK_INFO);
             if (NetworkInfo.State.CONNECTED == info.getState()) {
                 //连接状态 处理自己的业务逻辑
-
             } else {
                 Toast.makeText(context, "网络链接失败", Toast.LENGTH_SHORT).show();
-
             }
         }
 

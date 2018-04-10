@@ -27,7 +27,7 @@ public class ResetPassWordActivity extends Activity {
         setContentView(R.layout.activity_set_password);
         init();
         inEvent();
-
+        initTitle();
     }
 
     private void inEvent() {
@@ -53,4 +53,22 @@ public class ResetPassWordActivity extends Activity {
         input_password = (EditText) findViewById(R.id.et_set_password);
         set_password = (Button) findViewById(R.id.btn_register_password);
     }
+    private void initTitle() {
+        title = (Title) findViewById(R.id.title);
+        title.setTitleNameStr("重置密码");
+        title.setOnTitleButtonClickListener(onTitleButtonClickListener);
+        title.mSetButtonInfo(new Title.ButtonInfo(true,Title.BUTTON_LEFT,R.drawable.img_back,null));
+    }
+    private Title.OnTitleButtonClickListener onTitleButtonClickListener = new Title.OnTitleButtonClickListener() {
+        @Override
+        public void onClick(int id, Title.ButtonViewHolder viewHolder) {
+            if (id == Title.BUTTON_LEFT){
+                finish();
+                if(click){
+                    click=false;}
+            }else if (id == Title.BUTTON_RIGHT1){
+            }
+        }
+    };
+
 }
