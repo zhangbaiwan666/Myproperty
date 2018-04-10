@@ -1165,7 +1165,7 @@ public class LoginRegisterManager implements Serializable {
                             //获得新的session
                             String str = response1.body().string();
                             Session.setSession(str);
-                            ShowExceptNotice(num_start);
+                            ShowExceptNotice(n);
                         }
 
                     }else {

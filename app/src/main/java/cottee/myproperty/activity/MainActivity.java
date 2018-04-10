@@ -1,6 +1,13 @@
 package cottee.myproperty.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
+import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
@@ -8,16 +15,23 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cottee.myproperty.R;
 import cottee.myproperty.fragment.GroupBuyFragment;
 import cottee.myproperty.fragment.MainFragment;
 import cottee.myproperty.fragment.SettingFragment;
 import cottee.myproperty.manager.ActivityFinishManager;
+import cottee.myproperty.receiver.NetBroadCastReciver;
+import cottee.myproperty.server.ReceiveMsgService;
 
 public class MainActivity extends FragmentActivity {
     private FragmentTabHost mTabHost;
     private boolean click=true;
+    public ReceiveMsgService mService = null;
+//    private MServiceConnection mServiceConnection =
+//            new MServiceConnection();
+
 
     private LayoutInflater layoutInflater;
 
@@ -31,6 +45,7 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ActivityFinishManager.destoryActivity("destroy");
+        setBreoadcast();
         initView();
     }
 
@@ -66,8 +81,32 @@ public class MainActivity extends FragmentActivity {
 
         return view;
     }
+     class MServiceConnection implements ServiceConnection {
 
-        }
+
+         @Override
+         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+             ReceiveMsgService.MyBinder myBinder = (ReceiveMsgService.MyBinder)iBinder;
+             //调用公有方法就能获得服务类的实例
+             mService = myBinder.getService();
+
+         }
+
+         @Override
+         public void onServiceDisconnected(ComponentName componentName) {
+             Toast.makeText(mService, "当前网络异常，建议移动至信号良好区域", Toast.LENGTH_SHORT).show();
+         }
+     }
+    private void setBreoadcast() {
+        BroadcastReceiver receiver=new NetBroadCastReciver();
+        IntentFilter filter=new IntentFilter();
+        filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
+        filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(receiver, filter);
+    }
+
+}
 
 
 
