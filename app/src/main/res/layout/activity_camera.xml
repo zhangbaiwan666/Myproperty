@@ -19,11 +19,13 @@
             android:id="@+id/rel_shutter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
             android:layout_gravity="bottom|center">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+
                 android:orientation="horizontal">
 
                 <Button
@@ -35,6 +37,7 @@
                     android:gravity="start"
                     android:onClick="cancel"
                     android:textColor="#ff9800"
+
                     android:text="取消"/>
 
                 <Button
@@ -53,7 +56,6 @@
                     android:layout_weight="3"
                     android:background="#00000000"
                     android:gravity="end"
-                    android:onClick="convertCamera"
                     android:text="转换镜头"
                     android:textColor="#ff9800"
                     />

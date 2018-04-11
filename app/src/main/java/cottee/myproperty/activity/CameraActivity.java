@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -62,42 +63,43 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback, 
         btn_convert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //释放当前的相机资源
-                myCamera.stopPreview();
-                myCamera.release();
-                myCamera=null;
-                //1代表后置摄像头，0代表前置摄像头
-                if (cameraPosition==1){
-                    myCamera=Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
-                    cameraPosition=0;
-                }
-                else {
-                    myCamera=Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK);
-                    cameraPosition=1;
-                }
-                Camera.Parameters parameters = myCamera.getParameters();
-                List pictureSizes=parameters.getSupportedPictureSizes();
-                if (mBestPictureSizes==null){
-                    mBestPictureSizes=findBestPictureSize(pictureSizes,parameters.getPictureSize(),ratio);
-
-                }
-                parameters.setPictureSize(mBestPictureSizes.width,mBestPictureSizes.height);
-                List previewSizes=parameters.getSupportedPreviewSizes();
-                if (mBestPreviewSize==null)
-                {
-                    mBestPreviewSize=findBestPreviewSize(previewSizes,parameters.getPreviewSize(),
-                            mBestPictureSizes,ratio);
-
-                }
-                parameters.setPreviewSize(mBestPreviewSize.width,mBestPreviewSize.height);
-                myCamera.setParameters(parameters);
-                try {
-                    myCamera.setPreviewDisplay(holder);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                myCamera.setDisplayOrientation(90);
-                myCamera.startPreview();
+//                //释放当前的相机资源
+//                myCamera.stopPreview();
+//                myCamera.release();
+//                myCamera=null;
+//                //1代表后置摄像头，0代表前置摄像头
+//                if (cameraPosition==1){
+//                    myCamera=Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
+//                    cameraPosition=0;
+//                }
+//                else {
+//                    myCamera=Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK);
+//                    cameraPosition=1;
+//                }
+//                Camera.Parameters parameters = myCamera.getParameters();
+//                List pictureSizes=parameters.getSupportedPictureSizes();
+//                if (mBestPictureSizes==null){
+//                    mBestPictureSizes=findBestPictureSize(pictureSizes,parameters.getPictureSize(),ratio);
+//
+//                }
+//                parameters.setPictureSize(mBestPictureSizes.width,mBestPictureSizes.height);
+//                List previewSizes=parameters.getSupportedPreviewSizes();
+//                if (mBestPreviewSize==null)
+//                {
+//                    mBestPreviewSize=findBestPreviewSize(previewSizes,parameters.getPreviewSize(),
+//                            mBestPictureSizes,ratio);
+//
+//                }
+//                parameters.setPreviewSize(mBestPreviewSize.width,mBestPreviewSize.height);
+//                myCamera.setParameters(parameters);
+//                try {
+//                    myCamera.setPreviewDisplay(holder);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//                myCamera.setDisplayOrientation(90);
+//                myCamera.startPreview();
+                Toast.makeText(CameraActivity.this,"此功能正在开发",Toast.LENGTH_SHORT).show();
             }
         });
 

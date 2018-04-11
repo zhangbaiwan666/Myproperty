@@ -25,7 +25,7 @@ public class PaymentActivity extends Activity {
 //        imv_diantiFee.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//
+//                Toast.makeText(PaymentActivity.this,"电梯费目前无法缴费",Toast.LENGTH_SHORT);
 //            }
 //        });
         ll_payRecord = (LinearLayout)findViewById(R.id.ll_payRecord);

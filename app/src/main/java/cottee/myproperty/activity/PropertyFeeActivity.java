@@ -2,6 +2,7 @@ package cottee.myproperty.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import cottee.myproperty.R;
 import cottee.myproperty.manager.PayFeeManager;
+import cottee.myproperty.uitils.CustomDialog;
 
 public class PropertyFeeActivity extends Activity {
         String type="物业费";
@@ -96,14 +98,35 @@ public class PropertyFeeActivity extends Activity {
         if (TextUtils.isEmpty( tv_propertyFee.getText() )){
             Toast.makeText(this,"请选择要缴纳的月数",Toast.LENGTH_SHORT).show();
         }else {
-            Intent intent = new Intent(this, PayFeeFinishActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putString("payFeeAmount", tv_propertyFee.getText().toString());
+            CustomDialog.Builder builder = new CustomDialog.Builder(PropertyFeeActivity.this);
+            builder.setMessage("您确定要缴纳物业费吗");
+            builder.setPositiveButton("否", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
 
-            intent.putExtras(bundle);
-            PayFeeManager payFeeManager = new PayFeeManager(type, address, property_fee, rb.getText().toString(), tv_propertyFee.getText().toString(), area1);
-            payFeeManager.sendRequestPayFee();
-            startActivity(intent);
+
+                }
+            });
+
+            builder.setNegativeButton("是",
+                    new android.content.DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            Intent intent = new Intent(PropertyFeeActivity.this, PayFeeFinishActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("payFeeAmount", tv_propertyFee.getText().toString());
+                            intent.putExtras(bundle);
+                            PayFeeManager payFeeManager = new PayFeeManager(type, address, property_fee, rb.getText().toString(), tv_propertyFee.getText().toString(), area1);
+                            payFeeManager.sendRequestPayFee();
+                            startActivity(intent);
+                            finish();
+
+                        }
+                    });
+
+            builder.create().show();
+
+
         }
     }
 

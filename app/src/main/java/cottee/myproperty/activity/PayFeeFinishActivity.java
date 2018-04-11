@@ -26,5 +26,6 @@ public class PayFeeFinishActivity extends Activity {
     public  void  Sure(View view){
         Intent intent=new Intent(this,MainActivity.class);
         startActivity(intent);
+        finish();
     }
 }

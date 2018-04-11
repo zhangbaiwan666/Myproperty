@@ -30,6 +30,7 @@ public class RepairProjectActivity extends Activity {
             RepairHandler repairHandler = new RepairHandler(this, lv_left, lv_Right, tv_title, pb_repairProject);
             RepairManager repairManager = new RepairManager(repairHandler);
             repairManager.sendRequestRepairProject();
+
             if (lv_Right == null || lv_left == null) {
                 pb_repairProject.setVisibility(View.VISIBLE);
             }
