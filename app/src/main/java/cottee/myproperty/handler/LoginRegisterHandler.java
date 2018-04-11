@@ -35,6 +35,7 @@ import cottee.myproperty.adapter.SubinfoAdapter;
 import cottee.myproperty.constant.BullentinFindInfo;
 import cottee.myproperty.constant.BullentinInfo;
 import cottee.myproperty.constant.HouseListBean;
+import cottee.myproperty.constant.ProName;
 import cottee.myproperty.constant.Properties;
 import cottee.myproperty.activity.MainActivity;
 import cottee.myproperty.activity.SetPasswordActivity;
@@ -44,6 +45,7 @@ import cottee.myproperty.fragment.MainFragment;
 import cottee.myproperty.fragment.PastBulletinFragment;
 import cottee.myproperty.fragment.RecentBulletinFragment;
 import cottee.myproperty.fragment.SearchBulletionFragment;
+import cottee.myproperty.fragment.SettingFragment;
 import cottee.myproperty.manager.LoginRegisterManager;
 import cottee.myproperty.uitils.HealthMap;
 import cottee.myproperty.uitils.Session;
@@ -125,8 +127,8 @@ public class LoginRegisterHandler extends Handler {
     ##提交字段：mail_address（邮件地址）   password（密码）
                 * 成功返回 0
                 * 失败返回 1*/
-    private static final int RESETSUCCEE = 26;
-    private static final int RESETFAILED = 1;
+    private static final int RESETSUCCEE = 1;
+    private static final int RESETFAILED = 0;
     /* #添加子账户
              ##提交字段：father_id（查询拥有房屋返还的id）$user_id（子账户id） power_service（报修权限）
               power_payment（缴费权限） power_affiche（公告权限）
@@ -309,6 +311,7 @@ public class LoginRegisterHandler extends Handler {
                         Toast.makeText(context, "修改成功", Toast.LENGTH_LONG).show();
                         break;
                     case RESETFAILED:
+                        Toast.makeText(context, "修改失败，请检查网络或联系客服咨询", Toast.LENGTH_SHORT).show();
                         break;
                 }
                 break;
@@ -329,6 +332,7 @@ public class LoginRegisterHandler extends Handler {
                         LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "", "");
                         LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
                         loginRegisterManager.GsonSubList();
+                        ((Activity)context).finish();
                         Toast.makeText(context, "添加子账户成功", Toast.LENGTH_LONG).show();
                         break;
                     case ADDFAILED:
@@ -360,9 +364,13 @@ public class LoginRegisterHandler extends Handler {
                 if (subListBeanslist==null){
                 }else {
                     final ListView listView = (ListView) ((Activity) context).findViewById(R.id.sub_list);
+                    final TextView text_notice_son = (TextView) ((Activity) context).findViewById(R.id.text_notice_son);
                     SubinfoAdapter sub_adapter = new SubinfoAdapter(
                             context, R.layout.layout_list_item, subListBeanslist);
                     listView.setAdapter(sub_adapter);
+                    if (sub_adapter!=null){
+                        text_notice_son.setVisibility(View.GONE);
+                    }
                     sub_adapter.notifyDataSetChanged();
                 }
 
@@ -397,23 +405,22 @@ public class LoginRegisterHandler extends Handler {
                  listAdapter.notifyDataSetChanged();
                  tvRight = (TextView) ((Activity) context).findViewById(R.id.tv_right);
                  //todo pop's width modify
-                 if (popRight!=null&&popRight.isShowing()) {
-                     popRight.dismiss();
-                 }else {
-                     popRight = new PopupWindow(layoutRight, ViewGroup.LayoutParams.WRAP_CONTENT,
-                             ViewGroup.LayoutParams.WRAP_CONTENT);
+
+//                     popRight = new PopupWindow(layoutRight, ViewGroup.LayoutParams.WRAP_CONTENT,
+//                             ViewGroup.LayoutParams.WRAP_CONTENT);
 //                            ColorDrawable cd = new ColorDrawable(-0000);
 //                            popRight.setBackgroundDrawable(cd);
-                     popRight.setAnimationStyle(R.style.PopupAnimation);
-                     popRight.update();
-                     popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-                     popRight.setTouchable(true); // 设置popupwindow可点击
-                     popRight.setBackgroundDrawable(new BitmapDrawable());
+                     MainFragment.popRight.setContentView(layoutRight);
+                     MainFragment.popRight.setAnimationStyle(R.style.PopupAnimation);
+                     MainFragment.popRight.update();
+                     MainFragment.popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+                     MainFragment.popRight.setTouchable(true); // 设置popupwindow可点击
+                     MainFragment.popRight.setBackgroundDrawable(new BitmapDrawable());
 //                 popRight.setOutsideTouchable(true); // 设置popupwindow外部可点击
-                     popRight.setFocusable(true); // 获取焦点
+                     MainFragment.popRight.setFocusable(true); // 获取焦点
                      // 设置popupwindow的位置
                      int topBarHeight1 = 35;
-                     popRight.showAsDropDown(tvRight, 0,
+                     MainFragment.popRight.showAsDropDown(tvRight, 0,
                              40);
 //                 popRight.setTouchInterceptor(new View.OnTouchListener() {
 //                     @Override
@@ -426,7 +433,7 @@ public class LoginRegisterHandler extends Handler {
 //                         return false;
 //                     }
 //                 });
-                 }
+
                  menulistRight
                          .setOnItemClickListener(new AdapterView.OnItemClickListener() {
                              @Override
@@ -434,8 +441,11 @@ public class LoginRegisterHandler extends Handler {
                                  LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "", "");
                                  LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
                                  loginRegisterManager.ChooseProperty(propertyListBean.get(position).getPro_id());
-                                 if (popRight != null && popRight.isShowing()) {
-                                     popRight.dismiss();
+                                 TextView tv_pro_name= (TextView) ((Activity) context).findViewById(R.id.positon_pro_name);
+                                 tv_pro_name.setText(propertyListBean.get(position).getName());
+                                 ProName.setPro_name(propertyListBean.get(position).getName());
+                                 if (MainFragment.popRight != null && MainFragment.popRight.isShowing()) {
+                                     MainFragment.popRight.dismiss();
                                  }
                              }
                          });
@@ -443,8 +453,8 @@ public class LoginRegisterHandler extends Handler {
                 break;
             case Properties.ALL_HOUSE_LIST_FOR_SUB:         //todo 2
                 Object obj_house = msg.obj;
-                if (popRight!=null&&popRight.isShowing()) {
-                    popRight.dismiss();
+                if (ControlSubActivity.popRight!=null&&ControlSubActivity.popRight.isShowing()) {
+                    ControlSubActivity.popRight.dismiss();
                 }else {
                     Object choosed_property_name = HealthMap.get("choosed_property_name");
                     if (choosed_property_name == null) {
@@ -462,25 +472,22 @@ public class LoginRegisterHandler extends Handler {
                     menulistRight1.setAdapter(listAdapter1);
                     listAdapter1.notifyDataSetChanged();
                     tvRight = (TextView) ((Activity) context).findViewById(R.id.tv_right);
-                    if (popRight!=null&&popRight.isShowing()) {
-                        popRight.dismiss();
-                    }else {
-                        popRight = new PopupWindow(layoutRight1, 340,
-                                ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                    ControlSubActivity.popRight .setContentView(layoutRight1);
 //                            ColorDrawable cd = new ColorDrawable(-0000);
 //                            popRight.setBackgroundDrawable(cd);
-                        popRight.setAnimationStyle(R.style.PopupAnimation);
-                        popRight.update();
-                        popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-                        popRight.setBackgroundDrawable(new BitmapDrawable());
-                        popRight.setTouchable(true); // 设置popupwindow可点击
+                    ControlSubActivity.popRight.setAnimationStyle(R.style.PopupAnimation);
+                    ControlSubActivity.popRight.update();
+                    ControlSubActivity.popRight.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+                    ControlSubActivity.popRight.setBackgroundDrawable(new BitmapDrawable());
+                    ControlSubActivity.popRight.setTouchable(true); // 设置popupwindow可点击
 //                popRight.setOutsideTouchable(true); // 设置popupwindow外部可点击
-                        popRight.setFocusable(true); // 获取焦点
+                    ControlSubActivity. popRight.setFocusable(true); // 获取焦点
                         // 设置popupwindow的位置
                         int topBarHeight = 35;
-                        popRight.showAsDropDown(tvRight, 0,
-                                (topBarHeight - tvRight.getHeight()) / 2);
-                    }
+                    ControlSubActivity.popRight.showAsDropDown(tvRight, 0,
+                                40);
+
 //                popRight.setTouchInterceptor(new View.OnTouchListener() {
 //                    @Override
 //                    public boolean onTouch(View v, MotionEvent event) {
@@ -501,8 +508,11 @@ public class LoginRegisterHandler extends Handler {
                                     LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "", "");
                                     LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
                                     loginRegisterManager.ChooseHouse(houseListBean.get(position).getHome_id());
-                                    if (popRight != null && popRight.isShowing()) {
-                                        popRight.dismiss();
+                                    TextView tv_house_name = (TextView) ((Activity) context).findViewById(R.id.tv_show_house);
+                                    tv_house_name.setText(houseListBean.get(position).getAddress());
+                                    if (ControlSubActivity.popRight != null && ControlSubActivity.popRight.isShowing()) {
+                                        ControlSubActivity.popRight.dismiss();
+
                                     }
                                 }
                             });
@@ -547,9 +557,11 @@ public class LoginRegisterHandler extends Handler {
             case Properties.UPDATE_SUB_ACCOUNT_:
                 switch (msg.arg1) {
                     case UPDATESUBSUCCESS:
+                        LoginRegisterHandler loginRegisterHandler1 = new LoginRegisterHandler(context, "", "");
+                        LoginRegisterManager loginRegisterManager1 = new LoginRegisterManager(context, loginRegisterHandler1);
+//                                loginRegisterManager.GsonProperyt();
+                        loginRegisterManager1.GsonSubList();
                         ((Activity) context).finish();
-                        Intent intent = new Intent(context,ControlSubActivity.class);
-                        ((Activity) context).startActivity(intent);
                         Toast.makeText(context, "修改成功", Toast.LENGTH_LONG).show();
                         break;
                     case UPDATESUBFAILED:

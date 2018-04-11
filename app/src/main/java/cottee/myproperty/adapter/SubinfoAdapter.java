@@ -56,23 +56,43 @@ public class SubinfoAdapter extends ArrayAdapter<SubListBean> {
             viewHolder.sub_phone = (TextView) view.findViewById(R.id.tv_sub_phone);//从View中获取TextView，并暂存新建的ViewHolder中
             viewHolder.btn_call_phone = view.findViewById(R.id.btn_call_phone);
             //对于item得操作
+
             view.setTag(viewHolder);//使用setTag把查找的view缓存起来方便多次重用
         } else//布局被加载过
         {
             view = convertView;
             viewHolder = (ViewHolder) view.getTag();//把之前暂存的ViewHolder赋给viewHolder
         }
+
         viewHolder.sub_name.setText(subInfo.getRemark());
-        viewHolder.sub_phone.setText(subInfo.getPhone_num());
+        String phone_num = subInfo.getPhone_num();
+        String str2=phone_num.replace(" ", "");//去掉所用空格
+        List list = Arrays.asList(str2.split(","));
+        viewHolder.sub_phone.setText((String)list.get(0));
         viewHolder.btn_call_phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String phone_num = subInfo.getPhone_num();
                 String str2=phone_num.replace(" ", "");//去掉所用空格
-                List  list =  Arrays.asList(str2.split(","));
-                menuWindow = new SelectPicPopupWindow((Activity) getContext(), itemsOnClick,list);
-                //显示窗口
-                menuWindow.showAtLocation(view, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+                List list = Arrays.asList(str2.split(","));
+                if (list.size()>1) {
+                    menuWindow = new SelectPicPopupWindow((Activity) getContext(), itemsOnClick, list);
+                    //显示窗口
+                    menuWindow.showAtLocation(view, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+                }else {
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+(String)list.get(0)));
+                    if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        return;
+                    }
+                    getContext().startActivity(intent);
+                }
             }
         });
 

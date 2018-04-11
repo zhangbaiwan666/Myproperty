@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="PopListView_Entries">
-        <item >物业1</item>
-        <item >物业2</item>
-        <item >物业3</item>
+
+    <string-array name="date">
+        <item>代购</item>
+        <item>快递</item>
+        <item>买房</item>
+        <item>卖房</item>
+        <item>爱尚家广告咨询</item>
+        <item>泊车</item>
+        <item>安装防盗窗</item>
+        <item>加装暖气片</item>
+        <item>打车</item>
+        <item>搭顺风车</item>
+        <item>附近快餐</item>
+        <item>代缴电费</item>
+        <item>代缴水费</item>
+        <item>重物搬运</item>
+        <item>房屋托管</item>
+        <item>工作咨询</item>
+        <item>黑天护送</item>
+        <item>黑天护送</item>
+        <item>紧急呼救</item>
+        <item>开锁</item>
+        <item>楼宇加固</item>
+        <item>楼宇加固</item>
+
     </string-array>
+
 </resources>

@@ -52,7 +52,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:text="邮箱"
+                        android:text="当前物业："
                         android:layout_marginLeft="10dp"
                         android:textSize="16dp"
                         android:textColor="@android:color/white"/>

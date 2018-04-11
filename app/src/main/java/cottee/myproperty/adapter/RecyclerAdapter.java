@@ -40,8 +40,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Author
         public AuthorViewHolder(View itemView) {
             super(itemView);
 
-            mNickNameView = (TextView) itemView.findViewById(R.id.tv_nickname);
-            mMottoView = (TextView) itemView.findViewById(R.id.tv_motto);
+//            mNickNameView = (TextView) itemView.findViewById(R.id.tv_nickname);
+//            mMottoView = (TextView) itemView.findViewById(R.id.tv_motto);
 
         }
     }
