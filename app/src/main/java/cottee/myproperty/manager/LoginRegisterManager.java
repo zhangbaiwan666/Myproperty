@@ -287,6 +287,9 @@ public class LoginRegisterManager implements Serializable {
                     if (response.isSuccessful()) {
                         String str = response.body().string();
                         System.out.println("最后的张繁"+str);
+                        SharedPreferences   preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor=preferences.edit();
+                        editor.putString("name",email);
                         Message msg = new Message();
                         msg.what = Properties.RESET_USER;
                         msg.arg1 = str.length();

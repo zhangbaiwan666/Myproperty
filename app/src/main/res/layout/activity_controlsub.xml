@@ -107,6 +107,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="子账户列表:"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="380dp">
     <ListView
         android:layout_marginLeft="20dp"
         android:id="@+id/sub_list"
@@ -114,6 +117,16 @@
         android:layout_height="380dp"
         android:divider="@color/theme"
         ></ListView>
+            <TextView
+                android:id="@+id/text_notice_son"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:textColor="@color/gray3"
+                android:text="点击右上角选择房屋即可显示子账户"/>
+
+        </RelativeLayout>
 
     </LinearLayout>
     <Button

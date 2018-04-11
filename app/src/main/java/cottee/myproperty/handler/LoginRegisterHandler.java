@@ -332,6 +332,7 @@ public class LoginRegisterHandler extends Handler {
                         LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(context, "", "");
                         LoginRegisterManager loginRegisterManager = new LoginRegisterManager(context, loginRegisterHandler);
                         loginRegisterManager.GsonSubList();
+                        ((Activity)context).finish();
                         Toast.makeText(context, "添加子账户成功", Toast.LENGTH_LONG).show();
                         break;
                     case ADDFAILED:
@@ -363,9 +364,13 @@ public class LoginRegisterHandler extends Handler {
                 if (subListBeanslist==null){
                 }else {
                     final ListView listView = (ListView) ((Activity) context).findViewById(R.id.sub_list);
+                    final TextView text_notice_son = (TextView) ((Activity) context).findViewById(R.id.text_notice_son);
                     SubinfoAdapter sub_adapter = new SubinfoAdapter(
                             context, R.layout.layout_list_item, subListBeanslist);
                     listView.setAdapter(sub_adapter);
+                    if (sub_adapter!=null){
+                        text_notice_son.setVisibility(View.GONE);
+                    }
                     sub_adapter.notifyDataSetChanged();
                 }
 
@@ -552,9 +557,11 @@ public class LoginRegisterHandler extends Handler {
             case Properties.UPDATE_SUB_ACCOUNT_:
                 switch (msg.arg1) {
                     case UPDATESUBSUCCESS:
+                        LoginRegisterHandler loginRegisterHandler1 = new LoginRegisterHandler(context, "", "");
+                        LoginRegisterManager loginRegisterManager1 = new LoginRegisterManager(context, loginRegisterHandler1);
+//                                loginRegisterManager.GsonProperyt();
+                        loginRegisterManager1.GsonSubList();
                         ((Activity) context).finish();
-                        Intent intent = new Intent(context,ControlSubActivity.class);
-                        ((Activity) context).startActivity(intent);
                         Toast.makeText(context, "修改成功", Toast.LENGTH_LONG).show();
                         break;
                     case UPDATESUBFAILED:

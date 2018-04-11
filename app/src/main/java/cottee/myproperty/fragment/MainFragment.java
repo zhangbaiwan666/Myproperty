@@ -4,6 +4,9 @@ package cottee.myproperty.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +29,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,7 +56,9 @@ import cottee.myproperty.constant.PropertyListBean;
 import cottee.myproperty.handler.LoginRegisterHandler;
 import cottee.myproperty.listener.NoDoubleClickListener;
 import cottee.myproperty.manager.LoginRegisterManager;
+import cottee.myproperty.server.ImageService;
 import cottee.myproperty.uitils.HealthMap;
+import cottee.myproperty.uitils.Properties;
 import cottee.myproperty.uitils.Session;
 
 public class MainFragment extends Fragment {
@@ -92,6 +98,8 @@ public class MainFragment extends Fragment {
 	private View rootView;
 	private ListView list_preview_bulletin;
 	private static String strItem;
+	private Bitmap bitmap;
+	private BitmapDrawable bd;
 
 
 	@Override
@@ -100,6 +108,17 @@ public class MainFragment extends Fragment {
 //		not_title =(ArrayList<String>) HealthMap.get("not_title");
 //		not_message =(ArrayList<String>) HealthMap.get("not_message");
 //		not_time =(ArrayList<String>) HealthMap.get("not_time");
+		String imgUrl = cottee.myproperty.constant.Properties.IMG_URL;
+		String urlPathContent = imgUrl;
+		try {
+			byte[] data = ImageService.getImage(urlPathContent);
+			//生成位图
+			bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+//			imageView.setImageBitmap(bitmap);  //显示图片
+			bd = new BitmapDrawable(getContext().getResources(), bitmap);
+		} catch (IOException e) {
+			Toast.makeText(getContext(), "图片由于网络原因未显示", Toast.LENGTH_LONG).show(); //通知用户连接超时信息
+		}
 
 		if (rootView == null) {
 
@@ -267,6 +286,9 @@ public class MainFragment extends Fragment {
 				images = new ArrayList<ImageView>();
 				for(int i =0; i < imageIds.length; i++){
 					ImageView imageView = new ImageView(getContext());
+					if (i==1){
+						imageView.setImageBitmap(bitmap);
+					}
 					imageView.setBackgroundResource(imageIds[i]);
 					final int finalI = i;
 					imageView.setOnClickListener(new NoDoubleClickListener() {

@@ -34,6 +34,7 @@ public class DelateSubActivity extends Activity {
     private TextView tv_sub_id;
     private ListView list_sub_phone;
     private TextView tv_sub_remark;
+    private TextView tv_house_name;
     private LinearLayout ll_show_sub_info;
     private LinearLayout ll_modify_sub_info;
     private EditText et_sub_remark;
@@ -47,6 +48,7 @@ public class DelateSubActivity extends Activity {
     private List<ItemBean> mData;
     private EditextListAdapter mAdapter;
     private String id;
+    private String house_name;
     private List<String> list_phone;
     private String remark;
 
@@ -77,12 +79,14 @@ public class DelateSubActivity extends Activity {
         remark = intent.getStringExtra("remark");
         list_phone = (List<String>) getIntent().getSerializableExtra("phone");
         id = intent.getStringExtra("id");
+        house_name = intent.getStringExtra("house_name");
         System.out.println("DelateSubActivity得备注" + remark);
         System.out.println("DelateSubActivity得phone" + list_phone);
         System.out.println("DelateSubActivity得id" + id);
         mListView = (ListView) findViewById(R.id.list_view);
         mButton = (Button) findViewById(R.id.button);
         tv_sub_id.setText(id);
+        tv_house_name.setText(house_name);
         List<SubPhoneBean> bullentinlist = initsubphonelist();
         for (int i=0;i<list_phone.size();i++){
             SubPhoneBean subPhoneBean = new SubPhoneBean();
@@ -103,8 +107,8 @@ public class DelateSubActivity extends Activity {
 //            String phone = mData.get(i).getText();
 //            sub_phones=phone+"#";
 //        }
+        mData = new ArrayList<ItemBean>();
         for (int i=0;i<list_phone.size();i++){
-            mData = new ArrayList<ItemBean>();
             ItemBean itemBean = new ItemBean();
             itemBean.setText(list_phone.get(i));
             mData.add(itemBean);
@@ -209,6 +213,7 @@ public class DelateSubActivity extends Activity {
         btn_delete_sub = (Button) findViewById(R.id.btn_delete_sub);
         btn_modify_sub = (Button) findViewById(R.id.btn_modify_sub);
         et_sub_phone = (EditText)findViewById(R.id.edit_text);
+        tv_house_name = (TextView)findViewById(R.id.tv_house_name);
     }
 
     private Title.OnTitleButtonClickListener onTitleButtonClickListener = new Title.OnTitleButtonClickListener() {

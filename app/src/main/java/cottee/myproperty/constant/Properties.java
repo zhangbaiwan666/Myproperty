@@ -25,6 +25,7 @@ public class Properties {
     public static final String EXCEPT_NOTICE_LIST="https://https://thethreestooges.cn:5210/notice/notice_week/except";
     public static final String NOTICE_INFO="https://thethreestooges.cn:5210/notice/notice/info";
     public static final String NOTICE_FIND="https://thethreestooges.cn:5210/notice/find/notic";
+    public static final String IMG_URL="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523415467402&di=a95384f8ef5e6c521d942c29c6a472cb&imgtype=0&src=http%3A%2F%2Fpic5.nipic.com%2F20091223%2F3311772_105559015588_2.jpg";
     public final static int USER_LOGIN = 1;
     public final static int CHECKOUT_EMAIL = 2;
     public final static int CHECKOUT_EMAIL_VER = 3;

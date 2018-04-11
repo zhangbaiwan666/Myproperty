@@ -64,7 +64,7 @@ public class AddSubActivity extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
                         LoginRegisterHandler loginRegisterHandler = new LoginRegisterHandler(AddSubActivity.this, "", "");
                         LoginRegisterManager loginRegisterManager = new LoginRegisterManager(AddSubActivity.this, loginRegisterHandler);
-                                                      loginRegisterManager.AddSubAccount(et_sub_account.getText().toString().trim(),
+                         loginRegisterManager.AddSubAccount(et_sub_account.getText().toString().trim(),
                                 et_sub_remark.getText().toString().trim(), et_sub_phone.getText().toString().trim());
                         dialog.dismiss();
 

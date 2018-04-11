@@ -7,7 +7,7 @@
 
     <EditText
         android:id="@+id/edit_text"
-        android:layout_width="150dp"
+        android:layout_width="140dp"
         android:layout_height="35dp"
         android:textSize="12dp"
         android:digits="1234567890"
@@ -16,6 +16,7 @@
         android:maxLength="11"
         android:textColorHint="#7c7c7c" />
     <Button
+        android:layout_marginLeft="10dp"
         android:id="@+id/btn_delete_sub_phone"
         android:layout_gravity="center_vertical"
         android:layout_width="60dp"
