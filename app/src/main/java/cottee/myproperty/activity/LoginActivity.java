@@ -18,6 +18,7 @@ import cottee.myproperty.manager.LoginRegisterManager;
 import cottee.myproperty.R;
 
 public class LoginActivity extends Activity {
+    //
 
     private TextView tv_emailRegister;
     private TextView tv_passwordForget;
